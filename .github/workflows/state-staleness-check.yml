@@ -1,0 +1,24 @@
+name: State staleness check
+
+on:
+  pull_request:
+    paths:
+      - "agents/**"
+      - "docs/**"
+      - "CHANGELOG.md"
+      - ".github/scripts/generate-state.js"
+  push:
+    branches: [main, develop]
+    paths:
+      - "agents/**"
+      - "docs/**"
+      - "CHANGELOG.md"
+      - ".github/scripts/generate-state.js"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check docs/STATE.md is current
+        run: node .github/scripts/generate-state.js --check

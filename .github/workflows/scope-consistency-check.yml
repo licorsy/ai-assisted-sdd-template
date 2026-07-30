@@ -1,0 +1,22 @@
+name: Scope consistency check
+
+on:
+  pull_request:
+    paths:
+      - ".github/scripts/doc-scope.js"
+      - ".github/scripts/check-scope-consistency.js"
+      - ".github/CODEOWNERS"
+  push:
+    branches: [main, develop]
+    paths:
+      - ".github/scripts/doc-scope.js"
+      - ".github/scripts/check-scope-consistency.js"
+      - ".github/CODEOWNERS"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check CODEOWNERS matches doc-scope.js
+        run: node .github/scripts/check-scope-consistency.js

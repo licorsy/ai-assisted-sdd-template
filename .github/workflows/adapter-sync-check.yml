@@ -1,0 +1,24 @@
+name: Adapter sync check
+
+on:
+  pull_request:
+    paths:
+      - "CLAUDE.md"
+      - "AGENTS.md"
+      - "docs/manuals/operation-manual.md"
+      - ".github/scripts/check-adapter-sync.js"
+  push:
+    branches: [main, develop]
+    paths:
+      - "CLAUDE.md"
+      - "AGENTS.md"
+      - "docs/manuals/operation-manual.md"
+      - ".github/scripts/check-adapter-sync.js"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check adapter rule restatements are in sync
+        run: node .github/scripts/check-adapter-sync.js

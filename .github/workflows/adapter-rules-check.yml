@@ -1,0 +1,24 @@
+name: Adapter rules check
+
+on:
+  pull_request:
+    paths:
+      - "agents/**"
+      - ".claude/agents/**"
+      - ".claude/commands/**"
+      - ".github/scripts/check-adapter-rules.js"
+  push:
+    branches: [main, develop]
+    paths:
+      - "agents/**"
+      - ".claude/agents/**"
+      - ".claude/commands/**"
+      - ".github/scripts/check-adapter-rules.js"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check every adapter operating rule is anchored in its canonical prompt
+        run: node .github/scripts/check-adapter-rules.js

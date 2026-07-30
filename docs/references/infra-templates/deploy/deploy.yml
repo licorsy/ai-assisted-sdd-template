@@ -1,0 +1,52 @@
+# Template for adopter projects: CD pipeline skeleton.
+# Copy to .github/workflows/deploy.yml and replace the REPLACE_ME steps
+# with your real build/deploy commands. The gate model is:
+#   merge to main  -> automatic deploy to staging
+#   production     -> gated by a GitHub Environment with required reviewers
+# Configure the "production" environment under
+# Settings > Environments > production > Required reviewers, so promotion
+# is human-approved (roadmap Phase 7: auto-deploy to staging,
+# human-approved promotion to production).
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # actions/checkout v4.2.2, pinned by commit SHA
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Test
+        run: echo "REPLACE_ME - run backend and frontend tests and enforce the coverage threshold (fail the build below it)"
+      - name: Build
+        run: echo "REPLACE_ME - build and package (e.g. docker build, upload artifact)"
+
+  deploy-staging:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Deploy to staging
+        run: echo "REPLACE_ME - deploy to staging (IaC apply, image push, etc.)"
+      - name: Smoke test
+        run: echo "REPLACE_ME - hit a health endpoint; fail the job if unhealthy"
+
+  deploy-production:
+    needs: deploy-staging
+    runs-on: ubuntu-latest
+    # Requires a "production" GitHub Environment with required reviewers -
+    # the workflow pauses here until a human approves.
+    environment: production
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Deploy to production
+        run: echo "REPLACE_ME - same deploy path as staging, production target"
+      - name: Verify + record rollback point
+        run: echo "REPLACE_ME - post-deploy check; record the previous version for rollback"

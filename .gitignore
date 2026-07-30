@@ -1,0 +1,13 @@
+# Personal/local notes — excluded from what this template presents.
+# Untracked as of prompt-025; kept on disk locally but never committed.
+local-notes/
+
+# OS/editor artifacts and local credential files (checked, none tracked
+# today, per prompt-108's public-mirror sanitization gate — kept as a
+# safety net rather than added only once something actually needs it).
+.DS_Store
+.env
+.env.*
+.vscode/
+.idea/
+node_modules/

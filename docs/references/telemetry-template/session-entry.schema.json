@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ai-assisted-sdd-template/docs/references/telemetry-template/session-entry.schema.json",
+  "title": "Telemetry session entry",
+  "description": "One line of a generated project's docs/telemetry/sessions.jsonl - one JSON object per session, appended (never rewritten) at session end.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "session_id",
+    "started_at",
+    "ended_at",
+    "duration_minutes",
+    "phase",
+    "activity",
+    "tokens",
+    "artifacts_created",
+    "artifacts_updated",
+    "next_action"
+  ],
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "description": "Stable identifier for the session, e.g. \"2026-07-24-phase3-design\" (date + short slug). Not reused across sessions."
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp, session start."
+    },
+    "ended_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp, session end."
+    },
+    "duration_minutes": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Wall-clock session length in minutes, derived from started_at/ended_at."
+    },
+    "phase": {
+      "type": "string",
+      "description": "Roadmap phase active during this session, e.g. \"Phase 3 - Designing\". Matches the phase names in docs/strategy/roadmap.md."
+    },
+    "roadmap_path": {
+      "type": "string",
+      "enum": ["full", "short", "fast-track"],
+      "description": "Optional - the project's current roadmap path, if the session touched or depended on it."
+    },
+    "activity": {
+      "type": "string",
+      "description": "One-sentence summary of what the session actually did."
+    },
+    "tokens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "value"],
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": ["rtk", "estimate"],
+          "description": "\"rtk\" if a reliable per-session figure was available from rtk/cc-economics at write time; \"estimate\" otherwise (see this template's README for why \"rtk\" is not yet the default)."
+        },
+        "value": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Token count (input+output combined) for the session, from whichever source is named above."
+        }
+      }
+    },
+    "artifacts_created": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Repo-relative paths of new files this session. Derive from `git status`/`git diff --name-status` at session end, not by hand."
+    },
+    "artifacts_updated": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Repo-relative paths of modified files this session. Derive from `git status`/`git diff --name-status` at session end, not by hand."
+    },
+    "decisions": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Optional - short plain-language record of decisions made this session that a git log alone would not make obvious."
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Optional - what's currently blocking progress, if anything."
+    },
+    "next_action": {
+      "type": "string",
+      "description": "The single next step, matching what /docs/status.md already records."
+    }
+  }
+}

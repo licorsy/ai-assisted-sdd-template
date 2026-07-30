@@ -1,0 +1,22 @@
+# Template for adopter projects: release automation via release-please.
+# Copy to .github/workflows/release-please.yml, and copy
+# release-please-config.json + .release-please-manifest.json to the repo root.
+name: Release please
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      # googleapis/release-please-action v4.4.0, pinned by commit SHA
+      - uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json

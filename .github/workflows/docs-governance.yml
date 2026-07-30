@@ -1,0 +1,36 @@
+name: Docs governance
+
+# Replaces docs-frontmatter-lint.yml, changelog-retention-check.yml, and
+# broken-link-check.yml. The engine now lives in licorsy/docs-governance and
+# is consumed via composite action - one source of truth shared across
+# repositories instead of copies that drift independently. Repo-specific
+# checks (adapter rules/sync, scope consistency, step references, state
+# freshness) stay in .github/scripts/ - docgov only covers the 4 generic
+# rules (frontmatter, internal-links, changelog-retention, version-bump).
+
+on:
+  pull_request:
+    paths:
+      - "**/*.md"
+      - ".docgov.config.js"
+      - ".github/workflows/docs-governance.yml"
+  push:
+    branches: [main, develop]
+    paths:
+      - "**/*.md"
+      - ".docgov.config.js"
+      - ".github/workflows/docs-governance.yml"
+
+jobs:
+  docgov:
+    name: docgov
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The version-bump rule needs history to find the merge-base.
+          fetch-depth: 0
+      - uses: licorsy/docs-governance/action@v1
+        with:
+          # Empty on push: with no base, the bump rule abstains instead of failing.
+          base-sha: ${{ github.event.pull_request.base.sha }}

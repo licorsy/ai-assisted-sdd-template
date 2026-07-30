@@ -1,0 +1,6 @@
+# Canonical process documents require review before merge.
+/agents/          @aleclemente
+/docs/adr/        @aleclemente
+/docs/manuals/    @aleclemente
+/docs/strategy/   @aleclemente
+/docs/visuals/    @aleclemente

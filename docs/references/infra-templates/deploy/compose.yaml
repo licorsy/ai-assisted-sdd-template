@@ -1,0 +1,19 @@
+# Template for adopter projects: local/staging compose starter.
+# Replace the service definition with your stack; keep the principles:
+# env vars from the environment (never committed), healthcheck defined,
+# volumes only where state is intentional.
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      # Secrets come from the runtime environment or a secrets manager -
+      # never hardcode them here or in the image.
+      DATABASE_URL: ${DATABASE_URL:?set in your environment}
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

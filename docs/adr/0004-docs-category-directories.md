@@ -1,0 +1,54 @@
+---
+title: "ADR-0004: Category directories for docs/manuals/ content"
+doc_type: adr
+description: "Records the decision to split docs/manuals/ by category into docs/adr/, docs/strategy/, and docs/visuals/, as an extension of ADR-0003's principles (not a supersession) - operation-manual.md itself stays a single, unfragmented file, since ADR-0003's own Alternative #2 already rejected splitting it and check-step-references.js depends on that assumption."
+status: active
+version: "1.0"
+created: 2026-07-23
+updated: 2026-07-23
+language: en
+id: 0004-docs-category-directories
+tags: [adr, document-architecture, folder-reorg, docs-adr, docs-strategy, docs-visuals]
+owner: Alexandre Clemente
+related: [0003-document-architecture, operation-manual, documentation-metadata-standard]
+---
+
+# ADR-0004: Category directories for docs/manuals/ content
+
+## Status
+
+Accepted (2026-07-23).
+
+## Context
+
+`docs/reports/008-relatorio-melhorias-v6.md`, an external comparative analysis, proposed splitting `docs/manuals/` by category — ADRs, roadmap/strategy documents, and diagrams each into their own directory — for discoverability and single-responsibility placement. `ADR-0003` (Accepted, 2026-07-13) already governs this repository's document architecture, but its Alternative #2 rejected something narrower and different: physically splitting `operation-manual.md` itself, specifically because `check-step-references.js` depends on it staying one file and because the benefit (SRP) was already delivered without that cost by the manual's internal Part groupings. ADR-0003 does not address category placement for *other* documents such as ADRs, the roadmap, or diagrams — extending it to cover that case, rather than treating the report's proposal as a conflict, is this ADR's purpose.
+
+## Decision
+
+Introduce three category directories, populated by moving existing files (history preserved via `git mv`, not copy):
+
+- `docs/adr/` — `0002-audience-tier.md`, `0003-document-architecture.md`, this ADR. Both this template's own real decisions and, per Step 15's existing guidance, a generated project's own ADRs now live under the same `docs/adr/` naming — the "this template uses `docs/manuals/`, a generated project uses `docs/adr/`" distinction that existed before this ADR is retired.
+- `docs/strategy/` — `roadmap.md`, `go-to-market.md`.
+- `docs/visuals/` — `template-visual-overview.md`.
+
+`docs/manuals/examples/adr-0001-documentation-and-governance-model.md` stays in `examples/` — it is the illustrative worked example a generated project replaces, not a live decision, so it does not move into `docs/adr/`. `operation-manual.md`, `agent-design-guide.md`, `documentation-metadata-standard.md`, `prompt-engineering-guide.md`, `role-operating-guide.md`, and `tool-library-catalog.md` remain in `docs/manuals/` as the operational-guide category; they are not being split further.
+
+This ADR **extends** ADR-0003 rather than superseding it: all five of ADR-0003's principles (SRP per document, Adapter pattern, Facade pattern for `docs/STATE.md`, pointer-over-copy, mechanical checks over manual discipline) remain in force unchanged. This decision is best read as principle 1 (SRP) applied one level up, at the directory instead of the single-document level. `operation-manual.md`'s own physical structure is explicitly out of scope here and stays governed by ADR-0003's existing Alternative #2 reasoning: any future proposal to fragment it (for example, into per-roadmap-phase files) needs its own ADR and, more importantly, a generator/facade mechanism — not a hand-synced split — since `check-step-references.js` has no multi-file awareness today.
+
+## Alternatives considered
+
+1. Leave everything flat in `docs/manuals/` — rejected: the category itself (decision record vs. strategy vs. diagram vs. operating guide) is a real, useful distinction for a new reader, and moving files is a mechanically safe, `check-internal-links.js`-verified operation, unlike fragmenting a step-numbered document.
+2. Treat the report's proposal as blocked by ADR-0003 and reject it outright — rejected: ADR-0003's actual Decision and Alternatives never address category placement for non-manual documents; reading it as a blanket ban on any directory change would over-extend a decision scoped to one specific document's internal structure.
+3. Supersede ADR-0003 wholesale and rewrite it to include directory guidance — rejected: unnecessary churn; ADR-0003's five principles are unaffected by this decision, so an extension is the accurate, smaller-diff record.
+
+## Consequences
+
++ ADRs, strategy documents, and diagrams are each discoverable by directory name instead of requiring a reader to already know they live inside `docs/manuals/`.
++ The "this template uses `docs/manuals/` for ADRs, a generated project uses `docs/adr/`" distinction in Step 15's tool-guidance table is retired — one convention now applies to both, simplifying that row.
++ Every cross-reference to a moved file had to be located and updated in the same change (`docs/prompts/064-prompt-docs-manuals-reorg.md`); `check-internal-links.js` is the safety net for anything missed, per ADR-0003 principle 5.
+
+- `operation-manual.md`'s own token-budget-per-session concern (loading the whole file every time) is *not* addressed by this ADR — it was explicitly considered and deferred, since the fragmentation approach that would address it conflicts with the still-valid parts of ADR-0003's Alternative #2 and needs its own generator-based design first.
+
+## Confidence
+
+High for the directory split itself (mechanically verified, low blast radius per file). Medium for the "retire the manuals-vs-adr distinction in Step 15" consequence — it simplifies today's guidance but assumes no future reason reappears to keep this template's own ADRs somewhere a generated project's ADRs are not.

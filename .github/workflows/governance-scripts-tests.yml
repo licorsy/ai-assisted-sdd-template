@@ -1,0 +1,18 @@
+name: Governance scripts tests
+
+on:
+  pull_request:
+    paths:
+      - ".github/scripts/**"
+  push:
+    branches: [main, develop]
+    paths:
+      - ".github/scripts/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run governance script tests
+        run: node --test .github/scripts/*.test.js
