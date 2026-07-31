@@ -10,7 +10,7 @@ language: en
 id: spec-prfaq-template
 tags: [template, discovery, prfaq, working-backwards]
 owner: Alexandre Clemente
-related: [basic-prompt-template, roadmap]
+related: [roadmap]
 ---
 
 # PRFAQ: [Product/Feature Name]

@@ -10,7 +10,7 @@ language: en
 id: tools-ecosystem
 tags: [tools, observability, security, secrets, ci-cd, shortlist]
 owner: Alexandre Clemente
-related: [token-economy, tool-library-catalog, prompt-engineering-guide, operation-manual, 051-prompt-course-roadmap-distillation, 056-prompt-local-note-tips-distillation]
+related: [token-economy, tool-library-catalog, prompt-engineering-guide, operation-manual]
 diataxis: reference
 ---
 

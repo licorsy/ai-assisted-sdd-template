@@ -10,7 +10,7 @@ language: en
 id: 0010-public-release
 tags: [adr, public-release, governance, licorsy]
 owner: Alexandre Clemente
-related: [0002-audience-tier, 101-prompt-git-governance-adoption, 100-prompt-public-release-sanitization]
+related: [0002-audience-tier]
 ---
 
 # ADR-0010: Public-mirror release via `licorsy/ai-assisted-sdd-template`

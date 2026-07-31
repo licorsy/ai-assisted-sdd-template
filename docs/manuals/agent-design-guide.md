@@ -10,7 +10,7 @@ language: en
 id: agent-design-guide
 tags: [agent-design, workflows-vs-agents, agent-testing, llm-as-a-judge, automation]
 owner: Alexandre Clemente
-related: [operation-manual, prompt-engineering-guide, tool-library-catalog, 056-prompt-local-note-tips-distillation]
+related: [operation-manual, prompt-engineering-guide, tool-library-catalog]
 ---
 
 # Agent Design Guide

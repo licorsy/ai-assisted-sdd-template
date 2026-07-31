@@ -10,7 +10,7 @@ language: en
 id: report-proposal-tracking
 tags: [status-artifact, docs-reports, tracking, discoverability]
 owner: Alexandre Clemente
-related: [prompt-archive-index, documentation-metadata-standard, 079-prompt-report-proposal-tracking]
+related: [documentation-metadata-standard]
 ---
 
 # Report Proposal Tracking

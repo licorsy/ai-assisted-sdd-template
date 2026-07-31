@@ -10,7 +10,7 @@ language: en
 id: token-economy
 tags: [token-economy, cost, tooling, rag, decisions]
 owner: Alexandre Clemente
-related: [tool-library-catalog, operation-manual, 037-prompt-token-economy-research]
+related: [tool-library-catalog, operation-manual]
 diataxis: explanation
 ---
 

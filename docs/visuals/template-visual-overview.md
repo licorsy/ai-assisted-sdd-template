@@ -10,7 +10,7 @@ language: en
 id: template-visual-overview
 tags: [visual-documentation, mermaid, diagrams, onboarding, overview]
 owner: Alexandre Clemente
-related: [operation-manual, roadmap, orchestrator, prompt-engineering-guide, 052-prompt-template-visual-overview]
+related: [operation-manual, roadmap, orchestrator, prompt-engineering-guide]
 ---
 
 # Template Visual Overview

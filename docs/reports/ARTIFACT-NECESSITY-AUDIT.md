@@ -10,7 +10,7 @@ language: en
 id: artifact-necessity-audit
 tags: [status-artifact, audit, documentation, governance]
 owner: Alexandre Clemente
-related: [report-proposal-tracking, documentation-metadata-standard, prompt-archive-index]
+related: [report-proposal-tracking, documentation-metadata-standard]
 diataxis: reference
 ---
 

@@ -10,7 +10,7 @@ language: en
 id: prompt-engineering-guide
 tags: [prompt-engineering, prompt-patterns, authoring-quality, code-generation, security-audit, runtime-triggers]
 owner: Alexandre Clemente
-related: [operation-manual, basic-prompt-template, roadmap, 048-prompt-prompt-engineering-guide, 049-prompt-runtime-pattern-triggers, 050-prompt-deployment-phase-hardening, 051-prompt-course-roadmap-distillation, 085-prompt-ai-workflow-transcripts-triage]
+related: [operation-manual, roadmap]
 ---
 
 # Prompt Engineering Guide
@@ -28,7 +28,7 @@ Changelog of this document:
 
 This guide covers **how to write a high-quality individual prompt** during roadmap work - a spec request, a code-generation ask, a debugging session, a review. It deliberately does not cover the three neighboring concerns, which stay where they are:
 
-- Prompt **document** structure (ROLE/CONTEXT/TASK/...) - [operation-manual.md](operation-manual.md) Step 12 and [basic-prompt-template.md](../prompts/basic-prompt-template.md).
+- Prompt **document** structure (ROLE/CONTEXT/TASK/...) - [operation-manual.md](operation-manual.md) Step 12 and basic-prompt-template.md.
 - Which reasoning **technique fits which phase** (ToT/CoT/checklist/retrieval) - [operation-manual.md](operation-manual.md) Step 17.
 - How agent **output is formatted** for the human - [operation-manual.md](operation-manual.md) Step 18.
 
@@ -66,7 +66,7 @@ INPUT → OUTPUT EXAMPLES:
 "123456789a"  → ValueError: "Input must contain only digits"
 ```
 
-The optional `## EXAMPLES` section of [basic-prompt-template.md](../prompts/basic-prompt-template.md) exists for exactly this.
+The optional `## EXAMPLES` section of basic-prompt-template.md exists for exactly this.
 
 ## 5. Labeled context blocks and priority tags
 

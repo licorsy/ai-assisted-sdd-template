@@ -3,29 +3,26 @@ title: "Repository State"
 doc_type: status-artifact
 description: "Generated single-read snapshot of every living document's title, type, status, version, and freshness. Answers 'where are we?' without a directory sweep; excludes the historical docs/prompts/ archive."
 status: active
-version: "6"
+version: "8"
 created: 2026-07-13
 updated: 2026-07-30
 language: en
 id: repository-state
 tags: [status-artifact, generated, state, retrieval]
 owner: Alexandre Clemente
-related: [operation-manual, prompt-archive-index]
+related: [operation-manual]
 ---
 
 <!-- GENERATED FILE - do not edit by hand. Regenerate with: node .github/scripts/generate-state.js -->
 
 # Repository State
 
-One consolidated read of the living documents. For "where are we?" questions, start here, then follow the link that answers it. Historical prompts are indexed separately in [PROMPT-INDEX.md](prompts/PROMPT-INDEX.md).
+One consolidated read of the living documents. For "where are we?" questions, start here, then follow the link that answers it.
 
 | Document | Title | Type | Status | Version | Updated |
 | --- | --- | --- | --- | --- | --- |
 | [CHANGELOG.md](../CHANGELOG.md) | — | — | — | — | — |
-| [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) | — | — | — | — | — |
-| [CONTRIBUTING.md](../CONTRIBUTING.md) | — | — | — | — | — |
 | [QUICKSTART.md](../QUICKSTART.md) | Quickstart | product-doc | active | 1.3 | 2026-07-28 |
-| [SECURITY.md](../SECURITY.md) | — | — | — | — | — |
 | [agents/adversarial.md](../agents/adversarial.md) | Adversarial Review Prompt | instruction | active | 1.0 | 2026-07-13 |
 | [agents/doc-consistency.md](../agents/doc-consistency.md) | Doc Consistency Reviewer Prompt | instruction | active | 1.6 | 2026-07-29 |
 | [agents/init.md](../agents/init.md) | Template Init Prompt | instruction | active | 1.8 | 2026-07-28 |
@@ -51,7 +48,6 @@ One consolidated read of the living documents. For "where are we?" questions, st
 | [docs/references/telemetry-template/README.md](references/telemetry-template/README.md) | Telemetry Template - how to apply | product-doc | active | 1.1 | 2026-07-24 |
 | [docs/references/token-economy.md](references/token-economy.md) | Token Economy - adopt/defer/reject decisions | product-doc | active | 1.2 | 2026-07-28 |
 | [docs/references/tools-ecosystem.md](references/tools-ecosystem.md) | Tools Ecosystem - unvetted starting shortlist | product-doc | active | 1.3 | 2026-07-30 |
-| [docs/reports/008-relatorio-melhorias-v6.md](reports/008-relatorio-melhorias-v6.md) | Relatório de Melhorias v6: AI-Assisted SDD Template | product-doc | active | 6.4 | 2026-07-30 |
 | [docs/reports/ARTIFACT-NECESSITY-AUDIT.md](reports/ARTIFACT-NECESSITY-AUDIT.md) | Artifact Necessity Audit: docs/manuals/, docs/references/, docs/reports/ | product-doc | active | 1.0 | 2026-07-30 |
 | [docs/reports/PROPOSAL-TRACKING.md](reports/PROPOSAL-TRACKING.md) | Report Proposal Tracking | status-artifact | active | 1.9 | 2026-07-27 |
 | [docs/strategy/go-to-market.md](strategy/go-to-market.md) | Go-to-Market Roadmap | instruction | active | 1.0 | 2026-07-19 |
