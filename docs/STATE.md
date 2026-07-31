@@ -3,7 +3,7 @@ title: "Repository State"
 doc_type: status-artifact
 description: "Generated single-read snapshot of every living document's title, type, status, version, and freshness. Answers 'where are we?' without a directory sweep; excludes the historical docs/prompts/ archive."
 status: active
-version: "9"
+version: "10"
 created: 2026-07-13
 updated: 2026-07-31
 language: en
@@ -34,7 +34,7 @@ One consolidated read of the living documents. For "where are we?" questions, st
 | [docs/adr/0004-docs-category-directories.md](adr/0004-docs-category-directories.md) | ADR-0004: Category directories for docs/manuals/ content | adr | active | 1.0 | 2026-07-23 |
 | [docs/adr/0010-public-release.md](adr/0010-public-release.md) | ADR-0010: Public-mirror release via licorsy/ai-assisted-sdd-template | adr | active | 1.1 | 2026-07-31 |
 | [docs/manuals/agent-design-guide.md](manuals/agent-design-guide.md) | Agent Design Guide | manual | active | 1.4 | 2026-07-31 |
-| [docs/manuals/documentation-metadata-standard.md](manuals/documentation-metadata-standard.md) | Documentation Metadata Standard | instruction | active | 1.22 | 2026-07-30 |
+| [docs/manuals/documentation-metadata-standard.md](manuals/documentation-metadata-standard.md) | Documentation Metadata Standard | instruction | active | 1.23 | 2026-07-31 |
 | [docs/manuals/examples/adr-0001-documentation-and-governance-model.md](manuals/examples/adr-0001-documentation-and-governance-model.md) | ADR-0001: Documentation and Governance Model | adr | active | 1.1 | 2026-07-08 |
 | [docs/manuals/examples/governance.md](manuals/examples/governance.md) | Governance — Project | governance | active | 1.2 | 2026-07-08 |
 | [docs/manuals/examples/risks.md](manuals/examples/risks.md) | Risk Register — Project | governance | active | 1.2 | 2026-07-28 |
