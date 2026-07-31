@@ -28,7 +28,7 @@ Before closing a significant phase, load `agents/phase-reviewer.md` directly for
 
 ## Git operations
 
-Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `hom` or `main` — apply the branch-naming taxonomy and permission matrix published at [licorsy/git-governance](https://github.com/licorsy/git-governance) (autonomous up to `develop`; explicit human permission required for `hom`/`main`) instead of restating it here; in Claude Code, this is the `git-governance-advisor` subagent installed via the `git-governance` plugin. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `hom`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (`docs/prompts/101-prompt-git-governance-adoption.md`).
+Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `staging` or `main` — apply the branch-naming taxonomy and permission matrix published at [licorsy/git-governance](https://github.com/licorsy/git-governance) (autonomous up to `develop`; explicit human permission required for `staging`/`main`) instead of restating it here; in Claude Code, this is the `git-governance-advisor` subagent installed via the `git-governance` plugin. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `staging`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (`docs/prompts/101-prompt-git-governance-adoption.md`).
 
 ## Canonical documents
 

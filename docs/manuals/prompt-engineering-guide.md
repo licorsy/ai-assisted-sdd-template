@@ -3,23 +3,23 @@ title: "Prompt Engineering Guide"
 doc_type: manual
 description: "Authoring-quality guide for the individual prompts written during roadmap work - specification anatomy, example-driven specs, labeled context blocks, priority tags, staged multi-step prompting, chain-of-thought scaffolds, targeted refinement, comment-driven development - plus a versioned starter library of reusable prompt patterns including a security-audit checklist, each with a runtime trigger mapping it to its roadmap phase."
 status: active
-version: "1.6"
+version: "1.7"
 created: 2026-07-14
-updated: 2026-07-28
+updated: 2026-07-31
 language: en
 id: prompt-engineering-guide
 tags: [prompt-engineering, prompt-patterns, authoring-quality, code-generation, security-audit, runtime-triggers]
 owner: Alexandre Clemente
-related: [operation-manual, basic-prompt-template, roadmap, 048-prompt-prompt-engineering-guide, 049-prompt-runtime-pattern-triggers, 050-prompt-deployment-phase-hardening, 051-prompt-course-roadmap-distillation, 085-prompt-ai-workflow-transcripts-triage]
+related: [operation-manual, roadmap]
 ---
 
 # Prompt Engineering Guide
 
 Changelog of this document:
 
+- v1.7: Dropped `related:` entries pointing at `basic-prompt-template` and five archived prompt ids, and un-linked two `basic-prompt-template.md` references in Section 1 - `docs/prompts/` is deliberately absent from this public-mirror repository (ADR-0010), so none of them resolve.
 - v1.6: doc-consistency-reviewer batch fix: Section 12's P9 trigger row still said "Phase 3 architecture spikes" after prompt-086 reworded the same claim in P9's own use-when prose, leaving the file disagreeing with itself - both now read identically (prompt-087).
 - v1.5: doc-consistency-reviewer follow-up on prompt-085: P8's template hardcoded vendor names in prose instead of a `[BRACKETED]` placeholder - now `[EXTERNAL DEEP-RESEARCH TOOL, ...]`, matching P6's precedent; P9's Phase 3 claim was unanchored (`roadmap.md` Phase 3 has no spike/prototype activity) - reworded to name what actually exists; P10's use-when dropped its target-document anchor and used sprint-specific wording - both corrected (prompt-086).
-- v1.4: Three new patterns from a triage of two external AI-workflow transcripts (no dependency on either source created) - P8 guided external deep-research handoff (Phase 1), P9 throwaway UI/UX taste prototype (Phase 1), P10 external-dependency research spike (Phase 5, extends the existing "research spikes" task-type mention) - each with its Section 12 trigger row (prompt-085).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -28,7 +28,7 @@ Changelog of this document:
 
 This guide covers **how to write a high-quality individual prompt** during roadmap work - a spec request, a code-generation ask, a debugging session, a review. It deliberately does not cover the three neighboring concerns, which stay where they are:
 
-- Prompt **document** structure (ROLE/CONTEXT/TASK/...) - [operation-manual.md](operation-manual.md) Step 12 and [basic-prompt-template.md](../prompts/basic-prompt-template.md).
+- Prompt **document** structure (ROLE/CONTEXT/TASK/...) - [operation-manual.md](operation-manual.md) Step 12 and basic-prompt-template.md.
 - Which reasoning **technique fits which phase** (ToT/CoT/checklist/retrieval) - [operation-manual.md](operation-manual.md) Step 17.
 - How agent **output is formatted** for the human - [operation-manual.md](operation-manual.md) Step 18.
 
@@ -66,7 +66,7 @@ INPUT → OUTPUT EXAMPLES:
 "123456789a"  → ValueError: "Input must contain only digits"
 ```
 
-The optional `## EXAMPLES` section of [basic-prompt-template.md](../prompts/basic-prompt-template.md) exists for exactly this.
+The optional `## EXAMPLES` section of basic-prompt-template.md exists for exactly this.
 
 ## 5. Labeled context blocks and priority tags
 
