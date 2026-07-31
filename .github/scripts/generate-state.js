@@ -95,14 +95,14 @@ function buildState(root) {
   lines.push('id: repository-state');
   lines.push('tags: [status-artifact, generated, state, retrieval]');
   lines.push('owner: Alexandre Clemente');
-  lines.push('related: [operation-manual, prompt-archive-index]');
+  lines.push('related: [operation-manual]');
   lines.push('---');
   lines.push('');
   lines.push('<!-- GENERATED FILE - do not edit by hand. Regenerate with: node .github/scripts/generate-state.js -->');
   lines.push('');
   lines.push('# Repository State');
   lines.push('');
-  lines.push('One consolidated read of the living documents. For "where are we?" questions, start here, then follow the link that answers it. Historical prompts are indexed separately in [PROMPT-INDEX.md](prompts/PROMPT-INDEX.md).');
+  lines.push('One consolidated read of the living documents. For "where are we?" questions, start here, then follow the link that answers it.');
   lines.push('');
   lines.push('| Document | Title | Type | Status | Version | Updated |');
   lines.push('| --- | --- | --- | --- | --- | --- |');
