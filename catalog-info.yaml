@@ -1,0 +1,16 @@
+# Backstage/Port service-catalog metadata. No substitution mechanism scaffolds
+# this file today (neither /template-init nor any doc-governance check fills in
+# placeholders) — replace the two {{...}} tokens below by hand when adopting
+# this template for a new project.
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "{{PROJECT_NAME}}"
+  description: "{{PROJECT_DESCRIPTION}}"
+  annotations:
+    github.com/project-slug: "licorsy/{{PROJECT_NAME}}"
+    licorsy.com/sdd-template-version: "1.0"
+spec:
+  type: service
+  lifecycle: development
+  owner: licorsy
