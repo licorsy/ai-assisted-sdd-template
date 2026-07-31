@@ -3,9 +3,9 @@ title: "Template Visual Overview"
 doc_type: manual
 description: "Six Mermaid diagrams orienting a new reader in the template's architecture - document map, roadmap state machine, phase-execution sequence, prompt-lifecycle workflow, Spec Kit artifact flow, and the runtime-trigger decision flow. Diagrams orient, prose governs: every diagram links to the canonical document that owns its content."
 status: active
-version: "1.8"
+version: "1.9"
 created: 2026-07-14
-updated: 2026-07-29
+updated: 2026-07-31
 language: en
 id: template-visual-overview
 tags: [visual-documentation, mermaid, diagrams, onboarding, overview]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, orchestrator, prompt-engineering-guide]
 
 Changelog of this document:
 
+- v1.9: Dropped the `related:` entry pointing at `052-prompt-template-visual-overview` - `docs/prompts/` is deliberately absent from this public-mirror repository (ADR-0010), so the reference no longer resolves.
 - v1.8: doc-consistency-reviewer batch fix: Section 6's runtime-trigger flowchart `P4` node no longer contradicts the `Q4` question routing into it - the node self-described as "(design time: threat model, Phase 3)" while `Q4` is labeled "(Phase 6 / pre-merge)"; relabeled to match P4's actual scope (Phase 6/pre-merge) with a note that the same trigger also fires Phase 3's separate threat-model sketch (prompt-097).
 - v1.7: doc-consistency-reviewer batch fix: Section 5's Spec Kit artifact-flow diagram gains a `/speckit.analyze` node, previously missing though the operation manual calls it mandatory, and splits the single `/speckit.plan` node into a first pass (Phase 3, `.specify/plans/technical-strategy.md`) and a refined pass (Phase 4, `.specify/plans/[feature-name]-tech-plan.md`) with `/speckit.clarify` running between them, matching the roadmap's own two-pass design instead of the previous single-pass, wrong-artifact depiction (prompt-093).
-- v1.6: doc-consistency-reviewer batch fix: Section 1's document-map diagram gains a `REPORTS` node for `docs/reports/`, previously absent from every document-map diagram; Section 4's prompt-lifecycle diagram gains a `DOC -- declined/superseded --> DEPR` branch, since the `deprecated` prompt status (added prompt-090) had no visual representation (prompt-092).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---

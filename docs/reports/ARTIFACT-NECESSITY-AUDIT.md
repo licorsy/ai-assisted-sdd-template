@@ -3,9 +3,9 @@ title: "Artifact Necessity Audit: docs/manuals/, docs/references/, docs/reports/
 doc_type: product-doc
 description: "One-time audit of every file in docs/manuals/, docs/references/, and docs/reports/ for whether it is genuinely needed for SDD development, each with a keep/simplify/remove verdict and its evidence. Produced by prompt-106, answering local-notes/012's artifact-necessity ask for these three directories; docs/prompts/ is out of scope here (see prompt-105's ledger enrichment instead), as are agents/, docs/adr/, docs/strategy/, docs/visuals/."
 status: active
-version: "1.0"
+version: "1.1"
 created: 2026-07-30
-updated: 2026-07-30
+updated: 2026-07-31
 language: en
 id: artifact-necessity-audit
 tags: [status-artifact, audit, documentation, governance]

@@ -3,9 +3,9 @@ title: "Tools Ecosystem - unvetted starting shortlist"
 doc_type: product-doc
 description: "Curated per-category shortlist of tools a generated project will need to choose from - observability/error tracking, security scanning, secrets, CI/CD, diagramming, knowledge management - distilled from the Vibe Coding course's SDLC roadmap. 'Unvetted' means not yet run through tool-hunter's structured, per-need vetting checklist - not that this list is uncurated or arbitrary. It narrows the search; live vetting per need stays with tool-hunter Mode B and the project's build-vs-buy record."
 status: active
-version: "1.3"
+version: "1.4"
 created: 2026-07-14
-updated: 2026-07-30
+updated: 2026-07-31
 language: en
 id: tools-ecosystem
 tags: [tools, observability, security, secrets, ci-cd, shortlist]

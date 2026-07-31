@@ -3,9 +3,9 @@ title: "ADR-0010: Public-mirror release via licorsy/ai-assisted-sdd-template"
 doc_type: adr
 description: "Records the decision to publish a new public repository, licorsy/ai-assisted-sdd-template, seeded with a single fresh commit and no carried-over history, as this template's public home - rather than flipping aleclemente/ai-assisted-sdd-template's own visibility. The private repository stays the sole place development happens; the public mirror is refreshed by a deliberate, on-demand sanitized sync, not continuously."
 status: active
-version: "1.0"
+version: "1.1"
 created: 2026-07-30
-updated: 2026-07-30
+updated: 2026-07-31
 language: en
 id: 0010-public-release
 tags: [adr, public-release, governance, licorsy]
@@ -17,7 +17,7 @@ related: [0002-audience-tier]
 
 ## Status
 
-Accepted (2026-07-30).
+Accepted (2026-07-30). Amended 2026-07-31 (v1.0 → v1.1): dropped `related:` entries pointing at `101-prompt-git-governance-adoption`/`100-prompt-public-release-sanitization` - `docs/prompts/` is deliberately absent from this public-mirror repository, so neither resolved. Does not change the decision itself.
 
 ## Context
 

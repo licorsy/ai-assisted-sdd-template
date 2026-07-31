@@ -3,9 +3,9 @@ title: "PRFAQ Template"
 doc_type: template
 description: "Optional Phase 1 Discovery scaffold for articulating a product's value proposition before writing specs, using Amazon's 'working backwards' technique: a mock press release plus an FAQ. Fill in and delete the guidance comments; not a gate, not required by the roadmap."
 status: active
-version: "1.0"
+version: "1.1"
 created: 2026-07-24
-updated: 2026-07-24
+updated: 2026-07-31
 language: en
 id: spec-prfaq-template
 tags: [template, discovery, prfaq, working-backwards]

@@ -3,9 +3,9 @@ title: "Agent Design Guide"
 doc_type: manual
 description: "Decision-oriented guide for choosing between a deterministic workflow and an autonomous agent, a design checklist for building agents (single responsibility, minimal context, few tools, retries, loop guards), and the three testing dimensions - accuracy, execution cost, reliability - that tell whether an agent actually works. Consulted when designing or adopting an agent or automation; adds no phase activity or gate."
 status: active
-version: "1.3"
+version: "1.4"
 created: 2026-07-17
-updated: 2026-07-28
+updated: 2026-07-31
 language: en
 id: agent-design-guide
 tags: [agent-design, workflows-vs-agents, agent-testing, llm-as-a-judge, automation]
@@ -17,9 +17,9 @@ related: [operation-manual, prompt-engineering-guide, tool-library-catalog]
 
 Changelog of this document:
 
+- v1.4: Dropped the `related:` entry pointing at `056-prompt-local-note-tips-distillation` - `docs/prompts/` is deliberately absent from this public-mirror repository (ADR-0010), so the reference no longer resolves.
 - v1.3: doc-consistency-reviewer batch fix: Section 3's worked-example list corrected - `template-init` is a slash command, not a subagent, and `orchestrator` (the largest file in `agents/`) was missing entirely (prompt-087).
 - v1.2: New Section 2.1 documents the `*.opt-in.md` declarative-extension convention as a tier lighter than "workflow" - reference material only, no extension file built (prompt-081).
-- v1.1: Section 3's worked-example subagent list gains `doc-consistency-reviewer`, the fourth standard subagent - finding from a project generated from this template (prompt-058).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
