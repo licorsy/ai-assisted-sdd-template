@@ -3,6 +3,7 @@
 [![PR checks](https://github.com/licorsy/ai-assisted-sdd-template/actions/workflows/pr-checks.yml/badge.svg)](https://github.com/licorsy/ai-assisted-sdd-template/actions/workflows/pr-checks.yml)
 [![Governance scripts tests](https://github.com/licorsy/ai-assisted-sdd-template/actions/workflows/governance-scripts-tests.yml/badge.svg)](https://github.com/licorsy/ai-assisted-sdd-template/actions/workflows/governance-scripts-tests.yml)
 [![License: MIT-0](https://img.shields.io/badge/License-MIT--0-yellow.svg)](LICENSE)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/licorsy/ai-assisted-sdd-template/badge)](https://securityscorecards.dev/viewer/?uri=github.com/licorsy/ai-assisted-sdd-template)
 
 This repository is a reusable template for starting a documentation-first, AI-assisted software project. It provides the governance, operating instructions, roadmap artifacts, and repository structure needed to bootstrap a new product or platform without beginning from a blank slate.
 
