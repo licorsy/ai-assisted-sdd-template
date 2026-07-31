@@ -44,9 +44,13 @@ jobs:
           done
 
   # Replaces the retired docs-governance.yml — same licorsy/docs-governance
-  # check, now delegated through the reusable workflow.
+  # check, now delegated through the reusable workflow. Unconditional: unlike
+  # git-governance's dogfooded pr-checks.yml (which guards this as a *step*
+  # after checkout, where hashFiles() is valid), reusable-workflow-call jobs
+  # only support job-level `if:`, and hashFiles() is not a recognized
+  # function there (confirmed via a failed `gh workflow run` dispatch) — this
+  # repo always carries .docgov.config.js, so no guard is needed here.
   ci-docs:
-    if: hashFiles('.docgov.config.js') != ''
     uses: licorsy/platform-workflows/.github/workflows/ci-docs.yml@v1
     with:
       base-sha: ${{ github.event.pull_request.base.sha }}
