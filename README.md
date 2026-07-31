@@ -1,6 +1,6 @@
 # AI Assisted SDD Template
 
-[![Docs governance](https://github.com/licorsy/ai-assisted-sdd-template/actions/workflows/docs-governance.yml/badge.svg)](https://github.com/licorsy/ai-assisted-sdd-template/actions/workflows/docs-governance.yml)
+[![PR checks](https://github.com/licorsy/ai-assisted-sdd-template/actions/workflows/pr-checks.yml/badge.svg)](https://github.com/licorsy/ai-assisted-sdd-template/actions/workflows/pr-checks.yml)
 [![Governance scripts tests](https://github.com/licorsy/ai-assisted-sdd-template/actions/workflows/governance-scripts-tests.yml/badge.svg)](https://github.com/licorsy/ai-assisted-sdd-template/actions/workflows/governance-scripts-tests.yml)
 [![License: MIT-0](https://img.shields.io/badge/License-MIT--0-yellow.svg)](LICENSE)
 
