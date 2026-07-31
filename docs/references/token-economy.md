@@ -3,14 +3,14 @@ title: "Token Economy - adopt/defer/reject decisions"
 doc_type: product-doc
 description: "Live-vetted decisions on tooling to reduce token cost when operating this docs-heavy repository: adopt Graphify for repo Q&A, rely on the generated STATE.md for state reads, defer local vector-DB/RAG, reject ponytail and NotebookLM for this need. Records the reasoning and revisit triggers, not just the verdicts."
 status: active
-version: "1.2"
+version: "1.3"
 created: 2026-07-13
-updated: 2026-07-28
+updated: 2026-07-31
 language: en
 id: token-economy
 tags: [token-economy, cost, tooling, rag, decisions]
 owner: Alexandre Clemente
-related: [tool-library-catalog, operation-manual, 037-prompt-token-economy-research]
+related: [tool-library-catalog, operation-manual]
 diataxis: explanation
 ---
 

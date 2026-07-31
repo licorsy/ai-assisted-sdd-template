@@ -67,9 +67,7 @@ The template is designed to support human-led and agent-assisted development wit
 
 - [CLAUDE.md](CLAUDE.md) - Claude Code entry point; points at the documents above instead of duplicating them
 - [AGENTS.md](AGENTS.md) - tool-neutral entry point for coding tools that read `AGENTS.md` by convention (for example Copilot, Gemini CLI); kept identical to `CLAUDE.md`'s shared rules via `check-adapter-sync.js`
-- [CONTRIBUTING](CONTRIBUTING.md) — how to propose a change to this template itself: the Change-as-prompt rule and the draft → active → archived (or deprecated) prompt lifecycle.
-- [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) — Contributor Covenant v2.1.
-- [SECURITY](SECURITY.md) — this template's security policy, including an LLM/AI-specific risks section.
+- Community health files (Code of Conduct, Contributing, Security) — inherited from [licorsy/.github](https://github.com/licorsy/.github); this repository does not keep its own copies.
 - [LICENSE](LICENSE) — MIT No Attribution (MIT-0)
 
 ## Repository layout
@@ -84,7 +82,7 @@ The template is designed to support human-led and agent-assisted development wit
 - `docs/STATE.md` - generated snapshot of every living document (regenerate with `node .github/scripts/generate-state.js`).
 - `docs/reports/` - external improvement reports and `PROPOSAL-TRACKING.md`, the status index tracking every proposal each report contains.
 - `docs/` - also holds the living documentation (handbook, status, planning, reference material) a project generated from this template will produce as it executes the roadmap.
-- `.github/` - CI workflows and governance scripts, plus `CODEOWNERS` (review routing for the process directories in `.github/scripts/doc-scope.js`'s `PROCESS_DIRS`), `ISSUE_TEMPLATE/`, and `PULL_REQUEST_TEMPLATE.md`.
+- `.github/` - CI workflows and governance scripts, plus `CODEOWNERS` (review routing for the process directories in `.github/scripts/doc-scope.js`'s `PROCESS_DIRS`). Issue/PR templates and community health files (Code of Conduct, Contributing, Security) are inherited from [licorsy/.github](https://github.com/licorsy/.github), not kept locally.
 
 No separate `RUNBOOK.md` exists, by design — this template has no deploy/incident/on-call reality of its own: `docs/manuals/operation-manual.md` already covers the process it governs, and `docs/references/infra-templates/` covers deployment automation for a project generated from it.
 

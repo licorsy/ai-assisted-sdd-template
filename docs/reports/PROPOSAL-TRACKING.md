@@ -3,14 +3,14 @@ title: "Report Proposal Tracking"
 doc_type: status-artifact
 description: "Status index over every distinct proposal in docs/reports/*.md external improvement reports - done, done-scoped, deferred, rejected, or not-triaged - so a proposal's fate is discoverable in one place instead of scattered across docs/prompts/*.md CONTEXT sections and CHANGELOG.md prose. Populated 2026-07-24 from a full audit of docs/reports/008-relatorio-melhorias-v6.md against docs/prompts/PROMPT-INDEX.md, CHANGELOG.md, and live repo state."
 status: active
-version: "1.9"
+version: "1.10"
 created: 2026-07-24
-updated: 2026-07-27
+updated: 2026-07-31
 language: en
 id: report-proposal-tracking
 tags: [status-artifact, docs-reports, tracking, discoverability]
 owner: Alexandre Clemente
-related: [prompt-archive-index, documentation-metadata-standard, 079-prompt-report-proposal-tracking]
+related: [documentation-metadata-standard]
 ---
 
 # Report Proposal Tracking
