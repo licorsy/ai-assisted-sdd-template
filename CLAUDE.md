@@ -28,7 +28,7 @@ To independently verify a completed phase against its own Acceptance Criteria / 
 
 ## Git operations
 
-Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `hom` or `main` — use the `git-governance-advisor` subagent (installed via the `git-governance` plugin, [licorsy/git-governance](https://github.com/licorsy/git-governance)) instead of restating its branch-naming taxonomy and permission matrix (autonomous up to `develop`; explicit human permission required for `hom`/`main`) here. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `hom`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (`docs/prompts/101-prompt-git-governance-adoption.md`).
+Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `staging` or `main` — use the `git-governance-advisor` subagent (installed via the `git-governance` plugin, [licorsy/git-governance](https://github.com/licorsy/git-governance)) instead of restating its branch-naming taxonomy and permission matrix (autonomous up to `develop`; explicit human permission required for `staging`/`main`) here. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `staging`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (`docs/prompts/101-prompt-git-governance-adoption.md`).
 
 ## Canonical documents
 
