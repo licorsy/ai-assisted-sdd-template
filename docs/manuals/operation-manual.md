@@ -3,9 +3,9 @@ title: "Operation Manual - Integrating Instructions Documents"
 doc_type: instruction
 description: "Operational guide for an AI-assisted software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.50"
+version: "3.51"
 created: 2024-07-04
-updated: 2026-07-30
+updated: 2026-07-31
 language: en
 id: operation-manual
 tags: [operating-model, phase-gates, governance, human-in-the-loop, living-documentation]
@@ -17,9 +17,9 @@ related: [orchestrator, roadmap, phase-reviewer, adversarial, doc-consistency, i
 
 Changelog of this document:
 
+- v3.51: `docs/prompts/` restarted inside this repository (numbering fresh at `001`; the pre-2026-07-31 archive stays in the archived private source repo and is not migrated, `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md`). Step 11's dangling `prompt-004`/`prompt-005` citation dropped; Step 12 rule 1 records this repository as the current source of truth; rule 3's worked-example citation repointed at `001-restart-prompt-archive-and-source-of-truth.md` (`ADR-0010` v1.2).
 - v3.50: the "Reading this model as a loop" illustration no longer names `business-tech-agency` or describes its own internal ADR-0007 in detail - generalized to the pattern itself (decision-vs-mechanical-act separation), found during `prompt-108`'s public-mirror sanitization gate since this is a currently-active document, not frozen archive.
 - v3.49: second naming-convention change to the Step 11/12 rule text and the Step 12 non-trivial/structural table row: `docs/prompts/NNN-prompt-<slug>.md` → `docs/prompts/NNN-<slug>.md`, effective prompt-102 onward only, not retroactive (prompt-103, mirroring prompt-029's own Task 5 precedent for the first such change).
-- v3.48: Step 15 gains a row for `git-governance` (branch/merge naming taxonomy and permission-matrix persona, GitHub-native ruleset enforcement via `setup-branch-protection.sh`), the same adoption model as `docs-governance` (prompt-101).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -247,7 +247,7 @@ This carve-out has a formal expression: the session **interaction level**, chose
 3. **archived** - flip to `status: archived` once every change the prompt describes has been merged and verified (Step 14's validation layers), so the prompt becomes a historical record rather than an open request.
 4. **deprecated** - flip to `status: deprecated` when a drafted prompt is declined or superseded before execution; record the decline reason in the prompt's own body, not only in `PROMPT-INDEX.md`.
 
-No physical file move happens at any step (Section 4.1) - only the frontmatter `status` field changes. Leaving a prompt at `active` after its work has already merged is a lifecycle-hygiene bug (see prompt-004, fixed by prompt-005, for a concrete example of this drift).
+No physical file move happens at any step (Section 4.1) - only the frontmatter `status` field changes. Leaving a prompt at `active` after its work has already merged is a lifecycle-hygiene bug - watch for it whenever a PR merges without a matching status flip.
 
 ## Step 12 - Every non-trivial change, update, upgrade, or refactor requires its own prompt document
 
@@ -255,9 +255,9 @@ A non-trivial change to this project - to code, docs, folder structure, tooling,
 
 Rules:
 
-1. **Scope - this template repository only** - this rule governs the `ai-assisted-sdd-template` repository itself: its own docs, governance files, prompts, and tooling. It does not extend into a project generated from this template. Such a project builds actual software through the roadmap phases and Spec Kit commands; it defines its own change-management process (for example, its own `CONTRIBUTING.md`, PR review rules, or governance document) rather than inheriting a requirement to write a `docs/prompts/NNN-<slug>.md` for every code change. See the "this template's own worked example" convention (the files under `docs/manuals/examples/`) for the same repo-vs-generated-project distinction.
+1. **Scope - this template repository only** - this rule governs the `ai-assisted-sdd-template` repository itself: its own docs, governance files, prompts, and tooling. It does not extend into a project generated from this template. Such a project builds actual software through the roadmap phases and Spec Kit commands; it defines its own change-management process (for example, its own `CONTRIBUTING.md`, PR review rules, or governance document) rather than inheriting a requirement to write a `docs/prompts/NNN-<slug>.md` for every code change. See the "this template's own worked example" convention (the files under `docs/manuals/examples/`) for the same repo-vs-generated-project distinction. Prompts are authored directly in `licorsy/ai-assisted-sdd-template` (this repository) — it is the current source of truth for this template's own development (`docs/adr/0010-public-release.md`, v1.2); the archived private source repository's own pre-2026-07-31 prompt sequence is not migrated here and is not a citable path in this repository.
 2. **Trigger** - the same bar as Step 10's "non-trivial" test (creating or materially changing an artifact, entering a roadmap phase, or a change whose effects are not immediately and trivially reversible); see Step 12a for the objective criteria that classify a candidate change into trivial, batchable minor, or non-trivial/structural. Step 10's own carve-out applies here too: trivial, obviously reversible, or already-batch-approved steps (for example, fixing a typo, or a single step inside a group the human already approved) do not each need their own prompt document.
-3. **Structure** - follow `docs/prompts/basic-prompt-template.md` (`ROLE`, `CONTEXT`, `TASK`, `REQUIREMENTS, CONSTRAINTS AND RULES`, optional `EXAMPLES`, `FORMAT AND OUTPUT`). `docs/prompts/087-prompt-enumeration-drift-batch.md` is the canonical worked example of this shape; `docs/prompts/005-prompt-update-upgrade-refactoring.md` remains the worked example of the proposed→approved→executed lifecycle (accepted-Changes list plus verification section), but predates the current section shape.
+3. **Structure** - follow `docs/prompts/basic-prompt-template.md` (`ROLE`, `CONTEXT`, `TASK`, `REQUIREMENTS, CONSTRAINTS AND RULES`, optional `EXAMPLES`, `FORMAT AND OUTPUT`). `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` is this repository's own worked example of the shape and of the proposed→approved→executed lifecycle. The deeper archive that established this rule (`087-prompt-enumeration-drift-batch.md`, `005-prompt-update-upgrade-refactoring.md`, and the rest) predates 2026-07-31 and was not migrated when this repository became the sole source of truth (`docs/adr/0010-public-release.md`) - it remains in the archived private source repository only, not a citable path here.
 4. **ROLE must be scenario-specific** - name the panel of experts (or single role) actually relevant to the change at hand; do not reuse a prior prompt's panel verbatim for an unrelated scenario (for example, a documentation-naming refactor needs a different role mix than a CI/CD pipeline change).
 5. **TASK must be scenario-specific** - state the concrete tasks for this change, not a generic restatement of "make updates."
 6. **`## REQUIREMENTS, CONSTRAINTS AND RULES` is mandatory** - every such prompt must carry this section. It may reuse this repository's recurring baseline constraints (no execution without explicit human instruction, prefer objective and realistic direction over agreement, prefer small reversible changes) where relevant, but must also add constraints specific to the scenario (for example, backward-compatibility limits, a freeze window, a specific tool or format to use).

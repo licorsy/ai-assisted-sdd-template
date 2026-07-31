@@ -41,7 +41,7 @@ The template is designed to support human-led and agent-assisted development wit
 - [ADR-0002: Intended adopter tier](docs/adr/0002-audience-tier.md) — Accepted: consultancy/agency, executed solo; see "Future extensions" below for what it unblocks.
 - [ADR-0003: Document architecture principles](docs/adr/0003-document-architecture.md) — the five patterns behind this repo's document system, with their CI enforcement.
 - [ADR-0004: Category directories for docs/manuals/ content](docs/adr/0004-docs-category-directories.md) — `docs/adr/`, `docs/strategy/`, `docs/visuals/`, extending ADR-0003 rather than superseding it.
-- [ADR-0010: Public-mirror release via licorsy/ai-assisted-sdd-template](docs/adr/0010-public-release.md) — publishes a new public repository seeded with a single fresh commit; this repository stays private and remains the sole place development happens.
+- [ADR-0010: Public-mirror release via licorsy/ai-assisted-sdd-template](docs/adr/0010-public-release.md) — publishes a new public repository seeded with a single fresh commit; amended 2026-07-31 to record this repository as the current source of truth, after the original private source repository was archived.
 - [Business software development roadmap](docs/strategy/roadmap.md)
 - [Go-to-market roadmap](docs/strategy/go-to-market.md) — optional, parallel commercial-lifecycle roadmap; not a gate every increment passes through.
 - [Orchestrator reviewer prompt](agents/phase-reviewer.md)

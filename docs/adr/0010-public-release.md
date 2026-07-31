@@ -1,16 +1,16 @@
 ---
 title: "ADR-0010: Public-mirror release via licorsy/ai-assisted-sdd-template"
 doc_type: adr
-description: "Records the decision to publish a new public repository, licorsy/ai-assisted-sdd-template, seeded with a single fresh commit and no carried-over history, as this template's public home - rather than flipping aleclemente/ai-assisted-sdd-template's own visibility. The private repository stays the sole place development happens; the public mirror is refreshed by a deliberate, on-demand sanitized sync, not continuously."
+description: "Records the decision to publish a new public repository, licorsy/ai-assisted-sdd-template, seeded with a single fresh commit and no carried-over history, as this template's public home - rather than flipping aleclemente/ai-assisted-sdd-template's own visibility. Amended 2026-07-31 (v1.2): the private repository was archived and this repository is now the sole source of truth where development happens - the original 'private repo stays sole place development happens, mirror refreshed by on-demand export' arrangement no longer holds."
 status: active
-version: "1.1"
+version: "1.2"
 created: 2026-07-30
 updated: 2026-07-31
 language: en
 id: 0010-public-release
 tags: [adr, public-release, governance, licorsy]
 owner: Alexandre Clemente
-related: [0002-audience-tier]
+related: [0002-audience-tier, 001-restart-prompt-archive-and-source-of-truth]
 ---
 
 # ADR-0010: Public-mirror release via `licorsy/ai-assisted-sdd-template`
@@ -18,6 +18,8 @@ related: [0002-audience-tier]
 ## Status
 
 Accepted (2026-07-30). Amended 2026-07-31 (v1.0 → v1.1): dropped `related:` entries pointing at `101-prompt-git-governance-adoption`/`100-prompt-public-release-sanitization` - `docs/prompts/` is deliberately absent from this public-mirror repository, so neither resolved. Does not change the decision itself.
+
+Amended again 2026-07-31 (v1.1 → v1.2): the Decision's "private repo stays the sole place development happens; public mirror refreshed by a deliberate, on-demand export" half no longer holds. The human archived `aleclemente/ai-assisted-sdd-template` and made `licorsy/ai-assisted-sdd-template` — this repository — the sole official repository going forward; its own git history (PR-merged commits, not a single fresh export commit) already reflects that. `.github/scripts/sync-to-public-mirror.sh`'s force-push, justified by "the mirror has no history of its own to preserve between syncs," is unsafe under the new arrangement and must not be run from this repository. The rest of the Decision — the single-fresh-commit migration that seeded this repository, and the reasoning in Alternatives considered — remains accurate as history and is unchanged. `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` records the documentation consequences of this amendment.
 
 ## Context
 
