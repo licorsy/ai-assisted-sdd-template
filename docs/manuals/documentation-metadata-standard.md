@@ -3,9 +3,9 @@ title: "Documentation Metadata Standard"
 doc_type: instruction
 description: "Defines the mandatory YAML frontmatter schema for every Markdown documentation file and roadmap-generated artifact in this repository, and the rule for applying it whenever such a file is created or materially updated."
 status: active
-version: "1.22"
+version: "1.23"
 created: 2026-07-07
-updated: 2026-07-30
+updated: 2026-07-31
 language: en
 id: documentation-metadata-standard
 tags: [frontmatter, metadata, documentation-standard, retrieval, rag, diataxis]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, adr-0001-documentation-and-governance-model
 
 Changelog of this document:
 
+- v1.23: Section 9's CI-enforcement sentence repointed from the retired standalone `docs-governance.yml` to `pr-checks.yml`'s `ci-docs` job, which now delegates the same `licorsy/docs-governance/action@v1` check through `licorsy/platform-workflows`'s reusable `ci-docs.yml` workflow instead of calling it directly. Enforcement mechanism and location changed; the check itself did not (`prompt-NNN` — TBD, see this repo's private prompt sequence).
 - v1.22: Section 1's root-entry-points exclusion sentence now names `CODE_OF_CONDUCT.md`, added this cycle (`prompt-107`) alongside `README.md`/`CLAUDE.md`/`AGENTS.md`/`CONTRIBUTING.md`/`SECURITY.md`/`CHANGELOG.md` - the same enumeration a new root entry point must join, per this repository's own recurring enumeration-drift lesson (`prompt-087` onward).
 - v1.21: Section 2.1 and Section 9 updated for the move from repo-local `.github/scripts/` checks to the shared `licorsy/docs-governance` engine (`docgov`): frontmatter/internal-links/changelog-retention now run via `.docgov.config.js` and the `docs-governance.yml` workflow instead of `validate-docs-frontmatter.js`/`check-internal-links.js`/`check-changelog-retention.js`, which are retired. Enforcement mechanism changed; the standard itself (schema, retention rule) did not.
-- v1.20: doc-consistency-reviewer batch fix: Section 1's `docs/prompts/` bullet now names `PROMPT-INDEX.md`, which Section 4 already assigns a `doc_type` but Section 1 never listed - the same "Section 1 omits a file Section 4 types" defect `prompt-092` fixed for `docs/STATE.md`, recurring on the sibling file; Section 9's CI-coverage sentence now names `QUICKSTART.md`, already linted via `validate-docs-frontmatter.js`'s separate `SCOPE_FILES` constant but previously undocumented here (prompt-096).
 - Older entries: see `git log --follow` on this file.
 
 ---
@@ -170,7 +170,7 @@ related: [orchestrator, roadmap, phase-reviewer, documentation-metadata-standard
 
 ## 9. Verification checklist
 
-Enforcement is prompt-based for the checks below; a GitHub Action (`.github/workflows/docs-governance.yml`, running `licorsy/docs-governance`; originally `docs-frontmatter-lint.yml`, prompt-013) automates checks 1, 2, and 3 for every directory in `.github/scripts/doc-scope.js`'s `CATEGORY_DIRS`, plus `QUICKSTART.md` (Section 1's one in-scope root file), on every push and pull request; the same workflow's `internal-links` rule (originally `.github/scripts/check-internal-links.js`, prompt-017) automates check 4 for link-formatted references. What stays manual: check 2's `adr`-status-mirrors-body rule, check 4 for paths mentioned as inline code rather than as Markdown links, and check 5's `tool-catalog` freshness bump. Whoever creates or updates an in-scope file confirms:
+Enforcement is prompt-based for the checks below; a GitHub Action (`.github/workflows/pr-checks.yml`'s `ci-docs` job, delegating to `licorsy/platform-workflows`'s reusable `ci-docs.yml`, which runs `licorsy/docs-governance`; originally `docs-frontmatter-lint.yml`, prompt-013, then the standalone `docs-governance.yml`, prompt-NNN — TBD) automates checks 1, 2, and 3 for every directory in `.github/scripts/doc-scope.js`'s `CATEGORY_DIRS`, plus `QUICKSTART.md` (Section 1's one in-scope root file), on every push and pull request; the same workflow's `internal-links` rule (originally `.github/scripts/check-internal-links.js`, prompt-017) automates check 4 for link-formatted references. What stays manual: check 2's `adr`-status-mirrors-body rule, check 4 for paths mentioned as inline code rather than as Markdown links, and check 5's `tool-catalog` freshness bump. Whoever creates or updates an in-scope file confirms:
 
 1. **Structural** — the file starts with `---`, has a closing `---` before the H1, and all 8 required fields (Section 2) are present and non-empty.
 2. **Enum** — `doc_type` matches the file's actual location (Section 4); `status` is one of the four allowed values; for `adr`-typed files, frontmatter `status` matches the body's own `## Status` section.
