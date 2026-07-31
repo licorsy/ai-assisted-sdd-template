@@ -41,7 +41,7 @@ The template is designed to support human-led and agent-assisted development wit
 - [ADR-0002: Intended adopter tier](docs/adr/0002-audience-tier.md) — Accepted: consultancy/agency, executed solo; see "Future extensions" below for what it unblocks.
 - [ADR-0003: Document architecture principles](docs/adr/0003-document-architecture.md) — the five patterns behind this repo's document system, with their CI enforcement.
 - [ADR-0004: Category directories for docs/manuals/ content](docs/adr/0004-docs-category-directories.md) — `docs/adr/`, `docs/strategy/`, `docs/visuals/`, extending ADR-0003 rather than superseding it.
-- [ADR-0010: Public-mirror release via licorsy/ai-assisted-sdd-template](docs/adr/0010-public-release.md) — publishes a new public repository seeded with a single fresh commit; amended 2026-07-31 to record this repository as the current source of truth, after the original private source repository was archived.
+- [ADR-0005: Public-mirror release via licorsy/ai-assisted-sdd-template](docs/adr/0005-public-release.md) — publishes a new public repository seeded with a single fresh commit; amended 2026-07-31 to record this repository as the current source of truth, after the original private source repository was archived.
 - [Business software development roadmap](docs/strategy/roadmap.md)
 - [Go-to-market roadmap](docs/strategy/go-to-market.md) — optional, parallel commercial-lifecycle roadmap; not a gate every increment passes through.
 - [Orchestrator reviewer prompt](agents/phase-reviewer.md)
@@ -75,7 +75,7 @@ The template is designed to support human-led and agent-assisted development wit
 
 - `agents/` - live subagent operating instructions (orchestrator, orchestrator reviewer, adversarial reviewer, doc consistency reviewer, template init, tool hunter).
 - `docs/manuals/` - the operation manual, this repo's documentation standard, the role guide, the prompt-engineering and agent-design guides, and the tool catalog; `docs/manuals/examples/` holds the worked examples you replace (governance, risks, example ADR, and an optional Phase 1 PRFAQ scaffold).
-- `docs/adr/` - this template's real architecture decision records (`0002-audience-tier.md`, `0003-document-architecture.md`, `0004-docs-category-directories.md`, `0010-public-release.md`); a project generated from this template uses the same directory for its own ADRs.
+- `docs/adr/` - this template's real architecture decision records (`0002-audience-tier.md`, `0003-document-architecture.md`, `0004-docs-category-directories.md`, `0005-public-release.md`); a project generated from this template uses the same directory for its own ADRs.
 - `docs/strategy/` - the execution roadmap and the optional go-to-market roadmap.
 - `docs/visuals/` - the template visual overview and its Mermaid diagrams.
 - `docs/prompts/` - historical/archived prompts and the blank prompt template; see `docs/prompts/PROMPT-INDEX.md` for a full id/status/purpose listing.

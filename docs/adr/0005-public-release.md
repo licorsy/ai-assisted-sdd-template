@@ -1,25 +1,27 @@
 ---
-title: "ADR-0010: Public-mirror release via licorsy/ai-assisted-sdd-template"
+title: "ADR-0005: Public-mirror release via licorsy/ai-assisted-sdd-template"
 doc_type: adr
-description: "Records the decision to publish a new public repository, licorsy/ai-assisted-sdd-template, seeded with a single fresh commit and no carried-over history, as this template's public home - rather than flipping aleclemente/ai-assisted-sdd-template's own visibility. Amended 2026-07-31 (v1.2): the private repository was archived and this repository is now the sole source of truth where development happens - the original 'private repo stays sole place development happens, mirror refreshed by on-demand export' arrangement no longer holds."
+description: "Records the decision to publish a new public repository, licorsy/ai-assisted-sdd-template, seeded with a single fresh commit and no carried-over history, as this template's public home - rather than flipping aleclemente/ai-assisted-sdd-template's own visibility. Amended 2026-07-31 (v1.2): the private repository was archived and this repository is now the sole source of truth where development happens - the original 'private repo stays sole place development happens, mirror refreshed by on-demand export' arrangement no longer holds. Renumbered from 0010 to 0005 in the same session (v1.3), closing the unused-number gap."
 status: active
-version: "1.2"
+version: "1.3"
 created: 2026-07-30
 updated: 2026-07-31
 language: en
-id: 0010-public-release
+id: 0005-public-release
 tags: [adr, public-release, governance, licorsy]
 owner: Alexandre Clemente
-related: [0002-audience-tier, 001-restart-prompt-archive-and-source-of-truth]
+related: [0002-audience-tier, 001-restart-prompt-archive-and-source-of-truth, 002-renumber-adr-0010-to-0005]
 ---
 
-# ADR-0010: Public-mirror release via `licorsy/ai-assisted-sdd-template`
+# ADR-0005: Public-mirror release via `licorsy/ai-assisted-sdd-template`
 
 ## Status
 
 Accepted (2026-07-30). Amended 2026-07-31 (v1.0 → v1.1): dropped `related:` entries pointing at `101-prompt-git-governance-adoption`/`100-prompt-public-release-sanitization` - `docs/prompts/` is deliberately absent from this public-mirror repository, so neither resolved. Does not change the decision itself.
 
 Amended again 2026-07-31 (v1.1 → v1.2): the Decision's "private repo stays the sole place development happens; public mirror refreshed by a deliberate, on-demand export" half no longer holds. The human archived `aleclemente/ai-assisted-sdd-template` and made `licorsy/ai-assisted-sdd-template` — this repository — the sole official repository going forward; its own git history (PR-merged commits, not a single fresh export commit) already reflects that. `.github/scripts/sync-to-public-mirror.sh`'s force-push, justified by "the mirror has no history of its own to preserve between syncs," is unsafe under the new arrangement and must not be run from this repository. The rest of the Decision — the single-fresh-commit migration that seeded this repository, and the reasoning in Alternatives considered — remains accurate as history and is unchanged. `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` records the documentation consequences of this amendment.
+
+Renumbered 2026-07-31 (v1.2 → v1.3): this ADR moved from `docs/adr/0010-public-release.md` to `docs/adr/0005-public-release.md` (`id` from `0010-public-release` to `0005-public-release`), closing the unused `0005`-`0009` gap now that the v1.2 amendment made the original cross-repository-numbering rationale moot. See the renumbered Consequences bullet below and `docs/prompts/002-renumber-adr-0010-to-0005.md`. The decision content is otherwise unchanged.
 
 ## Context
 
@@ -48,7 +50,7 @@ The sanitization-gate script, the initial migration itself, and the repeatable s
 + Keeps a private space for iteration that has not yet passed a sanitization check, without blocking ongoing development on a public-readiness gate.
 - Two repositories now exist for this template — a private source of truth and a public mirror. Any future prompt touching cross-repository consistency must state which repository it targets.
 - The public mirror's own git history starts empty at the migration point; contributors inspecting `licorsy/ai-assisted-sdd-template` see no history before that first commit.
-- Numbered `0010`, not `0005` (the next sequential slot after `0004`) — deliberately matching the number `local-notes/012` itself already used, most likely mirroring a cross-repository numbering the user keeps in the private `personal-os` repository. This ADR's number is therefore not evidence of six ADRs having existed in between; `0005`-`0009` are intentionally unused here.
+- Originally numbered `0010` rather than `0005` (the next sequential slot after `0004`), deliberately matching the number `local-notes/012` had already used, most likely mirroring a cross-repository numbering kept in the private `personal-os` repository. Renumbered to `0005` in the same session as the amendment above (`docs/prompts/002-renumber-adr-0010-to-0005.md`): once the private source repository was archived, the reason to stay aligned with an external, non-public workspace's numbering no longer applied, and the gap had already caused repeated reader confusion.
 
 ## Confidence
 
