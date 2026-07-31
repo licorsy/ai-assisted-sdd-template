@@ -1,0 +1,59 @@
+# Absorbs the retired docs-governance.yml and adds the licorsy/platform-
+# workflows reusable checks. Mirrors git-governance's dogfooded pr-checks.yml:
+# local pre-commit is the continuous gate everywhere including develop; the
+# pre-commit/Conventional-Commits job here is the remote backstop, run only
+# at the two deliberate promotion points (staging, main) or on demand, to
+# save Actions minutes. ci-docs/ci-security are NOT branch-restricted: docs
+# correctness and secret scanning should be caught as early as develop.
+name: PR checks
+
+on:
+  pull_request:
+    branches: [develop, staging, main]
+  push:
+    branches: [develop, main]
+  workflow_dispatch: {}
+
+jobs:
+  pre-commit:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.pull_request.base.ref == 'staging' ||
+      github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Install pre-commit
+        run: pip install pre-commit
+      - name: Run file-content hooks
+        run: pre-commit run --all-files
+      - name: Validate commit messages (Conventional Commits)
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.sha }}
+          HEAD_REF: ${{ github.event.pull_request.head.sha }}
+        run: |
+          git log --format=%s "${BASE_REF}..${HEAD_REF}" | while IFS= read -r subject; do
+            echo "$subject" > /tmp/commit-msg
+            pre-commit run conventional-pre-commit --hook-stage commit-msg --commit-msg-filename /tmp/commit-msg || exit 1
+          done
+
+  # Replaces the retired docs-governance.yml — same licorsy/docs-governance
+  # check, now delegated through the reusable workflow.
+  ci-docs:
+    if: hashFiles('.docgov.config.js') != ''
+    uses: licorsy/platform-workflows/.github/workflows/ci-docs.yml@v1
+    with:
+      base-sha: ${{ github.event.pull_request.base.sha }}
+
+  # New: dependency-review (self-gated to staging/main) + secret-scanning
+  # (runs on every trigger above). Needs an org-level GITLEAKS_LICENSE
+  # secret to fully function — see licorsy/platform-workflows's README.
+  ci-security:
+    uses: licorsy/platform-workflows/.github/workflows/ci-security.yml@v1
+    secrets: inherit
