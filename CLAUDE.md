@@ -1,3 +1,18 @@
+---
+title: "CLAUDE.md"
+doc_type: instruction
+description: "Claude Code's entry point for this repository: the always-on confirmation rule, the documentation metadata rule, and the pointers to the operation manual and governance plugins that own the full text of each."
+status: active
+version: "1.0.0"
+created: 2026-07-30
+updated: 2026-08-01
+language: en
+id: claude-adapter
+owner: Alexandre Clemente
+tags: [instructions, adapter, claude-code, sdd]
+related: [agents-adapter, operation-manual, documentation-metadata-standard]
+---
+
 # CLAUDE.md
 
 This repository is a living instance of the AI-assisted SDD template operating model. See `README.md` for the full document map.

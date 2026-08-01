@@ -1,3 +1,18 @@
+---
+title: "AGENTS.md"
+doc_type: instruction
+description: "Tool-neutral agent entry point for this repository, equivalent to CLAUDE.md, for coding tools that read AGENTS.md by convention: the always-on confirmation rule, the documentation metadata rule, and pointers to the documents that own the full text of each."
+status: active
+version: "1.0.0"
+created: 2026-07-30
+updated: 2026-08-01
+language: en
+id: agents-adapter
+owner: Alexandre Clemente
+tags: [instructions, adapter, agents, sdd]
+related: [claude-adapter, operation-manual, documentation-metadata-standard]
+---
+
 # AGENTS.md
 
 This repository is a living instance of the AI-assisted SDD template operating model. See `README.md` for the full document map. This file is a tool-neutral adapter, equivalent to `CLAUDE.md`, for coding tools that read `AGENTS.md` by convention.
