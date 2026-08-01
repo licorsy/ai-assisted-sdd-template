@@ -108,5 +108,33 @@ module.exports = {
         + 'é a classe de defeito que produziu 3 rodadas seguidas de achados de '
         + 'doc-consistency-reviewer sem convergir (docs/prompts/003-close-restart-followon-drift.md).',
     },
+
+    // -----------------------------------------------------------------------
+    // Fase 2: liga o predicado de isenção "registro histórico ≠ afirmação
+    // atual" (lib/exempt.js) já existente no motor, em vez de reimplementar
+    // à mão, sessão a sessão, o mesmo qualificador "arquivo histórico,
+    // citação não resolvível aqui" em prosa.
+    version_citations: {
+      scope_dirs: CATEGORY_DIRS,
+      root_files: SCOPE_FILES,
+      exempt: {
+        // docs/prompts/ já é tratado como arquivo histórico congelado por
+        // changelog-retention acima (mesmo comentário); uma citação de
+        // versão dentro de um prompt arquivado é um registro do que era
+        // verdade então, não uma afirmação atual — mesmo raciocínio.
+        historical_paths: ['docs/prompts'],
+        // O changelog de corpo por documento (ex.: agents/init.md) cita
+        // versões de outros arquivos como estavam na época de cada entrada
+        // — não é uma reafirmação atual. Verificado: CHANGELOG.md na raiz
+        // usa uma estrutura Keep-a-Changelog diferente e não está em
+        // SCOPE_FILES, então esta isenção cobre exatamente o padrão real
+        // observado (agents/init.md v1.7, citando `prompt-086` v1.5).
+        inside_changelog_block: true,
+        changelog_marker: 'Changelog of this document:',
+      },
+      why: 'a citação `path.md` vX.Y é uma afirmação verificável — sem isenção pra '
+        + 'registro histórico, o mesmo qualificador manual "histórico, não citável '
+        + 'aqui" teria que ser reescrito à mão em cada prompt arquivado.',
+    },
   },
 };
