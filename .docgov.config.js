@@ -136,5 +136,40 @@ module.exports = {
         + 'registro histórico, o mesmo qualificador manual "histórico, não citável '
         + 'aqui" teria que ser reescrito à mão em cada prompt arquivado.',
     },
+
+    // -----------------------------------------------------------------------
+    // Fase 2: fixa o `--no-merges` do lint de mensagens de commit
+    // (docs/prompts/005-fix-commit-lint-merge-subjects.md). Sem a flag, o
+    // check reprova por construção em toda promoção develop -> staging, que é
+    // exatamente o PR que ele existe pra proteger.
+    facts: {
+      // NÃO shadow. `facts` vem com shadow ligado — reporta e nunca falha — e
+      // foi justamente isso que deixou este defeito sobreviver em três cópias
+      // scaffolded antes de ser notado. Sem shadow a regra também roda sob
+      // `--changed`, então o pre-commit pega a regressão, não a CI na
+      // promoção. Não altera `dead_citations`, que segue shadow por decisão
+      // do prompt 004: aquela regra tem backlog real de 509 achados, esta
+      // confere um valor declarado.
+      shadow: false,
+      scope_dirs: CATEGORY_DIRS,
+      root_files: SCOPE_FILES,
+      entries: [
+        {
+          id: 'commit-msg-lint-skips-merges',
+          value: 'git log --no-merges --format=%s',
+          why: 'sem --no-merges o lint de Conventional Commits analisa os assuntos '
+            + '"Merge pull request #N from ..." que o próprio GitHub gera, e que '
+            + 'nunca podem conformar — reprovando por construção em toda promoção '
+            + 'develop -> staging. Corrigido em git-governance, docs-governance e '
+            + 'licorsy/.github em 2026-08-01; este repositório era a última cópia.',
+          required_in: [
+            {
+              file: '.github/workflows/pr-checks.yml',
+              pattern: /git log --no-merges --format=%s/,
+            },
+          ],
+        },
+      ],
+    },
   },
 };
