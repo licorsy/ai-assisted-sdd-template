@@ -3,9 +3,9 @@ title: "Doc Consistency Reviewer Prompt"
 doc_type: instruction
 description: "Audit the entire current living-document set - not one phase - for cross-document semantic inconsistency, broken traceability, unnecessary redundancy, and textual ambiguity, using directed search over cross-references and frontmatter `related:` fields rather than full reads of every document. Reports only; never edits files."
 status: active
-version: "1.6"
+version: "1.7"
 created: 2026-07-19
-updated: 2026-07-29
+updated: 2026-07-31
 language: en
 id: doc-consistency
 tags: [review, consistency, traceability, documentation, cross-document]
@@ -17,9 +17,9 @@ related: [operation-manual, agent-design-guide, phase-reviewer, adversarial, roa
 
 Changelog of this document:
 
+- v1.7: Section 3 step 1's `docs/prompts/` carve-out reworded to explicitly status-based (`draft`/`active` in scope, `archived`/`deprecated` frozen) instead of ambiguous "archived prompt files... a frozen historical archive" wording that a re-review of this same repository's `docs/prompts/` restart read as directory-wide and nearly skipped the two `status: active` prompts describing its own branch; dangling citation of prompt `059` (archived private-repo sequence) qualified as non-citable here.
 - v1.6: Section 3 step 1's reference to `check-changelog-retention.js` updated to `.docgov.config.js`'s `changelog-retention` rule — the script was retired when frontmatter/internal-links/changelog-retention moved to the shared `licorsy/docs-governance` engine; `check-step-references.js` stays repo-specific and unaffected.
 - v1.5: doc-consistency-reviewer batch fix: Section 6 gains rule 5, the "ask before proceeding if scope is unspecified" rule that previously existed only in `.claude/agents/doc-consistency-reviewer.md` (a fourth recurrence of the adapter-vs-canonical class, this time found on three review agents at once); Section 3 step 1's `docs/prompts/` carve-out now explicitly excludes only archived prompt files, not `PROMPT-INDEX.md` (a live status-artifact this reviewer had been blind to); step 1 also names the `docs/STATE.md` facade explicitly instead of leaving it out of every scope category; step 2's "build the graph, then follow it" order no longer states building the graph as happening after following it (prompt-098).
-- v1.4: doc-consistency-reviewer batch fix: Section 3 step 1's root-entry-points list gains `CHANGELOG.md`, already present in `.github/scripts/doc-scope.js`'s `ROOT_FILES` and `docs/STATE.md` but missing from this file's own scope definition (prompt-096).
 - Older entries: see `git log --follow` on this file.
 
 ---
@@ -35,9 +35,9 @@ Changelog of this document:
 
 ## 3. Search strategy: directed, not exhaustive
 
-This review does not read every living document in full. That does not scale - a single document in a long-running project has already been observed to hit a platform's read ceiling on its own (see `docs/prompts/059-prompt-living-doc-retention.md`) - and it is not how a human reviewer would actually locate drift either. Instead:
+This review does not read every living document in full. That does not scale - a single document in a long-running project has already been observed to hit a platform's read ceiling on its own (see prompt `059`, archived private-repo sequence, not a citable path in this repository) - and it is not how a human reviewer would actually locate drift either. Instead:
 
-1. Identify the current living-document set before searching: the category directories in `.github/scripts/doc-scope.js`'s `CATEGORY_DIRS` (`agents`, `docs/manuals`, `docs/adr`, `docs/strategy`, `docs/visuals`, `docs/references`, `docs/reports`) — excluding `docs/prompts/`'s archived prompt files, which `CATEGORY_DIRS` covers for frontmatter-lint purposes but which this review treats as a frozen historical archive, not current content to check for drift against (the same carve-out `.docgov.config.js`'s `changelog-retention` rule and `check-step-references.js` already apply, and `docs/adr/0003-document-architecture.md` principle 3 states for the `docs/STATE.md` facade) — but *including* `docs/prompts/PROMPT-INDEX.md`, which is a live `status-artifact` updated every cycle (`documentation-metadata-standard.md` Section 4), not archive content — plus root entry points (`README.md`, `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `SECURITY.md`, `QUICKSTART.md`, `CHANGELOG.md`), the generated `docs/STATE.md` facade (checked against its sources, never edited — `docs/adr/0003-document-architecture.md` principle 3), and any project-specific living docs such as `/docs/status.md`.
+1. Identify the current living-document set before searching: the category directories in `.github/scripts/doc-scope.js`'s `CATEGORY_DIRS` (`agents`, `docs/manuals`, `docs/adr`, `docs/strategy`, `docs/visuals`, `docs/references`, `docs/reports`) — including `docs/prompts/`, but only its files whose frontmatter `status` is `draft` or `active`: those describe changes not yet merged and verified and ARE current content to check for drift against. Files at `status: archived` or `deprecated` are frozen historical record, not checked for drift (the same status-based carve-out `.docgov.config.js`'s `changelog-retention` rule and `check-step-references.js` already apply, and `docs/adr/0003-document-architecture.md` principle 3 states for the `docs/STATE.md` facade) — `docs/prompts/PROMPT-INDEX.md` is always in scope regardless of status, since it is a live `status-artifact` updated every cycle (`documentation-metadata-standard.md` Section 4), not archive content — plus root entry points (`README.md`, `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `SECURITY.md`, `QUICKSTART.md`, `CHANGELOG.md`), the generated `docs/STATE.md` facade (checked against its sources, never edited — `docs/adr/0003-document-architecture.md` principle 3), and any project-specific living docs such as `/docs/status.md`.
 2. Build the frontmatter `related:` graph connecting the set from step 1 (see `docs/manuals/documentation-metadata-standard.md`), then follow its edges outward - a claimed relationship is exactly where semantic drift or broken traceability is most likely to hide.
 3. Grep for cross-references: file paths, section names, `id:` values, and named decisions mentioned in one document that should appear, consistently, in every document that depends on them.
 4. Read the specific fragments the search surfaces, not the surrounding document in full. Widen to a full read of a document only when a fragment-level read leaves the inconsistency ambiguous.

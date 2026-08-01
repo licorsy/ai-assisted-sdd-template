@@ -3,7 +3,7 @@ title: "Report Proposal Tracking"
 doc_type: status-artifact
 description: "Status index over every distinct proposal in docs/reports/*.md external improvement reports - done, done-scoped, deferred, rejected, or not-triaged - so a proposal's fate is discoverable in one place instead of scattered across docs/prompts/*.md CONTEXT sections and CHANGELOG.md prose. Populated 2026-07-24 from a full audit of docs/reports/008-relatorio-melhorias-v6.md against docs/prompts/PROMPT-INDEX.md, CHANGELOG.md, and live repo state."
 status: active
-version: "1.10"
+version: "1.11"
 created: 2026-07-24
 updated: 2026-07-31
 language: en
@@ -43,7 +43,7 @@ Sections 6 ("Tabela de Riscos Consolidada"), 9 and 18 ("Backlog Priorizado") and
 | R008-N.3 | New `agents/aidlc-adapter.md` | deferred | Same as R008-0.3 |
 | R008-N.4 | New `agents/orchestrator-tasks.md` (system/task split) | rejected | Batch-7 decision (2026-07-24): literally the same proposal as R008-T.2/R008-3.2, already rejected (batch 5) for the same reason. |
 | R008-N.5 | Upper/lowercase file-naming convention | done | `CONTRIBUTING.md`'s case-naming-convention bullet; `prompt-075` |
-| R008-N.6 | ADR numbering standardized under `docs/adr/` | done-scoped | `docs/adr/0002-0004` exist (`prompt-064`/`072`), but the proposed ADR-0004 ("Spec-as-CI-Contract") and ADR-0005 (aidlc-integration) content was not what shipped in those slots |
+| R008-N.6 | ADR numbering standardized under `docs/adr/` | done-scoped | `docs/adr/0002-0004` exist (`prompt-064`/`072`), but the proposed ADR-0004 ("Spec-as-CI-Contract") and ADR-0005 (aidlc-integration) content was not what shipped in those slots. Slot `0005` was later filled by the unrelated public-release ADR, renumbered from `0010` on 2026-07-31 (`docs/prompts/002-renumber-adr-0010-to-0005.md`); the aidlc-integration proposal remains unadopted. |
 
 ### Seção E — Estrutura de Pastas
 
@@ -160,7 +160,7 @@ Sections 6 ("Tabela de Riscos Consolidada"), 9 and 18 ("Backlog Priorizado") and
 
 ### Sections 14-20 — Arquitetura de Telemetria / Camada de Respostas de Negócio (NOVO v6)
 
-All rows below were superseded by a single, explicitly scoped-down decision in `docs/prompts/068-prompt-project-telemetry-reference.md` — see that prompt's own CONTEXT for the full reasoning.
+All rows below were superseded by a single, explicitly scoped-down decision in prompt `068` (archived private-repo sequence, not a citable path in this repository) — see this file's own summary above for the reasoning that survives.
 
 | ID | Proposal | Status | Decision / Evidence |
 | --- | --- | --- | --- |

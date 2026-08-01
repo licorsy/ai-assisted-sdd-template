@@ -3,7 +3,7 @@ title: "Basic Prompt Template"
 doc_type: template
 description: "Reusable scaffold for authoring new prompts, structured as Role, Context, Task, Requirements/Constraints/Rules, optional Examples, and Format and Output sections. ROLE, CONTEXT, and REQUIREMENTS ship with sensible repo-wide defaults, meant to be added to or edited per scenario rather than reused verbatim."
 status: active
-version: "1.0"
+version: "1.1"
 created: 2026-07-31
 updated: 2026-07-31
 language: en
@@ -13,7 +13,7 @@ owner: Alexandre Clemente
 related: [prompt-engineering-guide]
 ---
 
-# Prompt
+# Basic Prompt Template
 
 *The ROLE, CONTEXT, and REQUIREMENTS content below are this template's own sensible defaults for a repository-wide analysis/change prompt — add, remove, or edit them to fit the specific scenario at hand. `operation-manual.md`'s change-as-prompt rule requires ROLE and TASK to be scenario-specific, not reused verbatim from a prior prompt. For authoring-quality techniques — specification anatomy, input→output examples, context blocks, priority tags, staged prompting, reusable patterns — see `docs/manuals/prompt-engineering-guide.md`.*
 

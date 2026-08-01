@@ -78,7 +78,7 @@ The template is designed to support human-led and agent-assisted development wit
 - `docs/adr/` - this template's real architecture decision records (`0002-audience-tier.md`, `0003-document-architecture.md`, `0004-docs-category-directories.md`, `0005-public-release.md`); a project generated from this template uses the same directory for its own ADRs.
 - `docs/strategy/` - the execution roadmap and the optional go-to-market roadmap.
 - `docs/visuals/` - the template visual overview and its Mermaid diagrams.
-- `docs/prompts/` - historical/archived prompts and the blank prompt template; see `docs/prompts/PROMPT-INDEX.md` for a full id/status/purpose listing.
+- `docs/prompts/` - this repository's change-as-prompt records (`draft`/`active` in flight, `archived`/`deprecated` historical) and the blank prompt template; see `docs/prompts/PROMPT-INDEX.md` for a full id/status/purpose listing.
 - `docs/references/` - token-economy decisions, an unvetted tools-ecosystem shortlist (`tools-ecosystem.md`), ready-to-apply GitHub-hardening/deployment templates (`infra-templates/`), a ready-to-apply session telemetry convention for generated projects (`telemetry-template/`), and an opt-in phase-gate artifact check (`gate-verification-template/`).
 - `docs/STATE.md` - generated snapshot of every living document (regenerate with `node .github/scripts/generate-state.js`).
 - `docs/reports/` - external improvement reports and `PROPOSAL-TRACKING.md`, the status index tracking every proposal each report contains.
@@ -95,7 +95,7 @@ No separate `RUNBOOK.md` exists, by design — this template has no deploy/incid
 | Template-authoring material (keep as-is) | Project artifacts / worked examples (replace when you start) |
 | --- | --- |
 | `docs/manuals/operation-manual.md`, `docs/strategy/roadmap.md`, `docs/manuals/documentation-metadata-standard.md`, `docs/manuals/role-operating-guide.md`, `docs/manuals/tool-library-catalog.md`, `docs/manuals/prompt-engineering-guide.md`, `docs/manuals/agent-design-guide.md` | Everything under `docs/manuals/examples/` (`governance.md`, `risks.md`, `adr-0001-documentation-and-governance-model.md`, `spec-prfaq-template.md`) |
-| `docs/prompts/`, `agents/` | Future living docs your project adds under `docs/` as it executes the roadmap (handbook, status, references, ADRs, governance/risk register — see `documentation-metadata-standard.md` Section 7 for the artifact-to-`doc_type` mapping) |
+| `docs/prompts/basic-prompt-template.md`, `agents/` | This template's own numbered prompts under `docs/prompts/` (`001-...`, `002-...`, etc.) — delete them; they record this repository's own history, not yours. Plus future living docs your project adds under `docs/` as it executes the roadmap (handbook, status, references, ADRs, governance/risk register — see `documentation-metadata-standard.md` Section 7 for the artifact-to-`doc_type` mapping) |
 
 The right column is already labeled "this template's own example" in the Key documents list above.
 

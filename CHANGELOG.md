@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to this template are documented here, starting from this file's own introduction. Prior history is recorded per-prompt in each `docs/prompts/NNN-prompt-<slug>.md`'s own Context/Task sections and changelog entries, and inside each `docs/manuals/*.md` file's own changelog — this file does not attempt to reconstruct that history retroactively. Entries describe each change as executed; file paths reflect the repository at that time and may since have moved (see `docs/prompts/PROMPT-INDEX.md` and each prompt's own file for current locations).
+All notable changes to this template are documented here, starting from this file's own introduction. Prior history is recorded per-prompt in each `docs/prompts/NNN-<slug>.md`'s own Context/Task sections and changelog entries, and inside each `docs/manuals/*.md` file's own changelog — this file does not attempt to reconstruct that history retroactively. Entries describe each change as executed; file paths reflect the repository at that time and may since have moved (see `docs/prompts/PROMPT-INDEX.md` and each prompt's own file for current locations).
 
 Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 

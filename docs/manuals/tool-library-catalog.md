@@ -3,24 +3,24 @@ title: "Claude Tool Library Catalog"
 doc_type: tool-catalog
 description: "Single-file catalog of vetted, third-party Claude Code tools (Agents, Skills, Hooks, MCP servers, Commands) available for reuse across projects, so any roadmap activity needing a Claude-ecosystem capability can favor a proven, already-vetted tool over rebuilding it. Mode B's product frameworks/libraries (Phase 1, Activity 11a) go to the project's own build-vs-buy record instead, not here."
 status: active
-version: "2.5"
+version: "2.6"
 created: 2026-07-07
-updated: 2026-07-28
+updated: 2026-07-31
 language: en
 id: tool-library-catalog
 tags: [tool-library, catalog, agents, skills, hooks, mcp, discovery, build-vs-buy]
 owner: Alexandre Clemente
 related: [tool-discovery, operation-manual, documentation-metadata-standard, roadmap]
-lastreviewed: "2026-07-28"
+lastreviewed: "2026-07-31"
 ---
 
 # Claude Tool Library Catalog
 
 Changelog of this document:
 
+- v2.6: `grilling` entry's dangling citation of prompt `085` (archived private-repo sequence) qualified as non-citable in this repository, per `operation-manual.md` Step 12 rule 3 (`docs/prompts/003-close-restart-followon-drift.md`).
 - v2.5: doc-consistency-reviewer batch fix: adds a one-sentence clarification below the Purpose section that the frontmatter `lastreviewed` field is file-level (most recent date any entry was added/reconfirmed), not a per-entry claim - each entry's own `checked on` field carries that (prompt-095).
 - v2.4: doc-consistency-reviewer batch fix: gains the new `lastreviewed` frontmatter field (prompt-020, reopened by prompt-094 after finding its 2026-07-28 decline was based on a false "no real entries" premise); `knowledge-rag`'s `Notes` field's "141 tracked Markdown files" figure - already one file stale after only one merge - replaced with a live `git ls-files` reference instead of a hardcoded count, matching `token-economy.md` (prompt-094).
-- v2.3: doc-consistency-reviewer batch fix: `knowledge-rag`'s `Notes` field's stale "~60 Markdown files" corpus-size estimate corrected to the actual tracked count (141 files repo-wide, 94 of them the frozen `docs/prompts/` archive) - the figure is load-bearing for this entry's defer decision (prompt-093).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -84,7 +84,7 @@ Each cataloged tool is a level-3 heading with this fixed set of fields:
 - Security level: trusted - MIT-licensed (LICENSE verified verbatim), listed and SHA-pinned in Anthropic's own official plugin marketplace, very large adoption (192k stars), actively maintained (pushed the same day as the check), and the skill body is a five-line prompt with no scripts, hooks, network calls, or file writes, so its blast radius is the conversation only. Caveat (freshness, not security): the locally installed copy is pinned to a 2026-06-25 commit via a local-directory marketplace, not the official one, so it predates an upstream 2026-07-03 confirmation-gate addition and a 2026-07-13 reword.
 - Roadmap coverage: Phase 3 - Designing, Validation - optional interview-side complement to `agents/adversarial.md`'s pre-lock-in merit review; also usable alongside `agents/phase-reviewer.md` for independent review in any phase. Strictly optional and never a dependency: both agents must stay tool-neutral because they also run via `AGENTS.md` for non-Claude-Code tools.
 - Status: candidate
-- Notes: Complements rather than replaces `agents/adversarial.md` - it supplies elicitation (an interactive interview pulling assumptions out of the human) where `adversarial.md` supplies analysis and a fixed output contract (no verdict line, no severity-ranked findings, no before/after proposed edits from `grilling` itself). To honor `adversarial.md`'s independence rule, run the grilling session in a fresh context from the one that wrote the spec. Found via `tool-hunter`, triaged from a YouTube walkthrough of the `mattpocock/skills` package in `docs/prompts/085-prompt-ai-workflow-transcripts-triage.md` - the package as a whole is not adopted as a template dependency; only this one skill is cataloged as an optional aid.
+- Notes: Complements rather than replaces `agents/adversarial.md` - it supplies elicitation (an interactive interview pulling assumptions out of the human) where `adversarial.md` supplies analysis and a fixed output contract (no verdict line, no severity-ranked findings, no before/after proposed edits from `grilling` itself). To honor `adversarial.md`'s independence rule, run the grilling session in a fresh context from the one that wrote the spec. Found via `tool-hunter`, triaged from a YouTube walkthrough of the `mattpocock/skills` package in prompt `085` (archived private-repo sequence, not a citable path in this repository) - the package as a whole is not adopted as a template dependency; only this one skill is cataloged as an optional aid.
 
 ### docflow
 
