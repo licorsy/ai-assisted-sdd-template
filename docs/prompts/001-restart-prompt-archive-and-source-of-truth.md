@@ -2,7 +2,7 @@
 title: "Prompt 001: restart the change-as-prompt archive and record this repository as the source of truth"
 doc_type: prompt
 description: "Restarts docs/prompts/ inside licorsy/ai-assisted-sdd-template (numbering fresh at 001; the pre-2026-07-31 archive stays in the archived private source repository and is deliberately not migrated) and amends ADR-0005 to record that this repository, not the private source repo, is now where prompt-driven development happens. Repoints operation-manual.md Step 12's structure citations, CLAUDE.md/AGENTS.md's synced change-as-prompt block, and README.md at paths that actually exist here, and fixes the prompt-lifecycle diagram's stale filename convention. Fixes the root cause behind findings 1, 2, and 4 of a 2026-07-31 doc-consistency-reviewer audit."
-status: active
+status: archived
 version: "1.0"
 created: 2026-07-31
 updated: 2026-07-31

@@ -2,7 +2,7 @@
 title: "Prompt 002: renumber ADR-0010 to ADR-0005, closing the unused-number gap"
 doc_type: prompt
 description: "Renumbers docs/adr/0010-public-release.md to docs/adr/0005-public-release.md, the next sequential slot after 0004. The original 0010 numbering matched a private, external personal-os workspace's own numbering - a rationale the ADR itself only stated as 'most likely' and that stopped mattering once prompt-001 amended the same ADR to record the private source repo as archived and this repository as the sole source of truth. Updates every citing document's related: field, prose citation, and docs/STATE.md."
-status: active
+status: archived
 version: "1.0"
 created: 2026-07-31
 updated: 2026-07-31
