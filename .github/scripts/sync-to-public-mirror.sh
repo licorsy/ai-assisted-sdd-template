@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Syncs the current tracked tree to the public mirror, licorsy/ai-assisted-sdd-template
-# (docs/adr/0010-public-release.md). On-demand only - invoke by hand when something
-# is release-ready, never from CI or a git hook.
+# RETIRED - do not run. This repository IS licorsy/ai-assisted-sdd-template and is
+# now the sole source of truth (docs/adr/0005-public-release.md, v1.2 Status
+# amendment); the force-push this script performs is unsafe here. Kept only as the
+# historical record of the export mechanism this repository was originally seeded by.
+#
+# Original purpose: synced the tracked tree from the archived private source
+# repository to this one. On-demand only - invoked by hand when something was
+# release-ready, never from CI or a git hook.
 #
 # Excludes docs/prompts/ and docs/reports/008-relatorio-melhorias-v6.md: both carry
 # extensive business-tech-agency/personal-os detail and are frozen historical record

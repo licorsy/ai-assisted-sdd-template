@@ -3,9 +3,9 @@ title: "ADR-0004: Category directories for docs/manuals/ content"
 doc_type: adr
 description: "Records the decision to split docs/manuals/ by category into docs/adr/, docs/strategy/, and docs/visuals/, as an extension of ADR-0003's principles (not a supersession) - operation-manual.md itself stays a single, unfragmented file, since ADR-0003's own Alternative #2 already rejected splitting it and check-step-references.js depends on that assumption."
 status: active
-version: "1.0"
+version: "1.1"
 created: 2026-07-23
-updated: 2026-07-23
+updated: 2026-07-31
 language: en
 id: 0004-docs-category-directories
 tags: [adr, document-architecture, folder-reorg, docs-adr, docs-strategy, docs-visuals]
@@ -17,7 +17,7 @@ related: [0003-document-architecture, operation-manual, documentation-metadata-s
 
 ## Status
 
-Accepted (2026-07-23).
+Accepted (2026-07-23). Amended 2026-07-31 (v1.0 → v1.1): qualified a dangling citation of prompt `064` (archived private-repo sequence) in Consequences as non-citable in this repository, per `operation-manual.md` Step 12 rule 3. Does not change the decision itself.
 
 ## Context
 
@@ -45,7 +45,7 @@ This ADR **extends** ADR-0003 rather than superseding it: all five of ADR-0003's
 
 + ADRs, strategy documents, and diagrams are each discoverable by directory name instead of requiring a reader to already know they live inside `docs/manuals/`.
 + The "this template uses `docs/manuals/` for ADRs, a generated project uses `docs/adr/`" distinction in Step 15's tool-guidance table is retired — one convention now applies to both, simplifying that row.
-+ Every cross-reference to a moved file had to be located and updated in the same change (`docs/prompts/064-prompt-docs-manuals-reorg.md`); `check-internal-links.js` is the safety net for anything missed, per ADR-0003 principle 5.
++ Every cross-reference to a moved file had to be located and updated in the same change (prompt `064`, archived private-repo sequence, not a citable path in this repository); `check-internal-links.js` is the safety net for anything missed, per ADR-0003 principle 5.
 
 - `operation-manual.md`'s own token-budget-per-session concern (loading the whole file every time) is *not* addressed by this ADR — it was explicitly considered and deferred, since the fragmentation approach that would address it conflicts with the still-valid parts of ADR-0003's Alternative #2 and needs its own generator-based design first.
 

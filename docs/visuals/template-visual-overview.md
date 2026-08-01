@@ -3,7 +3,7 @@ title: "Template Visual Overview"
 doc_type: manual
 description: "Six Mermaid diagrams orienting a new reader in the template's architecture - document map, roadmap state machine, phase-execution sequence, prompt-lifecycle workflow, Spec Kit artifact flow, and the runtime-trigger decision flow. Diagrams orient, prose governs: every diagram links to the canonical document that owns its content."
 status: active
-version: "1.9"
+version: "1.11"
 created: 2026-07-14
 updated: 2026-07-31
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, orchestrator, prompt-engineering-guide]
 
 Changelog of this document:
 
-- v1.9: Dropped the `related:` entry pointing at `052-prompt-template-visual-overview` - `docs/prompts/` is deliberately absent from this public-mirror repository (ADR-0010), so the reference no longer resolves.
+- v1.11: Removed the v1.9 entry below (retention rule: removal, not reword, per `documentation-metadata-standard.md` Section 2.1) - it stated `docs/prompts/` was "deliberately absent from this public-mirror repository," which the v1.10 entry immediately above it already contradicted once `docs/prompts/` was restarted (`docs/prompts/003-close-restart-followon-drift.md`).
+- v1.10: Section 4's prompt-lifecycle diagram first node updated from `docs/prompts/NNN-prompt-slug.md` to `docs/prompts/NNN-slug.md`, matching the naming convention `operation-manual.md` v3.49 already adopted (`docs/prompts/001-restart-prompt-archive-and-source-of-truth.md`) - this file's own governing rule requires reviewing a diagram in the same change as the documents it visualizes.
 - v1.8: doc-consistency-reviewer batch fix: Section 6's runtime-trigger flowchart `P4` node no longer contradicts the `Q4` question routing into it - the node self-described as "(design time: threat model, Phase 3)" while `Q4` is labeled "(Phase 6 / pre-merge)"; relabeled to match P4's actual scope (Phase 6/pre-merge) with a note that the same trigger also fires Phase 3's separate threat-model sketch (prompt-097).
-- v1.7: doc-consistency-reviewer batch fix: Section 5's Spec Kit artifact-flow diagram gains a `/speckit.analyze` node, previously missing though the operation manual calls it mandatory, and splits the single `/speckit.plan` node into a first pass (Phase 3, `.specify/plans/technical-strategy.md`) and a refined pass (Phase 4, `.specify/plans/[feature-name]-tech-plan.md`) with `/speckit.clarify` running between them, matching the roadmap's own two-pass design instead of the previous single-pass, wrong-artifact depiction (prompt-093).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -118,7 +118,7 @@ The change-as-prompt rule for this template repository ([operation-manual.md](..
 
 ```mermaid
 flowchart LR
-    IDEA["Non-trivial change idea"] --> DOC["docs/prompts/NNN-prompt-slug.md<br/>status: draft"]
+    IDEA["Non-trivial change idea"] --> DOC["docs/prompts/NNN-slug.md<br/>status: draft"]
     DOC --> APPROVE["Human approves<br/>→ status: active"]
     DOC -- declined/superseded --> DEPR["status: deprecated<br/>(decline reason in body)"]
     APPROVE --> EXEC["Execute on a branch<br/>(edits to living documents)"]

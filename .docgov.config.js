@@ -55,7 +55,8 @@ module.exports = {
 
     // -----------------------------------------------------------------------
     'changelog-retention': {
-      // docs/prompts/ é o arquivo histórico congelado (ver doc-scope.js);
+      // docs/prompts/ não usa changelog de corpo (retenção é via status:
+      // draft/active/archived/deprecated no frontmatter, não uma lista no corpo);
       // docs/reports/ é material de status/relatório sem changelog de corpo.
       scope_dirs: CATEGORY_DIRS.filter((d) => !['docs/prompts', 'docs/reports'].includes(d)),
       root_files: [],
@@ -74,6 +75,38 @@ module.exports = {
       enabled: true,
       why: 'Documento versionado modificado sem bump de `version:` é o mesmo defeito '
         + 'que motivou esta regra no personal-os (2 violações reais na mesma sessão).',
+    },
+
+    // -----------------------------------------------------------------------
+    // shadow (não falha CI ainda) — adotada em 2026-08-01 depois de 3 rodadas
+    // de doc-consistency-reviewer sobre o mesmo defeito: citação inline-code
+    // de um prompt/ADR arquivado só no repositório privado (aleclemente/
+    // ai-assisted-sdd-template, arquivado) que `internal-links` não vê por
+    // não ser sintaxe de link Markdown de verdade. `self_qualifying` reflete
+    // a frase que já foi escrita nos ~11 sites corrigidos manualmente
+    // (docs/prompts/003-close-restart-followon-drift.md) — qualquer citação
+    // nova sem essa frase agora vira achado mecânico, não mais uma varredura
+    // cara de LLM a cada ciclo. Ainda shadow: o backlog de citações
+    // pré-existentes (números < 110, arquivo privado nunca migrado) não foi
+    // zerado nesta sessão — o objetivo era ligar a checagem, não esgotar o
+    // backlog de uma vez.
+    dead_citations: {
+      scope_dirs: CATEGORY_DIRS,
+      root_files: SCOPE_FILES,
+      exclude_prefixes: [],
+      exclude_files: [],
+      patterns: [
+        { id: 'md-files', kind: 'filename' },
+        { id: 'prompts', kind: 'prefix-id', prefix: 'prompt', dir: 'docs/prompts', digits: 3 },
+      ],
+      exempt: {
+        fenced_code: true,
+        self_qualifying: /archived private-repo sequence/,
+      },
+
+      why: 'operation-manual.md Step 12 regra 3 - o motivo de existência desta regra '
+        + 'é a classe de defeito que produziu 3 rodadas seguidas de achados de '
+        + 'doc-consistency-reviewer sem convergir (docs/prompts/003-close-restart-followon-drift.md).',
     },
 
     // -----------------------------------------------------------------------
