@@ -55,7 +55,8 @@ module.exports = {
 
     // -----------------------------------------------------------------------
     'changelog-retention': {
-      // docs/prompts/ é o arquivo histórico congelado (ver doc-scope.js);
+      // docs/prompts/ não usa changelog de corpo (retenção é via status:
+      // draft/active/archived/deprecated no frontmatter, não uma lista no corpo);
       // docs/reports/ é material de status/relatório sem changelog de corpo.
       scope_dirs: CATEGORY_DIRS.filter((d) => !['docs/prompts', 'docs/reports'].includes(d)),
       root_files: [],
@@ -74,6 +75,101 @@ module.exports = {
       enabled: true,
       why: 'Documento versionado modificado sem bump de `version:` é o mesmo defeito '
         + 'que motivou esta regra no personal-os (2 violações reais na mesma sessão).',
+    },
+
+    // -----------------------------------------------------------------------
+    // shadow (não falha CI ainda) — adotada em 2026-08-01 depois de 3 rodadas
+    // de doc-consistency-reviewer sobre o mesmo defeito: citação inline-code
+    // de um prompt/ADR arquivado só no repositório privado (aleclemente/
+    // ai-assisted-sdd-template, arquivado) que `internal-links` não vê por
+    // não ser sintaxe de link Markdown de verdade. `self_qualifying` reflete
+    // a frase que já foi escrita nos ~11 sites corrigidos manualmente
+    // (docs/prompts/003-close-restart-followon-drift.md) — qualquer citação
+    // nova sem essa frase agora vira achado mecânico, não mais uma varredura
+    // cara de LLM a cada ciclo. Ainda shadow: o backlog de citações
+    // pré-existentes (números < 110, arquivo privado nunca migrado) não foi
+    // zerado nesta sessão — o objetivo era ligar a checagem, não esgotar o
+    // backlog de uma vez.
+    dead_citations: {
+      scope_dirs: CATEGORY_DIRS,
+      root_files: SCOPE_FILES,
+      exclude_prefixes: [],
+      exclude_files: [],
+      patterns: [
+        { id: 'md-files', kind: 'filename' },
+        { id: 'prompts', kind: 'prefix-id', prefix: 'prompt', dir: 'docs/prompts', digits: 3 },
+      ],
+      exempt: {
+        fenced_code: true,
+        self_qualifying: /archived private-repo sequence/,
+      },
+
+      why: 'operation-manual.md Step 12 regra 3 - o motivo de existência desta regra '
+        + 'é a classe de defeito que produziu 3 rodadas seguidas de achados de '
+        + 'doc-consistency-reviewer sem convergir (docs/prompts/003-close-restart-followon-drift.md).',
+    },
+
+    // -----------------------------------------------------------------------
+    // Fase 2: liga o predicado de isenção "registro histórico ≠ afirmação
+    // atual" (lib/exempt.js) já existente no motor, em vez de reimplementar
+    // à mão, sessão a sessão, o mesmo qualificador "arquivo histórico,
+    // citação não resolvível aqui" em prosa.
+    version_citations: {
+      scope_dirs: CATEGORY_DIRS,
+      root_files: SCOPE_FILES,
+      exempt: {
+        // docs/prompts/ já é tratado como arquivo histórico congelado por
+        // changelog-retention acima (mesmo comentário); uma citação de
+        // versão dentro de um prompt arquivado é um registro do que era
+        // verdade então, não uma afirmação atual — mesmo raciocínio.
+        historical_paths: ['docs/prompts'],
+        // O changelog de corpo por documento (ex.: agents/init.md) cita
+        // versões de outros arquivos como estavam na época de cada entrada
+        // — não é uma reafirmação atual. Verificado: CHANGELOG.md na raiz
+        // usa uma estrutura Keep-a-Changelog diferente e não está em
+        // SCOPE_FILES, então esta isenção cobre exatamente o padrão real
+        // observado (agents/init.md v1.7, citando `prompt-086` v1.5).
+        inside_changelog_block: true,
+        changelog_marker: 'Changelog of this document:',
+      },
+      why: 'a citação `path.md` vX.Y é uma afirmação verificável — sem isenção pra '
+        + 'registro histórico, o mesmo qualificador manual "histórico, não citável '
+        + 'aqui" teria que ser reescrito à mão em cada prompt arquivado.',
+    },
+
+    // -----------------------------------------------------------------------
+    // Fase 2: fixa o `--no-merges` do lint de mensagens de commit
+    // (docs/prompts/005-fix-commit-lint-merge-subjects.md). Sem a flag, o
+    // check reprova por construção em toda promoção develop -> staging, que é
+    // exatamente o PR que ele existe pra proteger.
+    facts: {
+      // NÃO shadow. `facts` vem com shadow ligado — reporta e nunca falha — e
+      // foi justamente isso que deixou este defeito sobreviver em três cópias
+      // scaffolded antes de ser notado. Sem shadow a regra também roda sob
+      // `--changed`, então o pre-commit pega a regressão, não a CI na
+      // promoção. Não altera `dead_citations`, que segue shadow por decisão
+      // do prompt 004: aquela regra tem backlog real de 509 achados, esta
+      // confere um valor declarado.
+      shadow: false,
+      scope_dirs: CATEGORY_DIRS,
+      root_files: SCOPE_FILES,
+      entries: [
+        {
+          id: 'commit-msg-lint-skips-merges',
+          value: 'git log --no-merges --format=%s',
+          why: 'sem --no-merges o lint de Conventional Commits analisa os assuntos '
+            + '"Merge pull request #N from ..." que o próprio GitHub gera, e que '
+            + 'nunca podem conformar — reprovando por construção em toda promoção '
+            + 'develop -> staging. Corrigido em git-governance, docs-governance e '
+            + 'licorsy/.github em 2026-08-01; este repositório era a última cópia.',
+          required_in: [
+            {
+              file: '.github/workflows/pr-checks.yml',
+              pattern: /git log --no-merges --format=%s/,
+            },
+          ],
+        },
+      ],
     },
   },
 };
