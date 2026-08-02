@@ -5,13 +5,21 @@
 # at the two deliberate promotion points (staging, main) or on demand, to
 # save Actions minutes. ci-docs/ci-security are NOT branch-restricted: docs
 # correctness and secret scanning should be caught as early as develop.
+#
+# No `push:` trigger, deliberately. It used to run on develop and main, which
+# re-reported the same check contexts a second time on any pull request whose
+# head branch was also a push target. Both runs attach to the same commit, and
+# branch protection takes the most recent result per context — so a push run
+# finishing after the pull-request run would overwrite a real result with the
+# `skipped` its event-guarded jobs produce, satisfying a required check
+# vacuously. Direct pushes to develop and main are blocked by ruleset anyway,
+# so the trigger only ever fired on merges, duplicating work that had already
+# passed on the pull request. The four sibling repositories never had it.
 name: PR checks
 
 on:
   pull_request:
     branches: [develop, staging, main]
-  push:
-    branches: [develop, main]
   workflow_dispatch: {}
 
 jobs:
