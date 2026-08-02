@@ -78,20 +78,36 @@ jobs:
           echo "OK: '$HEAD' -> '$BASE' is a promotion."
 
   # Replaces the retired docs-governance.yml — same licorsy/docs-governance
-  # check, now delegated through the reusable workflow. Unconditional: unlike
-  # git-governance's dogfooded pr-checks.yml (which guards this as a *step*
-  # after checkout, where hashFiles() is valid), reusable-workflow-call jobs
-  # only support job-level `if:`, and hashFiles() is not a recognized
-  # function there (confirmed via a failed `gh workflow run` dispatch) — this
-  # repo always carries .docgov.config.js, so no guard is needed here.
+  # check, delegated through the reusable workflow.
+  #
+  # ADOPTERS, READ THIS. This repository is a GitHub template, so a project
+  # created from it inherits a dependency on workflow definitions the Licorsy
+  # organization controls and could change or delete. The owner guard on this
+  # job and the next makes that explicit rather than silent: outside `licorsy`
+  # both are skipped, and no documentation or security check runs until you
+  # decide what should. To turn them on, either repoint the `uses:` lines at
+  # your own copies of these workflows, or delete the `if:` if you are content
+  # to consume Licorsy's.
+  #
+  # The guard is a job-level `if:` on purpose. A reusable-workflow call
+  # supports only job-level conditions, and `hashFiles()` is not a recognized
+  # function there — confirmed by a failed dispatch, not assumed — so the
+  # capability-style guard git-governance uses at step level cannot be copied
+  # here. `github.repository_owner` is valid in a job-level `if:` and answers
+  # the question that actually matters for a template: whose workflows are
+  # these.
   ci-docs:
+    if: github.repository_owner == 'licorsy'
     uses: licorsy/platform-workflows/.github/workflows/ci-docs.yml@v1
     with:
       base-sha: ${{ github.event.pull_request.base.sha }}
 
-  # New: dependency-review (self-gated to staging/main) + secret-scanning
-  # (runs on every trigger above). Needs an org-level GITLEAKS_LICENSE
+  # dependency-review (self-gated to staging/main inside the reusable workflow)
+  # plus secret-scanning on every trigger. Needs an org-level GITLEAKS_LICENSE
   # secret to fully function — see licorsy/platform-workflows's README.
+  #
+  # Same owner guard, same reason as ci-docs above.
   ci-security:
+    if: github.repository_owner == 'licorsy'
     uses: licorsy/platform-workflows/.github/workflows/ci-security.yml@v1
     secrets: inherit

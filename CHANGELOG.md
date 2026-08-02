@@ -6,6 +6,10 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- `.github/workflows/pr-checks.yml`'s `ci-docs` and `ci-security` jobs are now guarded by `if: github.repository_owner == 'licorsy'`. This repository is a GitHub template, so a project created from it inherited a silent dependency on reusable workflows the Licorsy organization controls and could change or delete; the guard makes that dependency explicit — outside `licorsy` both jobs skip, and the adopter chooses whether to repoint the `uses:` lines at their own copies or delete the `if:`. A job-level condition is the only option available: a reusable-workflow call supports no step-level `if:`, and `hashFiles()` is not a recognized function in job-level conditions (confirmed by a failed dispatch), so the capability-style guard `git-governance` uses cannot be copied here. `documentation-metadata-standard.md` Section 9 (v1.25 → v1.26) gains the matching caveat, since it previously promised adopters automation that a guarded job does not deliver.
+
 ### Added
 
 - Restarted `docs/prompts/` inside this repository (`docs/prompts/basic-prompt-template.md`, `001-restart-prompt-archive-and-source-of-truth.md`) after `ADR-0010` (later renumbered `ADR-0005`, see below) was amended (v1.1 → v1.2) to record `licorsy/ai-assisted-sdd-template` as the current source of truth, following the archival of the private source repository. Numbering restarts fresh at `001` — the pre-2026-07-31 archive is not migrated and stays only in the archived private repo. Repointed `operation-manual.md` Step 11/12, `CLAUDE.md`/`AGENTS.md`'s synced change-as-prompt block, and `README.md`'s ADR summary at this fact; fixed the prompt-lifecycle diagram's stale `NNN-prompt-slug.md` filename convention (`template-visual-overview.md`). Found by a 2026-07-31 `doc-consistency-reviewer` audit.

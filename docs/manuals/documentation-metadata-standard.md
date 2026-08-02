@@ -3,9 +3,9 @@ title: "Documentation Metadata Standard"
 doc_type: instruction
 description: "Defines the mandatory YAML frontmatter schema for every Markdown documentation file and roadmap-generated artifact in this repository, and the rule for applying it whenever such a file is created or materially updated."
 status: active
-version: "1.25"
+version: "1.26"
 created: 2026-07-07
-updated: 2026-08-01
+updated: 2026-08-02
 language: en
 id: documentation-metadata-standard
 tags: [frontmatter, metadata, documentation-standard, retrieval, rag, diataxis]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, adr-0001-documentation-and-governance-model
 
 Changelog of this document:
 
+- v1.26: Section 9's enforcement sentence now states that none of the automated checks run in a project created from this template outside the `licorsy` organization. The `ci-docs` job gained an `if: github.repository_owner == 'licorsy'` guard, making the template's dependency on Licorsy-controlled workflows explicit rather than silent; without that caveat this section promised adopters automation they do not receive.
 - v1.25: Section 1 realigned to the org-wide rule that every tracked Markdown file carries the schema. The blanket "repository entry points" exemption is replaced by a stated test — another system already owns the file's frontmatter as a functional contract, or renders/injects its raw content verbatim — under which only `README.md` (GitHub renders frontmatter as a visible table) and `CHANGELOG.md` (Keep a Changelog owns its structure) remain exempt, joined by the GitHub-owned PR and issue templates. `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `SECURITY.md`, and `CODE_OF_CONDUCT.md` move into scope via `doc-scope.js`'s `SCOPE_FILES`; the first two gained frontmatter in the same change, the latter three already carried it while going unvalidated.
 - v1.24: Section 1's `docs/prompts/` and `docs/adr/` scope bullets, and Section 4's `prompt` `doc_type` row, reworded - `docs/prompts/` is no longer uniformly "historical/archived" (this repository restarted it with `draft`/`active` entries, `docs/prompts/001-...md` onward); `docs/adr/`'s real-ADR range updated `0002`-`0004` → `0002`-`0005` after `docs/adr/0010-public-release.md` was renumbered (`docs/prompts/003-close-restart-followon-drift.md`).
-- v1.23: Section 9's CI-enforcement sentence repointed from the retired standalone `docs-governance.yml` to `pr-checks.yml`'s `ci-docs` job, which now delegates the same `licorsy/docs-governance/action@v1` check through `licorsy/platform-workflows`'s reusable `ci-docs.yml` workflow instead of calling it directly. Enforcement mechanism and location changed; the check itself did not (`prompt-NNN` — TBD, see this repo's private prompt sequence).
 - Older entries: see `git log --follow` on this file.
 
 ---
@@ -172,7 +172,7 @@ related: [orchestrator, roadmap, phase-reviewer, documentation-metadata-standard
 
 ## 9. Verification checklist
 
-Enforcement is prompt-based for the checks below; a GitHub Action (`.github/workflows/pr-checks.yml`'s `ci-docs` job, delegating to `licorsy/platform-workflows`'s reusable `ci-docs.yml`, which runs `licorsy/docs-governance`; originally `docs-frontmatter-lint.yml`, prompt-013, then the standalone `docs-governance.yml`, prompt-NNN — TBD) automates checks 1, 2, and 3 for every directory in `.github/scripts/doc-scope.js`'s `CATEGORY_DIRS`, plus `QUICKSTART.md` (Section 1's one in-scope root file), on every push and pull request; the same workflow's `internal-links` rule (originally `.github/scripts/check-internal-links.js`, prompt-017) automates check 4 for link-formatted references. What stays manual: check 2's `adr`-status-mirrors-body rule, check 4 for paths mentioned as inline code rather than as Markdown links, and check 5's `tool-catalog` freshness bump. Whoever creates or updates an in-scope file confirms:
+Enforcement is prompt-based for the checks below; a GitHub Action (`.github/workflows/pr-checks.yml`'s `ci-docs` job, delegating to `licorsy/platform-workflows`'s reusable `ci-docs.yml`, which runs `licorsy/docs-governance`; originally `docs-frontmatter-lint.yml`, prompt-013, then the standalone `docs-governance.yml`, prompt-NNN — TBD) automates checks 1, 2, and 3 for every directory in `.github/scripts/doc-scope.js`'s `CATEGORY_DIRS`, plus `QUICKSTART.md` (Section 1's one in-scope root file), on every push and pull request; the same workflow's `internal-links` rule (originally `.github/scripts/check-internal-links.js`, prompt-017) automates check 4 for link-formatted references. **In a project created from this template outside the `licorsy` organization, none of that automation runs**: the `ci-docs` job is guarded by `if: github.repository_owner == 'licorsy'`, so an adopter who has not repointed the `uses:` line at their own copy is running every check below manually, not just the ones listed as manual. What stays manual: check 2's `adr`-status-mirrors-body rule, check 4 for paths mentioned as inline code rather than as Markdown links, and check 5's `tool-catalog` freshness bump. Whoever creates or updates an in-scope file confirms:
 
 1. **Structural** — the file starts with `---`, has a closing `---` before the H1, and all 8 required fields (Section 2) are present and non-empty.
 2. **Enum** — `doc_type` matches the file's actual location (Section 4); `status` is one of the four allowed values; for `adr`-typed files, frontmatter `status` matches the body's own `## Status` section.
