@@ -154,21 +154,6 @@ module.exports = {
       scope_dirs: CATEGORY_DIRS,
       root_files: SCOPE_FILES,
       entries: [
-        {
-          id: 'commit-msg-lint-skips-merges',
-          value: 'git log --no-merges --format=%s',
-          why: 'sem --no-merges o lint de Conventional Commits analisa os assuntos '
-            + '"Merge pull request #N from ..." que o próprio GitHub gera, e que '
-            + 'nunca podem conformar — reprovando por construção em toda promoção '
-            + 'develop -> staging. Corrigido em git-governance, docs-governance e '
-            + 'licorsy/.github em 2026-08-01; este repositório era a última cópia.',
-          required_in: [
-            {
-              file: '.github/workflows/pr-checks.yml',
-              pattern: /git log --no-merges --format=%s/,
-            },
-          ],
-        },
       ],
     },
   },
