@@ -11,8 +11,9 @@ const OUTPUT_PATH = 'docs/STATE.md';
 
 const { CATEGORY_DIRS, ROOT_FILES } = require('./doc-scope.js');
 
-// Living documents only. docs/prompts/ is a historical archive (see
-// PROMPT-INDEX.md) and is deliberately excluded from state reads.
+// Living documents only. docs/prompts/ is excluded from state reads regardless
+// of status (kept lean) - docs/prompts/PROMPT-INDEX.md is that directory's own
+// status index.
 const SOURCE_DIRS = CATEGORY_DIRS.filter((d) => d !== 'docs/prompts');
 const SOURCE_FILES = ROOT_FILES;
 
@@ -86,7 +87,7 @@ function buildState(root) {
   lines.push('---');
   lines.push('title: "Repository State"');
   lines.push('doc_type: status-artifact');
-  lines.push('description: "Generated single-read snapshot of every living document\'s title, type, status, version, and freshness. Answers \'where are we?\' without a directory sweep; excludes the historical docs/prompts/ archive."');
+  lines.push('description: "Generated single-read snapshot of every living document\'s title, type, status, version, and freshness. Answers \'where are we?\' without a directory sweep; excludes docs/prompts/ regardless of status (kept lean)."');
   lines.push('status: active');
   lines.push('version: "%VERSION%"');
   lines.push('created: 2026-07-13');

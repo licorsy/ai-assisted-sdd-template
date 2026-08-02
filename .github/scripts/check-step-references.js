@@ -12,10 +12,12 @@ const MANUAL_PATH = 'docs/manuals/operation-manual.md';
 const { CATEGORY_DIRS, ROOT_FILES } = require('./doc-scope.js');
 
 // Living docs that may reference the operation manual's steps.
-// docs/prompts/ is excluded: archived prompts reference steps as they
-// were at the time and are historical records. .claude and .github are
-// Claude Code/GitHub special dirs outside documentation-metadata-standard
-// scope but still capable of citing a Step.
+// docs/prompts/ is excluded entirely: archived prompts reference steps as
+// they were at the time (historical, expected to drift); active prompts are
+// currently a small enough set to review by hand until this check becomes
+// status-aware. .claude and .github are Claude Code/GitHub special dirs
+// outside documentation-metadata-standard scope but still capable of citing
+// a Step.
 const SCAN_DIRS = [...CATEGORY_DIRS.filter((d) => d !== 'docs/prompts'), '.claude', '.github'];
 // CHANGELOG.md excluded as historical narrative, same rationale as docs/prompts.
 const SCAN_FILES = ['CLAUDE.md', 'AGENTS.md', 'README.md', ...ROOT_FILES.filter((f) => f !== 'CHANGELOG.md')];

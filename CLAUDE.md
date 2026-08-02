@@ -1,3 +1,18 @@
+---
+title: "CLAUDE.md"
+doc_type: instruction
+description: "Claude Code's entry point for this repository: the always-on confirmation rule, the documentation metadata rule, and the pointers to the operation manual and governance plugins that own the full text of each."
+status: active
+version: "1.0.0"
+created: 2026-07-30
+updated: 2026-08-01
+language: en
+id: claude-adapter
+owner: Alexandre Clemente
+tags: [instructions, adapter, claude-code, sdd]
+related: [agents-adapter, operation-manual, documentation-metadata-standard]
+---
+
 # CLAUDE.md
 
 This repository is a living instance of the AI-assisted SDD template operating model. See `README.md` for the full document map.
@@ -17,7 +32,7 @@ Every Markdown documentation file or roadmap-generated artifact — `agents/` an
 ## Change-as-prompt rule
 
 <!-- sync:change-as-prompt-rule source=docs/manuals/operation-manual.md anchor="## Step 12" -->
-Every non-trivial change, update, upgrade, or refactor to **this template repository itself** (its own docs, governance, prompts, tooling — not a project generated from this template) must first be captured as its own `docs/prompts/NNN-<slug>.md`, following `docs/prompts/basic-prompt-template.md`'s structure with a scenario-specific ROLE, TASK, and `## REQUIREMENTS, CONSTRAINTS AND RULES` section (`docs/prompts/087-prompt-enumeration-drift-batch.md` is the worked example of this shape) before execution begins. A named batch of small, related, individually-minor fixes may share one prompt document that lists every item explicitly (Step 12, rule 9); structural changes still get their own. This is the full rule defined in `docs/manuals/operation-manual.md`, Step 12; it applies regardless of task size.
+Every non-trivial change, update, upgrade, or refactor to **this template repository itself** (its own docs, governance, prompts, tooling — not a project generated from this template) must first be captured as its own `docs/prompts/NNN-<slug>.md`, following `docs/prompts/basic-prompt-template.md`'s structure with a scenario-specific ROLE, TASK, and `## REQUIREMENTS, CONSTRAINTS AND RULES` section (`docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` is the worked example of this shape) before execution begins. A named batch of small, related, individually-minor fixes may share one prompt document that lists every item explicitly (Step 12, rule 9); structural changes still get their own. This is the full rule defined in `docs/manuals/operation-manual.md`, Step 12; it applies regardless of task size.
 <!-- /sync:change-as-prompt-rule -->
 
 ## Driving the roadmap
@@ -28,8 +43,8 @@ To independently verify a completed phase against its own Acceptance Criteria / 
 
 ## Git operations
 
-Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `staging` or `main` — use the `git-governance-advisor` subagent (installed via the `git-governance` plugin, [licorsy/git-governance](https://github.com/licorsy/git-governance)) instead of restating its branch-naming taxonomy and permission matrix (autonomous up to `develop`; explicit human permission required for `staging`/`main`) here. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `staging`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (`docs/prompts/101-prompt-git-governance-adoption.md`).
+Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `staging` or `main` — use the `git-governance-advisor` subagent (installed via the `git-governance` plugin, [licorsy/git-governance](https://github.com/licorsy/git-governance)) instead of restating its branch-naming taxonomy and permission matrix (autonomous up to `develop`; explicit human permission required for `staging`/`main`) here. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `staging`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (recorded in the archived private source repository's own prompt sequence as `101-prompt-git-governance-adoption.md`; not a citable path in this repository, per `operation-manual.md` Step 12 rule 3).
 
 ## Canonical documents
 
-Do not duplicate instructions here. The canonical process documents live in `agents/`, `docs/manuals/`, `docs/strategy/`, `docs/adr/`, and `docs/visuals/` (the directories `.github/CODEOWNERS` gates); `docs/prompts/` is the historical change archive. This file only points to them and states the rules that should apply to every session regardless of task size.
+Do not duplicate instructions here. The canonical process documents live in `agents/`, `docs/manuals/`, `docs/strategy/`, `docs/adr/`, and `docs/visuals/` (the directories `.github/CODEOWNERS` gates); `docs/prompts/` holds this repository's change-as-prompt records. This file only points to them and states the rules that should apply to every session regardless of task size.
