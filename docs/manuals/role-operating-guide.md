@@ -3,9 +3,9 @@ title: "Role Operating Guide — Product, Delivery, and All Lifecycle Roles"
 doc_type: manual
 description: "Single operating guide covering the project/product/product-owner surface and its extension to every other lifecycle role (architect, engineer, QA, DevOps, scrum master, stakeholder) for one person operating solo across the full roadmap."
 status: active
-version: "2.8"
+version: "2.10"
 created: 2024-07-04
-updated: 2026-07-28
+updated: 2026-08-03
 language: en
 id: role-operating-guide
 tags: [project-management, product-management, product-ownership, all-roles, solo-operator, role-switching, github-issues, scrum]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, go-to-market, init]
 
 Changelog of this document:
 
+- v2.10: Section 13's outer-loop line now says **release cycle** rather than "increment/cycle"; operating principle 2's "small, testable increments" is the delivered-capability sense and is unchanged (`008-market-standard-vocabulary`).
+- v2.9: the reporting criterion "a figure with no attached decision is decoration" added alongside Section 13's existing five-things rule for prose status updates - the same bar, applied to numbers, which nothing in the corpus stated for figures (`006-absorb-local-notes-011-accepted-items`).
 - v2.8: doc-consistency-reviewer batch fix: Section 9's Scrum master row and Section 10's Retrospective row both sent retrospective notes to `/CHANGELOG.md`/`/docs/status.md`, contradicting `roadmap.md` Phase 8 Activities 4/4c, which mandate `docs/references/retrospective.md` as the actual artifact and prune the narrative out of `status.md` (prompt-092).
-- v2.7: doc-consistency-reviewer batch fix: Section 17's checklist item named only 2 of 5 Step 0 startup choices ("starting condition, roadmap path") - now points at "All Step 0 startup choices" (prompt-090).
-- v2.6: doc-consistency-reviewer batch fix: Section 13 step 1's status-check line named only 3 of 5 Step 0 startup choices - now points at "the Step 0 startup choices" (prompt-089).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -127,6 +127,8 @@ Condensed decision tables; the frameworks themselves are general knowledge and a
 - **Whole-roadmap visibility**: the tracking-issue pattern, Part III.
 
 **Cadence and status format**: weekly — review active issues, reorder by evidence, check blockers, confirm the next highest-value item, update the board, write a short `/docs/status.md` update. Every update answers five things: what changed, why it matters, what is next, what is blocked, what decision is needed. Do not hide risk from yourself by skipping `/docs/risks.md`; do not present assumptions as commitments.
+
+**A figure with no attached decision is decoration.** The rule above governs prose; this is the same criterion applied to numbers. Any artifact that reports a figure to a human — a status update, a report, the Section 18 dashboard — earns each figure only if it carries an owner, a target or expectation, a trend, and an action it would change. A figure failing all four is removed, not shrunk. The usual failure is a bare total: "21 open risks" decides nothing, while the same 21 decomposed by probability × impact isolate the one in the high/high corner that does. *Sourcing, stated honestly: this arrived via a vendor-blog-sourced analysis, not peer-reviewed work. It is adopted because it was validated in place against a real report, not because the source carries authority.*
 
 ---
 
@@ -244,7 +246,7 @@ GitHub's native tooling supports following the entire roadmap as one live checkl
 - The tracking issue's checklist is the coarse, always-visible progress view (which phases are done).
 - `/docs/status.md` remains the detailed, narrative current-state record (blockers, decisions, next step).
 - Update both at the same time when a phase closes; if they disagree, `/docs/status.md` is the source of truth and the checklist should be corrected to match it.
-- A single "current phase" field is not enough on its own: name both the outer loop (which increment/cycle - Phase 8 re-entering Phases 1-7) and the inner loop (which step inside the current phase). A project reading only "current phase" can look stuck permanently when it is actually cycling normally between increments (`docs/manuals/operation-manual.md`, Step 14).
+- A single "current phase" field is not enough on its own: name both the outer loop (which release cycle - Phase 8 re-entering Phases 1-7) and the inner loop (which step inside the current phase). A project reading only "current phase" can look stuck permanently when it is actually cycling normally between release cycles (`docs/manuals/operation-manual.md`, Step 14).
 
 ### 17. Phase-level roadmap checklist (copy into the tracking issue)
 
