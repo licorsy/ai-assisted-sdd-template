@@ -3,7 +3,7 @@ title: "Repository State"
 doc_type: status-artifact
 description: "Generated single-read snapshot of every living document's title, type, status, version, and freshness. Answers 'where are we?' without a directory sweep; excludes docs/prompts/ regardless of status (kept lean)."
 status: active
-version: "19"
+version: "20"
 created: 2026-07-13
 updated: 2026-08-03
 language: en
@@ -33,7 +33,7 @@ Documents without frontmatter show "—". Freshest source update: 2026-08-03.
 | [agents/tool-discovery.md](../agents/tool-discovery.md) | Tool Hunter Prompt | instruction | active | 1.8 | 2026-07-29 |
 | [docs/adr/0002-audience-tier.md](adr/0002-audience-tier.md) | ADR-0002: Intended Adopter Tier | adr | active | 2.3 | 2026-07-30 |
 | [docs/adr/0003-document-architecture.md](adr/0003-document-architecture.md) | ADR-0003: Document architecture principles | adr | active | 1.4 | 2026-08-03 |
-| [docs/adr/0004-docs-category-directories.md](adr/0004-docs-category-directories.md) | ADR-0004: Category directories for docs/manuals/ content | adr | active | 1.2 | 2026-08-03 |
+| [docs/adr/0004-docs-category-directories.md](adr/0004-docs-category-directories.md) | ADR-0004: Category directories for docs/manuals/ content | adr | active | 1.3 | 2026-08-03 |
 | [docs/adr/0005-public-release.md](adr/0005-public-release.md) | ADR-0005: Public-mirror release via licorsy/ai-assisted-sdd-template | adr | active | 1.4 | 2026-07-31 |
 | [docs/manuals/agent-design-guide.md](manuals/agent-design-guide.md) | Agent Design Guide | manual | active | 1.4 | 2026-07-31 |
 | [docs/manuals/documentation-metadata-standard.md](manuals/documentation-metadata-standard.md) | Documentation Metadata Standard | instruction | active | 1.26 | 2026-08-02 |
@@ -55,5 +55,5 @@ Documents without frontmatter show "—". Freshest source update: 2026-08-03.
 | [docs/reports/ARTIFACT-NECESSITY-AUDIT.md](reports/ARTIFACT-NECESSITY-AUDIT.md) | Artifact Necessity Audit: docs/manuals/, docs/references/, docs/reports/ | product-doc | active | 1.1 | 2026-07-31 |
 | [docs/reports/PROPOSAL-TRACKING.md](reports/PROPOSAL-TRACKING.md) | Report Proposal Tracking | status-artifact | active | 1.11 | 2026-07-31 |
 | [docs/strategy/go-to-market.md](strategy/go-to-market.md) | Go-to-Market Roadmap | instruction | active | 1.0 | 2026-07-19 |
-| [docs/strategy/roadmap.md](strategy/roadmap.md) | Business Software Development Roadmap | instruction | active | 3.29 | 2026-08-03 |
+| [docs/strategy/roadmap.md](strategy/roadmap.md) | Business Software Development Roadmap | instruction | active | 3.30 | 2026-08-03 |
 | [docs/visuals/template-visual-overview.md](visuals/template-visual-overview.md) | Template Visual Overview | manual | active | 1.13 | 2026-08-03 |

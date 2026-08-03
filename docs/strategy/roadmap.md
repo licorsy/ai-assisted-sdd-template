@@ -3,7 +3,7 @@ title: "Business Software Development Roadmap"
 doc_type: instruction
 description: "Guide the creation and evolution of any software product or platform as a generic and reusable AI multi-agent software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.29"
+version: "3.30"
 created: 2024-07-04
 updated: 2026-08-03
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, orchestrator, phase-reviewer, go-to-market]
 
 Changelog of this document:
 
+- v3.30: Phase 1 now states that Activities 9, 10 and 12 are product discovery and belong to this roadmap, and that a commercial-lifecycle roadmap builds on their output rather than re-deriving it. That ownership statement previously existed only inside `go-to-market.md` - the file slated to leave - so removing it would have destroyed the only record of the boundary (`009-prepare-go-to-market-separation`).
 - v3.29: the two senses of `increment` split - the process instance (status line, backlog status index, first-cycle bullet, Phase 8 replanning) becomes **release cycle**; the delivered capability keeps `Increment`, the Scrum term it already was. Section 1 now names the phase model as **Stage-Gate** (Cooper), which it always was without saying so. Both point at the new `docs/manuals/glossary.md` (`008-market-standard-vocabulary`).
 - v3.28: Phase 3's acceptance criterion "SPEC becomes tasks" contradicted Activity 12 of its own phase (`/speckit.plan` "without breaking it into tasks yet") and every other document, which place task generation in Phase 4 - now states the condition Phase 3 reaches instead of the act Phase 4 performs. New Activity 10a: verify a data source exists and holds real data before scoping a feature on it. Phase 7 Activity 6 gains the task-artifact reconciliation at closure. `test-report.md`'s Phase 5 bullet now says what the metadata standard already did, that it may be authored in Phase 5 or 6. Activity 4's P9 trigger widened to information design (`006-absorb-local-notes-011-accepted-items`).
-- v3.27: doc-consistency-reviewer batch fix: Phase 1 Activity 11a now names `agents/tool-discovery.md` alongside the `tool-hunter` adapter, matching the parallel treatment `agents/doc-consistency.md`/`agents/adversarial.md` already got at `prompt-096` (prompt-097).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -231,6 +231,9 @@ Transform a raw problem, or an existing system's actual behavior, into a validat
     c. Record findings in `/docs/references/build-vs-buy.md`, explicitly separating reuse from build.
     d. Record the tooling decision in an ADR.
 12. Define the initial value proposition.
+
+    Activities 9, 10 and 12 are **product discovery, not commerce, and belong to this roadmap.** Knowing what you are competing against, whether to build or adopt, and what value the thing delivers is work required to build the product at all — independent of whether anyone ever sells it. A commercial-lifecycle roadmap (positioning, pricing, launch, marketing, sales, retention) is a separate concern with different actors and a different cadence; it *builds on* this phase's output and does not re-derive it, and `market.md` plus `build-vs-buy.md` remain owned here. Stated at this altitude on purpose: the boundary has to hold whether or not any particular commercial-roadmap document exists alongside it.
+
 13. Record open questions.
 14. Validate the chosen direction before moving on.
 

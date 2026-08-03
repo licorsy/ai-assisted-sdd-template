@@ -3,7 +3,7 @@ title: "ADR-0004: Category directories for docs/manuals/ content"
 doc_type: adr
 description: "Records the decision to split docs/manuals/ by category into docs/adr/, docs/strategy/, and docs/visuals/, as an extension of ADR-0003's principles (not a supersession) - operation-manual.md itself stays a single, unfragmented file, since ADR-0003's own Alternative #2 already rejected splitting it and check-step-references.js depends on that assumption."
 status: active
-version: "1.2"
+version: "1.3"
 created: 2026-07-23
 updated: 2026-08-03
 language: en
@@ -17,7 +17,7 @@ related: [0003-document-architecture, operation-manual, documentation-metadata-s
 
 ## Status
 
-Accepted (2026-07-23). Amended 2026-07-31 (v1.0 → v1.1): qualified a dangling citation of prompt `064` (archived private-repo sequence) in Consequences as non-citable in this repository, per `operation-manual.md` Step 12 rule 3. Amended 2026-08-03 (v1.1 → v1.2): the "all five of ADR-0003's principles" statement time-scoped, after ADR-0003 gained a sixth principle by its own amendment; the count here records what this decision did not change, and now says so (`006-absorb-local-notes-011-accepted-items`). Neither amendment changes the decision itself.
+Accepted (2026-07-23). Amended 2026-07-31 (v1.0 → v1.1): qualified a dangling citation of prompt `064` (archived private-repo sequence) in Consequences as non-citable in this repository, per `operation-manual.md` Step 12 rule 3. Amended 2026-08-03 (v1.1 → v1.2): the "all five of ADR-0003's principles" statement time-scoped, after ADR-0003 gained a sixth principle by its own amendment; the count here records what this decision did not change, and now says so (`006-absorb-local-notes-011-accepted-items`). Amended 2026-08-03 (v1.2 -> v1.3): the Decision section's `docs/strategy/` line records that `go-to-market.md` is slated to leave for the Licorsy organization, and that this ADR's directory decision holds either way (`009-prepare-go-to-market-separation`). None of these amendments changes the decision itself.
 
 ## Context
 
@@ -28,7 +28,7 @@ Accepted (2026-07-23). Amended 2026-07-31 (v1.0 → v1.1): qualified a dangling 
 Introduce three category directories, populated by moving existing files (history preserved via `git mv`, not copy):
 
 - `docs/adr/` — `0002-audience-tier.md`, `0003-document-architecture.md`, this ADR. Both this template's own real decisions and, per Step 15's existing guidance, a generated project's own ADRs now live under the same `docs/adr/` naming — the "this template uses `docs/manuals/`, a generated project uses `docs/adr/`" distinction that existed before this ADR is retired.
-- `docs/strategy/` — `roadmap.md`, `go-to-market.md`.
+- `docs/strategy/` — `roadmap.md`, `go-to-market.md`. *(2026-08-03: `go-to-market.md` is slated to leave this repository for the Licorsy organization — its seven phases are the business-building lifecycle, and this template covers building the product, not building a business from it. The directory decision recorded here is unaffected either way: `docs/strategy/` exists to hold strategy-level documents, and `roadmap.md` alone justifies it. The removal itself is deliberately not performed yet — see `docs/prompts/009-prepare-go-to-market-separation.md` for the sequencing and the full inbound-reference map.)*
 - `docs/visuals/` — `template-visual-overview.md`.
 
 `docs/manuals/examples/adr-0001-documentation-and-governance-model.md` stays in `examples/` — it is the illustrative worked example a generated project replaces, not a live decision, so it does not move into `docs/adr/`. `operation-manual.md`, `agent-design-guide.md`, `documentation-metadata-standard.md`, `prompt-engineering-guide.md`, `role-operating-guide.md`, and `tool-library-catalog.md` remain in `docs/manuals/` as the operational-guide category; they are not being split further.
