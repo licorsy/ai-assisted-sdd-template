@@ -3,7 +3,7 @@ title: "Doc Consistency Reviewer Prompt"
 doc_type: instruction
 description: "Audit the entire current living-document set - not one phase - for cross-document semantic inconsistency, broken traceability, unnecessary redundancy, and textual ambiguity, using directed search over cross-references and frontmatter `related:` fields rather than full reads of every document. Reports only; never edits files."
 status: active
-version: "1.8"
+version: "1.9"
 created: 2026-07-19
 updated: 2026-08-03
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, agent-design-guide, phase-reviewer, adversarial, roa
 
 Changelog of this document:
 
+- v1.9: the explicit-non-findings rule now names itself an instance of the shared convention in `docs/references/missing-data-vocabulary.md`, which had listed this file as a demand site without this file pointing back (`fix-verifier` pass).
 - v1.8: the cadence line now says "at the end of a release cycle" rather than "at the end of an increment or release", per the sense split in `docs/manuals/glossary.md` (`008-market-standard-vocabulary`).
 - v1.7: Section 3 step 1's `docs/prompts/` carve-out reworded to explicitly status-based (`draft`/`active` in scope, `archived`/`deprecated` frozen) instead of ambiguous "archived prompt files... a frozen historical archive" wording that a re-review of this same repository's `docs/prompts/` restart read as directory-wide and nearly skipped the two `status: active` prompts describing its own branch; dangling citation of prompt `059` (archived private-repo sequence) qualified as non-citable here.
-- v1.6: Section 3 step 1's reference to `check-changelog-retention.js` updated to `.docgov.config.js`'s `changelog-retention` rule — the script was retired when frontmatter/internal-links/changelog-retention moved to the shared `licorsy/docs-governance` engine; `check-step-references.js` stays repo-specific and unaffected.
 - Older entries: see `git log --follow` on this file.
 
 ---
@@ -58,7 +58,7 @@ Produce a report - and nothing else; this review never edits or writes files (it
 
 1. **Scope note**: which documents and cross-references were actually searched, so the report's coverage is auditable.
 2. **Numbered findings**, most severe first. Each finding carries: category (from section 4), the documents involved, the quoted evidence from each, and a **proposed edit** shown as a before/after block.
-3. **Explicit non-findings**: categories checked and found sound, one line each, so silence is never ambiguous.
+3. **Explicit non-findings**: categories checked and found sound, one line each, so silence is never ambiguous - this report's instance of the convention in `docs/references/missing-data-vocabulary.md`.
 
 Every proposed edit requires individual human approval before anyone applies it. Applying edits is the executing session's job, after that approval - never this reviewer's.
 

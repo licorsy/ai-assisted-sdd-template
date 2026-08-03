@@ -59,7 +59,7 @@ Standing precedent this has to clear: `docs/reports/PROPOSAL-TRACKING.md` record
 - **[CRITICAL]** Do not rename `Acceptance criteria / Done`. The phase-level heading and the task-level "definition of done" are different scopes that currently coexist correctly, and `docs/references/gate-verification-template/verify-gate.js` parses sibling headings in the same file.
 - **[HIGH]** The four-surface table goes in the glossary only. `README.md` explicitly refuses a second copy of the Document map — *"this README used to carry a copy, which drifted"* — and `ADR-0003` principle 4 governs. One home, pointers elsewhere.
 - **[HIGH]** Every `increment` → `release cycle` change is a judgment about which sense is meant. Where the text does not settle it, the ruling goes in this prompt (task 1 above), per the same-cycle-departure convention added in `006`.
-- **[MEDIUM]** `docs/strategy/go-to-market.md` holds nine occurrences and is **not touched here** — `009` handles that file, and editing it in both prompts would produce a conflict for no benefit.
+- **[MEDIUM]** `docs/strategy/go-to-market.md` still uses the pre-split spelling and is **not touched here** — `009` handles that file, and editing it in both prompts would produce a conflict for no benefit.
 - Worked examples under `docs/manuals/examples/` are frozen replace-me content and are not retrofitted.
 
 ## FORMAT AND OUTPUT

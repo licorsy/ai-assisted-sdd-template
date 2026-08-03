@@ -3,7 +3,7 @@ title: "Orchestrator Prompt"
 doc_type: instruction
 description: "Orchestrate the creation and evolution of a software product or platform as a generic AI-assisted development system, with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.23"
+version: "3.24"
 created: 2024-07-04
 updated: 2026-08-03
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, role-operating-guide]
 
 Changelog of this document:
 
-- v3.23: the phase-exit brief's "not tracked (…)"/"none" strings now point at `docs/references/missing-data-vocabulary.md` as instances of a shared convention, rather than reading as this file's private invention - the same honest-absence rule was independently reinvented in five places across the corpus before the vocabulary existed (`007-missing-data-vocabulary`).
+- v3.24: the v3.23 pointer's "five places" count removed - it disagreed with three other statements of the same number and had no owner; `docs/references/missing-data-vocabulary.md` now owns the enumeration (`fix-verifier` pass).
+- v3.23: the phase-exit brief's "not tracked (…)"/"none" strings now point at `docs/references/missing-data-vocabulary.md` as instances of a shared convention, rather than reading as this file's private invention - the same honest-absence rule was independently reinvented across the corpus before the vocabulary existed, each site with its own token (`007-missing-data-vocabulary`).
 - v3.22: Step 3's readiness checklist gains acceptance criteria, which it never listed - the nearest item was "The phase goal was achieved", so the one thing a phase gate exists to check had no line of its own. Recorded per criterion in three states (met directly / met via a local analog / not applicable with the reason), reusing the "'not applicable' must be stated, not skipped" formulation `adversarial.md` and `doc-consistency.md` already carry (`006-absorb-local-notes-011-accepted-items`).
-- v3.21: doc-consistency-reviewer batch fix: the Spec Kit command list gains `/speckit.analyze`, previously omitted though the operation manual calls it mandatory; the source-of-truth list gains `docs/STATE.md` and `/docs/governance.md`, both already-guaranteed artifacts it omitted, and its trailing "roadmap and instruction documents in `docs/manuals/` and `agents/`" line - stale since the ADR-0004 reorg moved the roadmap to `docs/strategy/` - now names all five current instruction directories (prompt-093).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---

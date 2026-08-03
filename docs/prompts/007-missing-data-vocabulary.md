@@ -21,7 +21,7 @@ Act as the maintainer adopting an external, publicly-published convention into t
 
 ## CONTEXT
 
-This repository already demands honest degraded states, in four separate places, and each one invents its own token for the job:
+This repository already demands honest degraded states in several places, each inventing its own token for the job. The new reference owns the enumeration; the sites, at the time of writing:
 
 - `agents/orchestrator.md`'s phase-exit brief: *"not tracked (telemetry not adopted)"*, *"not tracked (no cost data collected)"*, and **"Never estimate any of the three."**
 - The same file, one field later: *write `"none"` explicitly when there isn't one - never omit the field.*
@@ -60,6 +60,6 @@ The repository currently violates the placement rule it is adopting: `generate-s
 
 ## FORMAT AND OUTPUT
 
-Executed as a new `docs/references/missing-data-vocabulary.md`, an edit to `.github/scripts/generate-state.js` and its test, a pointer added at each of the four demand sites, plus `CHANGELOG.md` and a regenerated `docs/STATE.md`.
+Executed as a new `docs/references/missing-data-vocabulary.md`, an edit to `.github/scripts/generate-state.js` (its test asserts no ordering, so none was needed), a pointer added at each of the four demand sites, plus `CHANGELOG.md` and a regenerated `docs/STATE.md`.
 
 Verification: `node --test .github/scripts/*.test.js` passes, `node .github/scripts/generate-state.js --check` passes, and `docgov check` exits 0.

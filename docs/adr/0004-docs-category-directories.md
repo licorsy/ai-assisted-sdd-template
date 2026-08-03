@@ -3,7 +3,7 @@ title: "ADR-0004: Category directories for docs/manuals/ content"
 doc_type: adr
 description: "Records the decision to split docs/manuals/ by category into docs/adr/, docs/strategy/, and docs/visuals/, as an extension of ADR-0003's principles (not a supersession) - operation-manual.md itself stays a single, unfragmented file, since ADR-0003's own Alternative #2 already rejected splitting it and check-step-references.js depends on that assumption."
 status: active
-version: "1.3"
+version: "1.4"
 created: 2026-07-23
 updated: 2026-08-03
 language: en
@@ -39,7 +39,7 @@ This ADR **extends** ADR-0003 rather than superseding it: all five of ADR-0003's
 
 1. Leave everything flat in `docs/manuals/` — rejected: the category itself (decision record vs. strategy vs. diagram vs. operating guide) is a real, useful distinction for a new reader, and moving files is a mechanically safe, `check-internal-links.js`-verified operation, unlike fragmenting a step-numbered document.
 2. Treat the report's proposal as blocked by ADR-0003 and reject it outright — rejected: ADR-0003's actual Decision and Alternatives never address category placement for non-manual documents; reading it as a blanket ban on any directory change would over-extend a decision scoped to one specific document's internal structure.
-3. Supersede ADR-0003 wholesale and rewrite it to include directory guidance — rejected: unnecessary churn; ADR-0003's five principles are unaffected by this decision, so an extension is the accurate, smaller-diff record.
+3. Supersede ADR-0003 wholesale and rewrite it to include directory guidance — rejected: unnecessary churn; ADR-0003's then-five principles are unaffected by this decision, so an extension is the accurate, smaller-diff record.
 
 ## Consequences
 

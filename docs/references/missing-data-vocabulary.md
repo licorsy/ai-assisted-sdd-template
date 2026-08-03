@@ -3,7 +3,7 @@ title: "Missing Data Vocabulary"
 doc_type: product-doc
 description: "Shared shorthand for absent, degraded, or untrustworthy data in any artifact a project renders for a human - adapted from the UK Government Analysis Function's published guidance. Covers the symbol set, why 'NA' is rejected as ambiguous, why the legend goes above the table rather than below it, and why a line chart never joins across a gap."
 status: active
-version: "1.0"
+version: "1.1"
 created: 2026-08-03
 updated: 2026-08-03
 language: en
@@ -17,7 +17,14 @@ related: [operation-manual, role-operating-guide]
 
 Every project built on this operating model derives data from incomplete sources and has to render the gaps. This file is the vocabulary for doing that, so each surface stops inventing its own token.
 
-The principle was already settled here before the vocabulary existed — `agents/orchestrator.md` refuses to estimate an untracked metric and writes `not tracked (…)` instead, `docs/references/gate-verification-template/` reports what it declines to guess at by name, and both review agents require explicit non-findings *so silence is never ambiguous*. Five sites, five different tokens. This file is what they can point at.
+The principle was already settled here before the vocabulary existed. This file owns the list of places that state it, so nothing else has to carry a count that goes stale:
+
+- `agents/orchestrator.md` — refuses to estimate an untracked metric, writing `not tracked (…)`; and writes `none` explicitly rather than omitting a field.
+- `.github/scripts/generate-state.js` — renders an absent frontmatter field as `—`, with a legend.
+- `docs/references/gate-verification-template/` — reports what it declines to guess at as `NOT MACHINE-CHECKABLE`, by name.
+- `agents/adversarial.md` and `agents/doc-consistency.md` — require explicit non-findings, *so silence is never ambiguous*.
+
+Each invented its own token for the same idea. This file is what they point at instead.
 
 ## Where this comes from
 

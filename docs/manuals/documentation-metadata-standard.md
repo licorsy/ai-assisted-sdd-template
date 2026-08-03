@@ -3,9 +3,9 @@ title: "Documentation Metadata Standard"
 doc_type: instruction
 description: "Defines the mandatory YAML frontmatter schema for every Markdown documentation file and roadmap-generated artifact in this repository, and the rule for applying it whenever such a file is created or materially updated."
 status: active
-version: "1.26"
+version: "1.27"
 created: 2026-07-07
-updated: 2026-08-02
+updated: 2026-08-03
 language: en
 id: documentation-metadata-standard
 tags: [frontmatter, metadata, documentation-standard, retrieval, rag, diataxis]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, adr-0001-documentation-and-governance-model
 
 Changelog of this document:
 
+- v1.27: Section 1's `docs/manuals/` and `docs/references/` scope lists and Section 4's `manual` `doc_type` row gain the two documents added this batch (`glossary.md`, `missing-data-vocabulary.md`). A `fix-verifier` pass caught this: the batch had diagnosed the enumeration-drift class and then reproduced it, in the very table a prompt in the same batch flagged as previously fixed for it (`008-market-standard-vocabulary`, `007-missing-data-vocabulary`).
 - v1.26: Section 9's enforcement sentence now states that none of the automated checks run in a project created from this template outside the `licorsy` organization. The `ci-docs` job gained an `if: github.repository_owner == 'licorsy'` guard, making the template's dependency on Licorsy-controlled workflows explicit rather than silent; without that caveat this section promised adopters automation they do not receive.
 - v1.25: Section 1 realigned to the org-wide rule that every tracked Markdown file carries the schema. The blanket "repository entry points" exemption is replaced by a stated test — another system already owns the file's frontmatter as a functional contract, or renders/injects its raw content verbatim — under which only `README.md` (GitHub renders frontmatter as a visible table) and `CHANGELOG.md` (Keep a Changelog owns its structure) remain exempt, joined by the GitHub-owned PR and issue templates. `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `SECURITY.md`, and `CODE_OF_CONDUCT.md` move into scope via `doc-scope.js`'s `SCOPE_FILES`; the first two gained frontmatter in the same change, the latter three already carried it while going unvalidated.
-- v1.24: Section 1's `docs/prompts/` and `docs/adr/` scope bullets, and Section 4's `prompt` `doc_type` row, reworded - `docs/prompts/` is no longer uniformly "historical/archived" (this repository restarted it with `draft`/`active` entries, `docs/prompts/001-...md` onward); `docs/adr/`'s real-ADR range updated `0002`-`0004` → `0002`-`0005` after `docs/adr/0010-public-release.md` was renumbered (`docs/prompts/003-close-restart-followon-drift.md`).
 - Older entries: see `git log --follow` on this file.
 
 ---
@@ -31,11 +31,11 @@ Every Markdown documentation file in this repository, and every Markdown artifac
 Applies to:
 
 - `agents/` — live subagent operating instructions: `orchestrator.md`, `phase-reviewer.md`, `tool-discovery.md`, `adversarial.md`, `init.md`, `doc-consistency.md`.
-- `docs/manuals/` — the operation manual, this standard, the role guide, the prompt-engineering and agent-design guides, and the tool catalog; `docs/manuals/examples/` holds the worked examples an adopter replaces (governance, risk register, example ADR, and an optional Phase 1 PRFAQ scaffold).
+- `docs/manuals/` — the operation manual, this standard, the role guide, the glossary, the prompt-engineering and agent-design guides, and the tool catalog; `docs/manuals/examples/` holds the worked examples an adopter replaces (governance, risk register, example ADR, and an optional Phase 1 PRFAQ scaffold).
 - `docs/strategy/` — the execution roadmap and the optional go-to-market roadmap.
 - `docs/adr/` — this template's real ADRs (`0002`-`0005`).
 - `docs/visuals/` — the template visual overview.
-- `docs/references/` — this template's own reference material for adopters: token-economy decisions, the unvetted tools-ecosystem shortlist, and the `infra-templates/`, `telemetry-template/`, and `gate-verification-template/` READMEs (nested one level deep; the lint walks recursively).
+- `docs/references/` — this template's own reference material for adopters: token-economy decisions, the unvetted tools-ecosystem shortlist, the missing-data vocabulary, and the `infra-templates/`, `telemetry-template/`, and `gate-verification-template/` READMEs (nested one level deep; the lint walks recursively).
 - `docs/prompts/` — this repository's change-as-prompt records, kept flat (see Section 4.1): `draft`/`active` prompts describe changes in flight, `archived`/`deprecated` ones are frozen historical record; plus the blank prompt template and `PROMPT-INDEX.md`, the id/status/purpose index over them (`doc_type: status-artifact`, Section 4).
 - `docs/reports/` — external improvement reports and `PROPOSAL-TRACKING.md`, the status index tracking every proposal each report contains.
 - Any Markdown artifact the roadmap generates elsewhere under `docs/` (e.g. `docs/business/`) or under `.specify/` during Phases 0-8 (see Section 7) — this is a *different* project's own generated content, coexisting under the same `docs/` root as this template's own `manuals/`/`prompts/` once the roadmap actually runs; see the reorg's own note in `docs/manuals/operation-manual.md`'s "Important note for this repository."
@@ -90,7 +90,7 @@ Add when meaningful:
 | `doc_type` | Directory / artifact | Notes |
 | --- | --- | --- |
 | `instruction` | `agents/` (a live subagent's primary operating instructions), `docs/manuals/` (the operation manual, this standard), or `docs/strategy/` (the execution and go-to-market roadmaps) | Spans multiple physical folders; folder location is an orthogonal facet — whether a subagent reads the file directly as its own canonical operating instructions (`agents/`) versus broader human/orchestrator-facing operating-model guidance (`docs/manuals/`/`docs/strategy/`) — not a subtype of `doc_type`. |
-| `manual` | `docs/manuals/`, `docs/visuals/` | Human-facing guides that are neither operating instructions nor a catalog: the role guide, the prompt-engineering and agent-design guides, and the visual overview. |
+| `manual` | `docs/manuals/`, `docs/visuals/` | Human-facing guides that are neither operating instructions nor a catalog: the role guide, the glossary, the prompt-engineering and agent-design guides, and the visual overview. |
 | `prompt` | `docs/prompts/` | Change-as-prompt records kept as flat reference material - `draft`/`active` prompts describe changes in flight, `archived`/`deprecated` ones are historical. No physical lifecycle subfolder; `status` alone conveys lifecycle stage. See Section 4.1. |
 | `template` | `docs/prompts/`; the worked-example PRFAQ scaffold stays at `docs/manuals/examples/` | Same physical location as `prompt` in `docs/prompts/`; `doc_type` distinguishes a reusable blank scaffold from a prompt with real content. |
 | `tool-catalog` | `docs/manuals/` | Single lean file (`tool-library-catalog.md`), not one file per tool; entry schema is defined inside the file itself. |

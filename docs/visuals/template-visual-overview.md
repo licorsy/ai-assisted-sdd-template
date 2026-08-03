@@ -3,7 +3,7 @@ title: "Template Visual Overview"
 doc_type: manual
 description: "Six Mermaid diagrams orienting a new reader in the template's architecture - document map, roadmap state machine, phase-execution sequence, prompt-lifecycle workflow, Spec Kit artifact flow, and the runtime-trigger decision flow. Diagrams orient, prose governs: every diagram links to the canonical document that owns its content."
 status: active
-version: "1.13"
+version: "1.14"
 created: 2026-07-14
 updated: 2026-08-03
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, orchestrator, prompt-engineering-guide]
 
 Changelog of this document:
 
+- v1.14: Section 3's `REFS` node gains `missing-data-vocabulary`, per this file's own rule that a diagram is reviewed in the same change as the documents it visualizes - two version bumps in this batch had passed without that review (`fix-verifier` pass).
 - v1.13: Section 6's flowchart entry node reworded from "Task / increment at hand" to "Task / change at hand" - it was the one use of the word that meant neither the release cycle nor the Scrum Increment. `Q4`'s "Security-relevant increment?" is the delivered-capability sense and stays (`008-market-standard-vocabulary`).
 - v1.12: Section 6's runtime-trigger flowchart `Q9`/`P9` nodes re-worded to match P9's widened scope in `prompt-engineering-guide.md` (v1.1: surface prototype, taste **or** information design), keeping the three copies of that trigger in sync (`006-absorb-local-notes-011-accepted-items`).
-- v1.11: Removed the v1.9 entry below (retention rule: removal, not reword, per `documentation-metadata-standard.md` Section 2.1) - it stated `docs/prompts/` was "deliberately absent from this public-mirror repository," which the v1.10 entry immediately above it already contradicted once `docs/prompts/` was restarted (`docs/prompts/003-close-restart-followon-drift.md`).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -46,7 +46,7 @@ flowchart TD
     OM --> ROG["role-operating-guide.md<br/>(one-person role coverage)"]
     RM --> SPEC[".specify/<br/>(Spec Kit artifacts: constitution, specs, plans, tasks)"]
     OM --> PROMPTS["docs/prompts/<br/>(change-as-prompt archive + PROMPT-INDEX)"]
-    OM --> REFS["docs/references/<br/>(token-economy, tools-ecosystem, infra-templates, telemetry-template, gate-verification-template)"]
+    OM --> REFS["docs/references/<br/>(token-economy, tools-ecosystem, missing-data-vocabulary,<br/>infra-templates, telemetry-template, gate-verification-template)"]
     OM --> STATE["docs/STATE.md<br/>(generated single-read snapshot)"]
     OM --> REPORTS["docs/reports/<br/>(external reports + PROPOSAL-TRACKING.md)"]
 ```

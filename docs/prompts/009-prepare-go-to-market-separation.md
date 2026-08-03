@@ -69,7 +69,7 @@ The organization side (`licorsy/.github`) has not yet received the content. Remo
 - **[CRITICAL]** Activities 9, 10 and 12, `docs/business/market.md`, and the market-research acceptance criterion **stay**. The founder corrected an earlier draft that moved them; do not re-import that draft's framing.
 - **[HIGH]** Do not repeat the proposal's grep claim. If the mechanical check is cited at all, cite it accurately: one hit, on "external contracts" in the API sense.
 - **[MEDIUM]** Do not rename `docs/business/`. The proposal itself records that the folder name reads slightly oddly afterwards and explicitly asks that it not be renamed — a directory rename is the cost class this batch already declined once.
-- `docs/strategy/go-to-market.md` is untouched here, which also keeps it clear of `008`'s vocabulary edits; the nine `increment` occurrences it carries retire with the file.
+- `docs/strategy/go-to-market.md` is untouched here, which also keeps it clear of `008`'s vocabulary edits; the pre-split `increment` spelling it still carries retires with the file, and `docs/manuals/glossary.md` records that exception.
 
 ## FORMAT AND OUTPUT
 
