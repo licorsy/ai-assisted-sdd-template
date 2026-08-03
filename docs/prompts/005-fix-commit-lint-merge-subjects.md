@@ -2,10 +2,10 @@
 title: "Prompt 005: stop the commit lint from failing on GitHub-generated merge subjects"
 doc_type: prompt
 description: "Adds --no-merges to the Conventional Commits step in .github/workflows/pr-checks.yml, so the check stops linting the 'Merge pull request #N from ...' subjects GitHub generates itself and can never conform, and pins the flag with a facts entry. Without it the check fails by construction on every develop -> staging promotion PR, because merging into develop is what creates those commits - the exact pull request the check exists to guard. Fixed in git-governance, docs-governance, and licorsy/.github on 2026-08-01; this repository is the last copy carrying the defect."
-status: active
-version: "1.0"
+status: deprecated
+version: "1.1"
 created: 2026-08-01
-updated: 2026-08-01
+updated: 2026-08-03
 language: en
 id: 005-fix-commit-lint-merge-subjects
 tags: [prompt, ci, tooling, conventional-commits, docs-governance]
@@ -92,3 +92,36 @@ Executed as an edit to `.github/workflows/pr-checks.yml` and
 Verification: `docgov check` exits 0 with the new fact passing; the same check
 exits 1 naming `commit-msg-lint-skips-merges` when `--no-merges` is removed;
 `pre-commit run --all-files` passes.
+
+## SUPERSEDED — 2026-08-03
+
+This prompt is `deprecated`, not `archived`: TASK item 1 shipped, TASK items 2
+and 3 never did, and they can no longer be executed as written.
+
+Commit `9257c73` removed the "Validate commit messages (Conventional Commits)"
+step from `.github/workflows/pr-checks.yml` outright. That removal was correct
+and is independently reasoned in the workflow's own surviving comment: the step
+ran only on pull requests into `staging`/`main`, and on a promotion pull request
+every commit in range is already merged into `develop` — so it could report
+unfixable history and nothing else, and correcting a finding meant rewriting a
+protected branch. The one place it could have prevented something is a work
+branch into `develop`, which is exactly where that workflow does not run, by
+design. The `commit-msg` hook in `.pre-commit-config.yaml` already gates every
+commit as it is written, which is both earlier and cheaper.
+
+So the defect this prompt existed to fix is gone — resolved more completely than
+this prompt proposed, by deleting the check rather than by pinning its flag. But
+`--no-merges` was never the point on its own: the point was that a check which
+fails by construction on the exact pull request it guards is worse than no
+check. Item 15 of `licorsy/.github`'s known-gaps register, which tracked this,
+is closed on that basis.
+
+What it left behind was live and is fixed in `006-absorb-local-notes-011-accepted-items.md`:
+the `facts` block reached `.docgov.config.js` with `shadow: false` and
+`entries: []` — a blocking rule checking nothing, under a comment describing a
+workflow step that no longer exists. Prompt 006 re-points that block at the
+`promotion-source` guard, which does exist and is load-bearing, preserving this
+prompt's actual intent.
+
+The **[CRITICAL]** verify-by-breaking constraint above survives this prompt and
+is carried forward verbatim into 006.

@@ -138,22 +138,54 @@ module.exports = {
     },
 
     // -----------------------------------------------------------------------
-    // Fase 2: fixa o `--no-merges` do lint de mensagens de commit
-    // (docs/prompts/005-fix-commit-lint-merge-subjects.md). Sem a flag, o
-    // check reprova por construção em toda promoção develop -> staging, que é
-    // exatamente o PR que ele existe pra proteger.
+    // Fixa a cadeia de promoção develop -> staging -> main, que é afirmada em
+    // prosa nos adaptadores e imposta em YAML no workflow — dois lugares, sem
+    // nada mantendo os dois em sincronia. Exatamente a classe de defeito para
+    // a qual esta regra existe.
+    //
+    // Este bloco nasceu no prompt 005 fixando outra coisa: o `--no-merges` do
+    // lint de mensagens de commit. Aquele step foi removido inteiro depois
+    // (commit 9257c73, por razão própria e correta), e o bloco ficou com
+    // `entries: []` — uma regra blocking que não checava nada, sob um
+    // comentário descrevendo um check inexistente. Re-apontado no prompt 006
+    // para um alvo que existe e é load-bearing.
     facts: {
       // NÃO shadow. `facts` vem com shadow ligado — reporta e nunca falha — e
-      // foi justamente isso que deixou este defeito sobreviver em três cópias
-      // scaffolded antes de ser notado. Sem shadow a regra também roda sob
-      // `--changed`, então o pre-commit pega a regressão, não a CI na
+      // foi justamente isso que deixou o defeito do prompt 005 sobreviver em
+      // três cópias scaffolded antes de ser notado. Sem shadow a regra também
+      // roda sob `--changed`, então o pre-commit pega a regressão, não a CI na
       // promoção. Não altera `dead_citations`, que segue shadow por decisão
-      // do prompt 004: aquela regra tem backlog real de 509 achados, esta
-      // confere um valor declarado.
+      // do prompt 004: aquela regra tem backlog real de achados, esta confere
+      // um valor declarado.
       shadow: false,
       scope_dirs: CATEGORY_DIRS,
       root_files: SCOPE_FILES,
       entries: [
+        {
+          id: 'promotion-chain-develop-staging-main',
+          value: 'staging <- develop; main <- staging',
+          why: 'a cadeia de promoção é afirmada como matriz de permissão em '
+            + 'CLAUDE.md/AGENTS.md e imposta como mapeamento de base ref no job '
+            + '`promotion-source`. Nenhum mecanismo ligava os dois: o bloco '
+            + 'sync do check-adapter-sync.js cobre o texto CLAUDE.md<->AGENTS.md, '
+            + 'nunca o YAML. Se o job for afrouxado ou removido, a prosa segue '
+            + 'prometendo uma barreira que não existe — que é literalmente o que '
+            + 'aconteceu com o lint que este bloco fixava antes.',
+          required_in: [
+            {
+              file: '.github/workflows/pr-checks.yml',
+              pattern: /staging\)\s*expected=develop[\s\S]*?main\)\s*expected=staging/,
+            },
+            {
+              file: 'CLAUDE.md',
+              pattern: /autonomous up to `develop`; explicit human permission required for `staging`\/`main`/,
+            },
+            {
+              file: 'AGENTS.md',
+              pattern: /autonomous up to `develop`; explicit human permission required for `staging`\/`main`/,
+            },
+          ],
+        },
       ],
     },
   },
