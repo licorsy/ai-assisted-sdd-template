@@ -3,7 +3,7 @@ title: "Business Software Development Roadmap"
 doc_type: instruction
 description: "Guide the creation and evolution of any software product or platform as a generic and reusable AI multi-agent software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.28"
+version: "3.29"
 created: 2024-07-04
 updated: 2026-08-03
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, orchestrator, phase-reviewer, go-to-market]
 
 Changelog of this document:
 
+- v3.29: the two senses of `increment` split - the process instance (status line, backlog status index, first-cycle bullet, Phase 8 replanning) becomes **release cycle**; the delivered capability keeps `Increment`, the Scrum term it already was. Section 1 now names the phase model as **Stage-Gate** (Cooper), which it always was without saying so. Both point at the new `docs/manuals/glossary.md` (`008-market-standard-vocabulary`).
 - v3.28: Phase 3's acceptance criterion "SPEC becomes tasks" contradicted Activity 12 of its own phase (`/speckit.plan` "without breaking it into tasks yet") and every other document, which place task generation in Phase 4 - now states the condition Phase 3 reaches instead of the act Phase 4 performs. New Activity 10a: verify a data source exists and holds real data before scoping a feature on it. Phase 7 Activity 6 gains the task-artifact reconciliation at closure. `test-report.md`'s Phase 5 bullet now says what the metadata standard already did, that it may be authored in Phase 5 or 6. Activity 4's P9 trigger widened to information design (`006-absorb-local-notes-011-accepted-items`).
 - v3.27: doc-consistency-reviewer batch fix: Phase 1 Activity 11a now names `agents/tool-discovery.md` alongside the `tool-hunter` adapter, matching the parallel treatment `agents/doc-consistency.md`/`agents/adversarial.md` already got at `prompt-096` (prompt-097).
-- v3.26: doc-consistency-reviewer batch fix: Phase 8 Activity 4b now names `agents/doc-consistency.md` alongside the `doc-consistency-reviewer` adapter, matching the parallel treatment `agents/adversarial.md`/`agents/phase-reviewer.md` already get elsewhere in this file (prompt-096).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -29,6 +29,10 @@ Changelog of this document:
 This roadmap exists to receive an initial problem, idea, existing codebase, or desired solution and transform it, step by step, into documentation, planning, specifications, code, tests, deployment artifacts, and operational knowledge using AI with mandatory human oversight.
 
 The system must remain generic, reusable, and process-oriented so it can be applied to any software product, internal initiative, or existing system, regardless of business domain.
+
+---
+
+**What this model is called.** Phases 0-8, each ending in a human-approved transition that can send the work back rather than only forward, is a **Stage-Gate** model — Robert G. Cooper's, the established name for exactly this shape. Naming it costs nothing and buys recognition: an engineer, PM, or director meeting this repository sees a methodology they already know rather than an apparently bespoke scheme they have to be taught. Nothing about the phases changes by saying so, and no dependency on Cooper's wider framework is taken on; this names an existing practice, the same way `agents/orchestrator.md` names the reverse-the-conversation-direction pattern it was already following. The agile equivalents of each stage, and this model's other vocabulary, are in `docs/manuals/glossary.md`.
 
 ---
 
@@ -171,7 +175,7 @@ Create the minimum documentation, governance, and memory structure before starti
 #### Phase 0 - Artifacts instructions
 
 - `handbook.md` is the project entry point.
-- `status.md` shows the current phase, blockers, the Step 0 startup choices, and next step - including which increment/cycle is in progress (the outer loop, Phase 8 re-entering Phases 1-7) alongside the current phase/step (the inner loop), since a single "current phase" field can't show both (`docs/manuals/operation-manual.md`, Step 14).
+- `status.md` shows the current phase, blockers, the Step 0 startup choices, and next step - including which release cycle is in progress (the outer loop, Phase 8 re-entering Phases 1-7) alongside the current phase/step (the inner loop), since a single "current phase" field can't show both (`docs/manuals/operation-manual.md`, Step 14).
 - `risks.md` is consulted during discovery and planning.
 - ADRs record architectural, operational, and tooling decisions.
 - The constitution (`.specify/memory/constitution.md`, produced in Phase 3) will define permanent guardrails for future work; Phase 0 only establishes the documentation and governance structure it lands in.
@@ -314,7 +318,7 @@ Transform the PRD into an executable plan with risks, dependencies, milestones, 
 #### Phase 2 - Artifacts instructions
 
 - `plan.md` becomes the basis for architecture.
-- `backlog.md` guides future task decomposition. Keep a small status index at the top - increment/cycle | status (`candidate / decided / in-progress / delivered`) | link to the retrospective entry that recorded the decision - so next-increment decisions stay scannable instead of existing only in retrospective prose. An index, not a duplicate: update it when a decision happens (Phase 8, activity 6), not a new table per increment.
+- `backlog.md` guides future task decomposition. Keep a small status index at the top - release cycle | status (`candidate / decided / in-progress / delivered`) | link to the retrospective entry that recorded the decision - so next-cycle decisions stay scannable instead of existing only in retrospective prose. An index, not a duplicate: update it when a decision happens (Phase 8, activity 6), not a new table per release cycle.
 - `risks.md` influences architectural decisions.
 - `governance.md` defines decision rights and review checkpoints.
 
@@ -514,7 +518,7 @@ During sprint execution, actual system assets are generated.
 - Code respects constitution and SPEC.
 - Explicit human checkpoint happened.
 - Changes were recorded.
-- If this is the project's first increment: it is a working walking skeleton (minimal end-to-end vertical slice), not a big-bang implementation.
+- If this is the project's first release cycle: it is a working walking skeleton (minimal end-to-end vertical slice), not a big-bang implementation.
 
 #### Phase 5 - Expected result
 
@@ -660,10 +664,10 @@ Keep the project understandable, auditable, and evolvable over time.
 4. Consolidate learnings into `docs/references/retrospective.md`.
 4a. Conditional: when a production incident occurred - users or data were affected (runtime trigger in `docs/manuals/prompt-engineering-guide.md`, Section 12) - produce the P7 one-page blameless incident note and route every action item to the backlog. A bug caught before production is not an incident; no note needed.
 4b. Recommended: run `agents/doc-consistency.md` once per cycle close to audit the whole living-document set for cross-document inconsistency, broken traceability, redundancy, and ambiguity, before replanning the next cycle — in Claude Code, this is the `doc-consistency-reviewer` subagent (`.claude/agents/doc-consistency-reviewer.md`). This runs once per cycle here, not once per phase - most phases only touch a narrow slice of the document set (see `docs/manuals/operation-manual.md`, Step 14, layer 7).
-4c. Recommended: run this after activity 4b's consistency audit, so the audit sees the full narrative before it is pruned. Once the retrospective (activity 4) is written, prune that cycle's step-by-step narrative out of `status.md`, leaving a short pointer to `/CHANGELOG.md` and the relevant `docs/references/retrospective.md` section. `status.md` is a current-state record, not an archive (`docs/manuals/role-operating-guide.md`, Section 16) - a single overgrown living document has been observed to hit a platform's own read ceiling on its own. A project whose living-document body keeps growing past what a pruned `status.md` can hold may eventually need to split `status.md` by increment or cycle; this is a note for that point, not a rule to apply pre-emptively.
+4c. Recommended: run this after activity 4b's consistency audit, so the audit sees the full narrative before it is pruned. Once the retrospective (activity 4) is written, prune that cycle's step-by-step narrative out of `status.md`, leaving a short pointer to `/CHANGELOG.md` and the relevant `docs/references/retrospective.md` section. `status.md` is a current-state record, not an archive (`docs/manuals/role-operating-guide.md`, Section 16) - a single overgrown living document has been observed to hit a platform's own read ceiling on its own. A project whose living-document body keeps growing past what a pruned `status.md` can hold may eventually need to split `status.md` by release cycle; this is a note for that point, not a rule to apply pre-emptively.
 4d. Recommended: keep the "Unreleased" section of `/CHANGELOG.md` bounded to a modest number of recent entries, rolling older ones into their own dated version block once released - the same retention spirit as `documentation-metadata-standard.md` Section 2.1's 3-entry cap for this template's own documents, though not identical and not CI-enforced for a generated project's own `/CHANGELOG.md`.
 5. Review the process itself and record a decision to keep, change, or retire a practice, even if the decision is "no change." This stays human-gated like every other phase transition (see the summarize-and-confirm rule and the validation strategy's human-approval layer in `docs/manuals/operation-manual.md`) — there is no autonomous, approval-free self-modification of the process.
-6. Replan the next cycle by explicitly naming which phase it re-enters: Phase 1 if the next increment needs fresh discovery, or Phase 2 if the problem is already understood and only planning is needed. Prioritize using the production signals named in this phase's inputs (usage, error trends, support feedback), not intuition alone. This is the same roadmap looping again for the next increment, not a separate mechanism. Record the decision in `backlog.md`'s status index (Phase 2 - Artifacts instructions) so which increments are candidate/decided/in-progress/delivered stays scannable without reading every retrospective's prose.
+6. Replan the next cycle by explicitly naming which phase it re-enters: Phase 1 if the next release cycle needs fresh discovery, or Phase 2 if the problem is already understood and only planning is needed. Prioritize using the production signals named in this phase's inputs (usage, error trends, support feedback), not intuition alone. This is the same roadmap looping again for the next release cycle, not a separate mechanism. Record the decision in `backlog.md`'s status index (Phase 2 - Artifacts instructions) so which release cycles are candidate/decided/in-progress/delivered stays scannable without reading every retrospective's prose.
 
 #### Phase 8 - Generated artifacts
 

@@ -3,7 +3,7 @@ title: "Prompt Engineering Guide"
 doc_type: manual
 description: "Authoring-quality guide for the individual prompts written during roadmap work - specification anatomy, example-driven specs, labeled context blocks, priority tags, staged multi-step prompting, chain-of-thought scaffolds, targeted refinement, comment-driven development - plus a versioned starter library of reusable prompt patterns including a security-audit checklist, each with a runtime trigger mapping it to its roadmap phase."
 status: active
-version: "1.9"
+version: "1.10"
 created: 2026-07-14
 updated: 2026-08-03
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap]
 
 Changelog of this document:
 
+- v1.10: P10's scratch-doc scope now says **release cycle**; P4's security trigger keeps `increment`, which means the delivered capability, matching `roadmap.md` and the visual overview's identical wording (`008-market-standard-vocabulary`).
 - v1.9: P9 (v1.0 -> v1.1) is now a throwaway **surface** prototype, not only a taste prototype: its trigger covers information design (which facts belong on a surface, in what decomposition) alongside taste, since a surface whose taste is settled can still be wrong about what it shows. Gains a pitfall forbidding plausible invented numbers in a prototype. Section 12's trigger row updated in the same edit, as were `roadmap.md` Activity 4 and the visual overview's flowchart node - the same P9 pair desynced once before, per v1.6 below (`006-absorb-local-notes-011-accepted-items`).
 - v1.8: Re-linked Section 1's and Section 4's `basic-prompt-template.md` references, un-linked in v1.7 on the premise that `docs/prompts/` was absent from this repository; the file exists again as of `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` (`docs/prompts/003-close-restart-followon-drift.md`).
-- v1.7: Dropped `related:` entries pointing at `basic-prompt-template` and five archived prompt ids, and un-linked two `basic-prompt-template.md` references in Section 1 - `docs/prompts/` is deliberately absent from this public-mirror repository (ADR-0010), so none of them resolve.
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -291,13 +291,13 @@ discard the rest.
 ### P10 - External-dependency research spike (v1.0)
 
 - **Use when:** implementing a task that integrates an unfamiliar or complex external API/dependency (Phase 5 - Development, extends `docs/strategy/roadmap.md` Phase 5 Activity 3's existing "research spikes" task-type mention). **Not when:** the dependency is already well-understood or thoroughly documented - skip straight to implementation.
-- **Pitfalls:** letting the scratch doc calcify into a permanent reference - it is expected to go stale and be discarded once the current increment or task slice closes; confusing it with `build-vs-buy.md`, which is a durable decision record, not exploration notes.
+- **Pitfalls:** letting the scratch doc calcify into a permanent reference - it is expected to go stale and be discarded once the current release cycle or task slice closes; confusing it with `build-vs-buy.md`, which is a durable decision record, not exploration notes.
 
 ```text
 Create a short-lived scratch doc caching exploration findings for [EXTERNAL API/DEPENDENCY]:
 what it actually does, quirks/gotchas found, example calls that worked, open questions.
 
-This doc is scoped to the current increment or task slice and expected to go stale - do not
+This doc is scoped to the current release cycle or task slice and expected to go stale - do not
 treat it as a durable reference; discard it once that slice closes, distinct from
 docs/references/build-vs-buy.md's durable decision record.
 ```

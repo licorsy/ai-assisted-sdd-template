@@ -3,9 +3,9 @@ title: "Doc Consistency Reviewer Prompt"
 doc_type: instruction
 description: "Audit the entire current living-document set - not one phase - for cross-document semantic inconsistency, broken traceability, unnecessary redundancy, and textual ambiguity, using directed search over cross-references and frontmatter `related:` fields rather than full reads of every document. Reports only; never edits files."
 status: active
-version: "1.7"
+version: "1.8"
 created: 2026-07-19
-updated: 2026-07-31
+updated: 2026-08-03
 language: en
 id: doc-consistency
 tags: [review, consistency, traceability, documentation, cross-document]
@@ -17,9 +17,9 @@ related: [operation-manual, agent-design-guide, phase-reviewer, adversarial, roa
 
 Changelog of this document:
 
+- v1.8: the cadence line now says "at the end of a release cycle" rather than "at the end of an increment or release", per the sense split in `docs/manuals/glossary.md` (`008-market-standard-vocabulary`).
 - v1.7: Section 3 step 1's `docs/prompts/` carve-out reworded to explicitly status-based (`draft`/`active` in scope, `archived`/`deprecated` frozen) instead of ambiguous "archived prompt files... a frozen historical archive" wording that a re-review of this same repository's `docs/prompts/` restart read as directory-wide and nearly skipped the two `status: active` prompts describing its own branch; dangling citation of prompt `059` (archived private-repo sequence) qualified as non-citable here.
 - v1.6: Section 3 step 1's reference to `check-changelog-retention.js` updated to `.docgov.config.js`'s `changelog-retention` rule — the script was retired when frontmatter/internal-links/changelog-retention moved to the shared `licorsy/docs-governance` engine; `check-step-references.js` stays repo-specific and unaffected.
-- v1.5: doc-consistency-reviewer batch fix: Section 6 gains rule 5, the "ask before proceeding if scope is unspecified" rule that previously existed only in `.claude/agents/doc-consistency-reviewer.md` (a fourth recurrence of the adapter-vs-canonical class, this time found on three review agents at once); Section 3 step 1's `docs/prompts/` carve-out now explicitly excludes only archived prompt files, not `PROMPT-INDEX.md` (a live status-artifact this reviewer had been blind to); step 1 also names the `docs/STATE.md` facade explicitly instead of leaving it out of every scope category; step 2's "build the graph, then follow it" order no longer states building the graph as happening after following it (prompt-098).
 - Older entries: see `git log --follow` on this file.
 
 ---
@@ -31,7 +31,7 @@ Changelog of this document:
 ## 2. When to run this prompt
 
 - On demand, whenever there is doubt that the document set is internally consistent.
-- Once per cycle close (Phase 8 - Maintenance, at the end of an increment or release), not once per phase. Most phases touch a narrow slice of the document set; running a full-corpus pass every phase would be costly and largely redundant with what `orchestrator-reviewer` already checks per phase. A cycle close is the point where accumulated cross-document drift is most likely and most worth catching before it compounds.
+- Once per cycle close (Phase 8 - Maintenance, at the end of a release cycle), not once per phase. Most phases touch a narrow slice of the document set; running a full-corpus pass every phase would be costly and largely redundant with what `orchestrator-reviewer` already checks per phase. A cycle close is the point where accumulated cross-document drift is most likely and most worth catching before it compounds.
 
 ## 3. Search strategy: directed, not exhaustive
 

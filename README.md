@@ -43,7 +43,7 @@ The template is designed to support human-led and agent-assisted development wit
 - [ADR-0004: Category directories for docs/manuals/ content](docs/adr/0004-docs-category-directories.md) — `docs/adr/`, `docs/strategy/`, `docs/visuals/`, extending ADR-0003 rather than superseding it.
 - [ADR-0005: Public-mirror release via licorsy/ai-assisted-sdd-template](docs/adr/0005-public-release.md) — publishes a new public repository seeded with a single fresh commit; amended 2026-07-31 to record this repository as the current source of truth, after the original private source repository was archived.
 - [Business software development roadmap](docs/strategy/roadmap.md)
-- [Go-to-market roadmap](docs/strategy/go-to-market.md) — optional, parallel commercial-lifecycle roadmap; not a gate every increment passes through.
+- [Go-to-market roadmap](docs/strategy/go-to-market.md) — optional, parallel commercial-lifecycle roadmap; not a gate every release cycle passes through.
 - [Orchestrator reviewer prompt](agents/phase-reviewer.md)
 - [Adversarial review prompt](agents/adversarial.md) — stress-tests a spec/plan's merit before Phase 3 locks in.
 - [Doc consistency reviewer prompt](agents/doc-consistency.md) — full-corpus cross-document audit, run on demand or at cycle close.
