@@ -3,7 +3,7 @@ title: "Operation Manual - Integrating Instructions Documents"
 doc_type: instruction
 description: "Operational guide for an AI-assisted software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.54"
+version: "3.55"
 created: 2024-07-04
 updated: 2026-08-03
 language: en
@@ -17,9 +17,9 @@ related: [orchestrator, roadmap, phase-reviewer, adversarial, doc-consistency, i
 
 Changelog of this document:
 
+- v3.55: Step 9 gains the missing-data rendering convention, pointing at the new `docs/references/missing-data-vocabulary.md` (`[x]` not available, `[z]` not applicable, never the ambiguous `NA`, legend above the table, never a line joined across a gap) (`007-missing-data-vocabulary`).
 - v3.54: Step 9 gains two document conventions the corpus never stated - a departure from an earlier same-cycle artifact carries its reason in the later artifact (the authoring half; detection was already covered three times), and a specimen value a reader could mistake for real output must be impossible rather than plausible. Step 15's CI-checks table corrected: it still listed `docs-frontmatter-lint.yml`, `broken-link-check.yml` and `changelog-retention-check.yml` as live after all three were retired into the shared docgov engine, and omitted `pr-checks.yml`'s `promotion-source`/`ci-security` jobs and `scorecard.yml` (`006-absorb-local-notes-011-accepted-items`).
 - v3.53: doc-consistency-reviewer follow-up (`docs/prompts/003-close-restart-followon-drift.md`): Document map gains a `docs/prompts/` row (previously absent from the table `README.md` calls the sole canonical component map) and the "Living memory" row's location list gains `docs/prompts/`; Step 15's `docs/STATE.md` row reworded from "excludes the historical archive" to "excludes regardless of status" (`docs/prompts/` now holds `active` prompts too); two dangling `docs/prompts/085-...md` citations qualified as archived-private-repo, non-citable paths.
-- v3.52: `docs/adr/0010-public-release.md` renumbered to `0005-public-release.md` (`docs/prompts/002-renumber-adr-0010-to-0005.md`), closing the `0005`-`0009` gap now that the private-repo-alignment rationale for `0010` no longer applies. Step 12 rules 1 and 3 repointed at `0005-public-release.md`.
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -217,6 +217,7 @@ Keep every important change traceable.
 - Every Markdown documentation file in this repository — including `agents/` and every category directory under `docs/` enumerated in `documentation-metadata-standard.md` Section 1, plus any artifact the roadmap generates elsewhere under `.specify/` — must carry the YAML frontmatter schema defined in `docs/manuals/documentation-metadata-standard.md`; apply or update it whenever the file is created or materially changed, alongside the changelog and version header.
 - Move a `docs/prompts/` file through its lifecycle by editing only its `status` field; see Step 11 for the concrete trigger points.
 - When a later artifact reaches a conclusion that departs from an earlier one produced in the same cycle, write the departure down in the later artifact, with its reason and the evidence that decided it. A silent softening reads afterwards as either an error or a retreat; the same paragraph, written down, reads as reasoning. This is the authoring-side obligation only — finding contradictions after the fact is already covered three times over, by `agents/phase-reviewer.md`, `agents/adversarial.md`, and `agents/doc-consistency.md`, and reversing an accepted ADR has its own rule in `docs/manuals/role-operating-guide.md`. Multi-artifact discovery produces these departures normally as understanding sharpens; what it must not produce is a stale earlier artifact nobody reconciled.
+- Render an absent, degraded, or withheld value with the shared vocabulary in `docs/references/missing-data-vocabulary.md` rather than inventing a token per surface: `[x]` not available, `[z]` not applicable, never the ambiguous `NA`, legend above the table, and never a line joined across a gap. The obligation to be honest about gaps was already stated in five places here before the vocabulary existed; this is what they point at.
 - Make a specimen value impossible rather than plausible whenever a reader could mistake it for the product's own output — `R$ 99.999,99`, `CLIENTE EXEMPLO S.A.`, a date in `2099`. Labelling is necessary and is not sufficient: a plausible fake survives being screenshotted away from its label, and a reader who misses one label misreads a real figure. This does not reach illustrative prose or format examples, which are meant to read as realistic — `docs/manuals/examples/spec-prfaq-template.md`'s invented user quote and `docs/references/telemetry-template/`'s realistic sample lines are both correct as written. Where clearly-labelled invented data *belongs* — fixtures, worked examples, throwaway prototypes — is already settled; see the keep-versus-replace table in `README.md`.
 
 ## Step 10 - The universal summarize-and-confirm rule

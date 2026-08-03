@@ -3,7 +3,7 @@ title: "Orchestrator Prompt"
 doc_type: instruction
 description: "Orchestrate the creation and evolution of a software product or platform as a generic AI-assisted development system, with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.22"
+version: "3.23"
 created: 2024-07-04
 updated: 2026-08-03
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, role-operating-guide]
 
 Changelog of this document:
 
+- v3.23: the phase-exit brief's "not tracked (…)"/"none" strings now point at `docs/references/missing-data-vocabulary.md` as instances of a shared convention, rather than reading as this file's private invention - the same honest-absence rule was independently reinvented in five places across the corpus before the vocabulary existed (`007-missing-data-vocabulary`).
 - v3.22: Step 3's readiness checklist gains acceptance criteria, which it never listed - the nearest item was "The phase goal was achieved", so the one thing a phase gate exists to check had no line of its own. Recorded per criterion in three states (met directly / met via a local analog / not applicable with the reason), reusing the "'not applicable' must be stated, not skipped" formulation `adversarial.md` and `doc-consistency.md` already carry (`006-absorb-local-notes-011-accepted-items`).
 - v3.21: doc-consistency-reviewer batch fix: the Spec Kit command list gains `/speckit.analyze`, previously omitted though the operation manual calls it mandatory; the source-of-truth list gains `docs/STATE.md` and `/docs/governance.md`, both already-guaranteed artifacts it omitted, and its trailing "roadmap and instruction documents in `docs/manuals/` and `agents/`" line - stale since the ADR-0004 reorg moved the roadmap to `docs/strategy/` - now names all five current instruction directories (prompt-093).
-- v3.20: doc-consistency-reviewer batch fix: the Interaction model section's eight restated Step 18 bullets - already hand-drifted and re-synced twice, outside any sync-marker protection - replaced with a pointer to `operation-manual.md`, Step 18, keeping only the two orchestrator-specific additions (prompt-090).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -136,7 +136,7 @@ At the end of every phase, report using the format chosen at Step 0, choice 5 ("
 1. **Summary (business level)** - what / why / how, in plain, non-technical language.
 2. **Decisions made** - the concrete calls taken this phase, each linking its ADR or decision-log entry if one exists.
 3. **Artifacts created/changed** - as clickable relative links.
-4. **Metrics** - tokens and duration for the phase, read from `docs/telemetry/sessions.jsonl` if the project adopted it; if not adopted, state "not tracked (telemetry not adopted)" for both. Cost always reads "not tracked (no cost data collected)" regardless of adoption - `docs/references/telemetry-template/session-entry.schema.json` has no cost field at all. Never estimate any of the three.
+4. **Metrics** - tokens and duration for the phase, read from `docs/telemetry/sessions.jsonl` if the project adopted it; if not adopted, state "not tracked (telemetry not adopted)" for both. Cost always reads "not tracked (no cost data collected)" regardless of adoption - `docs/references/telemetry-template/session-entry.schema.json` has no cost field at all. Never estimate any of the three. These "not tracked (…)" strings and the "none" below are this brief's own instances of the shared convention in `docs/references/missing-data-vocabulary.md` - an absent value is named, never silently omitted and never guessed at.
 5. **What actually deserves their attention** - the one thing, if anything, that needs founder judgment beyond a rubber-stamp (a risk, an ambiguity, a deviation); write "none" explicitly when there isn't one - never omit the field.
 6. **Next step + the gate question** - what happens next if approved, and the literal go/no-go question, formatted per Step 18's lettered style when there is a real choice to offer.
 
