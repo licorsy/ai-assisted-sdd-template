@@ -3,9 +3,9 @@ title: "Orchestrator Prompt"
 doc_type: instruction
 description: "Orchestrate the creation and evolution of a software product or platform as a generic AI-assisted development system, with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.21"
+version: "3.22"
 created: 2024-07-04
-updated: 2026-07-28
+updated: 2026-08-03
 language: en
 id: orchestrator
 tags: [orchestrator, phase-sequencing, roadmap-path-selection, spec-kit]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, role-operating-guide]
 
 Changelog of this document:
 
+- v3.22: Step 3's readiness checklist gains acceptance criteria, which it never listed - the nearest item was "The phase goal was achieved", so the one thing a phase gate exists to check had no line of its own. Recorded per criterion in three states (met directly / met via a local analog / not applicable with the reason), reusing the "'not applicable' must be stated, not skipped" formulation `adversarial.md` and `doc-consistency.md` already carry (`006-absorb-local-notes-011-accepted-items`).
 - v3.21: doc-consistency-reviewer batch fix: the Spec Kit command list gains `/speckit.analyze`, previously omitted though the operation manual calls it mandatory; the source-of-truth list gains `docs/STATE.md` and `/docs/governance.md`, both already-guaranteed artifacts it omitted, and its trailing "roadmap and instruction documents in `docs/manuals/` and `agents/`" line - stale since the ADR-0004 reorg moved the roadmap to `docs/strategy/` - now names all five current instruction directories (prompt-093).
 - v3.20: doc-consistency-reviewer batch fix: the Interaction model section's eight restated Step 18 bullets - already hand-drifted and re-synced twice, outside any sync-marker protection - replaced with a pointer to `operation-manual.md`, Step 18, keeping only the two orchestrator-specific additions (prompt-090).
-- v3.19: doc-consistency-reviewer batch fix: choice 1 ("what is being brought") is the only Step 0 choice that never said to record the answer - now does; Step 3's and the Output-style section's own choice enumerations pointed at 4-of-5 subsets, replaced with "the Step 0 startup choices" (prompt-089).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -150,6 +150,7 @@ Either format is followed by:
 Before any phase transition, verify the following:
 
 - The phase goal was achieved.
+- Every acceptance criterion for the phase has a recorded determination - **met directly**, **met via a local analog** (name it), or **not applicable** (say why). "Not applicable" must be stated, not skipped; the same rule `agents/adversarial.md` and `agents/doc-consistency.md` already apply to their own category checklists. A bare aggregate ("criteria validated") is not a determination. The criteria themselves live in `docs/strategy/roadmap.md` and are not restated here.
 - The required artifacts were produced or updated.
 - Open questions were recorded.
 - Risks and decisions were updated where relevant.

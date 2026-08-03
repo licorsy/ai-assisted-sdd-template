@@ -3,9 +3,9 @@ title: "Business Software Development Roadmap"
 doc_type: instruction
 description: "Guide the creation and evolution of any software product or platform as a generic and reusable AI multi-agent software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.27"
+version: "3.28"
 created: 2024-07-04
-updated: 2026-07-29
+updated: 2026-08-03
 language: en
 id: roadmap
 tags: [roadmap, lifecycle, greenfield, brownfield, phase-gates]
@@ -17,9 +17,9 @@ related: [operation-manual, orchestrator, phase-reviewer, go-to-market]
 
 Changelog of this document:
 
+- v3.28: Phase 3's acceptance criterion "SPEC becomes tasks" contradicted Activity 12 of its own phase (`/speckit.plan` "without breaking it into tasks yet") and every other document, which place task generation in Phase 4 - now states the condition Phase 3 reaches instead of the act Phase 4 performs. New Activity 10a: verify a data source exists and holds real data before scoping a feature on it. Phase 7 Activity 6 gains the task-artifact reconciliation at closure. `test-report.md`'s Phase 5 bullet now says what the metadata standard already did, that it may be authored in Phase 5 or 6. Activity 4's P9 trigger widened to information design (`006-absorb-local-notes-011-accepted-items`).
 - v3.27: doc-consistency-reviewer batch fix: Phase 1 Activity 11a now names `agents/tool-discovery.md` alongside the `tool-hunter` adapter, matching the parallel treatment `agents/doc-consistency.md`/`agents/adversarial.md` already got at `prompt-096` (prompt-097).
 - v3.26: doc-consistency-reviewer batch fix: Phase 8 Activity 4b now names `agents/doc-consistency.md` alongside the `doc-consistency-reviewer` adapter, matching the parallel treatment `agents/adversarial.md`/`agents/phase-reviewer.md` already get elsewhere in this file (prompt-096).
-- v3.25: doc-consistency-reviewer batch fix: Phase 0's Generated-artifacts list and Section 10's folder tree both gain `/docs/adr/0000-adr-template.md` - the blank ADR scaffold Activity 7 requires and `agents/init.md` creates on every bootstrap, previously named nowhere despite being the one ADR artifact actually guaranteed (only the conditional first real ADR was listed) (prompt-093).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -213,13 +213,14 @@ Transform a raw problem, or an existing system's actual behavior, into a validat
 1. Reformulate the problem to remove ambiguity.
 2. Brainstorm 3 to 5 approaches. When the problem resembles a well-served commodity category (calendars, CRM, payments, scheduling, and similar), one of the brainstormed approaches must be "adopt an existing product or service, build nothing custom" - not mandatory when the problem is genuinely novel or the product itself is the differentiator; record a one-line note either way (included, or explicitly excluded and why).
 3. Perform a Tree of Thought analysis to compare alternatives and expose gaps, risks, and opportunities (see `docs/manuals/operation-manual.md`, Step 17).
-4. Refine the strongest approach or combine compatible ideas. If the outcome has a user-facing visual/interaction dimension where "taste" must be resolved, spike disposable variants first (P9, `docs/manuals/prompt-engineering-guide.md`, Section 12) before continuing.
+4. Refine the strongest approach or combine compatible ideas. If the outcome is a surface - a page, a report, a view, a CLI output shape - whose "taste" or whose information design must be resolved, spike disposable variants first (P9, `docs/manuals/prompt-engineering-guide.md`, Section 12) and have the human react to one before continuing.
 5. Gather functional requirements.
 6. Gather non-functional requirements.
 7. If brownfield: separate "how it works today" from "how it should work" explicitly (section 3).
 8. Define MVP scope versus future scope.
 9. Research market and competitors. If the problem/market/prior-art isn't yet validated, or needs deeper research capability than the agent itself has, use the guided external deep-research handoff pattern (P8, `docs/manuals/prompt-engineering-guide.md`, Section 12).
 10. Compare existing solutions and identify gaps, then close with an explicit verdict - adopt an existing product/service, or build custom - before Phase 1 can end, surfaced via the human-interaction protocol (`docs/manuals/operation-manual.md`, Step 18): "A) Adopt an existing product/service as-is - recommended when gaps are minor or non-differentiating" / "B) Adopt an existing product plus a thin custom integration - recommended when one gap is real but small" / "C) Build custom software - recommended when gaps are substantial or the product itself is the differentiator." This is a human decision, not one the orchestrator makes unilaterally; record the comparison in `market.md` and the verdict plus one-line reasoning in `build-vs-buy.md`.
+10a. Conditional: if any candidate scope depends on a data source, verify the source before the scope is committed to, not after. Confirm that it (a) exists, (b) holds real data rather than fixtures or seed rows, and (c) will still hold real data by the time the feature ships. A feature scoped against a source that turns out to be empty or fabricated renders either blank or invented, and the cost of finding that out in Phase 5 is a rebuild. State the verification and its result in `market.md` or `build-vs-buy.md` alongside the verdict above; if no candidate scope is data-dependent, record the skip in one line. This is a scoping check about *inputs*, and is not the same discipline as this repository's existing rules against fabricated claims, dates, and citations - those govern what a document asserts.
 11. Perform tooling and prior-art research:
     a. Identify validated frameworks and libraries that may cover the software's needed capabilities (run `agents/tool-discovery.md` in Mode B — in Claude Code, the `tool-hunter` subagent; findings feed 11c's `build-vs-buy.md`). This is distinct from discovering Claude-ecosystem tools (Agents/Skills/Hooks) that help produce roadmap artifacts more generally — for that, see `docs/manuals/tool-library-catalog.md` and `docs/manuals/operation-manual.md`, Step 15.
     b. Decide on the Spec-Driven Development tooling to adopt and document the rationale.
@@ -390,7 +391,7 @@ Define how the system will be built before implementation starts.
 - High-level architecture defined.
 - Development and review rules documented.
 - Significant decisions recorded in ADRs.
-- SPEC becomes tasks.
+- The SPEC is ready to become tasks - specific enough that Phase 4 can decompose it without inventing scope. Phase 3 does not generate the tasks themselves; Activity 12 above stops at the first technical plan on purpose, and `/speckit.tasks` runs in Phase 4.
 - No critical ambiguity remains open.
 
 #### Phase 3 - Expected result
@@ -492,7 +493,7 @@ During sprint execution, actual system assets are generated.
 
 #### Phase 5 - Generated artifacts
 
-- `docs/references/test-report.md`
+- `docs/references/test-report.md` - may be authored here or in Phase 6, whichever is where the results actually land; `docs/manuals/documentation-metadata-standard.md` records it as Phase 5 / 6 for the same reason. Phase 6 is where it is consumed, and it is listed there too.
 - Source code
 - Tests
 - `/CHANGELOG.md` updated
@@ -598,7 +599,7 @@ Integrate the increment into the main project flow safely.
 3. Update changelog.
 4. Update handbook or status if needed.
 5. Perform post-integration verification.
-6. Record pending items and next steps.
+6. Record pending items and next steps. Reconcile the cycle's task artifact (`docs/task.md` or `.specify/tasks/sprint-backlog.json`, per Phase 4) before doing so: every task is either checked, or disclosed here as unchecked with its reason. An unchecked box on work that actually shipped is the common case and the reason this is worth a minute - the record then disagrees with reality in the direction nobody notices, because the work is done and nothing is broken. This one is written guidance on purpose. Making it mechanical would need a task-artifact path this roadmap does not commit to (Phase 4 offers two alternatives), and `docs/references/gate-verification-template/verify-gate.js` deliberately never reads "Acceptance criteria / Done" bullets at all.
 7. Run the deploy from the CI/CD pipeline, triggered by the merge or tag - never by hand. First-time setup: start from the templates in `/docs/references/infra-templates/deploy/`.
 8. Describe environments as versioned Infrastructure as Code (Terraform/OpenTofu, containers, or the platform's native IaC); choose the tool per project and record it in an ADR.
 9. Promote through environments: staging deploys automatically; production promotion requires explicit human approval (for example a GitHub Environment with required reviewers).

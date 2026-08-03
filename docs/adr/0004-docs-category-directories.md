@@ -3,9 +3,9 @@ title: "ADR-0004: Category directories for docs/manuals/ content"
 doc_type: adr
 description: "Records the decision to split docs/manuals/ by category into docs/adr/, docs/strategy/, and docs/visuals/, as an extension of ADR-0003's principles (not a supersession) - operation-manual.md itself stays a single, unfragmented file, since ADR-0003's own Alternative #2 already rejected splitting it and check-step-references.js depends on that assumption."
 status: active
-version: "1.1"
+version: "1.2"
 created: 2026-07-23
-updated: 2026-07-31
+updated: 2026-08-03
 language: en
 id: 0004-docs-category-directories
 tags: [adr, document-architecture, folder-reorg, docs-adr, docs-strategy, docs-visuals]
@@ -17,7 +17,7 @@ related: [0003-document-architecture, operation-manual, documentation-metadata-s
 
 ## Status
 
-Accepted (2026-07-23). Amended 2026-07-31 (v1.0 → v1.1): qualified a dangling citation of prompt `064` (archived private-repo sequence) in Consequences as non-citable in this repository, per `operation-manual.md` Step 12 rule 3. Does not change the decision itself.
+Accepted (2026-07-23). Amended 2026-07-31 (v1.0 → v1.1): qualified a dangling citation of prompt `064` (archived private-repo sequence) in Consequences as non-citable in this repository, per `operation-manual.md` Step 12 rule 3. Amended 2026-08-03 (v1.1 → v1.2): the "all five of ADR-0003's principles" statement time-scoped, after ADR-0003 gained a sixth principle by its own amendment; the count here records what this decision did not change, and now says so (`006-absorb-local-notes-011-accepted-items`). Neither amendment changes the decision itself.
 
 ## Context
 
@@ -33,7 +33,7 @@ Introduce three category directories, populated by moving existing files (histor
 
 `docs/manuals/examples/adr-0001-documentation-and-governance-model.md` stays in `examples/` — it is the illustrative worked example a generated project replaces, not a live decision, so it does not move into `docs/adr/`. `operation-manual.md`, `agent-design-guide.md`, `documentation-metadata-standard.md`, `prompt-engineering-guide.md`, `role-operating-guide.md`, and `tool-library-catalog.md` remain in `docs/manuals/` as the operational-guide category; they are not being split further.
 
-This ADR **extends** ADR-0003 rather than superseding it: all five of ADR-0003's principles (SRP per document, Adapter pattern, Facade pattern for `docs/STATE.md`, pointer-over-copy, mechanical checks over manual discipline) remain in force unchanged. This decision is best read as principle 1 (SRP) applied one level up, at the directory instead of the single-document level. `operation-manual.md`'s own physical structure is explicitly out of scope here and stays governed by ADR-0003's existing Alternative #2 reasoning: any future proposal to fragment it (for example, into per-roadmap-phase files) needs its own ADR and, more importantly, a generator/facade mechanism — not a hand-synced split — since `check-step-references.js` has no multi-file awareness today.
+This ADR **extends** ADR-0003 rather than superseding it: all five of ADR-0003's principles as they stood in 2026-07 (SRP per document, Adapter pattern, Facade pattern for `docs/STATE.md`, pointer-over-copy, mechanical checks over manual discipline) remain in force unchanged. ADR-0003 has since gained a sixth principle by its own separate amendment; this ADR's decision is unaffected by it, and the count here is deliberately left as the record of what *this* decision did not change — see ADR-0003's Status for the current set. This decision is best read as principle 1 (SRP) applied one level up, at the directory instead of the single-document level. `operation-manual.md`'s own physical structure is explicitly out of scope here and stays governed by ADR-0003's existing Alternative #2 reasoning: any future proposal to fragment it (for example, into per-roadmap-phase files) needs its own ADR and, more importantly, a generator/facade mechanism — not a hand-synced split — since `check-step-references.js` has no multi-file awareness today.
 
 ## Alternatives considered
 

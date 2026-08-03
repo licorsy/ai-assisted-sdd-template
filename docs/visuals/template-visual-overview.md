@@ -3,9 +3,9 @@ title: "Template Visual Overview"
 doc_type: manual
 description: "Six Mermaid diagrams orienting a new reader in the template's architecture - document map, roadmap state machine, phase-execution sequence, prompt-lifecycle workflow, Spec Kit artifact flow, and the runtime-trigger decision flow. Diagrams orient, prose governs: every diagram links to the canonical document that owns its content."
 status: active
-version: "1.11"
+version: "1.12"
 created: 2026-07-14
-updated: 2026-07-31
+updated: 2026-08-03
 language: en
 id: template-visual-overview
 tags: [visual-documentation, mermaid, diagrams, onboarding, overview]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, orchestrator, prompt-engineering-guide]
 
 Changelog of this document:
 
+- v1.12: Section 6's runtime-trigger flowchart `Q9`/`P9` nodes re-worded to match P9's widened scope in `prompt-engineering-guide.md` (v1.1: surface prototype, taste **or** information design), keeping the three copies of that trigger in sync (`006-absorb-local-notes-011-accepted-items`).
 - v1.11: Removed the v1.9 entry below (retention rule: removal, not reword, per `documentation-metadata-standard.md` Section 2.1) - it stated `docs/prompts/` was "deliberately absent from this public-mirror repository," which the v1.10 entry immediately above it already contradicted once `docs/prompts/` was restarted (`docs/prompts/003-close-restart-followon-drift.md`).
 - v1.10: Section 4's prompt-lifecycle diagram first node updated from `docs/prompts/NNN-prompt-slug.md` to `docs/prompts/NNN-slug.md`, matching the naming convention `operation-manual.md` v3.49 already adopted (`docs/prompts/001-restart-prompt-archive-and-source-of-truth.md`) - this file's own governing rule requires reviewing a diagram in the same change as the documents it visualizes.
-- v1.8: doc-consistency-reviewer batch fix: Section 6's runtime-trigger flowchart `P4` node no longer contradicts the `Q4` question routing into it - the node self-described as "(design time: threat model, Phase 3)" while `Q4` is labeled "(Phase 6 / pre-merge)"; relabeled to match P4's actual scope (Phase 6/pre-merge) with a note that the same trigger also fires Phase 3's separate threat-model sketch (prompt-097).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -175,8 +175,8 @@ flowchart TD
     Q7 -- yes --> P7["P7 incident RCA"]
     Q7 -- no --> Q8{"Problem/market/prior-art<br/>not yet validated? (Phase 1)"}
     Q8 -- yes --> P8["P8 deep-research handoff"]
-    Q8 -- no --> Q9{"User-facing taste<br/>question? (Phase 1/3)"}
-    Q9 -- yes --> P9["P9 UI/UX taste prototype"]
+    Q8 -- no --> Q9{"Surface with an unresolved<br/>taste or information-design<br/>question? (Phase 1/3)"}
+    Q9 -- yes --> P9["P9 throwaway<br/>surface prototype"]
     Q9 -- no --> Q10{"Unfamiliar external<br/>API/dependency? (Phase 5)"}
     Q10 -- yes --> P10["P10 external-dependency<br/>research spike"]
     Q10 -- no --> SKIP["No pattern fires -<br/>one-line skip note where required"]
