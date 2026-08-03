@@ -1,11 +1,18 @@
 name: Governance scripts tests
 
+# Two things here are deliberate and easy to undo by accident.
+#
+# No `push:` trigger: every path below is already matched by `pull_request`, so a
+# push trigger only re-runs on the merge what the pull request just ran. See
+# licorsy/.github REPOSITORY-CLASSIFICATION.md, gap 22.
+#
+# The job id must stay distinct from every other workflow's in this repository.
+# GitHub derives a check's context from the job's `name:`, falling back to the
+# job id, so five workflows that each called their only job `check` reported as
+# one indistinguishable `check` context - and could not be required. See gap 20.
+
 on:
   pull_request:
-    paths:
-      - ".github/scripts/**"
-  push:
-    branches: [main, develop]
     paths:
       - ".github/scripts/**"
 
