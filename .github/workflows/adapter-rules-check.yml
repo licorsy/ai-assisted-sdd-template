@@ -15,10 +15,16 @@ name: Adapter rules check
 # protected branch, so a push trigger only re-runs on the merge what the pull
 # request just ran. See licorsy/.github REPOSITORY-CLASSIFICATION.md, gap 22.
 #
-# The job id must stay distinct from every other workflow's in this repository.
-# GitHub derives a check's context from the job's `name:`, falling back to the
-# job id, so five workflows that each called their only job `check` reported as
-# one indistinguishable `check` context. Fixed in feb7c0a; keep it that way.
+# The job id must name what the job checks, specifically enough that no future
+# workflow would reach for the same word. GitHub derives a check's context from
+# the job's `name:`, falling back to the job id, so five workflows that each
+# called their only job `check` reported as one indistinguishable `check`
+# context (fixed in feb7c0a), and a job called `test` was distinct yet still
+# wrong - distinctness is a property of today's set, not tomorrow's. Once a
+# context is a required check the collision is silent in both directions: the
+# gate is satisfied by whichever job reports last, so a green gate proves
+# nothing about which job ran. See
+# docs/prompts/015-rename-generic-test-job-context.md.
 
 on:
   pull_request:
