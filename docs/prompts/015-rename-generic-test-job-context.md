@@ -2,8 +2,8 @@
 title: "Prompt 015: rename the generic `test` job so its required context cannot be collided with"
 doc_type: prompt
 description: "Renames `governance-scripts-tests.yml`'s job id from `test` to `governance-scripts-tests`, closing the collision risk prompt 014 recorded and deliberately declined. The rename changes a context that is currently required at both promotion gates, so the ruleset swap that follows it is a separate, human-permissioned step and the ordering between them is the whole difficulty."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-04
 updated: 2026-08-04
 language: en
@@ -63,3 +63,11 @@ Verification:
 2. On this pull request, the check reports as `governance-scripts-tests` and no check named `test` appears. That absence is as much the evidence as the presence.
 3. After the ruleset swap, both gates show eleven required contexts with `governance-scripts-tests` among them and `test` gone.
 4. The first pull request into `staging` after the swap shows all eleven reporting and none stuck pending.
+
+**Executed and verified 2026-08-04.** All four criteria met. The rename merged via pull request `#36`, where the check reported as `governance-scripts-tests` and no check named `test` appeared — the absence being half the evidence. Both rulesets were then swapped and re-read through the API: eleven required contexts each, `test` absent, `governance-scripts-tests` present, every other rule and parameter matching the pre-change read. Pull request `#37` (`develop` → `staging`) supplied criterion 4 with all eleven reporting `pass`, `mergeStateStatus: CLEAN`.
+
+**The ordering hazard was real and was closed by sequencing alone.** Between `#36` merging and the ruleset swap, both gates required a `test` context that nothing produced. Nothing mechanical prevented a promotion pull request from being opened into that window and hanging; only the sequence did. Recorded because the next person to rename a required check will face the same window, and the only protection available is knowing it is there.
+
+**The new context was pinned to the GitHub Actions app** (`integration_id: 15368`) when it was added, matching the other five governance checks. The pinning is now uniform across all six, where before this change it covered five of them.
+
+**One thing this prompt deliberately did not fix.** `scorecard.yml`'s job id is `analysis`, generic in the same way `test` was. It is not a required check, so it cannot be silently satisfied at a gate, and widening this batch to cover it would have meant touching a workflow with no bearing on the promotion gates. If it ever becomes required, it needs the same treatment first.
