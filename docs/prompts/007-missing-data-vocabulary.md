@@ -2,10 +2,10 @@
 title: "Prompt 007: give the corpus a shared vocabulary for missing and degraded data"
 doc_type: prompt
 description: "Adds docs/references/missing-data-vocabulary.md - a short reference adapting the UK Government Analysis Function's published shorthand for absent data ([x] not available, [z] not applicable, [c] confidential, and the rest), the rule against ambiguous 'NA', legend-above-the-table placement, and the never-join-across-a-gap rule for charts. The demand for honest degraded states is already stated in four places in this repository, each inventing its own local token; the vocabulary that would let them agree does not exist. Also fixes generate-state.js, which emits docs/STATE.md's own legend below the table - the exact placement the adopted guidance argues against."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-03
-updated: 2026-08-03
+updated: 2026-08-04
 language: en
 id: 007-missing-data-vocabulary
 tags: [prompt, conventions, data-honesty, accessibility, generate-state]

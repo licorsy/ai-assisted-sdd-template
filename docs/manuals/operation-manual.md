@@ -3,9 +3,9 @@ title: "Operation Manual - Integrating Instructions Documents"
 doc_type: instruction
 description: "Operational guide for an AI-assisted software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.57"
+version: "3.58"
 created: 2024-07-04
-updated: 2026-08-03
+updated: 2026-08-04
 language: en
 id: operation-manual
 tags: [operating-model, phase-gates, governance, human-in-the-loop, living-documentation]
@@ -349,6 +349,7 @@ Use the tool that matches the activity; do not default to freeform generation wh
 | Enforcing that a promotion pull request comes from the branch below it | `pr-checks.yml`'s `promotion-source` job, pinned by the `promotion-chain-develop-staging-main` fact in `.docgov.config.js` | Rulesets require a pull request but place no constraint on where it comes *from*; a single-parent commit reached `main` that way once. The `facts` pin keeps the YAML enforcement and the prose permission matrix in `CLAUDE.md`/`AGENTS.md` from drifting apart |
 | Dependency review and secret scanning | `pr-checks.yml`'s `ci-security` job (`dependency-review-action`, `gitleaks`) | Catches a vulnerable dependency or a committed secret at PR time rather than after merge |
 | Supply-chain posture scoring | `.github/workflows/scorecard.yml` (OpenSSF Scorecard) | Audits overall repository posture — branch protection, code review, token permissions — which is a property of the repository, not of any one diff, so it runs on its own schedule instead of per PR |
+| Detecting that `main` no longer carries the version `CHANGELOG.md` declares | `.github/scripts/check-release-integrity.js` + `.github/workflows/release-integrity.yml` (`docs/prompts/011-release-integrity-check.md`) | `main` moving past a tag is invisible in any single diff, and it happened twice here before anything watched for it. Scheduled rather than per-PR, and never on push to `main`: tagging follows the merge, so a push trigger would fail on every release by construction. Deliberately **not** a required check — it reports on `main`, and requiring it would block pull requests on a branch they have not reached |
 | Keeping the living-doc scope shared by `.docgov.config.js` and CODEOWNERS in sync with the canonical list | `.github/scripts/check-scope-consistency.js` + `.github/workflows/scope-consistency-check.yml` (prompt-088) | Makes "which directories are living documents" single-sourced in `.github/scripts/doc-scope.js`, so the file that can't literally import it (CODEOWNERS) can't silently drift from it either |
 | Verifying the repository's own governance scripts (every module under `.github/scripts/`) | `.github/workflows/governance-scripts-tests.yml`, Node's built-in `node:test` runner (prompt-024) | Catches a regression in the enforcement scripts themselves, which would otherwise let CI silently pass while the rule it exists to check is broken |
 | Answering "where are we?" without a directory sweep | Generated `docs/STATE.md` (`.github/scripts/generate-state.js`, staleness-checked by `.github/workflows/state-staleness-check.yml`, prompt-034) | One deterministic consolidated read of every living document's status/version/freshness; excludes `docs/prompts/` regardless of status (kept lean - `docs/prompts/PROMPT-INDEX.md` is that directory's own status index) |

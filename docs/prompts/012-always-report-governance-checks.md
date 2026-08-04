@@ -2,8 +2,8 @@
 title: "Prompt 012: make the governance checks always report, so they can be required"
 doc_type: prompt
 description: "Removes the `paths:` filters from the six governance check workflows so each always creates a check run, which is the precondition for requiring them at the staging and main gates. Closes licorsy/.github gap 20, whose premise had partly expired: the job-naming half was already fixed, six workflows carry filters rather than five, and none of them is required today."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-04
 updated: 2026-08-04
 language: en

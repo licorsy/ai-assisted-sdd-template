@@ -2,10 +2,10 @@
 title: "Prompt 006: absorb the accepted items from the business-tech-agency upstream batch, and close the superseded prompt 005"
 doc_type: prompt
 description: "Named batch (operation-manual.md Step 12 rule 9) of fourteen individually-minor changes: closes prompt 005 as superseded and resolves the vacuous blocking `facts` block it left behind, fixes two self-contradictions in roadmap.md that a downstream project re-flagged at three and seven consecutive cycle closures, adds four absent conventions the same project's session evidence justified (data-source verification before scoping, stated-reason departures, the non-retroactive data principle, the figure-carries-a-decision criterion), scopes the impossible-specimen rule so it resolves rather than ignores two live contradictions, widens P9's trigger from taste to information design, adds acceptance criteria to the orchestrator's readiness checklist, reframes ADR-0003 principle 4 as ownership, and corrects the operation manual's CI-checks table, which still listed three workflows retired in 2026-07."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-03
-updated: 2026-08-03
+updated: 2026-08-04
 language: en
 id: 006-absorb-local-notes-011-accepted-items
 tags: [prompt, batch, roadmap, conventions, docgov, prompt-lifecycle]

@@ -2,10 +2,10 @@
 title: "Prompt 008: adopt market-standard delivery vocabulary, re-scoped to what this repository actually has"
 doc_type: prompt
 description: "Disambiguates the two senses of `increment` that this corpus mixes - the process instance becomes `release cycle`, the delivered capability stays `Increment` in the Scrum sense - declares the phase model as Stage-Gate rather than leaving it an apparently bespoke scheme, and adds docs/manuals/glossary.md carrying both plus the four delivery surfaces (Roadmap, Board, Backlog, Reports) mapped onto this repository's real artifact names. Deliberately excludes three quarters of the source proposal: size-points, the versioned marker convention, and the migration note all target things that do not exist in this repository."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-03
-updated: 2026-08-03
+updated: 2026-08-04
 language: en
 id: 008-market-standard-vocabulary
 tags: [prompt, vocabulary, glossary, stage-gate, scrum, delivery-surfaces]
