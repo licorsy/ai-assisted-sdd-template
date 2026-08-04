@@ -3,9 +3,9 @@ title: "Business Software Development Roadmap"
 doc_type: instruction
 description: "Guide the creation and evolution of any software product or platform as a generic and reusable AI multi-agent software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.27"
+version: "3.30"
 created: 2024-07-04
-updated: 2026-07-29
+updated: 2026-08-03
 language: en
 id: roadmap
 tags: [roadmap, lifecycle, greenfield, brownfield, phase-gates]
@@ -17,9 +17,9 @@ related: [operation-manual, orchestrator, phase-reviewer, go-to-market]
 
 Changelog of this document:
 
-- v3.27: doc-consistency-reviewer batch fix: Phase 1 Activity 11a now names `agents/tool-discovery.md` alongside the `tool-hunter` adapter, matching the parallel treatment `agents/doc-consistency.md`/`agents/adversarial.md` already got at `prompt-096` (prompt-097).
-- v3.26: doc-consistency-reviewer batch fix: Phase 8 Activity 4b now names `agents/doc-consistency.md` alongside the `doc-consistency-reviewer` adapter, matching the parallel treatment `agents/adversarial.md`/`agents/phase-reviewer.md` already get elsewhere in this file (prompt-096).
-- v3.25: doc-consistency-reviewer batch fix: Phase 0's Generated-artifacts list and Section 10's folder tree both gain `/docs/adr/0000-adr-template.md` - the blank ADR scaffold Activity 7 requires and `agents/init.md` creates on every bootstrap, previously named nowhere despite being the one ADR artifact actually guaranteed (only the conditional first real ADR was listed) (prompt-093).
+- v3.30: Phase 1 now states that Activities 9, 10 and 12 are product discovery and belong to this roadmap, and that a commercial-lifecycle roadmap builds on their output rather than re-deriving it. That ownership statement previously existed only inside `go-to-market.md` - the file slated to leave - so removing it would have destroyed the only record of the boundary (`009-prepare-go-to-market-separation`).
+- v3.29: the two senses of `increment` split - the process instance (status line, backlog status index, first-cycle bullet, Phase 8 replanning) becomes **release cycle**; the delivered capability keeps `Increment`, the Scrum term it already was. Section 1 now names the phase model as **Stage-Gate** (Cooper), which it always was without saying so. Both point at the new `docs/manuals/glossary.md` (`008-market-standard-vocabulary`).
+- v3.28: Phase 3's acceptance criterion "SPEC becomes tasks" contradicted Activity 12 of its own phase (`/speckit.plan` "without breaking it into tasks yet") and every other document, which place task generation in Phase 4 - now states the condition Phase 3 reaches instead of the act Phase 4 performs. New Activity 10a: verify a data source exists and holds real data before scoping a feature on it. Phase 7 Activity 6 gains the task-artifact reconciliation at closure. `test-report.md`'s Phase 5 bullet now says what the metadata standard already did, that it may be authored in Phase 5 or 6. Activity 4's P9 trigger widened to information design (`006-absorb-local-notes-011-accepted-items`).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -29,6 +29,10 @@ Changelog of this document:
 This roadmap exists to receive an initial problem, idea, existing codebase, or desired solution and transform it, step by step, into documentation, planning, specifications, code, tests, deployment artifacts, and operational knowledge using AI with mandatory human oversight.
 
 The system must remain generic, reusable, and process-oriented so it can be applied to any software product, internal initiative, or existing system, regardless of business domain.
+
+---
+
+**What this model is called.** Phases 0-8, each ending in a human-approved transition that can send the work back rather than only forward, is a **Stage-Gate** model — Robert G. Cooper's, the established name for exactly this shape. Naming it costs nothing and buys recognition: an engineer, PM, or director meeting this repository sees a methodology they already know rather than an apparently bespoke scheme they have to be taught. Nothing about the phases changes by saying so, and no dependency on Cooper's wider framework is taken on; this names an existing practice, the same way `agents/orchestrator.md` names the reverse-the-conversation-direction pattern it was already following. The agile equivalents of each stage, and this model's other vocabulary, are in `docs/manuals/glossary.md`.
 
 ---
 
@@ -171,7 +175,7 @@ Create the minimum documentation, governance, and memory structure before starti
 #### Phase 0 - Artifacts instructions
 
 - `handbook.md` is the project entry point.
-- `status.md` shows the current phase, blockers, the Step 0 startup choices, and next step - including which increment/cycle is in progress (the outer loop, Phase 8 re-entering Phases 1-7) alongside the current phase/step (the inner loop), since a single "current phase" field can't show both (`docs/manuals/operation-manual.md`, Step 14).
+- `status.md` shows the current phase, blockers, the Step 0 startup choices, and next step - including which release cycle is in progress (the outer loop, Phase 8 re-entering Phases 1-7) alongside the current phase/step (the inner loop), since a single "current phase" field can't show both (`docs/manuals/operation-manual.md`, Step 14).
 - `risks.md` is consulted during discovery and planning.
 - ADRs record architectural, operational, and tooling decisions.
 - The constitution (`.specify/memory/constitution.md`, produced in Phase 3) will define permanent guardrails for future work; Phase 0 only establishes the documentation and governance structure it lands in.
@@ -213,19 +217,23 @@ Transform a raw problem, or an existing system's actual behavior, into a validat
 1. Reformulate the problem to remove ambiguity.
 2. Brainstorm 3 to 5 approaches. When the problem resembles a well-served commodity category (calendars, CRM, payments, scheduling, and similar), one of the brainstormed approaches must be "adopt an existing product or service, build nothing custom" - not mandatory when the problem is genuinely novel or the product itself is the differentiator; record a one-line note either way (included, or explicitly excluded and why).
 3. Perform a Tree of Thought analysis to compare alternatives and expose gaps, risks, and opportunities (see `docs/manuals/operation-manual.md`, Step 17).
-4. Refine the strongest approach or combine compatible ideas. If the outcome has a user-facing visual/interaction dimension where "taste" must be resolved, spike disposable variants first (P9, `docs/manuals/prompt-engineering-guide.md`, Section 12) before continuing.
+4. Refine the strongest approach or combine compatible ideas. If the outcome is a surface - a page, a report, a view, a CLI output shape - whose "taste" or whose information design must be resolved, spike disposable variants first (P9, `docs/manuals/prompt-engineering-guide.md`, Section 12) and have the human react to one before continuing.
 5. Gather functional requirements.
 6. Gather non-functional requirements.
 7. If brownfield: separate "how it works today" from "how it should work" explicitly (section 3).
 8. Define MVP scope versus future scope.
 9. Research market and competitors. If the problem/market/prior-art isn't yet validated, or needs deeper research capability than the agent itself has, use the guided external deep-research handoff pattern (P8, `docs/manuals/prompt-engineering-guide.md`, Section 12).
 10. Compare existing solutions and identify gaps, then close with an explicit verdict - adopt an existing product/service, or build custom - before Phase 1 can end, surfaced via the human-interaction protocol (`docs/manuals/operation-manual.md`, Step 18): "A) Adopt an existing product/service as-is - recommended when gaps are minor or non-differentiating" / "B) Adopt an existing product plus a thin custom integration - recommended when one gap is real but small" / "C) Build custom software - recommended when gaps are substantial or the product itself is the differentiator." This is a human decision, not one the orchestrator makes unilaterally; record the comparison in `market.md` and the verdict plus one-line reasoning in `build-vs-buy.md`.
+10a. Conditional: if any candidate scope depends on a data source, verify the source before the scope is committed to, not after. Confirm that it (a) exists, (b) holds real data rather than fixtures or seed rows, and (c) will still hold real data by the time the feature ships. A feature scoped against a source that turns out to be empty or fabricated renders either blank or invented, and the cost of finding that out in Phase 5 is a rebuild. State the verification and its result in `market.md` or `build-vs-buy.md` alongside the verdict above; if no candidate scope is data-dependent, record the skip in one line. This is a scoping check about *inputs*, and is not the same discipline as this repository's existing rules against fabricated claims, dates, and citations - those govern what a document asserts.
 11. Perform tooling and prior-art research:
     a. Identify validated frameworks and libraries that may cover the software's needed capabilities (run `agents/tool-discovery.md` in Mode B — in Claude Code, the `tool-hunter` subagent; findings feed 11c's `build-vs-buy.md`). This is distinct from discovering Claude-ecosystem tools (Agents/Skills/Hooks) that help produce roadmap artifacts more generally — for that, see `docs/manuals/tool-library-catalog.md` and `docs/manuals/operation-manual.md`, Step 15.
     b. Decide on the Spec-Driven Development tooling to adopt and document the rationale.
     c. Record findings in `/docs/references/build-vs-buy.md`, explicitly separating reuse from build.
     d. Record the tooling decision in an ADR.
 12. Define the initial value proposition.
+
+    Activities 9, 10 and 12 are **product discovery, not commerce, and belong to this roadmap.** Knowing what you are competing against, whether to build or adopt, and what value the thing delivers is work required to build the product at all — independent of whether anyone ever sells it. A commercial-lifecycle roadmap (positioning, pricing, launch, marketing, sales, retention) is a separate concern with different actors and a different cadence; it *builds on* this phase's output and does not re-derive it, and `market.md` plus `build-vs-buy.md` remain owned here. Stated at this altitude on purpose: the boundary has to hold whether or not any particular commercial-roadmap document exists alongside it.
+
 13. Record open questions.
 14. Validate the chosen direction before moving on.
 
@@ -313,7 +321,7 @@ Transform the PRD into an executable plan with risks, dependencies, milestones, 
 #### Phase 2 - Artifacts instructions
 
 - `plan.md` becomes the basis for architecture.
-- `backlog.md` guides future task decomposition. Keep a small status index at the top - increment/cycle | status (`candidate / decided / in-progress / delivered`) | link to the retrospective entry that recorded the decision - so next-increment decisions stay scannable instead of existing only in retrospective prose. An index, not a duplicate: update it when a decision happens (Phase 8, activity 6), not a new table per increment.
+- `backlog.md` guides future task decomposition. Keep a small status index at the top - release cycle | status (`candidate / decided / in-progress / delivered`) | link to the retrospective entry that recorded the decision - so next-cycle decisions stay scannable instead of existing only in retrospective prose. An index, not a duplicate: update it when a decision happens (Phase 8, activity 6), not a new table per release cycle.
 - `risks.md` influences architectural decisions.
 - `governance.md` defines decision rights and review checkpoints.
 
@@ -390,7 +398,7 @@ Define how the system will be built before implementation starts.
 - High-level architecture defined.
 - Development and review rules documented.
 - Significant decisions recorded in ADRs.
-- SPEC becomes tasks.
+- The SPEC is ready to become tasks - specific enough that Phase 4 can decompose it without inventing scope. Phase 3 does not generate the tasks themselves; Activity 12 above stops at the first technical plan on purpose, and `/speckit.tasks` runs in Phase 4.
 - No critical ambiguity remains open.
 
 #### Phase 3 - Expected result
@@ -492,7 +500,7 @@ During sprint execution, actual system assets are generated.
 
 #### Phase 5 - Generated artifacts
 
-- `docs/references/test-report.md`
+- `docs/references/test-report.md` - may be authored here or in Phase 6, whichever is where the results actually land; `docs/manuals/documentation-metadata-standard.md` records it as Phase 5 / 6 for the same reason. Phase 6 is where it is consumed, and it is listed there too.
 - Source code
 - Tests
 - `/CHANGELOG.md` updated
@@ -513,7 +521,7 @@ During sprint execution, actual system assets are generated.
 - Code respects constitution and SPEC.
 - Explicit human checkpoint happened.
 - Changes were recorded.
-- If this is the project's first increment: it is a working walking skeleton (minimal end-to-end vertical slice), not a big-bang implementation.
+- If this is the project's first release cycle: it is a working walking skeleton (minimal end-to-end vertical slice), not a big-bang implementation.
 
 #### Phase 5 - Expected result
 
@@ -598,7 +606,7 @@ Integrate the increment into the main project flow safely.
 3. Update changelog.
 4. Update handbook or status if needed.
 5. Perform post-integration verification.
-6. Record pending items and next steps.
+6. Record pending items and next steps. Reconcile the cycle's task artifact (`docs/task.md` or `.specify/tasks/sprint-backlog.json`, per Phase 4) before doing so: every task is either checked, or disclosed here as unchecked with its reason. An unchecked box on work that actually shipped is the common case and the reason this is worth a minute - the record then disagrees with reality in the direction nobody notices, because the work is done and nothing is broken. This one is written guidance on purpose. Making it mechanical would need a task-artifact path this roadmap does not commit to (Phase 4 offers two alternatives), and `docs/references/gate-verification-template/verify-gate.js` deliberately never reads "Acceptance criteria / Done" bullets at all.
 7. Run the deploy from the CI/CD pipeline, triggered by the merge or tag - never by hand. First-time setup: start from the templates in `/docs/references/infra-templates/deploy/`.
 8. Describe environments as versioned Infrastructure as Code (Terraform/OpenTofu, containers, or the platform's native IaC); choose the tool per project and record it in an ADR.
 9. Promote through environments: staging deploys automatically; production promotion requires explicit human approval (for example a GitHub Environment with required reviewers).
@@ -659,10 +667,10 @@ Keep the project understandable, auditable, and evolvable over time.
 4. Consolidate learnings into `docs/references/retrospective.md`.
 4a. Conditional: when a production incident occurred - users or data were affected (runtime trigger in `docs/manuals/prompt-engineering-guide.md`, Section 12) - produce the P7 one-page blameless incident note and route every action item to the backlog. A bug caught before production is not an incident; no note needed.
 4b. Recommended: run `agents/doc-consistency.md` once per cycle close to audit the whole living-document set for cross-document inconsistency, broken traceability, redundancy, and ambiguity, before replanning the next cycle — in Claude Code, this is the `doc-consistency-reviewer` subagent (`.claude/agents/doc-consistency-reviewer.md`). This runs once per cycle here, not once per phase - most phases only touch a narrow slice of the document set (see `docs/manuals/operation-manual.md`, Step 14, layer 7).
-4c. Recommended: run this after activity 4b's consistency audit, so the audit sees the full narrative before it is pruned. Once the retrospective (activity 4) is written, prune that cycle's step-by-step narrative out of `status.md`, leaving a short pointer to `/CHANGELOG.md` and the relevant `docs/references/retrospective.md` section. `status.md` is a current-state record, not an archive (`docs/manuals/role-operating-guide.md`, Section 16) - a single overgrown living document has been observed to hit a platform's own read ceiling on its own. A project whose living-document body keeps growing past what a pruned `status.md` can hold may eventually need to split `status.md` by increment or cycle; this is a note for that point, not a rule to apply pre-emptively.
+4c. Recommended: run this after activity 4b's consistency audit, so the audit sees the full narrative before it is pruned. Once the retrospective (activity 4) is written, prune that cycle's step-by-step narrative out of `status.md`, leaving a short pointer to `/CHANGELOG.md` and the relevant `docs/references/retrospective.md` section. `status.md` is a current-state record, not an archive (`docs/manuals/role-operating-guide.md`, Section 16) - a single overgrown living document has been observed to hit a platform's own read ceiling on its own. A project whose living-document body keeps growing past what a pruned `status.md` can hold may eventually need to split `status.md` by release cycle; this is a note for that point, not a rule to apply pre-emptively.
 4d. Recommended: keep the "Unreleased" section of `/CHANGELOG.md` bounded to a modest number of recent entries, rolling older ones into their own dated version block once released - the same retention spirit as `documentation-metadata-standard.md` Section 2.1's 3-entry cap for this template's own documents, though not identical and not CI-enforced for a generated project's own `/CHANGELOG.md`.
 5. Review the process itself and record a decision to keep, change, or retire a practice, even if the decision is "no change." This stays human-gated like every other phase transition (see the summarize-and-confirm rule and the validation strategy's human-approval layer in `docs/manuals/operation-manual.md`) — there is no autonomous, approval-free self-modification of the process.
-6. Replan the next cycle by explicitly naming which phase it re-enters: Phase 1 if the next increment needs fresh discovery, or Phase 2 if the problem is already understood and only planning is needed. Prioritize using the production signals named in this phase's inputs (usage, error trends, support feedback), not intuition alone. This is the same roadmap looping again for the next increment, not a separate mechanism. Record the decision in `backlog.md`'s status index (Phase 2 - Artifacts instructions) so which increments are candidate/decided/in-progress/delivered stays scannable without reading every retrospective's prose.
+6. Replan the next cycle by explicitly naming which phase it re-enters: Phase 1 if the next release cycle needs fresh discovery, or Phase 2 if the problem is already understood and only planning is needed. Prioritize using the production signals named in this phase's inputs (usage, error trends, support feedback), not intuition alone. This is the same roadmap looping again for the next release cycle, not a separate mechanism. Record the decision in `backlog.md`'s status index (Phase 2 - Artifacts instructions) so which release cycles are candidate/decided/in-progress/delivered stays scannable without reading every retrospective's prose.
 
 #### Phase 8 - Generated artifacts
 

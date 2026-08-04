@@ -1,0 +1,55 @@
+name: Release integrity
+
+# Fails when `main` does not carry the version CHANGELOG.md declares. Nothing
+# was watching for that, which is why it happened twice: `v1.0.0` and `v1.1.0`
+# were both cut while CHANGELOG.md held only an `[Unreleased]` heading, and main
+# then sat 30 commits past `v1.1.0` untagged. See
+# docs/prompts/011-release-integrity-check.md.
+#
+# Local script rather than licorsy/platform-workflows' reusable workflow, for
+# two reasons recorded in that prompt: the reusable one hard-requires a floating
+# major tag this repository deliberately does not have (its `major-tag` input
+# has no "empty to skip" affordance, unlike `version-file`), and this repository
+# is a GitHub template - a project created from it would inherit a silent
+# dependency on a workflow the Licorsy organization controls, which is the exact
+# surface the `if: github.repository_owner == 'licorsy'` guards on `ci-docs` and
+# `ci-security` were added to close. This check has no such guard because it
+# needs none: it runs unchanged in any fork, owned by anyone.
+#
+# Never triggered on push to `main`: tagging happens *after* the merge, so a
+# push-triggered run would fail on every release by construction and train
+# everyone to ignore it. That reasoning is upstream's and it is correct.
+#
+# Not in the required-checks set. It reports on the state of `main`, and a
+# required check that does so would block pull requests on a branch they have
+# not reached yet.
+#
+# The job id must stay distinct from every other workflow's in this repository.
+# GitHub derives a check's context from the job's `name:`, falling back to the
+# job id, so five workflows that each called their only job `check` reported as
+# one indistinguishable `check` context - and could not be required. See
+# licorsy/.github REPOSITORY-CLASSIFICATION.md, gap 20.
+
+on:
+  schedule:
+    # Daily, offset from the sibling repositories' runs (docs-governance uses
+    # 44 6 * * *) rather than landing on the hour alongside them. Drift here is
+    # silent and open-ended, so latency in hours is fine - what matters is that
+    # it is bounded at all.
+    - cron: '17 7 * * *'
+  workflow_dispatch: {}
+
+jobs:
+  release-integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          # Tags are not fetched by default at depth 0 in every runner image,
+          # and this check is entirely about tags.
+          fetch-tags: true
+
+      - name: Check main carries the version CHANGELOG.md declares
+        run: node .github/scripts/check-release-integrity.js

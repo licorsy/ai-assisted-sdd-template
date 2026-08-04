@@ -2,10 +2,10 @@
 title: "Prompt 004: adopt docs-governance v1.2.0's dead_citations shadow rule"
 doc_type: prompt
 description: "Enables the dead_citations rule (licorsy/docs-governance v1.2.0, released 2026-08-01) as a non-blocking shadow rule in .docgov.config.js, replacing the per-round LLM full-corpus sweep that produced 3 consecutive doc-consistency-reviewer rounds without converging (11, 13, 13 findings) with a mechanical, ~2s check for the exact defect class that caused it: inline-code citations of the archived private source repository's prompt sequence that internal-links cannot see. Left at shadow (509 pre-existing findings surfaced, not fixed by hand) per docs-governance's own adoption philosophy - promote to blocking only after measuring precision on the real corpus, not on day one."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-01
-updated: 2026-08-01
+updated: 2026-08-03
 language: en
 id: 004-adopt-dead-citations-shadow-rule
 tags: [prompt, docs-governance, tooling, dead-citations]
