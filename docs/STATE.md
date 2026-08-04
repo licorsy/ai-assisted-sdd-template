@@ -3,9 +3,9 @@ title: "Repository State"
 doc_type: status-artifact
 description: "Generated single-read snapshot of every living document's title, type, status, version, and freshness. Answers 'where are we?' without a directory sweep; excludes docs/prompts/ regardless of status (kept lean)."
 status: active
-version: "21"
+version: "22"
 created: 2026-07-13
-updated: 2026-08-03
+updated: 2026-08-04
 language: en
 id: repository-state
 tags: [status-artifact, generated, state, retrieval]
@@ -19,7 +19,7 @@ related: [operation-manual]
 
 One consolidated read of the living documents. For "where are we?" questions, start here, then follow the link that answers it.
 
-Documents without frontmatter show "—". Freshest source update: 2026-08-03.
+Documents without frontmatter show "—". Freshest source update: 2026-08-04.
 
 | Document | Title | Type | Status | Version | Updated |
 | --- | --- | --- | --- | --- | --- |
@@ -42,7 +42,7 @@ Documents without frontmatter show "—". Freshest source update: 2026-08-03.
 | [docs/manuals/examples/risks.md](manuals/examples/risks.md) | Risk Register — Project | governance | active | 1.2 | 2026-07-28 |
 | [docs/manuals/examples/spec-prfaq-template.md](manuals/examples/spec-prfaq-template.md) | PRFAQ Template | template | active | 1.1 | 2026-07-31 |
 | [docs/manuals/glossary.md](manuals/glossary.md) | Glossary | manual | active | 1.1 | 2026-08-03 |
-| [docs/manuals/operation-manual.md](manuals/operation-manual.md) | Operation Manual - Integrating Instructions Documents | instruction | active | 3.57 | 2026-08-03 |
+| [docs/manuals/operation-manual.md](manuals/operation-manual.md) | Operation Manual - Integrating Instructions Documents | instruction | active | 3.58 | 2026-08-04 |
 | [docs/manuals/prompt-engineering-guide.md](manuals/prompt-engineering-guide.md) | Prompt Engineering Guide | manual | active | 1.10 | 2026-08-03 |
 | [docs/manuals/role-operating-guide.md](manuals/role-operating-guide.md) | Role Operating Guide — Product, Delivery, and All Lifecycle Roles | manual | active | 2.10 | 2026-08-03 |
 | [docs/manuals/tool-library-catalog.md](manuals/tool-library-catalog.md) | Claude Tool Library Catalog | tool-catalog | active | 2.6 | 2026-07-31 |

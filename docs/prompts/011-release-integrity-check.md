@@ -2,8 +2,8 @@
 title: "Prompt 011: build the release-integrity guard prompt 010 deliberately left unbuilt"
 doc_type: prompt
 description: "Adds a local, scheduled check that fails when main has moved past the version CHANGELOG.md declares — the mechanical backstop whose absence let two tags ship with no release record. Adapted rather than adopted: the upstream reusable workflow hard-requires a floating major tag this repository deliberately does not have, and calling it would reintroduce the org dependency v1.2.0 just guarded against."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-04
 updated: 2026-08-04
 language: en

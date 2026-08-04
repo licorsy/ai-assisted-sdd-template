@@ -2,10 +2,10 @@
 title: "Prompt 009: prepare the go-to-market separation without performing the removal"
 doc_type: prompt
 description: "Does the reversible half of moving docs/strategy/go-to-market.md out to the Licorsy organization: preserves inside roadmap.md the Activities 9-14 ownership statement that currently exists only inside the file slated for removal, amends ADR-0004 (which defines docs/strategy/ as holding both documents), and records the complete inbound-reference map including three references the source proposal's table missed and one mechanical claim it got wrong. The file itself is NOT removed - the organization side must hold the content first."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-03
-updated: 2026-08-03
+updated: 2026-08-04
 language: en
 id: 009-prepare-go-to-market-separation
 tags: [prompt, scope-boundary, go-to-market, adr, preparation]
