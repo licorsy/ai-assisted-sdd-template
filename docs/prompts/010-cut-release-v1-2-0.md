@@ -2,10 +2,10 @@
 title: "Prompt 010: cut v1.2.0 and establish the release-cut precedent this repository never had"
 doc_type: prompt
 description: "Converts CHANGELOG.md's [Unreleased] section into a dated [1.2.0] release section and opens a fresh empty [Unreleased] above it, then promotes develop -> staging -> main with the v1.2.0 tag applied in the same movement. The bookkeeping matters more than the version number: this repository has never cut a release section at all - git show v1.0.0:CHANGELOG.md and v1.1.0:CHANGELOG.md both contain only [Unreleased] - so main has twice moved past a tag with no record of what the tag contained, and is currently 30 commits past v1.1.0."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-03
-updated: 2026-08-03
+updated: 2026-08-04
 language: en
 id: 010-cut-release-v1-2-0
 tags: [prompt, release, changelog, versioning, promotion]

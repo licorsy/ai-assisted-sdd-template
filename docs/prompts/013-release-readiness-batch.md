@@ -2,8 +2,8 @@
 title: "Prompt 013: make the repository releasable before the tag is cut"
 doc_type: prompt
 description: "Named batch of four small, related fixes that are only correct before v1.2.0 is tagged: folds the [Unreleased] entries into the release section so the tag does not sit on a commit advertising unreleased work, merges the section's duplicate ### Changed groups, adds the missing release-integrity row to the Step 15 enforcement table, and clears six prompts left at active after their work merged."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-04
 updated: 2026-08-04
 language: en
