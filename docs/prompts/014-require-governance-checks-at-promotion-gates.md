@@ -2,8 +2,8 @@
 title: "Prompt 014: require the six governance checks at the staging and main gates"
 doc_type: prompt
 description: "Adds the six governance check contexts to the `protect-staging` and `protect-main` rulesets — the explicitly-permissioned follow-up prompt 012 named and deliberately did not perform. The workflow half is already done and observed reporting; what remains is a GitHub-side ruleset change on two protected branches, which is why it needed its own prompt and its own moment of permission."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-04
 updated: 2026-08-04
 language: en
@@ -74,3 +74,11 @@ Verification:
 1. `docgov check` exits 0 and `node --test .github/scripts/*.test.js` passes — no repository file outside `docs/prompts/` and `CHANGELOG.md` is touched, so this confirms no collateral damage.
 2. Re-reading both rulesets after the `PATCH` shows eleven required contexts each, and every other rule and parameter byte-identical to the pre-change read.
 3. The first pull request opened into `staging` after the change shows all eleven contexts as required and none of them stuck pending — the acceptance evidence, and the only one that distinguishes a working required check from a hung gate.
+
+**Executed and verified 2026-08-04.** Both rulesets carry eleven required contexts, confirmed by re-reading them through the API rather than trusting the form that produced them; every other rule and parameter matches the pre-change read. Pull request `#34` (`develop` → `staging`) supplied criterion 3: all eleven contexts reported `SUCCESS`, `mergeStateStatus: CLEAN`, nothing pending without a check run.
+
+Two things the execution recorded that this prompt did not anticipate.
+
+**The six new contexts are pinned to the GitHub Actions app** (`integration_id: 15368`), while the original five remain source-agnostic. This came from applying the change through the ruleset UI rather than the `PUT` payload drafted here, which would have left them unpinned. The pinned form is stricter and correct — all six *are* Actions workflows, so nothing else should ever be able to satisfy them — and it closes a gap this prompt did not think to close. Recorded because the difference is invisible in the API's `context` field and only shows up as the "GitHub Actions" / "Any source" column.
+
+**`pre-commit` and `ci-security / dependency-review` ran and passed on `#34`, having reported `skipping` on `#33`.** Not an inconsistency: both are scoped to the promotion points, so `#34` is the first pull request where they had work to do. It confirms the promotion gate runs strictly more than the `develop` gate, which is the intended shape and worth stating, since a reader comparing the two pull requests would otherwise see it as drift.
