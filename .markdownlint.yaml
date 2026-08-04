@@ -1,5 +1,11 @@
 default: true
 single-title: false
+# Keep a Changelog repeats `### Added`/`### Changed` under every release
+# heading by construction, so the flat rule fires on CHANGELOG.md at every
+# release. `siblings_only` still catches a genuine duplicate within one
+# section, which is the case worth catching.
+no-duplicate-heading:
+  siblings_only: true
 line-length: false
 table-column-style: false
 first-line-heading: false

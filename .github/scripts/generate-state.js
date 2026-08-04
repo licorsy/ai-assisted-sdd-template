@@ -105,14 +105,17 @@ function buildState(root) {
   lines.push('');
   lines.push('One consolidated read of the living documents. For "where are we?" questions, start here, then follow the link that answers it.');
   lines.push('');
+  // The legend precedes the table it explains, not follows it: a reader meeting a
+  // symbol before its key reads noise, and assistive technology walks the document
+  // in order. Same rule as docs/references/missing-data-vocabulary.md.
+  lines.push(`Documents without frontmatter show "—". Freshest source update: ${maxUpdated}.`);
+  lines.push('');
   lines.push('| Document | Title | Type | Status | Version | Updated |');
   lines.push('| --- | --- | --- | --- | --- | --- |');
   for (const d of docs) {
     const link = `[${d.path}](${path.relative('docs', d.path).split(path.sep).join('/')})`;
     lines.push(`| ${link} | ${d.title} | ${d.doc_type} | ${d.status} | ${d.version} | ${d.updated} |`);
   }
-  lines.push('');
-  lines.push(`Freshest source update: ${maxUpdated}. Documents without frontmatter show "—".`);
   lines.push('');
   const candidate = lines.join('\n');
 

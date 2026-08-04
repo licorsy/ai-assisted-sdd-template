@@ -43,7 +43,7 @@ The template is designed to support human-led and agent-assisted development wit
 - [ADR-0004: Category directories for docs/manuals/ content](docs/adr/0004-docs-category-directories.md) — `docs/adr/`, `docs/strategy/`, `docs/visuals/`, extending ADR-0003 rather than superseding it.
 - [ADR-0005: Public-mirror release via licorsy/ai-assisted-sdd-template](docs/adr/0005-public-release.md) — publishes a new public repository seeded with a single fresh commit; amended 2026-07-31 to record this repository as the current source of truth, after the original private source repository was archived.
 - [Business software development roadmap](docs/strategy/roadmap.md)
-- [Go-to-market roadmap](docs/strategy/go-to-market.md) — optional, parallel commercial-lifecycle roadmap; not a gate every increment passes through.
+- [Go-to-market roadmap](docs/strategy/go-to-market.md) — optional, parallel commercial-lifecycle roadmap; not a gate every release cycle passes through.
 - [Orchestrator reviewer prompt](agents/phase-reviewer.md)
 - [Adversarial review prompt](agents/adversarial.md) — stress-tests a spec/plan's merit before Phase 3 locks in.
 - [Doc consistency reviewer prompt](agents/doc-consistency.md) — full-corpus cross-document audit, run on demand or at cycle close.
@@ -74,12 +74,12 @@ The template is designed to support human-led and agent-assisted development wit
 ## Repository layout
 
 - `agents/` - live subagent operating instructions (orchestrator, orchestrator reviewer, adversarial reviewer, doc consistency reviewer, template init, tool hunter).
-- `docs/manuals/` - the operation manual, this repo's documentation standard, the role guide, the prompt-engineering and agent-design guides, and the tool catalog; `docs/manuals/examples/` holds the worked examples you replace (governance, risks, example ADR, and an optional Phase 1 PRFAQ scaffold).
+- `docs/manuals/` - the operation manual, this repo's documentation standard, the role guide, the glossary, the prompt-engineering and agent-design guides, and the tool catalog; `docs/manuals/examples/` holds the worked examples you replace (governance, risks, example ADR, and an optional Phase 1 PRFAQ scaffold).
 - `docs/adr/` - this template's real architecture decision records (`0002-audience-tier.md`, `0003-document-architecture.md`, `0004-docs-category-directories.md`, `0005-public-release.md`); a project generated from this template uses the same directory for its own ADRs.
 - `docs/strategy/` - the execution roadmap and the optional go-to-market roadmap.
 - `docs/visuals/` - the template visual overview and its Mermaid diagrams.
 - `docs/prompts/` - this repository's change-as-prompt records (`draft`/`active` in flight, `archived`/`deprecated` historical) and the blank prompt template; see `docs/prompts/PROMPT-INDEX.md` for a full id/status/purpose listing.
-- `docs/references/` - token-economy decisions, an unvetted tools-ecosystem shortlist (`tools-ecosystem.md`), ready-to-apply GitHub-hardening/deployment templates (`infra-templates/`), a ready-to-apply session telemetry convention for generated projects (`telemetry-template/`), and an opt-in phase-gate artifact check (`gate-verification-template/`).
+- `docs/references/` - token-economy decisions, an unvetted tools-ecosystem shortlist (`tools-ecosystem.md`), the missing-data vocabulary (`missing-data-vocabulary.md`), ready-to-apply GitHub-hardening/deployment templates (`infra-templates/`), a ready-to-apply session telemetry convention for generated projects (`telemetry-template/`), and an opt-in phase-gate artifact check (`gate-verification-template/`).
 - `docs/STATE.md` - generated snapshot of every living document (regenerate with `node .github/scripts/generate-state.js`).
 - `docs/reports/` - external improvement reports and `PROPOSAL-TRACKING.md`, the status index tracking every proposal each report contains.
 - `docs/` - also holds the living documentation (handbook, status, planning, reference material) a project generated from this template will produce as it executes the roadmap.
@@ -94,7 +94,7 @@ No separate `RUNBOOK.md` exists, by design — this template has no deploy/incid
 
 | Template-authoring material (keep as-is) | Project artifacts / worked examples (replace when you start) |
 | --- | --- |
-| `docs/manuals/operation-manual.md`, `docs/strategy/roadmap.md`, `docs/manuals/documentation-metadata-standard.md`, `docs/manuals/role-operating-guide.md`, `docs/manuals/tool-library-catalog.md`, `docs/manuals/prompt-engineering-guide.md`, `docs/manuals/agent-design-guide.md` | Everything under `docs/manuals/examples/` (`governance.md`, `risks.md`, `adr-0001-documentation-and-governance-model.md`, `spec-prfaq-template.md`) |
+| `docs/manuals/operation-manual.md`, `docs/strategy/roadmap.md`, `docs/manuals/documentation-metadata-standard.md`, `docs/manuals/role-operating-guide.md`, `docs/manuals/glossary.md`, `docs/manuals/tool-library-catalog.md`, `docs/manuals/prompt-engineering-guide.md`, `docs/manuals/agent-design-guide.md` | Everything under `docs/manuals/examples/` (`governance.md`, `risks.md`, `adr-0001-documentation-and-governance-model.md`, `spec-prfaq-template.md`) |
 | `docs/prompts/basic-prompt-template.md`, `agents/` | This template's own numbered prompts under `docs/prompts/` (`001-...`, `002-...`, etc.) — delete them; they record this repository's own history, not yours. Plus future living docs your project adds under `docs/` as it executes the roadmap (handbook, status, references, ADRs, governance/risk register — see `documentation-metadata-standard.md` Section 7 for the artifact-to-`doc_type` mapping) |
 
 The right column is already labeled "this template's own example" in the Key documents list above.
@@ -123,7 +123,7 @@ flowchart TD
     OM --> ROG["role-operating-guide.md<br/>(one-person role coverage)"]
     RM --> SPEC[".specify/<br/>(Spec Kit artifacts: constitution, specs, plans, tasks)"]
     OM --> PROMPTS["docs/prompts/<br/>(change-as-prompt archive + PROMPT-INDEX)"]
-    OM --> REFS["docs/references/<br/>(token-economy, tools-ecosystem, infra-templates, telemetry-template, gate-verification-template)"]
+    OM --> REFS["docs/references/<br/>(token-economy, tools-ecosystem, missing-data-vocabulary,<br/>infra-templates, telemetry-template, gate-verification-template)"]
     OM --> STATE["docs/STATE.md<br/>(generated single-read snapshot)"]
     OM --> REPORTS["docs/reports/<br/>(external reports + PROPOSAL-TRACKING.md)"]
 ```

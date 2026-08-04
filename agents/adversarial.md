@@ -3,9 +3,9 @@ title: "Adversarial Review Prompt"
 doc_type: instruction
 description: "Stress-test the merit of a spec or plan before implementation locks in: interrogate assumptions, error states, persistent data, external contracts, and new dependencies, and output numbered findings with proposed before/after edits that only the human may apply. Complements, and never replaces, the orchestrator reviewer's artifact-vs-criteria audit."
 status: active
-version: "1.0"
+version: "1.1"
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-08-03
 language: en
 id: adversarial
 tags: [adversarial-review, spec-quality, pre-mortem, validation, phase-3]
@@ -17,6 +17,7 @@ related: [operation-manual, roadmap, phase-reviewer]
 
 Changelog of this document:
 
+- v1.1: the explicit-non-findings rule now names itself an instance of the shared convention in `docs/references/missing-data-vocabulary.md`, which had listed this file as a demand site without this file pointing back (`fix-verifier` pass).
 - v1.0: Initial version (prompt-038). Merit-focused adversarial review distinct from the orchestrator reviewer's compliance audit.
 
 ---
@@ -59,7 +60,7 @@ Produce a report - and nothing else; this review never edits files:
 
 1. **Verdict line:** `SOUND` (no blocking findings), `SOUND WITH FINDINGS`, or `FRAGILE` (at least one finding that should block Phase 3 exit).
 2. **Numbered findings**, most severe first. Each finding carries: severity (`blocking | serious | minor`), the questionnaire category, the evidence (quote the spec/plan line), the failure scenario in one concrete sentence, and a **proposed edit** shown as a before/after block.
-3. **Explicit non-findings:** categories checked and found sound, one line each, so silence is never ambiguous.
+3. **Explicit non-findings:** categories checked and found sound, one line each, so silence is never ambiguous - this report's instance of the convention in `docs/references/missing-data-vocabulary.md`.
 
 Every proposed edit requires individual human approval before anyone applies it to the spec or plan. Applying edits is the executing session's job, after that approval - never this reviewer's.
 

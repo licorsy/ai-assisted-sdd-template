@@ -3,9 +3,9 @@ title: "Prompt Engineering Guide"
 doc_type: manual
 description: "Authoring-quality guide for the individual prompts written during roadmap work - specification anatomy, example-driven specs, labeled context blocks, priority tags, staged multi-step prompting, chain-of-thought scaffolds, targeted refinement, comment-driven development - plus a versioned starter library of reusable prompt patterns including a security-audit checklist, each with a runtime trigger mapping it to its roadmap phase."
 status: active
-version: "1.8"
+version: "1.10"
 created: 2026-07-14
-updated: 2026-07-31
+updated: 2026-08-03
 language: en
 id: prompt-engineering-guide
 tags: [prompt-engineering, prompt-patterns, authoring-quality, code-generation, security-audit, runtime-triggers]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap]
 
 Changelog of this document:
 
+- v1.10: P10's scratch-doc scope now says **release cycle**; P4's security trigger keeps `increment`, which means the delivered capability, matching `roadmap.md` and the visual overview's identical wording (`008-market-standard-vocabulary`).
+- v1.9: P9 (v1.0 -> v1.1) is now a throwaway **surface** prototype, not only a taste prototype: its trigger covers information design (which facts belong on a surface, in what decomposition) alongside taste, since a surface whose taste is settled can still be wrong about what it shows. Gains a pitfall forbidding plausible invented numbers in a prototype. Section 12's trigger row updated in the same edit, as were `roadmap.md` Activity 4 and the visual overview's flowchart node - the same P9 pair desynced once before, per v1.6 below (`006-absorb-local-notes-011-accepted-items`).
 - v1.8: Re-linked Section 1's and Section 4's `basic-prompt-template.md` references, un-linked in v1.7 on the premise that `docs/prompts/` was absent from this repository; the file exists again as of `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` (`docs/prompts/003-close-restart-followon-drift.md`).
-- v1.7: Dropped `related:` entries pointing at `basic-prompt-template` and five archived prompt ids, and un-linked two `basic-prompt-template.md` references in Section 1 - `docs/prompts/` is deliberately absent from this public-mirror repository (ADR-0010), so none of them resolve.
-- v1.6: doc-consistency-reviewer batch fix: Section 12's P9 trigger row still said "Phase 3 architecture spikes" after prompt-086 reworded the same claim in P9's own use-when prose, leaving the file disagreeing with itself - both now read identically (prompt-087).
 - Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -271,14 +271,17 @@ paste into their tool of choice, and what to report back - findings feed
 docs/references/brainstorm.md, docs/business/market.md, and docs/references/build-vs-buy.md.
 ```
 
-### P9 - Throwaway UI/UX taste prototype (v1.0)
+### P9 - Throwaway surface prototype (v1.1)
 
-- **Use when:** the outcome has a user-facing visual or interaction dimension where "taste" must be resolved before committing to an approach (Phase 1 - Discovery, before PRD/architecture lock-in; also usable during Phase 3 design exploration and on the fast-track path's exploratory build, `docs/strategy/roadmap.md` Section 4.3). **Not when:** the work is purely backend/architectural with no user-facing visual or interaction surface.
-- **Pitfalls:** polishing a variant before the taste question is even resolved - these are disposable by design; treating the losing variants as wasted effort instead of the point of the exercise.
+- **Use when:** the outcome is a **surface** - a page, a report, a view, a CLI output shape - and either its *taste* (which visual or interaction treatment wins) or its *information design* (which facts belong on it, in what decomposition, at what altitude) must be resolved before committing to an approach (Phase 1 - Discovery, before PRD/architecture lock-in; also usable during Phase 3 design exploration and on the fast-track path's exploratory build, `docs/strategy/roadmap.md` Section 4.3). The information-design half matters because a surface whose taste is already settled can still be wrong about *what it shows*, and that defect is invisible in prose: reacting to a rendered artifact surfaces it in a paragraph, where finding it in Phase 5 costs a rebuild. **Not when:** the work is purely backend/architectural with no user-facing surface.
+- **Pitfalls:** polishing a variant before the question is even resolved - these are disposable by design; treating the losing variants as wasted effort instead of the point of the exercise; and letting a plausible invented number into the prototype, which is how a throwaway gets screenshotted and believed (`docs/manuals/operation-manual.md`, Step 9).
 
 ```text
-Spike 2-3 disposable variants of [UI/INTERACTION SURFACE] to resolve [THE TASTE QUESTION].
+Spike 2-3 disposable variants of [SURFACE] to resolve [THE TASTE OR INFORMATION-DESIGN QUESTION].
 Each variant should be quick and rough - do not polish any of them yet.
+
+Every number shown must either come from the real system or be visibly a placeholder -
+never a plausible invented value.
 
 Iterate with the human in the loop until one variant is clearly preferred.
 Commit only the winning variant to the codebase, as a reference for later implementation -
@@ -288,13 +291,13 @@ discard the rest.
 ### P10 - External-dependency research spike (v1.0)
 
 - **Use when:** implementing a task that integrates an unfamiliar or complex external API/dependency (Phase 5 - Development, extends `docs/strategy/roadmap.md` Phase 5 Activity 3's existing "research spikes" task-type mention). **Not when:** the dependency is already well-understood or thoroughly documented - skip straight to implementation.
-- **Pitfalls:** letting the scratch doc calcify into a permanent reference - it is expected to go stale and be discarded once the current increment or task slice closes; confusing it with `build-vs-buy.md`, which is a durable decision record, not exploration notes.
+- **Pitfalls:** letting the scratch doc calcify into a permanent reference - it is expected to go stale and be discarded once the current release cycle or task slice closes; confusing it with `build-vs-buy.md`, which is a durable decision record, not exploration notes.
 
 ```text
 Create a short-lived scratch doc caching exploration findings for [EXTERNAL API/DEPENDENCY]:
 what it actually does, quirks/gotchas found, example calls that worked, open questions.
 
-This doc is scoped to the current increment or task slice and expected to go stale - do not
+This doc is scoped to the current release cycle or task slice and expected to go stale - do not
 treat it as a durable reference; discard it once that slice closes, distinct from
 docs/references/build-vs-buy.md's durable decision record.
 ```
@@ -321,7 +324,7 @@ The library stays fast because **skip is the default**: a pattern runs only when
 | P6 observability baseline | Phase 7 - Deployment | First production deploy of a service, or a new deployable service | The baseline already exists - record the skip in one line, and add missing pieces via P5 |
 | P7 incident RCA | Phase 8 - Maintenance / operations | A production incident occurred - users or data were affected | The bug was caught before production - use P3 |
 | P8 guided external deep-research handoff | Phase 1 - Discovery | The idea's problem/market/prior-art isn't yet validated, or needs live-web/deep-research capability the agent lacks | The agent's own knowledge is sufficient, or the idea has no market/prior-art dimension |
-| P9 throwaway UI/UX taste prototype | Phase 1 - Discovery (also Phase 3 design exploration; fast-track exploratory build, roadmap.md §4.3) | The outcome has a user-facing visual/interaction dimension where taste must be resolved | The work is purely backend/architectural with no user-facing surface |
+| P9 throwaway surface prototype | Phase 1 - Discovery (also Phase 3 design exploration; fast-track exploratory build, roadmap.md §4.3) | The outcome is a surface (page, report, view, CLI output shape) whose taste **or** information design must be resolved | The work is purely backend/architectural with no user-facing surface |
 | P10 external-dependency research spike | Phase 5 - Development | The task integrates an unfamiliar or complex external API/dependency | The dependency is already well-understood or thoroughly documented |
 
 **P4 is the trigger with teeth.** The roadmap makes it a conditional Phase 6 activity ([roadmap.md](../strategy/roadmap.md), Phase 6): when the trigger fires, run the audit and feed confirmed findings - concrete exploit example required - into the defect log; when it does not, one skip line in the test evidence and move on. Rule of thumb: **if unsure whether the increment is security-relevant, it is.** Compliance-sensitive domains (personal data, financial records, regulated industries) should treat their domain rules as an additional item 12 on the P4 checklist rather than a separate pattern.
