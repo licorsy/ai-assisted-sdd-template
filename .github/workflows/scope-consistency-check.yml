@@ -1,22 +1,27 @@
 name: Scope consistency check
 
-# Two things here are deliberate and easy to undo by accident.
+# Three things here are deliberate and easy to undo by accident.
 #
-# No `push:` trigger: every path below is already matched by `pull_request`, so a
-# push trigger only re-runs on the merge what the pull request just ran. See
-# licorsy/.github REPOSITORY-CLASSIFICATION.md, gap 22.
+# No `paths:` filter. A workflow that does not trigger creates no check run at
+# all, and a required check with no check run leaves the pull request waiting on
+# a status that never arrives - so a path-filtered workflow cannot be required.
+# A job that runs and is skipped is a different case: it reports a conclusion
+# and satisfies the requirement. These scripts run in milliseconds, so what
+# removing the filter costs is runner start-up, paid in parallel. Closes the
+# remaining half of licorsy/.github gap 20 - see
+# docs/prompts/012-always-report-governance-checks.md.
+#
+# No `push:` trigger: `pull_request` already covers every change that reaches a
+# protected branch, so a push trigger only re-runs on the merge what the pull
+# request just ran. See licorsy/.github REPOSITORY-CLASSIFICATION.md, gap 22.
 #
 # The job id must stay distinct from every other workflow's in this repository.
 # GitHub derives a check's context from the job's `name:`, falling back to the
 # job id, so five workflows that each called their only job `check` reported as
-# one indistinguishable `check` context - and could not be required. See gap 20.
+# one indistinguishable `check` context. Fixed in feb7c0a; keep it that way.
 
 on:
   pull_request:
-    paths:
-      - ".github/scripts/doc-scope.js"
-      - ".github/scripts/check-scope-consistency.js"
-      - ".github/CODEOWNERS"
 
 jobs:
   scope-consistency:
