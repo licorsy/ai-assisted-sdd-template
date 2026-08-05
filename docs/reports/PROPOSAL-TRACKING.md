@@ -1,11 +1,11 @@
 ---
 title: "Report Proposal Tracking"
 doc_type: status-artifact
-description: "Status index over every distinct proposal in docs/reports/*.md external improvement reports - done, done-scoped, deferred, rejected, or not-triaged - so a proposal's fate is discoverable in one place instead of scattered across docs/prompts/*.md CONTEXT sections and CHANGELOG.md prose. Populated 2026-07-24 from a full audit of docs/reports/008-relatorio-melhorias-v6.md against docs/prompts/PROMPT-INDEX.md, CHANGELOG.md, and live repo state."
+description: "Status index over every distinct proposal in docs/reports/*.md external improvement reports - done, done-scoped, deferred, rejected, or not-triaged - so a proposal's fate is discoverable in one place instead of scattered across docs/prompts/*.md CONTEXT sections and CHANGELOG.md prose. Populated 2026-07-24 from a full audit of docs/reports/008-relatorio-melhorias-v6.md (archived private-repo sequence, not a citable path in this repository) against docs/prompts/PROMPT-INDEX.md, CHANGELOG.md, and live repo state."
 status: active
-version: "1.11"
+version: "1.12"
 created: 2026-07-24
-updated: 2026-07-31
+updated: 2026-08-04
 language: en
 id: report-proposal-tracking
 tags: [status-artifact, docs-reports, tracking, discoverability]
@@ -21,7 +21,7 @@ Every distinct, actionable proposal from every report in `docs/reports/` gets on
 
 Sections 6 ("Tabela de Riscos Consolidada"), 9 and 18 ("Backlog Priorizado") and 11/19 ("Estrutura-Alvo Completa") of the source report are consolidations/restatements of items already itemized in the sections below — they are not given separate rows, per this file's deduplication rule.
 
-## `docs/reports/008-relatorio-melhorias-v6.md`
+## Source report: `docs/reports/008-relatorio-melhorias-v6.md` (archived private-repo sequence, not a citable path in this repository)
 
 ### Section 0 — Posicionamento Estratégico (AI-DLC)
 
