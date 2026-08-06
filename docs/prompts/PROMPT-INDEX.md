@@ -3,7 +3,7 @@ title: "Prompt Index"
 doc_type: status-artifact
 description: "The id/status/one-line-purpose index over every prompt in docs/prompts/, updated whenever a prompt is created or moves lifecycle stage (operation-manual.md Step 11). The prompt file itself is the source of truth for content; this index exists so a reader can scan the whole archive without opening every file."
 status: active
-version: "1.22"
+version: "1.23"
 created: 2026-07-31
 updated: 2026-08-06
 language: en
@@ -38,5 +38,7 @@ One row per file in `docs/prompts/` (excluding `basic-prompt-template.md`, the s
 | `017-fix-prompt-016-verification-findings` | archived | Named batch fixing five findings a fix-verifier pass surfaced against `016`'s merged work: a dead citation incidentally silenced by an unrelated exemption on the same line (the exact failure mode `016`'s own `[CRITICAL]` rule warns against), and four factual inaccuracies `016` wrote into its own body and `CHANGELOG.md`'s `[Unreleased]` entry. Completed 2026-08-06: pull request `#40` merged the fix, `docgov check` stayed set-stable at 564 (0 new, 0 removed), and `resolveCitedPath` confirmed the fixed citation resolves independent of the line's exemption. `016` archived alongside it in the same follow-up commit. |
 
 | `018-assert-unreleased-empty-at-tag` | archived | Reverses a decision `011` recorded on purpose: asserts `CHANGELOG.md`'s `[Unreleased]` section is empty whenever `check-release-integrity.js` finds `main`'s tip already matching its declared release's tag. Prompted by a real near-miss on 2026-08-04 (recorded in `013`) where the sha-only check would have passed a tag whose release notes understated what the tagged commit actually shipped — caught by hand, not mechanically. Completed 2026-08-06 via TDD: new `extractUnreleasedSection` plus six new tests (15/15 in the file, 49/49 repo-wide), workflow and script header comments amended, verified against a real `main` worktree checkout. |
+
+| `019-fix-wrong-directory-citations` | active | First of a named split of the 564-item `dead_citations` shadow backlog into its measured component categories (wrong-directory citation, archived-private-repo `prompt-NNN` reference, template-target forward-reference, root-file scope gap) — the earlier framing as one `historical_paths` decision was never actually measured. Fixes only the 212 wrong-directory citations mechanically; the other three categories get their own prompts. |
 
 Historical note: the pre-2026-07-31 prompt archive (numbered up to `109` at the time the private source repository was archived) is not migrated here and is not indexed by this table — see `docs/adr/0005-public-release.md` and `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` for why.
