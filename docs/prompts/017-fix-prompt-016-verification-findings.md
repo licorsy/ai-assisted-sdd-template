@@ -2,8 +2,8 @@
 title: "Prompt 017: fix what a verification pass found in prompt 016's own merged work"
 doc_type: prompt
 description: "Named batch fixing five findings a fix-verifier pass surfaced against prompt 016's merged work: one live defect (a dead citation incidentally silenced by an unrelated exemption, the exact failure mode 016's own [CRITICAL] rule warns against) and four factual inaccuracies 016 wrote into its own permanent record and CHANGELOG.md's [Unreleased] entry. Prompt 016 is archived once this batch's own verification passes."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-06
 updated: 2026-08-06
 language: en
@@ -80,3 +80,5 @@ Verification:
 2. `node --test .github/scripts/*.test.js` passes.
 3. Each of R2-R5's corrected numbers/claims is independently re-derived (not copied from this prompt) before the batch is considered closed.
 4. `docs/prompts/PROMPT-INDEX.md` shows `017` at `active` until the follow-up archive commit flips both `016` and `017` to `archived` in the same edit.
+
+**Executed and verified 2026-08-06.** All four criteria met on pull request `#40` (`chore/017-fix-prompt-016-verification-findings` → `develop`). Criterion 1 was checked directly rather than trusted from `docgov check` alone: `resolveCitedPath("docs/reports/ARTIFACT-NECESSITY-AUDIT.md", "PROPOSAL-TRACKING.md")` resolved to a path that does not exist before the fix, and `resolveCitedPath(..., "docs/reports/PROPOSAL-TRACKING.md")` resolves to a path that does exist after it — independent of the line's `self_qualifying` exemption, which stayed in effect either way and so could not have distinguished the two on its own. `docgov check` itself stayed set-stable at 564 findings (0 new, 0 removed) across the change, as expected for a fix masked by an unrelated exemption. Criterion 2 held at 43/43. Criterion 3's four numbers were independently recomputed, not copied from this prompt's own CONTEXT section, before being written into the fix. **One thing this prompt got wrong in its own first draft, corrected before the fix commit**: describing the live defect meant citing the same broken and placeholder filenames it was in the middle of fixing — a bare proposal-tracking-report reference, an illustrative "path" example, an abbreviated stand-in for `016`'s own filename, a bare prompt-index reference — adding 12 new dead citations of its own before the fixes were even applied. This is the identical mistake `016` names in its own `[HIGH]` rule about illustrative placeholders, repeated by the very prompt fixing `016`. All twelve were rewritten to either resolve for real or carry the established qualifier before this prompt's own verification was considered complete.
