@@ -2,7 +2,7 @@
 title: "Prompt 020: restore CONTRIBUTING.md, SECURITY.md, CODE_OF_CONDUCT.md from the archived private source"
 doc_type: prompt
 description: "Closes the root-file scope gap 019 named and deliberately left out of its own mechanical batch: doc-scope.js declares CONTRIBUTING.md/SECURITY.md/CODE_OF_CONDUCT.md but none exist at this repository's root. Confirmed via the archived private source repo that all three existed with real content and were never deliberately excluded from the mirror sync - this is a migration gap, not a policy-authorship task. Restores all three, adapting every reference that has gone stale since the 2026-07-31 freeze (branch renamed hom->staging, an entire mirror-sync section that no longer applies, a governance-script count already known to drift, missing frontmatter)."
-status: active
+status: archived
 version: "1.0"
 created: 2026-08-06
 updated: 2026-08-06
