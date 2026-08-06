@@ -3,7 +3,7 @@ title: "AGENTS.md"
 doc_type: instruction
 description: "Tool-neutral agent entry point for this repository, equivalent to CLAUDE.md, for coding tools that read AGENTS.md by convention: the always-on confirmation rule, the documentation metadata rule, and pointers to the documents that own the full text of each."
 status: active
-version: "1.0.1"
+version: "1.0.2"
 created: 2026-07-30
 updated: 2026-08-06
 language: en
@@ -43,7 +43,7 @@ Before closing a significant phase, load `agents/phase-reviewer.md` directly for
 
 ## Git operations
 
-Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `staging` or `main` — apply the branch-naming taxonomy and permission matrix published at [licorsy/git-governance](https://github.com/licorsy/git-governance) (autonomous up to `develop`; explicit human permission required for `staging`/`main`) instead of restating it here; in Claude Code, this is the `git-governance-advisor` subagent installed via the `git-governance` plugin. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `staging`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (recorded in the archived private source repository's own prompt sequence as `101-prompt-git-governance-adoption.md`; not a citable path in this repository, per `docs/manuals/operation-manual.md` Step 12 rule 3).
+Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `staging` or `main` — apply the branch-naming taxonomy and permission matrix published at [licorsy/git-governance](https://github.com/licorsy/git-governance) (autonomous up to `develop`; explicit human permission required for `staging`/`main`) instead of restating it here; in Claude Code, this is the `git-governance-advisor` subagent installed via the `git-governance` plugin. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `staging`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (recorded as `101-prompt-git-governance-adoption.md`, archived private-repo sequence, not a citable path in this repository, per `docs/manuals/operation-manual.md` Step 12 rule 3).
 
 ## Canonical documents
 

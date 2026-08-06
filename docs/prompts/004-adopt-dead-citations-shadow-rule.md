@@ -3,7 +3,7 @@ title: "Prompt 004: adopt docs-governance v1.2.0's dead_citations shadow rule"
 doc_type: prompt
 description: "Enables the dead_citations rule (licorsy/docs-governance v1.2.0, released 2026-08-01) as a non-blocking shadow rule in .docgov.config.js, replacing the per-round LLM full-corpus sweep that produced 3 consecutive doc-consistency-reviewer rounds without converging (11, 13, 13 findings) with a mechanical, ~2s check for the exact defect class that caused it: inline-code citations of the archived private source repository's prompt sequence that internal-links cannot see. Left at shadow (509 pre-existing findings surfaced, not fixed by hand) per docs-governance's own adoption philosophy - promote to blocking only after measuring precision on the real corpus, not on day one."
 status: archived
-version: "1.2"
+version: "1.3"
 created: 2026-08-01
 updated: 2026-08-06
 language: en
@@ -21,7 +21,7 @@ Act as the maintainer wiring an upstream tooling fix into this repository, after
 
 ## CONTEXT
 
-`licorsy/docs-governance` v1.2.0 (released 2026-08-01, PRs #15/#16/#17, tag `v1` moved to it) ships `dead_citations`: a mechanical rule that resolves inline-code citations (`` `prompt-NNN` ``, `` `NNN-slug.md` ``) against real files, filling the gap `internal-links` leaves for anything not real Markdown link syntax. This repository's own three-round doc-consistency-reviewer loop (`docs/prompts/001`-`003`) was dominated by exactly this defect class: citations of the archived private source repository's pre-2026-07-31 prompt sequence (`prompt-013` through `prompt-109`), none of which resolve here by design. `licorsy/platform-workflows`'s reusable `ci-docs.yml` already pins `licorsy/docs-governance/action@v1`, so this repository's CI picks up v1.2.0 automatically - no CI wiring change needed, only `.docgov.config.js`.
+`licorsy/docs-governance` v1.2.0 (released 2026-08-01, PRs #15/#16/#17, tag `v1` moved to it) ships `dead_citations`: a mechanical rule that resolves inline-code citations (`` `prompt-NNN` ``, `` `NNN-slug.md` ``) against real files, filling the gap `internal-links` leaves for anything not real Markdown link syntax. This repository's own three-round doc-consistency-reviewer loop (`docs/prompts/001`-`003`) was dominated by exactly this defect class: citations of the archived private source repository's pre-2026-07-31 prompt sequence (`prompt-013` through `prompt-109`, archived private-repo sequence, not a citable path in this repository), none of which resolve here by design. `licorsy/platform-workflows`'s reusable `ci-docs.yml` already pins `licorsy/docs-governance/action@v1`, so this repository's CI picks up v1.2.0 automatically - no CI wiring change needed, only `.docgov.config.js`.
 
 ## TASK
 
