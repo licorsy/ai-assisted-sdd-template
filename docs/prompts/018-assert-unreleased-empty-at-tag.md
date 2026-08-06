@@ -2,8 +2,8 @@
 title: "Prompt 018: assert [Unreleased] is empty when release-integrity says a release is live"
 doc_type: prompt
 description: "Reverses a recorded decision: prompt 011 declined to assert CHANGELOG.md's [Unreleased] section is empty at tag time. On 2026-08-04 that gap nearly shipped a tag whose CHANGELOG entry understated what the tagged commit actually contained, caught by hand rather than mechanically. Extends check-release-integrity.js to fail when main's tip matches its declared release's tag but [Unreleased] is not empty."
-status: active
-version: "1.0"
+status: archived
+version: "1.1"
 created: 2026-08-06
 updated: 2026-08-06
 language: en
@@ -59,3 +59,9 @@ Verification, in this order:
 2. Run the check against the repository as it stands (`main` at `v1.2.0`, `[Unreleased]` non-empty on `develop`): the new assertion must **not** fire, because `develop` is not `main` and this check only ever reads `main` — confirming TASK item 2's third case is not a fixture-only guarantee.
 3. Construct the near-miss shape directly (a fixture, or a dry run against the historical commit between `010` cutting `[1.2.0]` and `013` folding `[Unreleased]` back in, if reachable) and confirm the new assertion fires there with a legible message.
 4. `docgov check` exits 0.
+
+**Executed and verified 2026-08-06, test-first.** Six new tests written and watched fail for the right reason (`extractUnreleasedSection is not a function`, and the near-miss fixture returning `0` problems instead of `1`) before any production code changed; all nine pre-existing tests untouched throughout. `node --test .github/scripts/*.test.js`: 15/15 in the file, 49/49 repository-wide. `docgov check` exits 0, set-stable at 564 shadow findings across the change (0 new, 0 removed).
+
+**Criterion 2 needed a real `main` checkout, not a same-branch run.** Running the script on this feature branch reports the new problem — expected, and not a defect: `checkReleaseIntegrity` reads `CHANGELOG.md` off the working tree, not via `git show main:CHANGELOG.md`, so any branch other than `main` shows its own `[Unreleased]` content regardless of what the tag says. In CI this is resolved by `release-integrity.yml`'s own `actions/checkout@v4` step (`ref: main`), which is exactly the mechanism this prompt's own CONTEXT names but did not spell out at this level of detail. Verified faithfully with a `git worktree` checked out to `main`: the script reports `Release integrity OK`, confirming `main`'s own `[Unreleased]` — genuinely just the heading, nothing below it — does not trip the new assertion.
+
+**Criterion 3 used the fixture path.** The historical commit between `010`'s cut and `013`'s fold is not reachable as a clean single-file diff (both prompts touch other lines in the same commits), so the near-miss shape was reconstructed as a fixture instead, matching the option this prompt's own verification section names.
