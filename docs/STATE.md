@@ -3,9 +3,9 @@ title: "Repository State"
 doc_type: status-artifact
 description: "Generated single-read snapshot of every living document's title, type, status, version, and freshness. Answers 'where are we?' without a directory sweep; excludes docs/prompts/ regardless of status (kept lean)."
 status: active
-version: "23"
+version: "24"
 created: 2026-07-13
-updated: 2026-08-04
+updated: 2026-08-06
 language: en
 id: repository-state
 tags: [status-artifact, generated, state, retrieval]
@@ -19,7 +19,7 @@ related: [operation-manual]
 
 One consolidated read of the living documents. For "where are we?" questions, start here, then follow the link that answers it.
 
-Documents without frontmatter show "—". Freshest source update: 2026-08-04.
+Documents without frontmatter show "—". Freshest source update: 2026-08-06.
 
 | Document | Title | Type | Status | Version | Updated |
 | --- | --- | --- | --- | --- | --- |
@@ -52,7 +52,7 @@ Documents without frontmatter show "—". Freshest source update: 2026-08-04.
 | [docs/references/telemetry-template/README.md](references/telemetry-template/README.md) | Telemetry Template - how to apply | product-doc | active | 1.1 | 2026-07-24 |
 | [docs/references/token-economy.md](references/token-economy.md) | Token Economy - adopt/defer/reject decisions | product-doc | active | 1.3 | 2026-07-31 |
 | [docs/references/tools-ecosystem.md](references/tools-ecosystem.md) | Tools Ecosystem - unvetted starting shortlist | product-doc | active | 1.4 | 2026-07-31 |
-| [docs/reports/ARTIFACT-NECESSITY-AUDIT.md](reports/ARTIFACT-NECESSITY-AUDIT.md) | Artifact Necessity Audit: docs/manuals/, docs/references/, docs/reports/ | product-doc | active | 1.2 | 2026-08-04 |
+| [docs/reports/ARTIFACT-NECESSITY-AUDIT.md](reports/ARTIFACT-NECESSITY-AUDIT.md) | Artifact Necessity Audit: docs/manuals/, docs/references/, docs/reports/ | product-doc | active | 1.3 | 2026-08-06 |
 | [docs/reports/PROPOSAL-TRACKING.md](reports/PROPOSAL-TRACKING.md) | Report Proposal Tracking | status-artifact | active | 1.12 | 2026-08-04 |
 | [docs/strategy/go-to-market.md](strategy/go-to-market.md) | Go-to-Market Roadmap | instruction | active | 1.0 | 2026-07-19 |
 | [docs/strategy/roadmap.md](strategy/roadmap.md) | Business Software Development Roadmap | instruction | active | 3.30 | 2026-08-03 |

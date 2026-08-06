@@ -3,9 +3,9 @@ title: "Prompt Index"
 doc_type: status-artifact
 description: "The id/status/one-line-purpose index over every prompt in docs/prompts/, updated whenever a prompt is created or moves lifecycle stage (operation-manual.md Step 11). The prompt file itself is the source of truth for content; this index exists so a reader can scan the whole archive without opening every file."
 status: active
-version: "1.17"
+version: "1.18"
 created: 2026-07-31
-updated: 2026-08-04
+updated: 2026-08-06
 language: en
 id: prompt-index
 tags: [status-artifact, docs-prompts, index]
@@ -35,5 +35,6 @@ One row per file in `docs/prompts/` (excluding `basic-prompt-template.md`, the s
 | `014-require-governance-checks-at-promotion-gates` | archived | Adds the six governance check contexts to the `protect-staging` and `protect-main` rulesets — the explicitly-permissioned follow-up `012` named and deliberately did not perform, unblocked now that all six have been observed reporting on a real pull request. Completed 2026-08-04: both rulesets at eleven required contexts, and pull request `#34` supplied the acceptance evidence with all eleven reporting and none hung. |
 | `015-rename-generic-test-job-context` | archived | Renames `governance-scripts-tests.yml`'s job id from the generic `test` to `governance-scripts-tests`, closing the silent-collision risk `014` recorded and deliberately declined, and amends the comment block shared by all six governance workflows to ask for a name specific to what the job checks rather than merely distinct. The ruleset swap that must follow is a separate, human-permissioned step. Completed 2026-08-04: both gates swapped to the new context at eleven required contexts each, and pull request `#37` supplied the acceptance evidence. |
 | `016-close-restart-leftover-citations` | active | Closes the two doc-consistency-reviewer findings `001` deliberately deferred. They report identically to `dead_citations` and need opposite treatments: two `CLAUDE.md` claims in `docs/reports/ARTIFACT-NECESSITY-AUDIT.md` are false about this repository and get corrected, while the `008-relatorio-melhorias-v6.md` (archived private-repo sequence, not a citable path in this repository) citations are accurate but unresolvable here and get the established archived-private-repo qualifier. The 567-item shadow backlog stays out of scope. |
+| `017-fix-prompt-016-verification-findings` | active | Named batch fixing five findings a fix-verifier pass surfaced against `016`'s merged work: a dead citation incidentally silenced by an unrelated exemption on the same line (the exact failure mode `016`'s own `[CRITICAL]` rule warns against), and four factual inaccuracies `016` wrote into its own body and `CHANGELOG.md`'s `[Unreleased]` entry. `016` is archived alongside this prompt once its own verification passes. |
 
 Historical note: the pre-2026-07-31 prompt archive (numbered up to `109` at the time the private source repository was archived) is not migrated here and is not indexed by this table — see `docs/adr/0005-public-release.md` and `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` for why.
