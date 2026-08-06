@@ -3,7 +3,7 @@ title: "Report Proposal Tracking"
 doc_type: status-artifact
 description: "Status index over every distinct proposal in docs/reports/*.md external improvement reports - done, done-scoped, deferred, rejected, or not-triaged - so a proposal's fate is discoverable in one place instead of scattered across docs/prompts/*.md CONTEXT sections and CHANGELOG.md prose. Populated 2026-07-24 from a full audit of docs/reports/008-relatorio-melhorias-v6.md (archived private-repo sequence, not a citable path in this repository) against docs/prompts/PROMPT-INDEX.md, CHANGELOG.md, and live repo state."
 status: active
-version: "1.13"
+version: "1.14"
 created: 2026-07-24
 updated: 2026-08-06
 language: en
@@ -42,7 +42,7 @@ Sections 6 ("Tabela de Riscos Consolidada"), 9 and 18 ("Backlog Priorizado") and
 | R008-N.2 | New `agents/fast-track.md` | rejected | `prompt-067`: collides with the existing fast-track roadmap path (`docs/strategy/roadmap.md` §4.3) |
 | R008-N.3 | New `agents/aidlc-adapter.md` | deferred | Same as R008-0.3 |
 | R008-N.4 | New `agents/orchestrator-tasks.md` (system/task split) | rejected | Batch-7 decision (2026-07-24): literally the same proposal as R008-T.2/R008-3.2, already rejected (batch 5) for the same reason. |
-| R008-N.5 | Upper/lowercase file-naming convention | done | `CONTRIBUTING.md`'s case-naming-convention bullet; `prompt-075` |
+| R008-N.5 | Upper/lowercase file-naming convention | done | `CONTRIBUTING.md`'s case-naming-convention bullet; `prompt-075` (archived private-repo sequence, not a citable path in this repository) |
 | R008-N.6 | ADR numbering standardized under `docs/adr/` | done-scoped | `docs/adr/0002-0004` exist (`prompt-064` (archived private-repo sequence, not a citable path in this repository)/`072`), but the proposed ADR-0004 ("Spec-as-CI-Contract") and ADR-0005 (aidlc-integration) content was not what shipped in those slots. Slot `0005` was later filled by the unrelated public-release ADR, renumbered from `0010` on 2026-07-31 (`docs/prompts/002-renumber-adr-0010-to-0005.md`); the aidlc-integration proposal remains unadopted. |
 
 ### Seção E — Estrutura de Pastas
@@ -119,7 +119,7 @@ Sections 6 ("Tabela de Riscos Consolidada"), 9 and 18 ("Backlog Priorizado") and
 | R008-4.1 | `QUICKSTART.md` (max 1 page) | done | `QUICKSTART.md`; `prompt-066` (archived private-repo sequence, not a citable path in this repository) |
 | R008-4.2 | Internal `README.md`s in `agents/`, `docs/manuals/`, `docs/adr/`, `docs/strategy/`, `adapters/` | rejected | Batch-4 decision (2026-07-24): duplicates the existing single canonical navigational artifact — `docs/STATE.md` plus `docs/manuals/operation-manual.md`'s Document Map (`prompt-044` (archived private-repo sequence, not a citable path in this repository)) already list every doc/agent/path/purpose in one place. Four more READMEs would duplicate and drift from it, against ADR-0003's pointer-over-copy principle. |
 | R008-4.3 | "Hello World SDD" demonstration PR | deferred | Batch-4 decision (2026-07-24): genuine onboarding value beyond `QUICKSTART.md`/the visual overview's diagrams, but building a full synthetic project's worth of realistic Phase 1-2 artifacts is substantial content work, not a batchable edit. No adopter has reported getting stuck here yet; revisit if that happens. |
-| R008-4.4 | `CONTRIBUTING.md` | done | Root `CONTRIBUTING.md`; `prompt-075` |
+| R008-4.4 | `CONTRIBUTING.md` | done | Root `CONTRIBUTING.md`; `prompt-075` (archived private-repo sequence, not a citable path in this repository) |
 | R008-4.5 | i18n (`docs/i18n/README.pt-BR.md`) | deferred | Same as R008-E.3 |
 | R008-4.6 | "First session in 30 seconds" flow in QUICKSTART | done | `/template-init` → `/orchestrator` flow; `prompt-066` (archived private-repo sequence, not a citable path in this repository) |
 | R008-4.7 | Session sequence diagram | done-scoped | `docs/visuals/template-visual-overview.md`'s phase-execution sequence diagram is conceptually adjacent, not the literal session-bootstrap sequence proposed; predates report (`prompt-052` (archived private-repo sequence, not a citable path in this repository)) |
@@ -128,8 +128,8 @@ Sections 6 ("Tabela de Riscos Consolidada"), 9 and 18 ("Backlog Priorizado") and
 
 | ID | Proposal | Status | Decision / Evidence |
 | --- | --- | --- | --- |
-| R008-5.1 | Expand `SECURITY.md` (prompt injection, agent permission scope, `Assisted-by:` audit, secrets policy, OWASP LLM Top 10, deploy-approval restriction) | done-scoped | OWASP LLM Top 10 section shipped (`prompt-075`); deploy-approval sentence added to the "Excessive agency" bullet (`prompt-080`). The `Assisted-by:` audit sub-item is intentionally not implemented — see R008-2.2's rejection (`Co-Authored-By:` trailer already serves that need). |
-| R008-5.2 | `.github/ISSUE_TEMPLATE/` (`bug_report.md`, `improvement.md`, `agent-behavior.md`) | done-scoped | `bug_report.md`, `feature_request.md` (`prompt-075`), and `agent-behavior.md` (`prompt-080`) all shipped. Functionally complete; naming differs from the proposal only in `improvement.md` → `feature_request.md`, an equivalent, not a gap. |
+| R008-5.1 | Expand `SECURITY.md` (prompt injection, agent permission scope, `Assisted-by:` audit, secrets policy, OWASP LLM Top 10, deploy-approval restriction) | done-scoped | OWASP LLM Top 10 section shipped (`prompt-075`, archived private-repo sequence, not a citable path in this repository); deploy-approval sentence added to the "Excessive agency" bullet (`prompt-080`, archived private-repo sequence, not a citable path in this repository). The `Assisted-by:` audit sub-item is intentionally not implemented — see R008-2.2's rejection (`Co-Authored-By:` trailer already serves that need). |
+| R008-5.2 | `.github/ISSUE_TEMPLATE/` (`.github/ISSUE_TEMPLATE/bug_report.md`, `.github/ISSUE_TEMPLATE/improvement.md`, `.github/ISSUE_TEMPLATE/agent-behavior.md`) | done-scoped | `.github/ISSUE_TEMPLATE/bug_report.md`, `.github/ISSUE_TEMPLATE/feature_request.md` (`prompt-075`, archived private-repo sequence, not a citable path in this repository), and `.github/ISSUE_TEMPLATE/agent-behavior.md` (`prompt-080`, archived private-repo sequence, not a citable path in this repository) all shipped. Functionally complete; naming differs from the proposal only in `.github/ISSUE_TEMPLATE/improvement.md` → `.github/ISSUE_TEMPLATE/feature_request.md`, an equivalent, not a gap. |
 | R008-5.3 | Mandatory human-review-before-merge policy for AI-generated code | done-scoped | `SECURITY.md`'s "excessive agency" bullet covers similar ground via the Change-as-prompt rule, not phrased as a literal per-line review mandate |
 
 ### Section 8 — Checklist de Sessão para o Orquestrador

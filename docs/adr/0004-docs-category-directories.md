@@ -3,7 +3,7 @@ title: "ADR-0004: Category directories for docs/manuals/ content"
 doc_type: adr
 description: "Records the decision to split docs/manuals/ by category into docs/adr/, docs/strategy/, and docs/visuals/, as an extension of ADR-0003's principles (not a supersession) - operation-manual.md itself stays a single, unfragmented file, since ADR-0003's own Alternative #2 already rejected splitting it and check-step-references.js depends on that assumption."
 status: active
-version: "1.5"
+version: "1.6"
 created: 2026-07-23
 updated: 2026-08-06
 language: en
@@ -17,11 +17,11 @@ related: [0003-document-architecture, operation-manual, documentation-metadata-s
 
 ## Status
 
-Accepted (2026-07-23). Amended 2026-07-31 (v1.0 → v1.1): qualified a dangling citation of prompt `064` (archived private-repo sequence) in Consequences as non-citable in this repository, per `docs/manuals/operation-manual.md` Step 12 rule 3. Amended 2026-08-03 (v1.1 → v1.2): the "all five of ADR-0003's principles" statement time-scoped, after ADR-0003 gained a sixth principle by its own amendment; the count here records what this decision did not change, and now says so (`006-absorb-local-notes-011-accepted-items`). Amended 2026-08-03 (v1.2 -> v1.3): the Decision section's `docs/strategy/` line records that `docs/strategy/go-to-market.md` is slated to leave for the Licorsy organization, and that this ADR's directory decision holds either way (`009-prepare-go-to-market-separation`). None of these amendments changes the decision itself.
+Accepted (2026-07-23). Amended 2026-07-31 (v1.0 → v1.1): qualified a dangling citation of prompt `064` (archived private-repo sequence) in Consequences as non-citable in this repository, per `docs/manuals/operation-manual.md` Step 12 rule 3. Amended 2026-08-03 (v1.1 → v1.2): the "all five of ADR-0003's principles" statement time-scoped, after ADR-0003 gained a sixth principle by its own amendment; the count here records what this decision did not change, and now says so (`006-absorb-local-notes-011-accepted-items`). Amended 2026-08-03 (v1.2 -> v1.3): the Decision section's `docs/strategy/` line records that `docs/strategy/go-to-market.md` is slated to leave for the Licorsy organization, and that this ADR's directory decision holds either way (`009-prepare-go-to-market-separation`). Amended 2026-08-06 (v1.3 -> v1.4): the Context section's `docs/reports/008-relatorio-melhorias-v6.md` citation qualified as archived private-repo sequence, not a citable path in this repository, matching the phrase already used elsewhere in this document. None of these amendments changes the decision itself.
 
 ## Context
 
-`docs/reports/008-relatorio-melhorias-v6.md`, an external comparative analysis, proposed splitting `docs/manuals/` by category — ADRs, roadmap/strategy documents, and diagrams each into their own directory — for discoverability and single-responsibility placement. `ADR-0003` (Accepted, 2026-07-13) already governs this repository's document architecture, but its Alternative #2 rejected something narrower and different: physically splitting `docs/manuals/operation-manual.md` itself, specifically because `check-step-references.js` depends on it staying one file and because the benefit (SRP) was already delivered without that cost by the manual's internal Part groupings. ADR-0003 does not address category placement for *other* documents such as ADRs, the roadmap, or diagrams — extending it to cover that case, rather than treating the report's proposal as a conflict, is this ADR's purpose.
+`docs/reports/008-relatorio-melhorias-v6.md` (archived private-repo sequence, not a citable path in this repository), an external comparative analysis, proposed splitting `docs/manuals/` by category — ADRs, roadmap/strategy documents, and diagrams each into their own directory — for discoverability and single-responsibility placement. `ADR-0003` (Accepted, 2026-07-13) already governs this repository's document architecture, but its Alternative #2 rejected something narrower and different: physically splitting `docs/manuals/operation-manual.md` itself, specifically because `check-step-references.js` depends on it staying one file and because the benefit (SRP) was already delivered without that cost by the manual's internal Part groupings. ADR-0003 does not address category placement for *other* documents such as ADRs, the roadmap, or diagrams — extending it to cover that case, rather than treating the report's proposal as a conflict, is this ADR's purpose.
 
 ## Decision
 
