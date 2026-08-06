@@ -3,9 +3,9 @@ title: "Telemetry Template - how to apply"
 doc_type: product-doc
 description: "Ready-to-apply, one-line-per-session activity ledger (docs/telemetry/sessions.jsonl) for projects generated from this template: phase, duration, tokens, artifacts touched, decisions, blockers. This template repository does not adopt the ledger for itself."
 status: active
-version: "1.1"
+version: "1.2"
 created: 2026-07-24
-updated: 2026-07-24
+updated: 2026-08-06
 language: en
 id: telemetry-template
 tags: [telemetry, observability, session-log, reference-template, how-to]
@@ -16,7 +16,7 @@ diataxis: how-to
 
 # Telemetry Template - how to apply
 
-Ready-to-apply session telemetry for a **project generated from this template** (this template repository itself deliberately stays on its own lightweight docs CI, the same boundary [`infra-templates/README.md`](../infra-templates/README.md) already states for infrastructure).
+Ready-to-apply session telemetry for a **project generated from this template** (this template repository itself deliberately stays on its own lightweight docs CI, the same boundary [`docs/references/infra-templates/README.md`](../infra-templates/README.md) already states for infrastructure).
 
 `/template-init` scaffolds `docs/telemetry/` by default for every generated project - strongly recommended, not mandatory. A human who prefers not to use it declines during bootstrap (see "Declining" below); this file stays the reference for what gets scaffolded and how to apply it if declined then reconsidered later.
 
@@ -38,7 +38,7 @@ None beyond the template itself. No new dependency, no new mandatory agent.
 
 1. `/template-init` creates `docs/telemetry/` by default during bootstrap (see `agents/init.md`'s scaffold table); if it was declined then, create it manually here to opt in later.
 2. Copy [`session-entry.schema.json`](session-entry.schema.json) into it as the validation contract; keep it there so tooling can find it at a stable path.
-3. Wire the append step into the existing session-end checklist - `agents/orchestrator.md`'s Closing rule and `docs/manuals/role-operating-guide.md` Section 13 step 5 already say "keep the project memory synchronized" / "update `/docs/status.md` and `/CHANGELOG.md` before ending the session"; if `docs/telemetry/` exists in the project, append one `sessions.jsonl` line as part of that same step. This is conditional, not mandatory for projects that haven't adopted it.
+3. Wire the append step into the existing session-end checklist - `agents/orchestrator.md`'s Closing rule and `docs/manuals/role-operating-guide.md` Section 13 step 5 already say "keep the project memory synchronized" / "update `/docs/status.md` and `CHANGELOG.md` before ending the session"; if `docs/telemetry/` exists in the project, append one `sessions.jsonl` line as part of that same step. This is conditional, not mandatory for projects that haven't adopted it.
 4. Derive `artifacts_created` / `artifacts_updated` from `git status` / `git diff --name-status` at session end - never hand-typed, so the field can't silently drift from what actually changed.
 5. See [`sessions.jsonl.example`](sessions.jsonl.example) for three realistic lines.
 

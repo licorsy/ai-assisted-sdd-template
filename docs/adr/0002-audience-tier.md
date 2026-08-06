@@ -3,9 +3,9 @@ title: "ADR-0002: Intended Adopter Tier"
 doc_type: adr
 description: "Records the resolved adopter-tier decision - consultancy/agency, executed solo (2026-07-12) - the four candidate tiers considered, and the re-assessed status of each backlog item that had been blocked on it."
 status: active
-version: "2.3"
+version: "2.5"
 created: 2026-07-09
-updated: 2026-07-30
+updated: 2026-08-06
 language: en
 id: 0002-audience-tier
 tags: [adr, governance, audience-tier, decision-record, accepted]
@@ -17,7 +17,7 @@ related: [adr-0001-documentation-and-governance-model, roadmap]
 
 ## Status
 
-Accepted (2026-07-12). Amended 2026-07-28 (v2.0 → v2.2): frontmatter `status` corrected from a stale `draft`-like state to match this section's own already-Accepted body, and the "issue templates still not justified" bullet re-assessed against three issue templates that shipped since (`prompt-089`); re-confirmed with no further change (`prompt-090`). Neither amendment changes the tier decision itself.
+Accepted (2026-07-12). Amended 2026-07-28 (v2.0 → v2.2): frontmatter `status` corrected from a stale `draft`-like state to match this section's own already-Accepted body, and the "issue templates still not justified" bullet re-assessed against three issue templates that shipped since (`prompt-089`); re-confirmed with no further change (`prompt-090` (archived private-repo sequence, not a citable path in this repository)). Amended 2026-08-06 (v2.4 -> v2.5): the `spec-writer.md` deferral bullet gains the "not yet a citable path in this repository" anchor phrase, so a mechanical rule can recognize the deferral without a table row. Neither amendment changes the tier decision itself.
 
 ## Context
 
@@ -33,8 +33,8 @@ Several prior decisions in this repository trace back to the same unresolved que
 Backlog items, re-assessed against this decision rather than left uniformly blocked:
 
 - **`/proposals` and `/contracts` top-level folders** — now justified by the business-model choice. Not created by this ADR itself; adopting them is its own follow-up change with its own prompt, per this ADR's original Consequences commitment.
-- **Issue templates** — deferred here, later adopted on different grounds: `prompt-075`/`prompt-080` shipped `.github/ISSUE_TEMPLATE/` for external adopters reporting against this template, not for internal multi-owner collaboration. This bullet's original reasoning stands for the collaboration case; the artifact exists.
-- **`agents/spec-writer.md` (a fifth subagent, alongside orchestrator-reviewer, adversarial-reviewer, tool-hunter, and doc-consistency-reviewer)** — still deferred. Revisit only if real client-engagement spec volume actually becomes a bottleneck, not preemptively.
+- **Issue templates** — deferred here, later adopted on different grounds: `prompt-075`/`prompt-080` (archived private-repo sequence, not a citable path in this repository) shipped `.github/ISSUE_TEMPLATE/` for external adopters reporting against this template, not for internal multi-owner collaboration. This bullet's original reasoning stands for the collaboration case; the artifact exists.
+- **`agents/spec-writer.md` (a fifth subagent, alongside orchestrator-reviewer, adversarial-reviewer, tool-hunter, and doc-consistency-reviewer)** — still deferred, not yet a citable path in this repository. Revisit only if real client-engagement spec volume actually becomes a bottleneck, not preemptively.
 - **Optional product-level CI/CD guidance for repositories generated from this template** — still premature. No real client engagement exists yet to write concrete guidance against.
 
 ## Alternatives considered

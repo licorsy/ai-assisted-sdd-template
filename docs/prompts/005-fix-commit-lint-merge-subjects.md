@@ -3,9 +3,9 @@ title: "Prompt 005: stop the commit lint from failing on GitHub-generated merge 
 doc_type: prompt
 description: "Adds --no-merges to the Conventional Commits step in .github/workflows/pr-checks.yml, so the check stops linting the 'Merge pull request #N from ...' subjects GitHub generates itself and can never conform, and pins the flag with a facts entry. Without it the check fails by construction on every develop -> staging promotion PR, because merging into develop is what creates those commits - the exact pull request the check exists to guard. Fixed in git-governance, docs-governance, and licorsy/.github on 2026-08-01; this repository is the last copy carrying the defect."
 status: deprecated
-version: "1.1"
+version: "1.2"
 created: 2026-08-01
-updated: 2026-08-03
+updated: 2026-08-06
 language: en
 id: 005-fix-commit-lint-merge-subjects
 tags: [prompt, ci, tooling, conventional-commits, docs-governance]
@@ -61,7 +61,7 @@ known-gaps register, and was left to this repository because this
 3. Set that `facts` entry non-shadow, so it fails rather than reports. The rule
    ships shadow-on, and a pin that only reports is what allowed this defect to
    survive three scaffolded copies.
-4. Update `PROMPT-INDEX.md` with this prompt, and flip it to `status: active`
+4. Update `docs/prompts/PROMPT-INDEX.md` with this prompt, and flip it to `status: active`
    once executed.
 
 ## REQUIREMENTS, CONSTRAINTS AND RULES
@@ -86,7 +86,7 @@ known-gaps register, and was left to this repository because this
 ## FORMAT AND OUTPUT
 
 Executed as an edit to `.github/workflows/pr-checks.yml` and
-`.docgov.config.js`, plus this prompt and a `PROMPT-INDEX.md` row, on branch
+`.docgov.config.js`, plus this prompt and a `docs/prompts/PROMPT-INDEX.md` row, on branch
 `fix/commit-lint-merge-subjects`, merged into `develop`.
 
 Verification: `docgov check` exits 0 with the new fact passing; the same check
@@ -116,7 +116,7 @@ fails by construction on the exact pull request it guards is worse than no
 check. Item 15 of `licorsy/.github`'s known-gaps register, which tracked this,
 is closed on that basis.
 
-What it left behind was live and is fixed in `006-absorb-local-notes-011-accepted-items.md`:
+What it left behind was live and is fixed in `docs/prompts/006-absorb-local-notes-011-accepted-items.md`:
 the `facts` block reached `.docgov.config.js` with `shadow: false` and
 `entries: []` — a blocking rule checking nothing, under a comment describing a
 workflow step that no longer exists. Prompt 006 re-points that block at the

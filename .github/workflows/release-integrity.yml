@@ -6,6 +6,13 @@ name: Release integrity
 # then sat 30 commits past `v1.1.0` untagged. See
 # docs/prompts/011-release-integrity-check.md.
 #
+# Also fails when a release genuinely is live at `main`'s tip but CHANGELOG.md's
+# `[Unreleased]` section is not empty - reversing a scope decision `011` made on
+# purpose, after a real near-miss recorded in
+# docs/prompts/013-release-readiness-batch.md showed a tag could pass this
+# check clean while its own release notes omitted work the tagged commit
+# actually shipped. See docs/prompts/018-assert-unreleased-empty-at-tag.md.
+#
 # Local script rather than licorsy/platform-workflows' reusable workflow, for
 # two reasons recorded in that prompt: the reusable one hard-requires a floating
 # major tag this repository deliberately does not have (its `major-tag` input
