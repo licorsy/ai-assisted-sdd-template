@@ -3,7 +3,7 @@ title: "Prompt Index"
 doc_type: status-artifact
 description: "The id/status/one-line-purpose index over every prompt in docs/prompts/, updated whenever a prompt is created or moves lifecycle stage (operation-manual.md Step 11). The prompt file itself is the source of truth for content; this index exists so a reader can scan the whole archive without opening every file."
 status: active
-version: "1.19"
+version: "1.20"
 created: 2026-07-31
 updated: 2026-08-06
 language: en
@@ -36,5 +36,7 @@ One row per file in `docs/prompts/` (excluding `basic-prompt-template.md`, the s
 | `015-rename-generic-test-job-context` | archived | Renames `governance-scripts-tests.yml`'s job id from the generic `test` to `governance-scripts-tests`, closing the silent-collision risk `014` recorded and deliberately declined, and amends the comment block shared by all six governance workflows to ask for a name specific to what the job checks rather than merely distinct. The ruleset swap that must follow is a separate, human-permissioned step. Completed 2026-08-04: both gates swapped to the new context at eleven required contexts each, and pull request `#37` supplied the acceptance evidence. |
 | `016-close-restart-leftover-citations` | archived | Closes the two doc-consistency-reviewer findings `001` deliberately deferred. They report identically to `dead_citations` and need opposite treatments: two `CLAUDE.md` claims in `docs/reports/ARTIFACT-NECESSITY-AUDIT.md` are false about this repository and get corrected, while the `008-relatorio-melhorias-v6.md` (archived private-repo sequence, not a citable path in this repository) citations are accurate but unresolvable here and get the established archived-private-repo qualifier. The 567-item shadow backlog stays out of scope. Archived 2026-08-06 after `017` fixed a live defect and four inaccuracies a verification pass found in this prompt's own merged work. |
 | `017-fix-prompt-016-verification-findings` | archived | Named batch fixing five findings a fix-verifier pass surfaced against `016`'s merged work: a dead citation incidentally silenced by an unrelated exemption on the same line (the exact failure mode `016`'s own `[CRITICAL]` rule warns against), and four factual inaccuracies `016` wrote into its own body and `CHANGELOG.md`'s `[Unreleased]` entry. Completed 2026-08-06: pull request `#40` merged the fix, `docgov check` stayed set-stable at 564 (0 new, 0 removed), and `resolveCitedPath` confirmed the fixed citation resolves independent of the line's exemption. `016` archived alongside it in the same follow-up commit. |
+
+| `018-assert-unreleased-empty-at-tag` | active | Reverses a decision `011` recorded on purpose: asserts `CHANGELOG.md`'s `[Unreleased]` section is empty whenever `check-release-integrity.js` finds `main`'s tip already matching its declared release's tag. Prompted by a real near-miss on 2026-08-04 (recorded in `013`) where the sha-only check would have passed a tag whose release notes understated what the tagged commit actually shipped — caught by hand, not mechanically. |
 
 Historical note: the pre-2026-07-31 prompt archive (numbered up to `109` at the time the private source repository was archived) is not migrated here and is not indexed by this table — see `docs/adr/0005-public-release.md` and `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` for why.
