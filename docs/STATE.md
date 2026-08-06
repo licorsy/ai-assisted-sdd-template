@@ -3,7 +3,7 @@ title: "Repository State"
 doc_type: status-artifact
 description: "Generated single-read snapshot of every living document's title, type, status, version, and freshness. Answers 'where are we?' without a directory sweep; excludes docs/prompts/ regardless of status (kept lean)."
 status: active
-version: "25"
+version: "26"
 created: 2026-07-13
 updated: 2026-08-06
 language: en
@@ -24,7 +24,10 @@ Documents without frontmatter show "—". Freshest source update: 2026-08-06.
 | Document | Title | Type | Status | Version | Updated |
 | --- | --- | --- | --- | --- | --- |
 | [CHANGELOG.md](../CHANGELOG.md) | — | — | — | — | — |
+| [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) | CODE_OF_CONDUCT.md | instruction | active | 1.0 | 2026-08-06 |
+| [CONTRIBUTING.md](../CONTRIBUTING.md) | CONTRIBUTING.md | instruction | active | 1.0 | 2026-08-06 |
 | [QUICKSTART.md](../QUICKSTART.md) | Quickstart | product-doc | active | 1.3 | 2026-07-28 |
+| [SECURITY.md](../SECURITY.md) | SECURITY.md | instruction | active | 1.0 | 2026-08-06 |
 | [agents/adversarial.md](../agents/adversarial.md) | Adversarial Review Prompt | instruction | active | 1.1 | 2026-08-03 |
 | [agents/doc-consistency.md](../agents/doc-consistency.md) | Doc Consistency Reviewer Prompt | instruction | active | 1.10 | 2026-08-06 |
 | [agents/init.md](../agents/init.md) | Template Init Prompt | instruction | active | 1.10 | 2026-08-06 |

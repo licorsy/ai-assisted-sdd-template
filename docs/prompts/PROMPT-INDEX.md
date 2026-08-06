@@ -3,7 +3,7 @@ title: "Prompt Index"
 doc_type: status-artifact
 description: "The id/status/one-line-purpose index over every prompt in docs/prompts/, updated whenever a prompt is created or moves lifecycle stage (operation-manual.md Step 11). The prompt file itself is the source of truth for content; this index exists so a reader can scan the whole archive without opening every file."
 status: active
-version: "1.26"
+version: "1.27"
 created: 2026-07-31
 updated: 2026-08-06
 language: en
@@ -40,5 +40,6 @@ One row per file in `docs/prompts/` (excluding `docs/prompts/basic-prompt-templa
 | `018-assert-unreleased-empty-at-tag` | archived | Reverses a decision `011` recorded on purpose: asserts `CHANGELOG.md`'s `[Unreleased]` section is empty whenever `check-release-integrity.js` finds `main`'s tip already matching its declared release's tag. Prompted by a real near-miss on 2026-08-04 (recorded in `013`) where the sha-only check would have passed a tag whose release notes understated what the tagged commit actually shipped — caught by hand, not mechanically. Completed 2026-08-06 via TDD: new `extractUnreleasedSection` plus six new tests (15/15 in the file, 49/49 repo-wide), workflow and script header comments amended, verified against a real `main` worktree checkout. |
 
 | `019-fix-wrong-directory-citations` | archived | Named batch fusing the two mechanical slices of the 564-item `dead_citations` shadow backlog's four measured categories: 212 wrong-directory citations (path correction) and 51 of 65 archived-private-repo `prompt-NNN` references (qualifier insertion; 14 deferred where the line still carries another unresolved citation). The template-target forward-reference and root-file scope-gap categories get their own prompts — each needs a real design decision, not a mechanical transform. Completed 2026-08-06: `docgov check` 564 -> 301 (263 removed as a verified set, 0 new); a leading-slash resolution bug in the correction script itself was caught and fixed before any file was touched. |
+| `020-restore-root-governance-files` | active | Closes the root-file scope gap `019` named and left out of its own batch: `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md` were declared in scope by `doc-scope.js` but absent at this repository's root. Confirmed via the archived private source repo (frozen 2026-07-31) that all three existed with real content and were never deliberately excluded from the mirror sync — a migration gap, not a policy-authorship task. Restores all three with frontmatter added and every stale reference fixed (an obsolete public-mirror-sync section removed, `hom` renamed to `staging`, a governance-script count already known to drift three times replaced with a pointer to `operation-manual.md` Step 15's canonical table). |
 
 Historical note: the pre-2026-07-31 prompt archive (numbered up to `109` at the time the private source repository was archived) is not migrated here and is not indexed by this table — see `docs/adr/0005-public-release.md` and `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` for why.
