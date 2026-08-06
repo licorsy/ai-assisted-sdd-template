@@ -19,6 +19,22 @@
 // repository's own two tags disagree in kind (`v1.0.0` is annotated, `v1.1.0`
 // is lightweight), so an unpeeled comparison reads the annotated tag's own
 // object sha and reports drift that is not there.
+//
+// A second question, added later: when a release genuinely is live at
+// `main`'s tip (the declared version's tag exists and matches), is
+// CHANGELOG.md's `[Unreleased]` section actually empty? `docs/prompts/
+// 011-release-integrity-check.md` declined this on purpose - out of scope
+// when the check was first built. `docs/prompts/013-release-readiness-batch.md`
+// then recorded the near-miss that reversed the decision: `010` cut `[1.2.0]`
+// and left a fresh, empty `[Unreleased]` above it; `011` and `012` both wrote
+// into that reopened section before `013` folded it back by hand. Had the
+// promotion and tag landed in that window, this check would have reported
+// clean - `main` genuinely matching a real tag - while the tagged release's
+// own notes omitted two things the tagged commit actually shipped. See
+// `docs/prompts/018-assert-unreleased-empty-at-tag.md`. The assertion fires
+// only in the "tag matches main's tip" state: mid-cycle, `[Unreleased]`
+// legitimately holds real content, and flagging it there would be noise, not
+// signal.
 
 const fs = require('fs');
 const path = require('path');
@@ -52,6 +68,32 @@ function parseDeclaredVersion(text) {
   return null;
 }
 
+// Returns the raw text between the `## [Unreleased]` heading and the next
+// `## [...]` heading (or end of file), so a caller can decide emptiness by
+// trimming the result. This repository's own convention for "nothing
+// pending" is the heading with literally nothing below it - not even an
+// empty `### Added` subheading, per the `[1.2.0]` cut's own history - so no
+// stricter or looser definition is applied here.
+function extractUnreleasedSection(text) {
+  const lines = text.split(/\r?\n/);
+  let start = -1;
+  for (let i = 0; i < lines.length; i += 1) {
+    const match = SECTION_HEADING.exec(lines[i].trim());
+    if (match && match[1].toLowerCase() === 'unreleased') {
+      start = i + 1;
+      break;
+    }
+  }
+  if (start === -1) return '';
+
+  const collected = [];
+  for (let i = start; i < lines.length; i += 1) {
+    if (SECTION_HEADING.test(lines[i].trim())) break;
+    collected.push(lines[i]);
+  }
+  return collected.join('\n');
+}
+
 // `--verify --quiet` exits non-zero without printing when the ref is absent, so
 // a missing tag comes back as null rather than as noise on stderr.
 function resolveRef(root, ref) {
@@ -72,7 +114,8 @@ function checkReleaseIntegrity(root = '.') {
   if (!fs.existsSync(changelog)) return [`missing file: ${CHANGELOG_FILE}`];
 
   const problems = [];
-  const declared = parseDeclaredVersion(fs.readFileSync(changelog, 'utf8'));
+  const changelogText = fs.readFileSync(changelog, 'utf8');
+  const declared = parseDeclaredVersion(changelogText);
   const mainSha = resolveRef(root, RELEASE_BRANCH);
 
   if (!mainSha) {
@@ -104,6 +147,14 @@ function checkReleaseIntegrity(root = '.') {
         `tag '${tag}' points at ${tagSha.slice(0, 7)}, ` +
           `${RELEASE_BRANCH} is at ${mainSha.slice(0, 7)}`
       );
+    } else if (mainSha && tagSha === mainSha) {
+      const unreleased = extractUnreleasedSection(changelogText);
+      if (unreleased.trim() !== '') {
+        problems.push(
+          `${RELEASE_BRANCH} is tagged '${tag}', but ${CHANGELOG_FILE}'s '[Unreleased]' section is ` +
+            `not empty - the tagged release's own notes may not describe everything the tagged commit contains`
+        );
+      }
     }
   }
 
@@ -141,6 +192,7 @@ if (require.main === module) {
 
 module.exports = {
   parseDeclaredVersion,
+  extractUnreleasedSection,
   resolveRef,
   checkReleaseIntegrity,
 };

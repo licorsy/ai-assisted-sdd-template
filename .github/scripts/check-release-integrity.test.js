@@ -7,7 +7,7 @@ const os = require('os');
 const path = require('path');
 const { execFileSync } = require('child_process');
 
-const { parseDeclaredVersion, checkReleaseIntegrity } = require('./check-release-integrity.js');
+const { parseDeclaredVersion, extractUnreleasedSection, checkReleaseIntegrity } = require('./check-release-integrity.js');
 
 function git(root, args) {
   execFileSync('git', args, { cwd: root, stdio: 'ignore' });
@@ -95,4 +95,58 @@ test('parseDeclaredVersion skips [Unreleased] and takes the topmost dated sectio
 
 test('parseDeclaredVersion returns null when nothing is released', () => {
   assert.strictEqual(parseDeclaredVersion('# Changelog\n\n## [Unreleased]\n'), null);
+});
+
+test('extractUnreleasedSection returns empty for the established empty-Unreleased shape', () => {
+  assert.strictEqual(extractUnreleasedSection(changelogDeclaring('1.2.0')).trim(), '');
+});
+
+test('extractUnreleasedSection returns the content sitting under the heading', () => {
+  const text = ['# Changelog', '', '## [Unreleased]', '', '### Added', '', '- a pending change', '', '## [1.2.0] - 2026-08-03', ''].join('\n');
+  assert.match(extractUnreleasedSection(text), /a pending change/);
+});
+
+test('extractUnreleasedSection returns empty when the file declares no release at all', () => {
+  assert.strictEqual(extractUnreleasedSection('# Changelog\n\n## [Unreleased]\n').trim(), '');
+});
+
+function changelogWithOpenUnreleased(version, date = '2026-08-03') {
+  return [
+    '# Changelog',
+    '',
+    '## [Unreleased]',
+    '',
+    '### Added',
+    '',
+    '- work that landed after the release section was supposed to be final',
+    '',
+    `## [${version}] - ${date}`,
+    '',
+    '### Changed',
+    '',
+    '- a thing',
+    '',
+  ].join('\n');
+}
+
+test('a tag matching main but a non-empty [Unreleased] fails, naming the gap', () => {
+  const root = makeFixtureRepo({ changelog: changelogWithOpenUnreleased('1.2.0'), tag: 'v1.2.0' });
+  const problems = checkReleaseIntegrity(root);
+  assert.strictEqual(problems.length, 1);
+  assert.match(problems[0], /\[Unreleased\]/);
+  assert.match(problems[0], /not empty/);
+});
+
+test('a non-empty [Unreleased] is not flagged when main has moved past the tag - the existing drift problem is the only one reported', () => {
+  const root = makeFixtureRepo({ changelog: changelogWithOpenUnreleased('1.2.0'), tag: 'v1.2.0', commitsAfterTag: 2 });
+  const problems = checkReleaseIntegrity(root);
+  assert.strictEqual(problems.length, 1);
+  assert.match(problems[0], /tag 'v1\.2\.0' points at [0-9a-f]{7}, main is at [0-9a-f]{7}/);
+});
+
+test('a non-empty [Unreleased] is not flagged when the declared version has no tag yet', () => {
+  const root = makeFixtureRepo({ changelog: changelogWithOpenUnreleased('1.2.0') });
+  const problems = checkReleaseIntegrity(root);
+  assert.strictEqual(problems.length, 1);
+  assert.match(problems[0], /tag 'v1\.2\.0' does not exist/);
 });
