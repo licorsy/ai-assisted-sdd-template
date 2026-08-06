@@ -3,7 +3,7 @@ title: "Artifact Necessity Audit: docs/manuals/, docs/references/, docs/reports/
 doc_type: product-doc
 description: "One-time audit of every file in docs/manuals/, docs/references/, and docs/reports/ for whether it is genuinely needed for SDD development, each with a keep/simplify/remove verdict and its evidence. Produced by prompt-106, answering local-notes/012's artifact-necessity ask for these three directories; docs/prompts/ is out of scope here (see prompt-105's ledger enrichment instead), as are agents/, docs/adr/, docs/strategy/, docs/visuals/."
 status: active
-version: "1.3"
+version: "1.4"
 created: 2026-07-30
 updated: 2026-08-06
 language: en
@@ -16,7 +16,7 @@ diataxis: reference
 
 # Artifact Necessity Audit: `docs/manuals/`, `docs/references/`, `docs/reports/`
 
-Scope: every file under `docs/manuals/`, `docs/references/`, and `docs/reports/` as of `prompt-106` (2026-07-30). `docs/prompts/` is not evaluated here — its own necessity question is answered by `prompt-105`'s enrich-the-ledger decision, not a keep/simplify/remove verdict. `agents/`, `docs/adr/`, `docs/strategy/`, and `docs/visuals/` were not in scope this cycle.
+Scope: every file under `docs/manuals/`, `docs/references/`, and `docs/reports/` as of `prompt-106` (2026-07-30). `docs/prompts/` is not evaluated here — its own necessity question is answered by `prompt-105` (archived private-repo sequence, not a citable path in this repository)'s enrich-the-ledger decision, not a keep/simplify/remove verdict. `agents/`, `docs/adr/`, `docs/strategy/`, and `docs/visuals/` were not in scope this cycle.
 
 **Headline finding**: 15 of 17 files are unambiguous keeps. Two get a lighter **simplify** verdict (wording/framing tightened, nothing removed). Zero get a **remove** verdict. These three directories were not, in fact, the accumulated bloat `local-notes/012-sanitizacao-para-repositorio-publico.txt` worried about — each file traces to a real, current consumer (a cross-reference, a `related:` field, or an agent/script that reads it) once checked directly, rather than judged by title alone.
 
@@ -28,7 +28,7 @@ Scope: every file under `docs/manuals/`, `docs/references/`, and `docs/reports/`
 | 2 | `docs/manuals/documentation-metadata-standard.md` | keep | The canonical metadata/scope standard every governance script (`doc-scope.js`, `docgov`) derives from. |
 | 3 | `docs/manuals/operation-manual.md` | keep | The canonical operating-model hub; `check-step-references.js` depends on it existing as one file. |
 | 4 | `docs/manuals/prompt-engineering-guide.md` | keep | Cited by `README.md`, `agents/orchestrator.md` and `docs/prompts/basic-prompt-template.md`, and referenced for the P1-P10 pattern library; no other file plays this role. |
-| 5 | `docs/manuals/role-operating-guide.md` | keep | Linked from `README.md`; distinct audience (role-specific guidance) from `operation-manual.md`. |
+| 5 | `docs/manuals/role-operating-guide.md` | keep | Linked from `README.md`; distinct audience (role-specific guidance) from `docs/manuals/operation-manual.md`. |
 | 6 | `docs/manuals/tool-library-catalog.md` | keep | Actively read by `agents/tool-discovery.md` (tool-hunter) before every vetting decision. |
 | 7 | `docs/manuals/examples/adr-0001-documentation-and-governance-model.md` | keep | Phase 0 scaffolding a generated project replaces — core to the template's own worked-example function, not optional filler. |
 | 8 | `docs/manuals/examples/governance.md` | keep | Same Phase 0 scaffolding role as #7. |

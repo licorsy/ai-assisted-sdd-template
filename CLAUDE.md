@@ -3,9 +3,9 @@ title: "CLAUDE.md"
 doc_type: instruction
 description: "Claude Code's entry point for this repository: the always-on confirmation rule, the documentation metadata rule, and the pointers to the operation manual and governance plugins that own the full text of each."
 status: active
-version: "1.0.0"
+version: "1.0.1"
 created: 2026-07-30
-updated: 2026-08-01
+updated: 2026-08-06
 language: en
 id: claude-adapter
 owner: Alexandre Clemente
@@ -43,7 +43,7 @@ To independently verify a completed phase against its own Acceptance Criteria / 
 
 ## Git operations
 
-Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `staging` or `main` — use the `git-governance-advisor` subagent (installed via the `git-governance` plugin, [licorsy/git-governance](https://github.com/licorsy/git-governance)) instead of restating its branch-naming taxonomy and permission matrix (autonomous up to `develop`; explicit human permission required for `staging`/`main`) here. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `staging`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (recorded in the archived private source repository's own prompt sequence as `101-prompt-git-governance-adoption.md`; not a citable path in this repository, per `operation-manual.md` Step 12 rule 3).
+Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `staging` or `main` — use the `git-governance-advisor` subagent (installed via the `git-governance` plugin, [licorsy/git-governance](https://github.com/licorsy/git-governance)) instead of restating its branch-naming taxonomy and permission matrix (autonomous up to `develop`; explicit human permission required for `staging`/`main`) here. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `staging`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (recorded in the archived private source repository's own prompt sequence as `101-prompt-git-governance-adoption.md`; not a citable path in this repository, per `docs/manuals/operation-manual.md` Step 12 rule 3).
 
 ## Canonical documents
 

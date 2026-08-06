@@ -3,9 +3,9 @@ title: "Prompt 008: adopt market-standard delivery vocabulary, re-scoped to what
 doc_type: prompt
 description: "Disambiguates the two senses of `increment` that this corpus mixes - the process instance becomes `release cycle`, the delivered capability stays `Increment` in the Scrum sense - declares the phase model as Stage-Gate rather than leaving it an apparently bespoke scheme, and adds docs/manuals/glossary.md carrying both plus the four delivery surfaces (Roadmap, Board, Backlog, Reports) mapped onto this repository's real artifact names. Deliberately excludes three quarters of the source proposal: size-points, the versioned marker convention, and the migration note all target things that do not exist in this repository."
 status: archived
-version: "1.1"
+version: "1.2"
 created: 2026-08-03
-updated: 2026-08-04
+updated: 2026-08-06
 language: en
 id: 008-market-standard-vocabulary
 tags: [prompt, vocabulary, glossary, stage-gate, scrum, delivery-surfaces]
@@ -23,7 +23,7 @@ The temptation to resist: the source proposal shipped with a costed migration pl
 
 ## CONTEXT
 
-The source proposal (carried up from `business-tech-agency`, recorded in `006-absorb-local-notes-011-accepted-items.md`) proposed six renames and warned that the item was "not adoptable without" a versioned marker convention plus a migration note, citing a rename downstream that cost four pull requests and roughly forty consistency findings.
+The source proposal (carried up from `business-tech-agency`, recorded in `docs/prompts/006-absorb-local-notes-011-accepted-items.md`) proposed six renames and warned that the item was "not adoptable without" a versioned marker convention plus a migration note, citing a rename downstream that cost four pull requests and roughly forty consistency findings.
 
 Verification against this repository falsified most of it:
 
@@ -32,7 +32,7 @@ Verification against this repository falsified most of it:
 | `size-points` (S=1/M=2/L=3) → story points | **No referent.** Zero occurrences outside the proposal itself; this repository has no estimation scale at all. |
 | `🎯 … CLOSED` markers → "gates", with a versioned marker convention | **No referent.** The character appears twice in the repository, both inside the proposal. No parser exists in `.github/scripts/`, `gate-verification-template/`, or `telemetry-template/`; `duration_minutes` is a hand-written JSONL field, and the only gate parser reads `#### Phase N - Generated artifacts` headings. **The blocking prerequisite the proposal declared therefore does not apply.** |
 | `cycle time`, `flow efficiency` — listed as "not touched, already correct" | **Absent.** Zero occurrences of either. They cannot be left untouched. |
-| `acceptance criteria / Done` → Definition of Done | `definition of done` **already exists**, at *task* level (`roadmap.md` Phase 4, `role-operating-guide.md` §11), while `Acceptance criteria / Done` is the *phase*-level heading. A blanket rename would collapse a live distinction. |
+| `acceptance criteria / Done` → Definition of Done | `definition of done` **already exists**, at *task* level (`docs/strategy/roadmap.md` Phase 4, `docs/manuals/role-operating-guide.md` §11), while `Acceptance criteria / Done` is the *phase*-level heading. A blanket rename would collapse a live distinction. |
 | Destinations: a glossary, and a migration note | **Neither exists.** Both would have to be created. |
 | `increment`, two senses mixed | **Real, and the actual work.** 43 occurrences outside the proposal, genuinely split between the process instance and the delivered capability. |
 
@@ -41,9 +41,9 @@ Standing precedent this has to clear: `docs/reports/PROPOSAL-TRACKING.md` record
 ## TASK
 
 1. **Split the two senses of `increment`.**
-   - The **process instance** — a bounded traversal of the phases that ships — becomes **release cycle**. Sites: `roadmap.md` (the status-index column, the first-cycle bullet, the replanning activity, the `status.md` description), `operation-manual.md` (the inner/outer loop passage, the go-to-market Document-map row), `role-operating-guide.md`, `agents/doc-consistency.md`, `prompt-engineering-guide.md`'s P10 scratch-doc scope, `template-visual-overview.md`'s flowchart entry node, and `README.md`.
+   - The **process instance** — a bounded traversal of the phases that ships — becomes **release cycle**. Sites: `docs/strategy/roadmap.md` (the status-index column, the first-cycle bullet, the replanning activity, the `status.md` description), `docs/manuals/operation-manual.md` (the inner/outer loop passage, the go-to-market Document-map row), `docs/manuals/role-operating-guide.md`, `agents/doc-consistency.md`, `docs/manuals/prompt-engineering-guide.md`'s P10 scratch-doc scope, `docs/visuals/template-visual-overview.md`'s flowchart entry node, and `README.md`.
    - The **delivered capability** stays `Increment`, unchanged and uncommented: this is already the Scrum term and already correct. Sites: Phase 5's expected result, Phase 6's and Phase 7's acceptance criteria and inputs.
-   - Two sites are genuinely undecidable from their own text and get an explicit ruling rather than a guess: `roadmap.md`'s Phase 6 goal ("Ensure the increment behaves as expected") and its Phase 5 security-trigger bullet ("if the increment is security-relevant"). **Both resolve to the delivered capability** — what is tested and what touches an auth surface is the shipped change, not the traversal. The identical trigger wording in `prompt-engineering-guide.md` P4, `operation-manual.md`'s `/security-review` row, and `template-visual-overview.md`'s `Q4` node resolves the same way, and must stay consistent with it.
+   - Two sites are genuinely undecidable from their own text and get an explicit ruling rather than a guess: `docs/strategy/roadmap.md`'s Phase 6 goal ("Ensure the increment behaves as expected") and its Phase 5 security-trigger bullet ("if the increment is security-relevant"). **Both resolve to the delivered capability** — what is tested and what touches an auth surface is the shipped change, not the traversal. The identical trigger wording in `docs/manuals/prompt-engineering-guide.md` P4, `docs/manuals/operation-manual.md`'s `/security-review` row, and `docs/visuals/template-visual-overview.md`'s `Q4` node resolves the same way, and must stay consistent with it.
 
 2. **Declare the phase model.** State once, where the phases are defined, that Phases 0-8 with human-approved transitions are a **Stage-Gate** model (Cooper), and that the `🎯`-free gate points are stage gates. Name the agile equivalents alongside rather than replacing anything. This is a naming, not a restructuring: no phase changes, no criterion changes.
 
@@ -64,6 +64,6 @@ Standing precedent this has to clear: `docs/reports/PROPOSAL-TRACKING.md` record
 
 ## FORMAT AND OUTPUT
 
-Executed as a new `docs/manuals/glossary.md`, plus `increment`-sense edits and the Stage-Gate declaration across `docs/strategy/roadmap.md`, `docs/manuals/operation-manual.md`, `docs/manuals/role-operating-guide.md`, `docs/manuals/prompt-engineering-guide.md`, `agents/doc-consistency.md`, `docs/visuals/template-visual-overview.md`, and `README.md`, plus `CHANGELOG.md`, `PROMPT-INDEX.md`, and a regenerated `docs/STATE.md`.
+Executed as a new `docs/manuals/glossary.md`, plus `increment`-sense edits and the Stage-Gate declaration across `docs/strategy/roadmap.md`, `docs/manuals/operation-manual.md`, `docs/manuals/role-operating-guide.md`, `docs/manuals/prompt-engineering-guide.md`, `agents/doc-consistency.md`, `docs/visuals/template-visual-overview.md`, and `README.md`, plus `CHANGELOG.md`, `docs/prompts/PROMPT-INDEX.md`, and a regenerated `docs/STATE.md`.
 
 Verification: the five repo-local governance scripts pass, `node --test .github/scripts/*.test.js` passes, `docgov check` exits 0, and a final `grep -rn "ncrement"` shows every surviving occurrence is deliberately in the delivered-capability sense.

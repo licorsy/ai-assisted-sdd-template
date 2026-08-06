@@ -3,9 +3,9 @@ title: "Tools Ecosystem - unvetted starting shortlist"
 doc_type: product-doc
 description: "Curated per-category shortlist of tools a generated project will need to choose from - observability/error tracking, security scanning, secrets, CI/CD, diagramming, knowledge management - distilled from the Vibe Coding course's SDLC roadmap. 'Unvetted' means not yet run through tool-hunter's structured, per-need vetting checklist - not that this list is uncurated or arbitrary. It narrows the search; live vetting per need stays with tool-hunter Mode B and the project's build-vs-buy record."
 status: active
-version: "1.4"
+version: "1.5"
 created: 2026-07-14
-updated: 2026-07-31
+updated: 2026-08-06
 language: en
 id: tools-ecosystem
 tags: [tools, observability, security, secrets, ci-cd, shortlist]
@@ -65,7 +65,7 @@ Feeds Step 15's diagramming row and Phase 3 architecture artifacts.
 
 ## Knowledge management
 
-The template itself covers project memory (living docs, `.specify/`, `STATE.md`); these are for material outside the repo.
+The template itself covers project memory (living docs, `.specify/`, `docs/STATE.md`); these are for material outside the repo.
 
 - **Obsidian** - local-first Markdown vault; good privacy fit for consultancy notes.
 - **Notion** - cloud collaboration; better for sharing with clients, can sprawl.

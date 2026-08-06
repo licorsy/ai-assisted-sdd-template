@@ -3,9 +3,9 @@ title: "Role Operating Guide — Product, Delivery, and All Lifecycle Roles"
 doc_type: manual
 description: "Single operating guide covering the project/product/product-owner surface and its extension to every other lifecycle role (architect, engineer, QA, DevOps, scrum master, stakeholder) for one person operating solo across the full roadmap."
 status: active
-version: "2.10"
+version: "2.11"
 created: 2024-07-04
-updated: 2026-08-03
+updated: 2026-08-06
 language: en
 id: role-operating-guide
 tags: [project-management, product-management, product-ownership, all-roles, solo-operator, role-switching, github-issues, scrum]
@@ -19,8 +19,8 @@ Changelog of this document:
 
 - v2.10: Section 13's outer-loop line now says **release cycle** rather than "increment/cycle"; operating principle 2's "small, testable increments" is the delivered-capability sense and is unchanged (`008-market-standard-vocabulary`).
 - v2.9: the reporting criterion "a figure with no attached decision is decoration" added alongside Section 13's existing five-things rule for prose status updates - the same bar, applied to numbers, which nothing in the corpus stated for figures (`006-absorb-local-notes-011-accepted-items`).
-- v2.8: doc-consistency-reviewer batch fix: Section 9's Scrum master row and Section 10's Retrospective row both sent retrospective notes to `/CHANGELOG.md`/`/docs/status.md`, contradicting `roadmap.md` Phase 8 Activities 4/4c, which mandate `docs/references/retrospective.md` as the actual artifact and prune the narrative out of `status.md` (prompt-092).
-- Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
+- v2.8: doc-consistency-reviewer batch fix: Section 9's Scrum master row and Section 10's Retrospective row both sent retrospective notes to `CHANGELOG.md`/`/docs/status.md`, contradicting `docs/strategy/roadmap.md` Phase 8 Activities 4/4c, which mandate `docs/references/retrospective.md` as the actual artifact and prune the narrative out of `status.md` (prompt-092).
+- Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
 
@@ -173,7 +173,7 @@ This table gives the whole-team lens across all nine roles — which one leads o
 | Scrum master | GitHub Projects board, `/docs/status.md`, `docs/references/retrospective.md` |
 | Stakeholder (proxy) | PRD, plan, and phase-gate summaries produced by the orchestrator prompt |
 | QA / quality assurance engineer | Automated test suite, `/docs/references/test-report.md`, defect log in GitHub Issues |
-| DevOps engineer | CI/CD pipeline configuration, deployment scripts, monitoring and alerting configuration, `/CHANGELOG.md` |
+| DevOps engineer | CI/CD pipeline configuration, deployment scripts, monitoring and alerting configuration, `CHANGELOG.md` |
 
 See `docs/manuals/operation-manual.md`, Step 15, for the general activity-to-tool mapping this table extends.
 
@@ -184,7 +184,7 @@ See `docs/manuals/operation-manual.md`, Step 15, for the general activity-to-too
 | Sprint planning | Write the sprint goal and select items in `/docs/status.md` before starting work; do not skip writing it down even though no one else is reading it live |
 | Daily stand-up | A one-paragraph self-check at the start of a work session: what changed since last session, what is next, what is blocked |
 | Sprint review | Re-read the sprint goal against what was actually produced, in a separate step from producing it |
-| Retrospective | A short entry in `docs/references/retrospective.md` (the roadmap's Phase 8 artifact): what worked, what to change next cycle, and the process-review decision - `/CHANGELOG.md` and `/docs/status.md` carry pointers to it, not the narrative itself (`docs/strategy/roadmap.md`, Phase 8, activities 4 and 4c) |
+| Retrospective | A short entry in `docs/references/retrospective.md` (the roadmap's Phase 8 artifact): what worked, what to change next cycle, and the process-review decision - `CHANGELOG.md` and `/docs/status.md` carry pointers to it, not the narrative itself (`docs/strategy/roadmap.md`, Phase 8, activities 4 and 4c) |
 | Backlog refinement | A recurring pass over `/docs/references/backlog.md`, wearing the product owner hat specifically, not blended into development work |
 
 ### 11. Definition of done, per role
@@ -216,7 +216,7 @@ When something goes wrong and there is no one else to escalate to:
 2. Do the work the current phase calls for, one role at a time, naming the hat (see Section 7).
 3. Before closing a task, run the relevant Definition of Done checks from Section 11.
 4. For any phase-gate or hard-to-reverse decision, run `agents/phase-reviewer.md` in a fresh context before approving the transition (stakeholder hat).
-5. Update `/docs/status.md` and `/CHANGELOG.md` before ending the session; if the project has adopted `docs/telemetry/` (`docs/references/telemetry-template/`), append the session's entry to `docs/telemetry/sessions.jsonl` in the same step.
+5. Update `/docs/status.md` and `CHANGELOG.md` before ending the session; if the project has adopted `docs/telemetry/` (`docs/references/telemetry-template/`), append the session's entry to `docs/telemetry/sessions.jsonl` in the same step.
 
 ---
 

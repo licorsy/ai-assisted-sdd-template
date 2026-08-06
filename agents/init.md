@@ -3,9 +3,9 @@ title: "Template Init Prompt"
 doc_type: instruction
 description: "Idempotent project bootstrap for a repository created from this template: detect greenfield vs. brownfield and confirm with the human, scaffold only the missing Phase 0 artifacts (status, ADR template, handbook stub, risk register, governance stub, telemetry ledger, changelog entry) with valid frontmatter, verify Spec Kit presence without installing anything, and end with a created/skipped/human-actions report. Running it twice must make the second run a pure no-op report."
 status: active
-version: "1.9"
+version: "1.10"
 created: 2026-07-13
-updated: 2026-07-31
+updated: 2026-08-06
 language: en
 id: init
 tags: [bootstrap, scaffold, idempotency, phase-0, template-init]
@@ -20,7 +20,7 @@ Changelog of this document:
 - v1.9: the "never overwrite/renumber `docs/adr/`'s real ADRs" guard's occupied-range note updated from `0002`-`0004` to `0002`-`0005` - `docs/adr/0010-public-release.md` was renumbered to `0005` (`docs/prompts/002-renumber-adr-0010-to-0005.md`), so an adopter's first project ADR now needs `0006` or later to avoid a collision.
 - v1.8: doc-consistency-reviewer batch fix: the ADR-template scaffold row's location note corrected - the worked-example ADR actually lives in `docs/manuals/examples/`, not `docs/manuals/` directly - and gains an explicit "never overwrite/renumber `docs/adr/`'s real ADRs" guard, since this row scaffolds a blank template into that same directory (prompt-090).
 - v1.7: doc-consistency-reviewer batch fix: new `/docs/governance.md` scaffold row (roadmap Phase 0 Activity 8 and Generated-artifacts list both name it; propagated to README/QUICKSTART/`.claude/commands/template-init.md`'s scaffold-list mentions too); `/docs/status.md` scaffold row gains the "what is being brought" field (choice 1 now has a recorder, see `agents/orchestrator.md` v3.19); the telemetry-ledger/tracking-issue cell's ambiguous bare "Step 18"/"Step 4a" references - reintroduced by `prompt-087` into a cell `prompt-086` v1.5 had already disambiguated once - corrected again (prompt-089).
-- Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
+- Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
 
@@ -50,7 +50,7 @@ Each artifact carries valid frontmatter per `docs/manuals/documentation-metadata
 
 | Artifact | Content |
 | --- | --- |
-| `/docs/status.md` | `doc_type: status-artifact`. Records: what is being brought (unset until the orchestrator's Step 0 asks), starting condition (from step 1), roadmap path (unset until the orchestrator's Step 0 asks), interaction level (unset, default full-gate), phase-exit brief format (unset, default free-prose), telemetry-ledger adoption (unset until the `docs/telemetry/` row below is answered, asked in the `operation-manual.md` Step 18 human-interaction format; default: scaffold now), GitHub tracking-issue and Project-board URLs (unset until item 4a below records them), current phase: `Phase 0 - Foundation`, blockers: none, next step: run the orchestrator. |
+| `/docs/status.md` | `doc_type: status-artifact`. Records: what is being brought (unset until the orchestrator's Step 0 asks), starting condition (from step 1), roadmap path (unset until the orchestrator's Step 0 asks), interaction level (unset, default full-gate), phase-exit brief format (unset, default free-prose), telemetry-ledger adoption (unset until the `docs/telemetry/` row below is answered, asked in the `docs/manuals/operation-manual.md` Step 18 human-interaction format; default: scaffold now), GitHub tracking-issue and Project-board URLs (unset until item 4a below records them), current phase: `Phase 0 - Foundation`, blockers: none, next step: run the orchestrator. |
 | `/docs/adr/0000-adr-template.md` | `doc_type: adr`, `status: draft`. A blank ADR scaffold (Context / Decision / Status / Consequences) for the project's future decisions. Never overwrite or renumber ADRs already present in `docs/adr/` (this template ships `0002`-`0005` as its own real decisions - number your first project ADR `0006` or later); the worked-example ADR in `docs/manuals/examples/` stays untouched. |
 | `/docs/handbook.md` | `doc_type: status-artifact`, `status: draft`. A stub with the sections the roadmap expects the handbook to grow (project summary, links to status/risks/ADRs/plan). |
 | `/docs/risks.md` | `doc_type: governance`, `status: draft`. An empty risk-register scaffold (risk / likelihood / impact / mitigation / owner table) - roadmap Phase 0 requires an initial risk register and the flattened `/docs/risks.md` is its canonical location. |

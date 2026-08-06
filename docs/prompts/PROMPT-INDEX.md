@@ -3,7 +3,7 @@ title: "Prompt Index"
 doc_type: status-artifact
 description: "The id/status/one-line-purpose index over every prompt in docs/prompts/, updated whenever a prompt is created or moves lifecycle stage (operation-manual.md Step 11). The prompt file itself is the source of truth for content; this index exists so a reader can scan the whole archive without opening every file."
 status: active
-version: "1.23"
+version: "1.25"
 created: 2026-07-31
 updated: 2026-08-06
 language: en
@@ -15,7 +15,7 @@ related: [operation-manual, documentation-metadata-standard]
 
 # Prompt Index
 
-One row per file in `docs/prompts/` (excluding `basic-prompt-template.md`, the scaffold itself). Update this table in the same edit that changes a prompt's `status` (`operation-manual.md`, Step 11).
+One row per file in `docs/prompts/` (excluding `docs/prompts/basic-prompt-template.md`, the scaffold itself). Update this table in the same edit that changes a prompt's `status` (`docs/manuals/operation-manual.md`, Step 11).
 
 | id | status | purpose |
 | --- | --- | --- |
@@ -27,7 +27,7 @@ One row per file in `docs/prompts/` (excluding `basic-prompt-template.md`, the s
 | `006-absorb-local-notes-011-accepted-items` | archived | Named batch absorbing the accepted items of a downstream upstream-sync note: closes prompt 005's leftover `facts` block, fixes two roadmap self-contradictions, and adds five absent conventions. |
 | `007-missing-data-vocabulary` | archived | Adds `docs/references/missing-data-vocabulary.md` - a shared shorthand for absent or degraded data, adapted from UK Government Analysis Function guidance - and fixes `generate-state.js`, which put `docs/STATE.md`'s own legend below the table. |
 | `008-market-standard-vocabulary` | archived | Splits the two senses of `increment` (process instance becomes **release cycle**; the delivered capability keeps the Scrum term), declares the phase model as Stage-Gate, and adds `docs/manuals/glossary.md` with the four delivery surfaces. |
-| `009-prepare-go-to-market-separation` | archived | Does the reversible half of moving `go-to-market.md` to the Licorsy organization: preserves the Activities 9-14 ownership statement inside `roadmap.md`, amends ADR-0004, and records the full reference map. The file is not removed. Archived because its own TASK is complete; the deferred removal of `go-to-market.md` waits on the Licorsy organization holding the content and needs its own prompt when that happens. |
+| `009-prepare-go-to-market-separation` | archived | Does the reversible half of moving `docs/strategy/go-to-market.md` to the Licorsy organization: preserves the Activities 9-14 ownership statement inside `docs/strategy/roadmap.md`, amends ADR-0004, and records the full reference map. The file is not removed. Archived because its own TASK is complete; the deferred removal of `docs/strategy/go-to-market.md` waits on the Licorsy organization holding the content and needs its own prompt when that happens. |
 | `010-cut-release-v1-2-0` | archived | Cuts `CHANGELOG.md`'s first-ever release section (`[1.2.0]`) and promotes `develop` -> `staging` -> `main` with the tag in the same movement, closing a bookkeeping debt that compounded across both prior tags. Completed 2026-08-04: `v1.2.0` cut as an annotated tag on `main`'s merge commit in the same window, and `check-release-integrity` went from failing to passing across the transition. |
 | `011-release-integrity-check` | archived | Adds the local, scheduled check that fails when `main` does not carry the version `CHANGELOG.md` declares — the backstop `010` named and deliberately left unbuilt. Adapted rather than adopted: the upstream reusable workflow hard-requires a floating major tag this repository does not have. |
 | `012-always-report-governance-checks` | archived | Removes the `paths:` filters from the six governance check workflows so each always creates a check run — the precondition for requiring them at the `staging`/`main` gates. Closes the remaining half of `licorsy/.github` gap 20; the ruleset change itself is the explicitly-permissioned follow-up. |
@@ -39,6 +39,6 @@ One row per file in `docs/prompts/` (excluding `basic-prompt-template.md`, the s
 
 | `018-assert-unreleased-empty-at-tag` | archived | Reverses a decision `011` recorded on purpose: asserts `CHANGELOG.md`'s `[Unreleased]` section is empty whenever `check-release-integrity.js` finds `main`'s tip already matching its declared release's tag. Prompted by a real near-miss on 2026-08-04 (recorded in `013`) where the sha-only check would have passed a tag whose release notes understated what the tagged commit actually shipped — caught by hand, not mechanically. Completed 2026-08-06 via TDD: new `extractUnreleasedSection` plus six new tests (15/15 in the file, 49/49 repo-wide), workflow and script header comments amended, verified against a real `main` worktree checkout. |
 
-| `019-fix-wrong-directory-citations` | active | First of a named split of the 564-item `dead_citations` shadow backlog into its measured component categories (wrong-directory citation, archived-private-repo `prompt-NNN` reference, template-target forward-reference, root-file scope gap) — the earlier framing as one `historical_paths` decision was never actually measured. Fixes only the 212 wrong-directory citations mechanically; the other three categories get their own prompts. |
+| `019-fix-wrong-directory-citations` | active | Named batch fusing the two mechanical slices of the 564-item `dead_citations` shadow backlog's four measured categories: 212 wrong-directory citations (path correction) and 51 of 65 archived-private-repo `prompt-NNN` references (qualifier insertion; 14 deferred where the line still carries another unresolved citation). The template-target forward-reference and root-file scope-gap categories get their own prompts — each needs a real design decision, not a mechanical transform. Completed 2026-08-06: `docgov check` 564 -> 301 (263 removed as a verified set, 0 new); a leading-slash resolution bug in the correction script itself was caught and fixed before any file was touched. |
 
 Historical note: the pre-2026-07-31 prompt archive (numbered up to `109` at the time the private source repository was archived) is not migrated here and is not indexed by this table — see `docs/adr/0005-public-release.md` and `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` for why.

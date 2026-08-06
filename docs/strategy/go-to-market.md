@@ -3,9 +3,9 @@ title: "Go-to-Market Roadmap"
 doc_type: instruction
 description: "Optional, parallel roadmap for a product's commercial lifecycle - positioning, pricing, launch readiness, marketing, sales, retention, business retrospective - alongside, not merged into, roadmap.md's engineering lifecycle. Different actors, different cadence, and not every increment needs it."
 status: active
-version: "1.0"
+version: "1.1"
 created: 2026-07-19
-updated: 2026-07-19
+updated: 2026-08-06
 language: en
 id: go-to-market
 tags: [go-to-market, positioning, pricing, launch, marketing, sales, retention, business-roadmap]
@@ -25,13 +25,13 @@ Changelog of this document:
 
 `docs/strategy/roadmap.md` covers the engineering lifecycle of a product well - Foundation through Maintenance - but has no counterpart for the commercial lifecycle of a product that actually goes to market: launch, marketing, sales, retention. This document is that counterpart.
 
-**This roadmap is optional and parallel, not an extension of the engineering roadmap.** Three reasons it stays separate rather than folding into `roadmap.md`:
+**This roadmap is optional and parallel, not an extension of the engineering roadmap.** Three reasons it stays separate rather than folding into `docs/strategy/roadmap.md`:
 
 - **Different actors.** The engineering roadmap is run by engineering/product roles (see `docs/manuals/role-operating-guide.md`); this one is run by commercial roles (marketing, sales, customer success), which may not exist yet in a solo or early-stage operation.
 - **Different cadence.** This roadmap does not run once per code increment. A product can ship several engineering increments between commercial phases, or run a commercial phase (a pricing change, a retention push) with no corresponding code increment at all.
 - **Not every increment needs it.** Internal tooling, infrastructure work, and increments with no external customer never go through "sales" or "marketing." Treat this roadmap as invoked when a product (or a significant increment of one) is actually going to market, not as a mandatory gate.
 
-This roadmap **references, and does not duplicate**, `roadmap.md` Phase 1 Activities 9-14 (market/competitor research, gap comparison, tooling/prior-art research, initial value proposition, open questions, direction validation) - Phase 1 - Positioning below builds on that output rather than re-doing it.
+This roadmap **references, and does not duplicate**, `docs/strategy/roadmap.md` Phase 1 Activities 9-14 (market/competitor research, gap comparison, tooling/prior-art research, initial value proposition, open questions, direction validation) - Phase 1 - Positioning below builds on that output rather than re-doing it.
 
 ## 2. When to invoke this roadmap
 
@@ -41,7 +41,7 @@ Invoke it when a product or a significant increment is heading toward real users
 
 ### Phase 1 - Positioning
 
-- **Goal**: Define who the product is for, what problem it solves, and why it wins against alternatives - building on, not duplicating, `roadmap.md` Phase 1 Activities 9-14.
+- **Goal**: Define who the product is for, what problem it solves, and why it wins against alternatives - building on, not duplicating, `docs/strategy/roadmap.md` Phase 1 Activities 9-14.
 - **Inputs**: Phase 1 Activity 12's initial value proposition; market/competitor research and gap comparison from Activities 9-10.
 - **Activities**: Sharpen the value proposition into a positioning statement (for whom, what category, what alternative, what differentiator); identify the target customer segment(s); record open positioning questions.
 - **Generated artifacts**: `docs/business/positioning.md` (or the project's equivalent business-docs location).
@@ -82,7 +82,7 @@ Invoke it when a product or a significant increment is heading toward real users
 ### Phase 6 - Customer Success & Retention
 
 - **Goal**: Keep customers, and learn why they leave when they do.
-- **Inputs**: Live usage and support signals (the same production signals `roadmap.md` Phase 8 already names as a replanning input).
+- **Inputs**: Live usage and support signals (the same production signals `docs/strategy/roadmap.md` Phase 8 already names as a replanning input).
 - **Activities**: Define onboarding; define what triggers a retention intervention; record churn reasons when they occur, not just churn counts.
 - **Generated artifacts**: A retention/churn log, referenced by Phase 7 - Business Retrospective below.
 - **Acceptance criteria / Done**: Churn has a recorded reason, not just a number, often enough to be useful for the next Business Retrospective.
@@ -92,8 +92,8 @@ Invoke it when a product or a significant increment is heading toward real users
 - **Goal**: Close the commercial cycle the same way the engineering roadmap's Phase 8 closes an engineering cycle - with a recorded look back, not just forward momentum.
 - **Inputs**: Commercial metrics accumulated since the last retrospective - CAC, conversion rate, churn, revenue - and the retention/churn log from Phase 6.
 - **Activities**: Record what worked and what didn't, commercially; decide whether pricing, positioning, or the marketing/sales motion needs to change before the next cycle; name the next commercial priority.
-- **Generated artifacts**: A business retrospective note, mirroring the engineering roadmap's per-increment technical retrospective (`roadmap.md` Phase 8, Activity 4) but scoped to commercial metrics.
-- **Acceptance criteria / Done**: At least one recorded decision to keep, change, or retire a commercial practice - the same "no change is still a decision" discipline `roadmap.md` Phase 8 already applies to the engineering process.
+- **Generated artifacts**: A business retrospective note, mirroring the engineering roadmap's per-increment technical retrospective (`docs/strategy/roadmap.md` Phase 8, Activity 4) but scoped to commercial metrics.
+- **Acceptance criteria / Done**: At least one recorded decision to keep, change, or retire a commercial practice - the same "no change is still a decision" discipline `docs/strategy/roadmap.md` Phase 8 already applies to the engineering process.
 
 ## 4. Relationship to the engineering roadmap
 

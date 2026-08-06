@@ -3,9 +3,9 @@ title: "Prompt 015: rename the generic `test` job so its required context cannot
 doc_type: prompt
 description: "Renames `governance-scripts-tests.yml`'s job id from `test` to `governance-scripts-tests`, closing the collision risk prompt 014 recorded and deliberately declined. The rename changes a context that is currently required at both promotion gates, so the ruleset swap that follows it is a separate, human-permissioned step and the ordering between them is the whole difficulty."
 status: archived
-version: "1.1"
+version: "1.2"
 created: 2026-08-04
-updated: 2026-08-04
+updated: 2026-08-06
 language: en
 id: 015-rename-generic-test-job-context
 tags: [prompt, ci, governance, branch-protection, required-checks]
@@ -51,7 +51,7 @@ Act as the maintainer closing a risk a prior prompt named, weighed, and delibera
 - **[HIGH]** The comment block stays byte-identical across all six workflows. Amending only the one being renamed would desync a block `012` deliberately kept uniform.
 - **[HIGH]** Do **not** rewrite archived prompts `012` or `014` to say `governance-scripts-tests`. They record what was true when they executed; editing them would destroy the record of why this prompt exists.
 - **[HIGH]** No other job id changes in this batch. The other five are already specific to what they check.
-- **[MEDIUM]** `README.md`'s badge and `operation-manual.md` Step 15 reference the workflow file, not the job id, and need no edit. Confirm this rather than assuming it.
+- **[MEDIUM]** `README.md`'s badge and `docs/manuals/operation-manual.md` Step 15 reference the workflow file, not the job id, and need no edit. Confirm this rather than assuming it.
 
 ## FORMAT AND OUTPUT
 

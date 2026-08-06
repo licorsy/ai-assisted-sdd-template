@@ -3,9 +3,9 @@ title: "Glossary"
 doc_type: manual
 description: "This operating model's vocabulary, stated in market-standard terms wherever one exists: the release cycle versus the Scrum Increment, the phase model named as Stage-Gate with each stage's agile equivalent, and the four delivery surfaces (Roadmap, Board, Backlog, Reports) mapped onto this repository's real artifacts. Exists so a reader who already knows Scrum, Kanban, or Stage-Gate does not have to learn a bespoke dialect first."
 status: active
-version: "1.1"
+version: "1.2"
 created: 2026-08-03
-updated: 2026-08-03
+updated: 2026-08-06
 language: en
 id: glossary
 tags: [glossary, vocabulary, stage-gate, scrum, delivery-surfaces, onboarding]
@@ -17,7 +17,7 @@ related: [roadmap, operation-manual, role-operating-guide]
 
 Changelog of this document:
 
-- v1.1: gains the body changelog this document was missing - it was the only file in `docs/manuals/` without one - and records that `go-to-market.md` deliberately keeps the pre-split `increment` spelling until it leaves the repository, so the disagreement reads as intentional rather than as drift (`fix-verifier` pass).
+- v1.1: gains the body changelog this document was missing - it was the only file in `docs/manuals/` without one - and records that `docs/strategy/go-to-market.md` deliberately keeps the pre-split `increment` spelling until it leaves the repository, so the disagreement reads as intentional rather than as drift (`fix-verifier` pass).
 - v1.0: created (`008-market-standard-vocabulary`). Carries the `release cycle` / `Increment` split, the Stage-Gate declaration with each stage's agile equivalent, and the four delivery surfaces mapped onto this repository's real artifacts.
 
 ---
@@ -35,9 +35,9 @@ These were the same word until 2026-08-03, in adjacent bullets of the same file,
 | **Release cycle** | One bounded traversal of the phases that ships something. The *process instance* — "the third release cycle re-entered at Phase 2." | `status.md`'s current-position line, `backlog.md`'s status index, Phase 8's replanning activity, the outer loop |
 | **Increment** | The working, usable capability a release cycle delivers. The *thing*, not the traversal. This is the Scrum Increment and was already correct. | Phase 5's expected result, Phase 6's acceptance criteria and expected result, Phase 7's goal and inputs |
 
-Two places name the delivered capability where the sentence alone leaves it open, and are settled deliberately: Phase 6's goal ("ensure the increment behaves as expected") and the security trigger ("if the increment is security-relevant"). Both mean the shipped change — what gets tested, and what touches an authentication surface, is the capability, not the traversal. The identical trigger wording in `prompt-engineering-guide.md`'s P4, `operation-manual.md`'s `/security-review` row, and the visual overview's decision flowchart resolves the same way.
+Two places name the delivered capability where the sentence alone leaves it open, and are settled deliberately: Phase 6's goal ("ensure the increment behaves as expected") and the security trigger ("if the increment is security-relevant"). Both mean the shipped change — what gets tested, and what touches an authentication surface, is the capability, not the traversal. The identical trigger wording in `docs/manuals/prompt-engineering-guide.md`'s P4, `docs/manuals/operation-manual.md`'s `/security-review` row, and the visual overview's decision flowchart resolves the same way.
 
-**One file is deliberately not converted.** `docs/strategy/go-to-market.md` still says `increment` where it means a release cycle, in its cadence and gate rows. That is intentional, not an oversight: the file is slated to leave this repository for the Licorsy organization (`docs/prompts/009-prepare-go-to-market-separation.md`), and editing prose that is about to move buys nothing. Until it goes, treat its usage as the pre-split spelling — and expect `README.md` and `operation-manual.md`, which state the same "not a gate every release cycle passes through" fact, to disagree with it in wording while agreeing in substance.
+**One file is deliberately not converted.** `docs/strategy/go-to-market.md` still says `increment` where it means a release cycle, in its cadence and gate rows. That is intentional, not an oversight: the file is slated to leave this repository for the Licorsy organization (`docs/prompts/009-prepare-go-to-market-separation.md`), and editing prose that is about to move buys nothing. Until it goes, treat its usage as the pre-split spelling — and expect `README.md` and `docs/manuals/operation-manual.md`, which state the same "not a gate every release cycle passes through" fact, to disagree with it in wording while agreeing in substance.
 
 ## The phase model is Stage-Gate
 

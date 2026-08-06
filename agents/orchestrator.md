@@ -3,9 +3,9 @@ title: "Orchestrator Prompt"
 doc_type: instruction
 description: "Orchestrate the creation and evolution of a software product or platform as a generic AI-assisted development system, with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.24"
+version: "3.25"
 created: 2024-07-04
-updated: 2026-08-03
+updated: 2026-08-06
 language: en
 id: orchestrator
 tags: [orchestrator, phase-sequencing, roadmap-path-selection, spec-kit]
@@ -19,8 +19,8 @@ Changelog of this document:
 
 - v3.24: the v3.23 pointer's "five places" count removed - it disagreed with three other statements of the same number and had no owner; `docs/references/missing-data-vocabulary.md` now owns the enumeration (`fix-verifier` pass).
 - v3.23: the phase-exit brief's "not tracked (…)"/"none" strings now point at `docs/references/missing-data-vocabulary.md` as instances of a shared convention, rather than reading as this file's private invention - the same honest-absence rule was independently reinvented across the corpus before the vocabulary existed, each site with its own token (`007-missing-data-vocabulary`).
-- v3.22: Step 3's readiness checklist gains acceptance criteria, which it never listed - the nearest item was "The phase goal was achieved", so the one thing a phase gate exists to check had no line of its own. Recorded per criterion in three states (met directly / met via a local analog / not applicable with the reason), reusing the "'not applicable' must be stated, not skipped" formulation `adversarial.md` and `doc-consistency.md` already carry (`006-absorb-local-notes-011-accepted-items`).
-- Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
+- v3.22: Step 3's readiness checklist gains acceptance criteria, which it never listed - the nearest item was "The phase goal was achieved", so the one thing a phase gate exists to check had no line of its own. Recorded per criterion in three states (met directly / met via a local analog / not applicable with the reason), reusing the "'not applicable' must be stated, not skipped" formulation `agents/adversarial.md` and `agents/doc-consistency.md` already carry (`006-absorb-local-notes-011-accepted-items`).
+- Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
 
@@ -39,7 +39,7 @@ Use these files as source of truth and living memory:
 - `/docs/status.md`
 - `docs/STATE.md` (the generated consolidated snapshot; read this first for "where are we?" - `docs/manuals/operation-manual.md`, Step 13)
 - `/docs/governance.md`
-- `/CHANGELOG.md`
+- `CHANGELOG.md`
 - the current instruction documents in `agents/`, `docs/manuals/`, `docs/strategy/` (the roadmap), `docs/adr/`, and `docs/visuals/` — the directories `.github/CODEOWNERS` gates
 
 Starting condition: [fill in once decided - Greenfield or Brownfield]
