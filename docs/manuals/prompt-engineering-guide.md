@@ -3,9 +3,9 @@ title: "Prompt Engineering Guide"
 doc_type: manual
 description: "Authoring-quality guide for the individual prompts written during roadmap work - specification anatomy, example-driven specs, labeled context blocks, priority tags, staged multi-step prompting, chain-of-thought scaffolds, targeted refinement, comment-driven development - plus a versioned starter library of reusable prompt patterns including a security-audit checklist, each with a runtime trigger mapping it to its roadmap phase."
 status: active
-version: "1.10"
+version: "1.11"
 created: 2026-07-14
-updated: 2026-08-03
+updated: 2026-08-06
 language: en
 id: prompt-engineering-guide
 tags: [prompt-engineering, prompt-patterns, authoring-quality, code-generation, security-audit, runtime-triggers]
@@ -17,10 +17,10 @@ related: [operation-manual, roadmap]
 
 Changelog of this document:
 
-- v1.10: P10's scratch-doc scope now says **release cycle**; P4's security trigger keeps `increment`, which means the delivered capability, matching `roadmap.md` and the visual overview's identical wording (`008-market-standard-vocabulary`).
-- v1.9: P9 (v1.0 -> v1.1) is now a throwaway **surface** prototype, not only a taste prototype: its trigger covers information design (which facts belong on a surface, in what decomposition) alongside taste, since a surface whose taste is settled can still be wrong about what it shows. Gains a pitfall forbidding plausible invented numbers in a prototype. Section 12's trigger row updated in the same edit, as were `roadmap.md` Activity 4 and the visual overview's flowchart node - the same P9 pair desynced once before, per v1.6 below (`006-absorb-local-notes-011-accepted-items`).
-- v1.8: Re-linked Section 1's and Section 4's `basic-prompt-template.md` references, un-linked in v1.7 on the premise that `docs/prompts/` was absent from this repository; the file exists again as of `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` (`docs/prompts/003-close-restart-followon-drift.md`).
-- Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
+- v1.10: P10's scratch-doc scope now says **release cycle**; P4's security trigger keeps `increment`, which means the delivered capability, matching `docs/strategy/roadmap.md` and the visual overview's identical wording (`008-market-standard-vocabulary`).
+- v1.9: P9 (v1.0 -> v1.1) is now a throwaway **surface** prototype, not only a taste prototype: its trigger covers information design (which facts belong on a surface, in what decomposition) alongside taste, since a surface whose taste is settled can still be wrong about what it shows. Gains a pitfall forbidding plausible invented numbers in a prototype. Section 12's trigger row updated in the same edit, as were `docs/strategy/roadmap.md` Activity 4 and the visual overview's flowchart node - the same P9 pair desynced once before, per v1.6 below (`006-absorb-local-notes-011-accepted-items`).
+- v1.8: Re-linked Section 1's and Section 4's `docs/prompts/basic-prompt-template.md` references, un-linked in v1.7 on the premise that `docs/prompts/` was absent from this repository; the file exists again as of `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` (`docs/prompts/003-close-restart-followon-drift.md`).
+- Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
 

@@ -3,9 +3,9 @@ title: "Prompt 002: renumber ADR-0010 to ADR-0005, closing the unused-number gap
 doc_type: prompt
 description: "Renumbers docs/adr/0010-public-release.md to docs/adr/0005-public-release.md, the next sequential slot after 0004. The original 0010 numbering matched a private, external personal-os workspace's own numbering - a rationale the ADR itself only stated as 'most likely' and that stopped mattering once prompt-001 amended the same ADR to record the private source repo as archived and this repository as the sole source of truth. Updates every citing document's related: field, prose citation, and docs/STATE.md."
 status: archived
-version: "1.0"
+version: "1.1"
 created: 2026-07-31
-updated: 2026-07-31
+updated: 2026-08-06
 language: en
 id: 002-renumber-adr-0010-to-0005
 tags: [prompt, adr, governance, renumber]
@@ -44,7 +44,7 @@ Act as the maintainer of this repository's own ADR sequence, correcting a number
 
 Executed as a `git mv` plus edits across `README.md`, `docs/manuals/operation-manual.md`, `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md`, `CHANGELOG.md`, and a regenerated `docs/STATE.md`, on the existing branch `docs/restart-prompt-archive-source-of-truth`. Verification:
 
-1. `ls docs/adr/` shows `0005-public-release.md`, not `0010-public-release.md`.
+1. `ls docs/adr/` shows `docs/adr/0005-public-release.md`, not `0010-public-release.md`.
 2. `grep -rn "0010-public-release\|ADR-0010" README.md docs/manuals/operation-manual.md docs/prompts/001-restart-prompt-archive-and-source-of-truth.md CHANGELOG.md docs/STATE.md` returns nothing.
 3. `grep -rln "0010-public-release" .` returns only the three frozen changelog-entry files named in Task 3.
 4. `docgov check` passes (cross-reference check confirms every `related:` entry resolves).

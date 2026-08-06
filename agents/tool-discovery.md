@@ -3,9 +3,9 @@ title: "Tool Hunter Prompt"
 doc_type: instruction
 description: "Two-mode prior-art search before building from scratch: Mode A finds Claude Code tools (Agents, Skills, Hooks, MCP servers, Commands) for the catalog, Mode B finds product frameworks/libraries/services for roadmap Phase 1 Activity 11a's build-vs-buy record. Records any tool meeting a concrete need with a signed security level, rather than filtering candidates on a freshness/rating gate."
 status: active
-version: "1.8"
+version: "1.9"
 created: 2024-07-06
-updated: 2026-07-29
+updated: 2026-08-06
 language: en
 id: tool-discovery
 tags: [tool-hunter, subagent, tools, discovery, agent, catalog, build-vs-buy]
@@ -17,10 +17,10 @@ related: [tool-library-catalog, operation-manual, documentation-metadata-standar
 
 Changelog of this document:
 
-- v1.8: doc-consistency-reviewer batch fix: `## Tasks` step 1 now carries the "ask before proceeding if the mode is unclear" rule, previously only in the `.claude/agents/tool-hunter.md` adapter (a third recurrence of the same adapter-vs-canonical class `prompt-095`/`prompt-096` already fixed twice); Mode B's first bullet no longer paraphrases the "7-day freshness bar" contrast the Mode B heading was already rewritten to retire at v1.7 (prompt-096 verified only the exact retired phrase, missing this paraphrase); Context section no longer instructs a reader to invoke the Claude-Code-only adapter (prompt-097).
+- v1.8: doc-consistency-reviewer batch fix: `## Tasks` step 1 now carries the "ask before proceeding if the mode is unclear" rule, previously only in the `.claude/agents/tool-hunter.md` adapter (a third recurrence of the same adapter-vs-canonical class `prompt-095`/`prompt-096` (archived private-repo sequence, not a citable path in this repository) already fixed twice); Mode B's first bullet no longer paraphrases the "7-day freshness bar" contrast the Mode B heading was already rewritten to retire at v1.7 (prompt-096 verified only the exact retired phrase, missing this paraphrase); Context section no longer instructs a reader to invoke the Claude-Code-only adapter (prompt-097).
 - v1.7: doc-consistency-reviewer batch fix: retires the "7-day freshness bar" contrast from the Mode B heading (Mode A's own recency check was already redefined as supporting evidence, not a gate); the Mode A re-research caching rule, previously only in the `.claude/agents/tool-hunter.md` adapter, now also lives in this canonical file's Rules, Constraints, and Considerations section; `## Tasks` step 2's "passes vetting" wording corrected to match this file's own "not pass/fail gates" Mode A model (prompt-096).
-- v1.6: doc-consistency-reviewer batch fix: `## Tasks` step 2 now instructs bumping `tool-library-catalog.md`'s frontmatter `lastreviewed` field to today's date for Mode A - previously no instruction anywhere set this field after its initial creation (prompt-095).
-- Older entries: see `git log --follow` on this file (retention per `documentation-metadata-standard.md` Section 2.1, prompt-033).
+- v1.6: doc-consistency-reviewer batch fix: `## Tasks` step 2 now instructs bumping `docs/manuals/tool-library-catalog.md`'s frontmatter `lastreviewed` field to today's date for Mode A - previously no instruction anywhere set this field after its initial creation (prompt-095).
+- Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
 
@@ -68,5 +68,5 @@ After completing a search, reconcile the project: update the relevant catalog or
 ## Tasks
 
 1. Determine which mode applies — Mode A for a Claude Agent/Skill/Hook/MCP server/Command, Mode B for a product framework/library/service. If the mode is not clear from the request, ask the human before proceeding rather than guessing. In Claude Code this runs as the `tool-hunter` subagent (`.claude/agents/tool-hunter.md`).
-2. Record every candidate that meets a concrete, current need in the correct destination for its mode, with its signed security level (Mode A) (`docs/manuals/tool-library-catalog.md` for Mode A, the project's `/docs/references/build-vs-buy.md` for Mode B), each with a description of what it does and how to use it. For Mode A, also bump `tool-library-catalog.md`'s frontmatter `lastreviewed` field to today's date — it tracks the catalog's most recent review activity as a whole, not any single entry (see `documentation-metadata-standard.md` Section 3).
+2. Record every candidate that meets a concrete, current need in the correct destination for its mode, with its signed security level (Mode A) (`docs/manuals/tool-library-catalog.md` for Mode A, the project's `/docs/references/build-vs-buy.md` for Mode B), each with a description of what it does and how to use it. For Mode A, also bump `docs/manuals/tool-library-catalog.md`'s frontmatter `lastreviewed` field to today's date — it tracks the catalog's most recent review activity as a whole, not any single entry (see `docs/manuals/documentation-metadata-standard.md` Section 3).
 3. During the software development process, the human decides whether to adopt a found tool or solution, or let the AI proceed via the normal roadmap process — the agent proposes, it does not decide.

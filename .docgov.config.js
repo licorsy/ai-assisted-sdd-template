@@ -102,6 +102,84 @@ module.exports = {
       exempt: {
         fenced_code: true,
         self_qualifying: /archived private-repo sequence/,
+        // Reusa o marcador do próprio version_citations logo abaixo, pra que
+        // as duas regras concordem sobre a extensão do bloco de changelog.
+        inside_changelog_block: true,
+        changelog_marker: 'Changelog of this document:',
+        // Linhas de tabela do PROPOSAL-TRACKING.md com Status `deferred`/
+        // `rejected` (ver cabeçalho do arquivo, linha 20, pros cinco valores
+        // válidos) registram uma decisão já tomada sobre uma proposta - não
+        // uma reafirmação atual do que existe. A segunda alternativa cobre a
+        // mesma ideia em prosa fora de tabela (docs/adr/0002-audience-tier.md).
+        // `\b` (not a closing `\|`) on purpose: a Status cell isn't always
+        // the bare enum value alone - two rows carry a parenthetical
+        // qualifier in the same cell ("deferred (Bolt piece rejected)",
+        // "rejected (GEMINI/OPENAI) / deferred (KIRO)"). Verified repo-wide:
+        // the only other hit is a legend line ("Status: candidate | adopted
+        // | rejected") with no citation on it to mask.
+        completed_items: /\|\s*(?:deferred|rejected)\b|not yet a citable path in this repository/,
+        // `target_allowlist` (chave nova do motor, adicionada em paralelo em
+        // licorsy/docs-governance - engine mais antigo ignora chave
+        // desconhecida em silêncio, então este bloco é seguro de mesclar
+        // independente da ordem de merge entre os dois repositórios):
+        // citações que nunca resolvem NESTE repositório por design -
+        // referências futuras de um projeto gerado a partir deste template
+        // (`status.md`, `docs/risks.md`, `.specify/memory/constitution.md`
+        // etc. - artefatos que só existirão no projeto que adota o
+        // template, nunca aqui), nomes de saída de ferramentas de terceiros
+        // citados em docs/manuals/tool-library-catalog.md (EvolveHQ/docflow,
+        // a skill graphify, mattpocock/skills grilling), placeholders
+        // ilustrativos de uma convenção de nomenclatura (`NNN-slug.md`,
+        // `001-...md`), e o próprio caminho pré-renumeração deste
+        // repositório (`docs/adr/0010-public-release.md`, renumerado por
+        // `docs/prompts/002-renumber-adr-0010-to-0005.md` - citação de
+        // registro histórico, mantida deliberadamente morta). Casado contra
+        // o alvo bruto da citação (a string dentro dos crases), não a linha
+        // que a cita - cada forma (bare/`docs/`-prefixada/`/`-prefixada) é
+        // uma string distinta e só entra aqui se de fato citada no repo.
+        target_allowlist: [
+          'status.md', 'docs/status.md', '/docs/status.md',
+          'risks.md', 'docs/risks.md', '/docs/risks.md',
+          'handbook.md', 'docs/handbook.md', '/docs/handbook.md',
+          'governance.md', 'docs/governance.md', '/docs/governance.md',
+          'plan.md', 'docs/plan.md', '/docs/plan.md',
+          'prd.md', 'docs/prd.md', '/docs/prd.md',
+          'market.md', 'docs/business/market.md', '/docs/business/market.md',
+          'docs/task.md', 'tasks.md',
+          'docs/references/retrospective.md',
+          'docs/references/test-report.md', '/docs/references/test-report.md', 'test-report.md',
+          'docs/references/build-vs-buy.md', '/docs/references/build-vs-buy.md', 'build-vs-buy.md',
+          'docs/references/backlog.md', '/docs/references/backlog.md', 'backlog.md',
+          'docs/references/data-model.md', '/docs/references/data-model.md',
+          'docs/references/problem-statement.md', '/docs/references/problem-statement.md', 'problem-statement.md',
+          'docs/references/existing-system-inventory.md', '/docs/references/existing-system-inventory.md', 'existing-system-inventory.md',
+          'docs/references/requirements.md', '/docs/references/requirements.md', 'requirements.md',
+          '/docs/references/user-stories.md', 'user-stories.md',
+          '/docs/references/mvp-scope.md', 'mvp-scope.md',
+          '/docs/references/brainstorm.md', 'brainstorm.md',
+          '/docs/references/tree-of-thought-brainstorm.md', 'tree-of-thought-brainstorm.md',
+          '/docs/references/integration-points.md', 'integration-points.md',
+          '.specify/memory/constitution.md', '.specify/memory/clarifications.md', '.specify/plans/technical-strategy.md',
+          '/docs/adr/0000-adr-template.md',
+          // Referência futura a um ADR-0001 de um PROJETO GERADO por este
+          // template - distinto de docs/manuals/examples/adr-0001-
+          // documentation-and-governance-model.md (o exemplo trabalhado real
+          // deste repositório), confirmado por docs/adr/0004-docs-category-
+          // directories.md.
+          '/docs/adr/0001-documentation-and-governance-model.md',
+          'docs/business/pricing.md', 'docs/business/positioning.md',
+          // Caminho pré-renumeração deste próprio repositório, morto por
+          // design (ver comentário do bloco acima).
+          'docs/adr/0010-public-release.md', '0010-public-release.md',
+          'NNN-slug.md', 'NNN-prompt-slug.md', 'docs/prompts/NNN-prompt-slug.md',
+          'docs/prompts/001-003.md', 'docs/prompts/001-...md', '001-...md', '002-...md',
+          'security-baseline.opt-in.md', 'property-based-testing.opt-in.md',
+          'GLOSSARY.md', 'CONTEXT.md', 'GRAPH_REPORT.md', 'CONVENTIONS.md', 'INDEX.md', 'SKILL.md',
+          'adr/0000-template.md', 'skills/productivity/grilling/SKILL.md',
+          // Nome proposto e nunca lançado (PROPOSAL-TRACKING.md R008-5.2);
+          // `feature_request.md` foi o que de fato foi lançado em seu lugar.
+          '.github/ISSUE_TEMPLATE/improvement.md',
+        ],
       },
 
       why: 'operation-manual.md Step 12 regra 3 - o motivo de existência desta regra '
