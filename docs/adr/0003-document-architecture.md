@@ -3,9 +3,9 @@ title: "ADR-0003: Document architecture principles"
 doc_type: adr
 description: "Records the deliberate design patterns behind this repository's document system as accepted, reviewable decisions: one responsibility per document, thin sync-enforced Adapters as tool entry points, a generated Facade (docs/STATE.md) as the single state read, pointer-over-copy with one owner per cumulative fact, mechanical drift checks over manual discipline wherever a rule is checkable, and the boundary on all of it - the class of fact that only exists if it is recorded as it happens, which no later derivation can recover."
 status: active
-version: "1.4"
+version: "1.5"
 created: 2026-07-13
-updated: 2026-08-03
+updated: 2026-08-06
 language: en
 id: 0003-document-architecture
 tags: [adr, document-architecture, solid, adapter, facade, drift-detection]
@@ -17,7 +17,7 @@ related: [operation-manual, documentation-metadata-standard, 0002-audience-tier]
 
 ## Status
 
-Accepted (2026-07-13). Amended 2026-07-28 (v1.1 → v1.2): principle 4 extended to cover duplicated enumerations and counts, not just duplicated prose (`prompt-087`); principle 5's checker list gained `check-scope-consistency.js` (`prompt-088`). Amended 2026-07-29 (v1.2 → v1.3): principles 2 and 5 gained `check-adapter-rules.js`, built after "an operating rule stated only in a `.claude/` adapter, never its canonical prompt" recurred a fourth time across three review agents at once (`prompt-098`). None of these amendments change the five principles' substance. Amended 2026-08-03 (v1.3 → v1.4): a sixth principle added — some facts are not retroactively derivable — as the declared counterweight to principle 4, whose "derive it, don't duplicate it" instinct had no stated boundary; principle 4 extended to name the cumulative-fact ownership form directly; principle 5's checker list re-pointed at `.docgov.config.js` after `validate-docs-frontmatter.js`, `check-internal-links.js` and `check-changelog-retention.js` moved into the shared engine and their workflows were retired, which the list had not reflected (`006-absorb-local-notes-011-accepted-items`).
+Accepted (2026-07-13). Amended 2026-07-28 (v1.1 → v1.2): principle 4 extended to cover duplicated enumerations and counts, not just duplicated prose (`prompt-087`); principle 5's checker list gained `check-scope-consistency.js` (`prompt-088`). Amended 2026-07-29 (v1.2 → v1.3): principles 2 and 5 gained `check-adapter-rules.js`, built after "an operating rule stated only in a `.claude/` adapter, never its canonical prompt" recurred a fourth time across three review agents at once (`prompt-098` (archived private-repo sequence, not a citable path in this repository)). None of these amendments change the five principles' substance. Amended 2026-08-03 (v1.3 → v1.4): a sixth principle added — some facts are not retroactively derivable — as the declared counterweight to principle 4, whose "derive it, don't duplicate it" instinct had no stated boundary; principle 4 extended to name the cumulative-fact ownership form directly; principle 5's checker list re-pointed at `.docgov.config.js` after `validate-docs-frontmatter.js`, `check-internal-links.js` and `check-changelog-retention.js` moved into the shared engine and their workflows were retired, which the list had not reflected (`006-absorb-local-notes-011-accepted-items`).
 
 ## Context
 

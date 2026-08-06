@@ -3,9 +3,9 @@ title: "ADR-0005: Public-mirror release via licorsy/ai-assisted-sdd-template"
 doc_type: adr
 description: "Records the decision to publish a new public repository, licorsy/ai-assisted-sdd-template, seeded with a single fresh commit and no carried-over history, as this template's public home - rather than flipping aleclemente/ai-assisted-sdd-template's own visibility. Amended 2026-07-31 (v1.2): the private repository was archived and this repository is now the sole source of truth where development happens - the original 'private repo stays sole place development happens, mirror refreshed by on-demand export' arrangement no longer holds. Renumbered from 0010 to 0005 in the same session (v1.3), closing the unused-number gap."
 status: active
-version: "1.4"
+version: "1.5"
 created: 2026-07-30
-updated: 2026-07-31
+updated: 2026-08-06
 language: en
 id: 0005-public-release
 tags: [adr, public-release, governance, licorsy]
@@ -29,13 +29,13 @@ Corrected 2026-07-31 (v1.3 → v1.4): Consequences and Confidence below still as
 
 `local-notes/012-sanitizacao-para-repositorio-publico.txt` names "ADR-0010" as the decision to make this template public, but no such ADR existed prior to this one — the make-public call was originally made in the user's separate, private `personal-os` workspace, and prompt `100`'s own research confirmed no local ADR backed it. `100` distilled that note's checklist into a same-repo action: audit `aleclemente/ai-assisted-sdd-template`'s full git history for secrets/PII, then flip its own GitHub visibility to public.
 
-That approach carries real cost: years of commit history would need to be grepped and, if anything is found, rewritten (`git filter-repo`/BFG) before the repository could safely go public — the highest-risk and highest-effort path available. Meanwhile, `licorsy` already exists as this user's public-tooling GitHub organization, currently holding `git-governance` and `docs-governance` (prompts `099` and `101`), both plugins already extracted from this same template's own work. Publishing the template itself under the same organization was considered as an alternative to publishing it in place. (Prompts `099`-`101`, like `100`, belong to the archived private source repository's own pre-2026-07-31 sequence — not citable paths in this repository, per `operation-manual.md` Step 12 rule 3; see `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md`.)
+That approach carries real cost: years of commit history would need to be grepped and, if anything is found, rewritten (`git filter-repo`/BFG) before the repository could safely go public — the highest-risk and highest-effort path available. Meanwhile, `licorsy` already exists as this user's public-tooling GitHub organization, currently holding `git-governance` and `docs-governance` (prompts `099` and `101`), both plugins already extracted from this same template's own work. Publishing the template itself under the same organization was considered as an alternative to publishing it in place. (Prompts `099`-`101`, like `100`, belong to the archived private source repository's own pre-2026-07-31 sequence — not citable paths in this repository, per `docs/manuals/operation-manual.md` Step 12 rule 3; see `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md`.)
 
 ## Decision
 
 Publish `licorsy/ai-assisted-sdd-template` as a new public repository, seeded with a single fresh commit built from this repository's current `main` (no carried-over history). `aleclemente/ai-assisted-sdd-template` stays private and remains the sole repository where prompt-driven development happens. The public mirror is kept current afterward by a deliberate, on-demand export — a sanitization gate followed by a tree export, commit, and push — not a continuous or automatic sync; it updates when the user decides something is release-ready, not on every merge to `develop`.
 
-`main` is already this repository's protected, stable branch per `prompt-101`'s git-governance adoption (branch-naming taxonomy, permission matrix, GitHub-native protection). This decision documents that `main` is what gets exported to the public mirror; it neither changes nor re-decides any of `101`'s existing git mechanics.
+`main` is already this repository's protected, stable branch per `prompt-101` (archived private-repo sequence, not a citable path in this repository)'s git-governance adoption (branch-naming taxonomy, permission matrix, GitHub-native protection). This decision documents that `main` is what gets exported to the public mirror; it neither changes nor re-decides any of `101`'s existing git mechanics.
 
 The sanitization-gate script, the initial migration itself, and the repeatable sync mechanism were specified in a later prompt (`108`, archived private-repo sequence, not a citable path in this repository), not this one — this ADR records the decision that prompt executed against. That mechanism is now retired; see the v1.2 Status amendment above.
 

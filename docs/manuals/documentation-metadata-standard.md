@@ -3,9 +3,9 @@ title: "Documentation Metadata Standard"
 doc_type: instruction
 description: "Defines the mandatory YAML frontmatter schema for every Markdown documentation file and roadmap-generated artifact in this repository, and the rule for applying it whenever such a file is created or materially updated."
 status: active
-version: "1.27"
+version: "1.28"
 created: 2026-07-07
-updated: 2026-08-03
+updated: 2026-08-06
 language: en
 id: documentation-metadata-standard
 tags: [frontmatter, metadata, documentation-standard, retrieval, rag, diataxis]
@@ -17,7 +17,7 @@ related: [operation-manual, roadmap, adr-0001-documentation-and-governance-model
 
 Changelog of this document:
 
-- v1.27: Section 1's `docs/manuals/` and `docs/references/` scope lists and Section 4's `manual` `doc_type` row gain the two documents added this batch (`glossary.md`, `missing-data-vocabulary.md`). A `fix-verifier` pass caught this: the batch had diagnosed the enumeration-drift class and then reproduced it, in the very table a prompt in the same batch flagged as previously fixed for it (`008-market-standard-vocabulary`, `007-missing-data-vocabulary`).
+- v1.27: Section 1's `docs/manuals/` and `docs/references/` scope lists and Section 4's `manual` `doc_type` row gain the two documents added this batch (`docs/manuals/glossary.md`, `docs/references/missing-data-vocabulary.md`). A `fix-verifier` pass caught this: the batch had diagnosed the enumeration-drift class and then reproduced it, in the very table a prompt in the same batch flagged as previously fixed for it (`008-market-standard-vocabulary`, `007-missing-data-vocabulary`).
 - v1.26: Section 9's enforcement sentence now states that none of the automated checks run in a project created from this template outside the `licorsy` organization. The `ci-docs` job gained an `if: github.repository_owner == 'licorsy'` guard, making the template's dependency on Licorsy-controlled workflows explicit rather than silent; without that caveat this section promised adopters automation they do not receive.
 - v1.25: Section 1 realigned to the org-wide rule that every tracked Markdown file carries the schema. The blanket "repository entry points" exemption is replaced by a stated test — another system already owns the file's frontmatter as a functional contract, or renders/injects its raw content verbatim — under which only `README.md` (GitHub renders frontmatter as a visible table) and `CHANGELOG.md` (Keep a Changelog owns its structure) remain exempt, joined by the GitHub-owned PR and issue templates. `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `SECURITY.md`, and `CODE_OF_CONDUCT.md` move into scope via `doc-scope.js`'s `SCOPE_FILES`; the first two gained frontmatter in the same change, the latter three already carried it while going unvalidated.
 - Older entries: see `git log --follow` on this file.
@@ -30,14 +30,14 @@ Every Markdown documentation file in this repository, and every Markdown artifac
 
 Applies to:
 
-- `agents/` — live subagent operating instructions: `orchestrator.md`, `phase-reviewer.md`, `tool-discovery.md`, `adversarial.md`, `init.md`, `doc-consistency.md`.
+- `agents/` — live subagent operating instructions: `agents/orchestrator.md`, `agents/phase-reviewer.md`, `agents/tool-discovery.md`, `agents/adversarial.md`, `agents/init.md`, `agents/doc-consistency.md`.
 - `docs/manuals/` — the operation manual, this standard, the role guide, the glossary, the prompt-engineering and agent-design guides, and the tool catalog; `docs/manuals/examples/` holds the worked examples an adopter replaces (governance, risk register, example ADR, and an optional Phase 1 PRFAQ scaffold).
 - `docs/strategy/` — the execution roadmap and the optional go-to-market roadmap.
 - `docs/adr/` — this template's real ADRs (`0002`-`0005`).
 - `docs/visuals/` — the template visual overview.
 - `docs/references/` — this template's own reference material for adopters: token-economy decisions, the unvetted tools-ecosystem shortlist, the missing-data vocabulary, and the `infra-templates/`, `telemetry-template/`, and `gate-verification-template/` READMEs (nested one level deep; the lint walks recursively).
-- `docs/prompts/` — this repository's change-as-prompt records, kept flat (see Section 4.1): `draft`/`active` prompts describe changes in flight, `archived`/`deprecated` ones are frozen historical record; plus the blank prompt template and `PROMPT-INDEX.md`, the id/status/purpose index over them (`doc_type: status-artifact`, Section 4).
-- `docs/reports/` — external improvement reports and `PROPOSAL-TRACKING.md`, the status index tracking every proposal each report contains.
+- `docs/prompts/` — this repository's change-as-prompt records, kept flat (see Section 4.1): `draft`/`active` prompts describe changes in flight, `archived`/`deprecated` ones are frozen historical record; plus the blank prompt template and `docs/prompts/PROMPT-INDEX.md`, the id/status/purpose index over them (`doc_type: status-artifact`, Section 4).
+- `docs/reports/` — external improvement reports and `docs/reports/PROPOSAL-TRACKING.md`, the status index tracking every proposal each report contains.
 - Any Markdown artifact the roadmap generates elsewhere under `docs/` (e.g. `docs/business/`) or under `.specify/` during Phases 0-8 (see Section 7) — this is a *different* project's own generated content, coexisting under the same `docs/` root as this template's own `manuals/`/`prompts/` once the roadmap actually runs; see the reorg's own note in `docs/manuals/operation-manual.md`'s "Important note for this repository."
 - `docs/STATE.md` — the generated repository-state facade (regenerated by `.github/scripts/generate-state.js`; hand-edits are a violation, see `docs/adr/0003-document-architecture.md` principle 3). It sits at the `docs/` root rather than in a category directory, so `.github/scripts/doc-scope.js`'s `CATEGORY_DIRS` does not reach it and the frontmatter-lint CI check does not cover it; its schema is maintained by the generator script instead.
 - `docs/handbook.md`, `docs/status.md`, once they exist.
@@ -80,10 +80,10 @@ Add when meaningful:
 | `id` | kebab-case string | Stable identifier decoupled from filename or version; the target of `related` links, so links survive renames and version bumps. |
 | `tags` | array of strings | Free-form keywords for hybrid keyword+vector search and faceted filtering. |
 | `owner` | string | Who to ask about the doc (Dublin Core `creator`/`contributor`). |
-| `related` | array of `id` values | Graph-style retrieval expansion (Dublin Core `relation`) — for example, pulling in the roadmap when the orchestrator prompt is retrieved. Edges are directional, not required to be symmetric: list a document here when retrieving *this* file should pull it in; do not add a back-edge purely because another file points here. Hub documents (`roadmap.md`, `operation-manual.md`) are deliberately pointed *at* by many files without listing them all back. |
+| `related` | array of `id` values | Graph-style retrieval expansion (Dublin Core `relation`) — for example, pulling in the roadmap when the orchestrator prompt is retrieved. Edges are directional, not required to be symmetric: list a document here when retrieving *this* file should pull it in; do not add a back-edge purely because another file points here. Hub documents (`docs/strategy/roadmap.md`, `docs/manuals/operation-manual.md`) are deliberately pointed *at* by many files without listing them all back. |
 | `diataxis` | enum: `tutorial \| how-to \| reference \| explanation` | Only meaningful for `doc_type: product-doc`. See Section 5. |
 | `phase` | string, e.g. `"Phase 1 - Discovery"` | Which roadmap phase produced or owns the artifact. Omit for docs not tied to a single phase. |
-| `lastreviewed` | date `YYYY-MM-DD` | Only meaningful for `doc_type: tool-catalog`. File-level: the most recent date any entry in the catalog was added, edited, or reconfirmed accurate — not a per-entry claim (each entry's own "checked on" vetting-evidence field, see `tool-library-catalog.md`'s Entry schema, carries entry-specific freshness). Distinct from `updated`, which only means the file's content changed. |
+| `lastreviewed` | date `YYYY-MM-DD` | Only meaningful for `doc_type: tool-catalog`. File-level: the most recent date any entry in the catalog was added, edited, or reconfirmed accurate — not a per-entry claim (each entry's own "checked on" vetting-evidence field, see `docs/manuals/tool-library-catalog.md`'s Entry schema, carries entry-specific freshness). Distinct from `updated`, which only means the file's content changed. |
 
 ## 4. `doc_type` values
 
@@ -93,11 +93,11 @@ Add when meaningful:
 | `manual` | `docs/manuals/`, `docs/visuals/` | Human-facing guides that are neither operating instructions nor a catalog: the role guide, the glossary, the prompt-engineering and agent-design guides, and the visual overview. |
 | `prompt` | `docs/prompts/` | Change-as-prompt records kept as flat reference material - `draft`/`active` prompts describe changes in flight, `archived`/`deprecated` ones are historical. No physical lifecycle subfolder; `status` alone conveys lifecycle stage. See Section 4.1. |
 | `template` | `docs/prompts/`; the worked-example PRFAQ scaffold stays at `docs/manuals/examples/` | Same physical location as `prompt` in `docs/prompts/`; `doc_type` distinguishes a reusable blank scaffold from a prompt with real content. |
-| `tool-catalog` | `docs/manuals/` | Single lean file (`tool-library-catalog.md`), not one file per tool; entry schema is defined inside the file itself. |
-| `governance` | `docs/manuals/examples/` (this template's own worked examples); `/docs/` root in a generated project (`governance.md`, `risks.md`, scaffolded by `agents/init.md`) | Decision rights, risk register. |
+| `tool-catalog` | `docs/manuals/` | Single lean file (`docs/manuals/tool-library-catalog.md`), not one file per tool; entry schema is defined inside the file itself. |
+| `governance` | `docs/manuals/examples/` (this template's own worked examples); `/docs/` root in a generated project (`docs/manuals/examples/governance.md`, `docs/manuals/examples/risks.md`, scaffolded by `agents/init.md`) | Decision rights, risk register. |
 | `adr` | `docs/adr/*.md` (real ADRs); the worked-example ADR stays at `docs/manuals/examples/` | Frontmatter `status` mirrors the ADR body's own `## Status` section: Accepted -> `active`, Proposed -> `draft`, Deprecated/Superseded -> `deprecated`. Keep the two in sync. |
 | `status-artifact` | `docs/handbook.md`, `docs/status.md`, `docs/STATE.md`, `docs/prompts/PROMPT-INDEX.md`, `docs/reports/PROPOSAL-TRACKING.md` (`CHANGELOG.md` is out of scope — see Section 1) | Frequently-updated living-memory docs. |
-| `product-doc` | `docs/*.md`, `docs/references/**/*.md`, `docs/reports/*.md` (external improvement reports; `PROPOSAL-TRACKING.md` is `status-artifact` instead — see the row above), `docs/business/*.md` (future), plus `QUICKSTART.md` (see Section 1) | Diataxis-governed per ADR-0001; use `diataxis` to refine. |
+| `product-doc` | `docs/*.md`, `docs/references/**/*.md`, `docs/reports/*.md` (external improvement reports; `docs/reports/PROPOSAL-TRACKING.md` is `status-artifact` instead — see the row above), `docs/business/*.md` (future), plus `QUICKSTART.md` (see Section 1) | Diataxis-governed per ADR-0001; use `diataxis` to refine. |
 | `spec-kit-artifact` | `.specify/**/*.md` (future) | Spec Kit's own regenerable memory. Frontmatter here is best-effort: Spec Kit tooling may regenerate these files and could strip custom frontmatter. Do not treat this class as a hard guarantee. |
 
 ### 4.1 Prompt lifecycle state (no physical folder)
@@ -130,7 +130,7 @@ Files with no prior pseudo-metadata at all get `created`/`updated` from `git log
 
 ## 7. Forward-looking guidance for roadmap artifacts
 
-The roadmap (`docs/strategy/roadmap.md`) generates most of its artifacts under `docs/` and `.specify/`, most of which don't exist yet in this repository — only Phase 0's governance/risk/ADR outputs have been produced so far, and they now live under `docs/manuals/examples/` (`governance.md`, `risks.md`, `adr-0001-documentation-and-governance-model.md`) as this template's own worked examples rather than at `docs/admin/...`/`docs/adr/...`, since this template repo is meant to become the project repo rather than stay a separate scaffold (see `docs/manuals/operation-manual.md`'s own "Important note for this repository"). This table is non-binding guidance for whoever executes the remaining phases later; it is not enforced today because most of these files don't exist:
+The roadmap (`docs/strategy/roadmap.md`) generates most of its artifacts under `docs/` and `.specify/`, most of which don't exist yet in this repository — only Phase 0's governance/risk/ADR outputs have been produced so far, and they now live under `docs/manuals/examples/` (`docs/manuals/examples/governance.md`, `docs/manuals/examples/risks.md`, `docs/manuals/examples/adr-0001-documentation-and-governance-model.md`) as this template's own worked examples rather than at `docs/admin/...`/`docs/adr/...`, since this template repo is meant to become the project repo rather than stay a separate scaffold (see `docs/manuals/operation-manual.md`'s own "Important note for this repository"). This table is non-binding guidance for whoever executes the remaining phases later; it is not enforced today because most of these files don't exist:
 
 | Future artifact | `doc_type` | `diataxis` | `phase` |
 | --- | --- | --- | --- |

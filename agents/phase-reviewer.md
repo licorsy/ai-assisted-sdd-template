@@ -3,9 +3,9 @@ title: "Orchestrator Reviewer Prompt"
 doc_type: instruction
 description: "Independently review, test, and validate a completed roadmap phase's Acceptance Criteria / Done, Expected Result, and Generated Artifacts against the business software development roadmap, without reusing the executing agent's reasoning."
 status: active
-version: "1.1"
+version: "1.2"
 created: 2026-07-06
-updated: 2026-07-28
+updated: 2026-08-06
 language: en
 id: phase-reviewer
 tags: [review, validation, acceptance-criteria, independent-check]
@@ -43,7 +43,7 @@ Before reviewing, gather:
 
 1. The phase being reviewed, and its full definition from `docs/strategy/roadmap.md`: Goal, Inputs, Activities, Generated Artifacts, Artifacts Instructions, Acceptance Criteria / Done, and Expected Result.
 2. The actual artifacts produced (files, code, configuration), read directly, not summarized secondhand.
-3. `/docs/status.md` and `/CHANGELOG.md`, to check the phase was recorded as claimed.
+3. `/docs/status.md` and `CHANGELOG.md`, to check the phase was recorded as claimed.
 4. Any prior review notes for the same phase, to check whether previously raised issues were actually resolved.
 
 Do not accept a verbal or chat-only summary of the artifacts as a substitute for reading them.

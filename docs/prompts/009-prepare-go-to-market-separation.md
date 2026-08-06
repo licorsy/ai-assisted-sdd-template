@@ -3,9 +3,9 @@ title: "Prompt 009: prepare the go-to-market separation without performing the r
 doc_type: prompt
 description: "Does the reversible half of moving docs/strategy/go-to-market.md out to the Licorsy organization: preserves inside roadmap.md the Activities 9-14 ownership statement that currently exists only inside the file slated for removal, amends ADR-0004 (which defines docs/strategy/ as holding both documents), and records the complete inbound-reference map including three references the source proposal's table missed and one mechanical claim it got wrong. The file itself is NOT removed - the organization side must hold the content first."
 status: archived
-version: "1.1"
+version: "1.2"
 created: 2026-08-03
-updated: 2026-08-04
+updated: 2026-08-06
 language: en
 id: 009-prepare-go-to-market-separation
 tags: [prompt, scope-boundary, go-to-market, adr, preparation]
@@ -29,19 +29,19 @@ What leaves is one whole document: `docs/strategy/go-to-market.md`, whose seven 
 
 **Three verification findings change how this is executed:**
 
-1. **The overlap risk runs backwards from how the proposal framed it.** The proposal warned that moving the document wholesale would leave "two owners for the same fact" and said to decide who owns positioning *before* the move. But ownership is already decided, in writing — and the writing is inside the file being removed. `go-to-market.md` states that it *"references, and does not duplicate"* `roadmap.md` Phase 1 Activities 9-14, and restates the dependency inline as its Phase 1 Goal and Inputs. There is no double ownership today. **Deleting the file is what would create the vacuum**, by destroying the only statement in the repository that the roadmap owns that output.
+1. **The overlap risk runs backwards from how the proposal framed it.** The proposal warned that moving the document wholesale would leave "two owners for the same fact" and said to decide who owns positioning *before* the move. But ownership is already decided, in writing — and the writing is inside the file being removed. `docs/strategy/go-to-market.md` states that it *"references, and does not duplicate"* `docs/strategy/roadmap.md` Phase 1 Activities 9-14, and restates the dependency inline as its Phase 1 Goal and Inputs. There is no double ownership today. **Deleting the file is what would create the vacuum**, by destroying the only statement in the repository that the roadmap owns that output.
 
 2. **The proposal's mechanical evidence is wrong.** It offers `grep -niE "pricing|invoice|contract|revenue|margin|client|billing|monetiz|agency" docs/strategy/roadmap.md` as returning **nothing**, proving the engineering roadmap is already free of business-building content. It returns **one line** — Phase 3's adversarial-review trigger, on *"external contracts"* in the API sense. The conclusion survives; the evidence as stated does not, and anyone re-running the command as written would reasonably distrust the item.
 
-3. **The reference table misses three live references.** All ten line numbers it gives are correct. But it omits `documentation-metadata-standard.md`'s `doc_type` enum table, which is a **second, linter-relevant** reference distinct from the scope row it does list — and `CHANGELOG.md` records that this exact table was already fixed once for drifting against Section 1, so leaving it would re-open a known defect class. It also omits a second historical `CHANGELOG.md` entry and the file's own internal self-reference.
+3. **The reference table misses three live references.** All ten line numbers it gives are correct. But it omits `docs/manuals/documentation-metadata-standard.md`'s `doc_type` enum table, which is a **second, linter-relevant** reference distinct from the scope row it does list — and `CHANGELOG.md` records that this exact table was already fixed once for drifting against Section 1, so leaving it would re-open a known defect class. It also omits a second historical `CHANGELOG.md` entry and the file's own internal self-reference.
 
 The organization side (`licorsy/.github`) has not yet received the content. Removing the file here first would open a window in which it exists nowhere.
 
 ## TASK
 
-1. **Preserve the boundary statement inside `roadmap.md`.** State, where Phase 1's activities are defined, that Activities 9, 10 and 12 are product discovery and belong to this roadmap — and that a commercial-lifecycle roadmap builds on their output rather than re-deriving it. This must read correctly both today, while `go-to-market.md` still exists, and after it is gone.
+1. **Preserve the boundary statement inside `docs/strategy/roadmap.md`.** State, where Phase 1's activities are defined, that Activities 9, 10 and 12 are product discovery and belong to this roadmap — and that a commercial-lifecycle roadmap builds on their output rather than re-deriving it. This must read correctly both today, while `docs/strategy/go-to-market.md` still exists, and after it is gone.
 
-2. **Amend `ADR-0004`.** Its Decision section defines `docs/strategy/` as holding `roadmap.md` **and** `go-to-market.md`. Record that the second is slated to leave, why, and that the ADR's directory decision is unaffected — a governance act, not a text edit.
+2. **Amend `ADR-0004`.** Its Decision section defines `docs/strategy/` as holding `docs/strategy/roadmap.md` **and** `docs/strategy/go-to-market.md`. Record that the second is slated to leave, why, and that the ADR's directory decision is unaffected — a governance act, not a text edit.
 
 3. **Record the complete reference map** inside this prompt, so the eventual removal is mechanical rather than a re-hunt: the ten references the proposal listed, the three it missed, and the note that `.github/CODEOWNERS`, `step-reference-check.yml`, and `doc-scope.js` are directory-scoped and therefore unaffected.
 
@@ -61,7 +61,7 @@ The organization side (`licorsy/.github`) has not yet received the content. Remo
 | `docs/STATE.md` | Generated; regenerates itself |
 | `CHANGELOG.md` (two entries), `docs/reports/PROPOSAL-TRACKING.md` | **Historical — leave as written**, per this repository's convention for dated records. The proposal's table named only one of the two changelog entries |
 | `docs/strategy/go-to-market.md`'s own internal self-reference | **Missed by the source proposal.** Travels with the file |
-| `.github/CODEOWNERS`, `.github/workflows/step-reference-check.yml`, `.github/scripts/doc-scope.js` | **No action.** Directory-scoped, not file-scoped; `roadmap.md` keeps them alive |
+| `.github/CODEOWNERS`, `.github/workflows/step-reference-check.yml`, `.github/scripts/doc-scope.js` | **No action.** Directory-scoped, not file-scoped; `docs/strategy/roadmap.md` keeps them alive |
 
 ## REQUIREMENTS, CONSTRAINTS AND RULES
 
@@ -73,6 +73,6 @@ The organization side (`licorsy/.github`) has not yet received the content. Remo
 
 ## FORMAT AND OUTPUT
 
-Executed as edits to `docs/strategy/roadmap.md` and `docs/adr/0004-docs-category-directories.md`, plus `CHANGELOG.md`, `PROMPT-INDEX.md`, and a regenerated `docs/STATE.md`. No file is removed.
+Executed as edits to `docs/strategy/roadmap.md` and `docs/adr/0004-docs-category-directories.md`, plus `CHANGELOG.md`, `docs/prompts/PROMPT-INDEX.md`, and a regenerated `docs/STATE.md`. No file is removed.
 
 Verification: the five repo-local governance scripts pass, `docgov check` exits 0, and `docs/strategy/go-to-market.md` is byte-identical to its state before this prompt.
