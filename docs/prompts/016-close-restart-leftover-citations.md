@@ -2,8 +2,8 @@
 title: "Prompt 016: close prompt 001's two deferred citation findings"
 doc_type: prompt
 description: "Closes the two doc-consistency-reviewer findings prompt 001 deliberately left for a follow-up pass. They look identical to the mechanical check and are not: one is a false claim about this repository and gets corrected, the other is a citation of a file that only ever existed in the archived private repository and gets qualified. The 567-item dead-citation backlog is explicitly out of scope."
-status: active
-version: "1.1"
+status: archived
+version: "1.2"
 created: 2026-08-04
 updated: 2026-08-06
 language: en
@@ -69,3 +69,5 @@ Verification:
 1. `docgov check` exits 0, and the shadow findings are compared **as a set, before and after** — not as a total. A net count is the wrong instrument here: this prompt is itself an in-scope file that cites the same unresolvable names it is about, so it necessarily adds findings of its own while removing others. The check is that every finding resolved is one this batch targeted, and every finding added is accounted for.
 2. Each replacement citer in rows 4 and 14 is confirmed by search to actually cite the artifact.
 3. `node --test .github/scripts/*.test.js` passes; no script is touched, so this confirms no collateral damage.
+
+**Archived 2026-08-06, after a verification pass corrected what this prompt got wrong.** Criteria 2 and 3 held on first read. Criterion 1 did not: a `fix-verifier` pass found that qualifying row 16's citation had silently exempted a second, unrelated citation on the same line — a bare-filename reference to the proposal-tracking report (no directory prefix, so it never resolved) that was hidden rather than fixed, in exactly the shape this prompt's own `[CRITICAL]` rule warns against. The same pass found four numeric/technical inaccuracies this prompt's own body and `CHANGELOG.md` entry had recorded (a backwards description of how `resolveCitedPath` resolves bare filenames, an off-by-2 `docs/manuals` count, an "eight sites" claim where seven was correct, and a "three resolved" delta that wasn't three targeted sites each resolving one finding). `docs/prompts/017-fix-prompt-016-verification-findings.md` fixed all five as a named batch and is the record of what changed and how it was verified. This prompt's own criteria are true now, not because they were true at merge time.
