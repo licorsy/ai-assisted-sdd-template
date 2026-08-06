@@ -2,8 +2,8 @@
 title: "Prompt 019: mechanical batch closing two of the four dead_citations backlog categories"
 doc_type: prompt
 description: "Named batch fusing the two mechanical slices of the 564-item dead_citations shadow backlog, discovered by direct measurement rather than assumed from prior notes: 212 wrong-directory citations (path correction) and 51 archived-private-repo prompt-NNN references (qualifier insertion). Fused into one prompt on 2026-08-06 by explicit request, after the first two of what would otherwise have been four to five separate prompts in one session. The other two categories (template-target forward-references, a CONTRIBUTING/SECURITY/CODE_OF_CONDUCT scope gap) stay separate — each needs an actual design decision, not a mechanical transform, and fusing them in would violate the same individually-minor test this fusion itself relies on."
-status: active
-version: "1.1"
+status: archived
+version: "1.2"
 created: 2026-08-06
 updated: 2026-08-06
 language: en
