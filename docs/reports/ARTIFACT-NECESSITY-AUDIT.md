@@ -3,9 +3,9 @@ title: "Artifact Necessity Audit: docs/manuals/, docs/references/, docs/reports/
 doc_type: product-doc
 description: "One-time audit of every file in docs/manuals/, docs/references/, and docs/reports/ for whether it is genuinely needed for SDD development, each with a keep/simplify/remove verdict and its evidence. Produced by prompt-106, answering local-notes/012's artifact-necessity ask for these three directories; docs/prompts/ is out of scope here (see prompt-105's ledger enrichment instead), as are agents/, docs/adr/, docs/strategy/, docs/visuals/."
 status: active
-version: "1.2"
+version: "1.3"
 created: 2026-07-30
-updated: 2026-08-04
+updated: 2026-08-06
 language: en
 id: artifact-necessity-audit
 tags: [status-artifact, audit, documentation, governance]
@@ -39,5 +39,5 @@ Scope: every file under `docs/manuals/`, `docs/references/`, and `docs/reports/`
 | 13 | `docs/references/telemetry-template/README.md` | keep | Same opt-in reusable-template role as #11; a separate telemetry-self-adoption decision this session does not affect this template file's own validity. |
 | 14 | `docs/references/token-economy.md` | keep | Records live, active decisions (Graphify adoption) that `README.md`'s Key documents section points to directly. |
 | 15 | `docs/references/tools-ecosystem.md` | simplify | Actively used by `agents/tool-discovery.md` as a shortlist, but its own description ("unvetted tools-ecosystem shortlist") signaled unclear scope — tightened to say what "unvetted" does and doesn't commit the reader to. |
-| 16 | `docs/reports/008-relatorio-melhorias-v6.md` (archived private-repo sequence, not a citable path in this repository) | simplify | Every proposal is fully triaged (0 `not-triaged` rows in `PROPOSAL-TRACKING.md`, confirmed by direct count) — its actionable content is fully absorbed elsewhere. Kept as the original source citation; its own description now says so explicitly (frozen historical source, not itself the living reference). |
+| 16 | `docs/reports/008-relatorio-melhorias-v6.md` (archived private-repo sequence, not a citable path in this repository) | simplify | Every proposal is fully triaged (0 `not-triaged` rows in `docs/reports/PROPOSAL-TRACKING.md`, confirmed by direct count) — its actionable content is fully absorbed elsewhere. Kept as the original source citation; its own description now says so explicitly (frozen historical source, not itself the living reference). |
 | 17 | `docs/reports/PROPOSAL-TRACKING.md` | keep | The actual living reference #16 defers to; this is the file that changes as proposals get triaged. |
