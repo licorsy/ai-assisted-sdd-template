@@ -3,9 +3,9 @@ title: "CLAUDE.md"
 doc_type: instruction
 description: "Claude Code's entry point for this repository: the always-on confirmation rule, the documentation metadata rule, and the pointers to the operation manual and governance plugins that own the full text of each."
 status: active
-version: "1.0.2"
+version: "1.0.3"
 created: 2026-07-30
-updated: 2026-08-06
+updated: 2026-08-07
 language: en
 id: claude-adapter
 owner: Alexandre Clemente
@@ -26,7 +26,7 @@ Before executing any non-trivial instruction (creating or materially changing an
 ## Documentation metadata rule
 
 <!-- sync:documentation-metadata-rule source=docs/manuals/operation-manual.md anchor="## Step 9" -->
-Every Markdown documentation file or roadmap-generated artifact — `agents/` and every category directory under `docs/` enumerated in `docs/manuals/documentation-metadata-standard.md` Section 1, plus any artifact the roadmap generates under `.specify/` — must carry the YAML frontmatter schema defined in `docs/manuals/documentation-metadata-standard.md`; apply it whenever such a file is created or materially updated. This is the full rule defined in `docs/manuals/operation-manual.md`, Step 9; it applies regardless of task size.
+Every Markdown documentation file or roadmap-generated artifact — `agents/` and every category directory under `docs/` enumerated in `docs/manuals/documentation-metadata-standard.md` Section 1, plus any artifact the roadmap generates under `.specify/` (best-effort there: Spec Kit tooling may regenerate those files and strip custom frontmatter, so apply it but don't treat its survival as guaranteed) — must carry the YAML frontmatter schema defined in `docs/manuals/documentation-metadata-standard.md`; apply it, alongside the version header and — for a guidance change, not a mechanical-only edit (see Section 2.1's distinction) — the changelog, whenever such a file is created or materially updated. This is the full rule defined in `docs/manuals/operation-manual.md`, Step 9; it applies regardless of task size.
 <!-- /sync:documentation-metadata-rule -->
 
 ## Change-as-prompt rule
@@ -43,7 +43,7 @@ To independently verify a completed phase against its own Acceptance Criteria / 
 
 ## Git operations
 
-Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `staging` or `main` — use the `git-governance-advisor` subagent (installed via the `git-governance` plugin, [licorsy/git-governance](https://github.com/licorsy/git-governance)) instead of restating its branch-naming taxonomy and permission matrix (autonomous up to `develop`; explicit human permission required for `staging`/`main`) here. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `staging`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (recorded as `101-prompt-git-governance-adoption.md`, archived private-repo sequence, not a citable path in this repository, per `docs/manuals/operation-manual.md` Step 12 rule 3).
+Before creating a branch, naming it, or proposing a merge — and always before any operation that touches `staging` or `main` — use the `git-governance-advisor` subagent (installed via the `git-governance` plugin, [licorsy/git-governance](https://github.com/licorsy/git-governance)) instead of restating its branch-naming taxonomy and permission matrix (autonomous up to and including opening a PR into `staging`/`main`; explicit human permission required to merge one) here. This repository's actual GitHub-side enforcement — no direct push, force-push, or deletion on `develop`, `staging`, or `main` — is configured via the same plugin's `setup-branch-protection.sh` script (recorded as `101-prompt-git-governance-adoption.md`, archived private-repo sequence, not a citable path in this repository, per `docs/manuals/operation-manual.md` Step 12 rule 3).
 
 ## Canonical documents
 

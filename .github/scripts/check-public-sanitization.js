@@ -2,6 +2,12 @@
 
 'use strict';
 
+// RETIRED - its only caller, sync-to-public-mirror.sh, is retired (see that
+// script's own header): this repository IS the public mirror now
+// (docs/adr/0005-public-release.md, v1.2 Status amendment), so there is no
+// export step left for this gate to run before. Kept only as the historical
+// record of the sanitization check that export used to run.
+//
 // Candidate-flagging gate for the public mirror (prompt-108). Greps tracked
 // files (git ls-files - local-notes/ is already gitignored and never
 // reaches this list) for secret/PII-shaped patterns and literal

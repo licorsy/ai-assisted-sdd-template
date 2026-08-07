@@ -3,9 +3,9 @@ title: "Doc Consistency Reviewer Prompt"
 doc_type: instruction
 description: "Audit the entire current living-document set - not one phase - for cross-document semantic inconsistency, broken traceability, unnecessary redundancy, and textual ambiguity, using directed search over cross-references and frontmatter `related:` fields rather than full reads of every document. Reports only; never edits files."
 status: active
-version: "1.10"
+version: "1.11"
 created: 2026-07-19
-updated: 2026-08-06
+updated: 2026-08-07
 language: en
 id: doc-consistency
 tags: [review, consistency, traceability, documentation, cross-document]
@@ -17,9 +17,9 @@ related: [operation-manual, agent-design-guide, phase-reviewer, adversarial, roa
 
 Changelog of this document:
 
+- v1.11: Section 3 step 1's `CATEGORY_DIRS` parenthetical (a hand-copied 7-entry list, missing `docs/prompts` and disagreeing with the real 8-entry constant) replaced with a pointer to `doc-scope.js`'s constant, per ADR-0003 principle 4 — a cross-repo documentation audit found this file itself reproducing the enumeration-drift class it exists to catch. The root-entry-points list is now `README.md`, `CLAUDE.md`, `AGENTS.md`, and `doc-scope.js`'s `ROOT_FILES` (adds `CODE_OF_CONDUCT.md`, which the old hand-copied list omitted, while keeping `CHANGELOG.md` in scope — a same-session fix-verifier pass caught a first version of this edit that pointed at `SCOPE_FILES` instead and silently dropped `CHANGELOG.md`, the exact file finding #2 of the same audit was about).
 - v1.9: the explicit-non-findings rule now names itself an instance of the shared convention in `docs/references/missing-data-vocabulary.md`, which had listed this file as a demand site without this file pointing back (`fix-verifier` pass).
 - v1.8: the cadence line now says "at the end of a release cycle" rather than "at the end of an increment or release", per the sense split in `docs/manuals/glossary.md` (`008-market-standard-vocabulary`).
-- v1.7: Section 3 step 1's `docs/prompts/` carve-out reworded to explicitly status-based (`draft`/`active` in scope, `archived`/`deprecated` frozen) instead of ambiguous "archived prompt files... a frozen historical archive" wording that a re-review of this same repository's `docs/prompts/` restart read as directory-wide and nearly skipped the two `status: active` prompts describing its own branch; dangling citation of prompt `059` (archived private-repo sequence) qualified as non-citable here.
 - Older entries: see `git log --follow` on this file.
 
 ---
@@ -37,7 +37,7 @@ Changelog of this document:
 
 This review does not read every living document in full. That does not scale - a single document in a long-running project has already been observed to hit a platform's read ceiling on its own (see prompt `059`, archived private-repo sequence, not a citable path in this repository) - and it is not how a human reviewer would actually locate drift either. Instead:
 
-1. Identify the current living-document set before searching: the category directories in `.github/scripts/doc-scope.js`'s `CATEGORY_DIRS` (`agents`, `docs/manuals`, `docs/adr`, `docs/strategy`, `docs/visuals`, `docs/references`, `docs/reports`) — including `docs/prompts/`, but only its files whose frontmatter `status` is `draft` or `active`: those describe changes not yet merged and verified and ARE current content to check for drift against. Files at `status: archived` or `deprecated` are frozen historical record, not checked for drift (the same status-based carve-out `.docgov.config.js`'s `changelog-retention` rule and `check-step-references.js` already apply, and `docs/adr/0003-document-architecture.md` principle 3 states for the `docs/STATE.md` facade) — `docs/prompts/PROMPT-INDEX.md` is always in scope regardless of status, since it is a live `status-artifact` updated every cycle (`docs/manuals/documentation-metadata-standard.md` Section 4), not archive content — plus root entry points (`README.md`, `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `SECURITY.md`, `QUICKSTART.md`, `CHANGELOG.md`), the generated `docs/STATE.md` facade (checked against its sources, never edited — `docs/adr/0003-document-architecture.md` principle 3), and any project-specific living docs such as `/docs/status.md`.
+1. Identify the current living-document set before searching: the category directories in `.github/scripts/doc-scope.js`'s `CATEGORY_DIRS` — that constant is the canonical enumeration (ADR-0003 principle 4); do not retype it here. `docs/prompts/` is one of those directories, but only its files whose frontmatter `status` is `draft` or `active` are in scope: those describe changes not yet merged and verified and ARE current content to check for drift against. Files at `status: archived` or `deprecated` are frozen historical record, not checked for drift (the same status-based carve-out `.docgov.config.js`'s `changelog-retention` rule and `check-step-references.js` already apply, and `docs/adr/0003-document-architecture.md` principle 3 states for the `docs/STATE.md` facade) — `docs/prompts/PROMPT-INDEX.md` is always in scope regardless of status, since it is a live `status-artifact` updated every cycle (`docs/manuals/documentation-metadata-standard.md` Section 4), not archive content — plus root entry points (`README.md`, `CLAUDE.md`, `AGENTS.md`, and `doc-scope.js`'s `ROOT_FILES`), the generated `docs/STATE.md` facade (checked against its sources, never edited — `docs/adr/0003-document-architecture.md` principle 3), and any project-specific living docs such as `/docs/status.md`.
 2. Build the frontmatter `related:` graph connecting the set from step 1 (see `docs/manuals/documentation-metadata-standard.md`), then follow its edges outward - a claimed relationship is exactly where semantic drift or broken traceability is most likely to hide.
 3. Grep for cross-references: file paths, section names, `id:` values, and named decisions mentioned in one document that should appear, consistently, in every document that depends on them.
 4. Read the specific fragments the search surfaces, not the surrounding document in full. Widen to a full read of a document only when a fragment-level read leaves the inconsistency ambiguous.

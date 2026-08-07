@@ -256,11 +256,34 @@ module.exports = {
             },
             {
               file: 'CLAUDE.md',
-              pattern: /autonomous up to `develop`; explicit human permission required for `staging`\/`main`/,
+              pattern: /autonomous up to and including opening a PR into `staging`\/`main`; explicit human permission required to merge one/,
             },
             {
               file: 'AGENTS.md',
-              pattern: /autonomous up to `develop`; explicit human permission required for `staging`\/`main`/,
+              pattern: /autonomous up to and including opening a PR into `staging`\/`main`; explicit human permission required to merge one/,
+            },
+          ],
+        },
+        {
+          id: 'specify-frontmatter-best-effort',
+          value: 'Spec Kit tooling may regenerate .specify/ files and strip custom frontmatter, so apply it but do not treat its survival as guaranteed',
+          why: 'a cross-repo audit found operation-manual.md Step 9 and both adapters '
+            + 'stating an unconditional "must" for .specify/ frontmatter while '
+            + 'documentation-metadata-standard.md already called that class '
+            + 'best-effort — a fact now restated in 3 files with nothing keeping the '
+            + 'copies in sync',
+          required_in: [
+            {
+              file: 'docs/manuals/operation-manual.md',
+              pattern: /best-effort there: Spec Kit tooling may regenerate those files and strip custom frontmatter/,
+            },
+            {
+              file: 'CLAUDE.md',
+              pattern: /best-effort there: Spec Kit tooling may regenerate those files and strip custom frontmatter/,
+            },
+            {
+              file: 'AGENTS.md',
+              pattern: /best-effort there: Spec Kit tooling may regenerate those files and strip custom frontmatter/,
             },
           ],
         },
