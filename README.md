@@ -39,7 +39,7 @@ The template is designed to support human-led and agent-assisted development wit
 ### Governance & decisions
 
 - [ADR-0002: Intended adopter tier](docs/adr/0002-audience-tier.md) — Accepted: consultancy/agency, executed solo; see "Future extensions" below for what it unblocks.
-- [ADR-0003: Document architecture principles](docs/adr/0003-document-architecture.md) — the five patterns behind this repo's document system, with their CI enforcement.
+- [ADR-0003: Document architecture principles](docs/adr/0003-document-architecture.md) — the six principles behind this repo's document system, with their CI enforcement.
 - [ADR-0004: Category directories for docs/manuals/ content](docs/adr/0004-docs-category-directories.md) — `docs/adr/`, `docs/strategy/`, `docs/visuals/`, extending ADR-0003 rather than superseding it.
 - [ADR-0005: Public-mirror release via licorsy/ai-assisted-sdd-template](docs/adr/0005-public-release.md) — publishes a new public repository seeded with a single fresh commit; amended 2026-07-31 to record this repository as the current source of truth, after the original private source repository was archived.
 - [Business software development roadmap](docs/strategy/roadmap.md)
@@ -68,7 +68,7 @@ The template is designed to support human-led and agent-assisted development wit
 
 - [CLAUDE.md](CLAUDE.md) - Claude Code entry point; points at the documents above instead of duplicating them
 - [AGENTS.md](AGENTS.md) - tool-neutral entry point for coding tools that read `AGENTS.md` by convention (for example Copilot, Gemini CLI); kept identical to `CLAUDE.md`'s shared rules via `check-adapter-sync.js`
-- Community health files (Code of Conduct, Contributing, Security) — inherited from [licorsy/.github](https://github.com/licorsy/.github); this repository does not keep its own copies.
+- Community health files — this repository keeps its own copies: [Code of Conduct](CODE_OF_CONDUCT.md), [Contributing](CONTRIBUTING.md), [Security](SECURITY.md).
 - [LICENSE](LICENSE) — MIT No Attribution (MIT-0)
 
 ## Repository layout
@@ -83,7 +83,7 @@ The template is designed to support human-led and agent-assisted development wit
 - `docs/STATE.md` - generated snapshot of every living document (regenerate with `node .github/scripts/generate-state.js`).
 - `docs/reports/` - external improvement reports and `PROPOSAL-TRACKING.md`, the status index tracking every proposal each report contains.
 - `docs/` - also holds the living documentation (handbook, status, planning, reference material) a project generated from this template will produce as it executes the roadmap.
-- `.github/` - CI workflows and governance scripts, plus `CODEOWNERS` (review routing for the process directories in `.github/scripts/doc-scope.js`'s `PROCESS_DIRS`). Issue/PR templates and community health files (Code of Conduct, Contributing, Security) are inherited from [licorsy/.github](https://github.com/licorsy/.github), not kept locally.
+- `.github/` - CI workflows and governance scripts, plus `CODEOWNERS` (review routing for the process directories in `.github/scripts/doc-scope.js`'s `PROCESS_DIRS`), issue/PR templates, and community health files (Code of Conduct, Contributing, Security) at the repository root — all kept locally, not inherited from [licorsy/.github](https://github.com/licorsy/.github).
 
 No separate `RUNBOOK.md` exists, by design — this template has no deploy/incident/on-call reality of its own: `docs/manuals/operation-manual.md` already covers the process it governs, and `docs/references/infra-templates/` covers deployment automation for a project generated from it.
 

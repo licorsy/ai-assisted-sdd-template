@@ -87,7 +87,7 @@ function buildState(root) {
   lines.push('---');
   lines.push('title: "Repository State"');
   lines.push('doc_type: status-artifact');
-  lines.push('description: "Generated single-read snapshot of every living document\'s title, type, status, version, and freshness. Answers \'where are we?\' without a directory sweep; excludes docs/prompts/ regardless of status (kept lean)."');
+  lines.push('description: "Generated single-read snapshot of every living document\'s title, type, status, version, and freshness. Answers \'where are we?\' without a directory sweep; excludes docs/prompts/ regardless of status (kept lean), plus README.md, CLAUDE.md, and AGENTS.md (root entry points, but not part of doc-scope.js\'s narrower ROOT_FILES this generator sources from)."');
   lines.push('status: active');
   lines.push('version: "%VERSION%"');
   lines.push('created: 2026-07-13');
