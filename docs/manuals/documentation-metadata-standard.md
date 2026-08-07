@@ -3,9 +3,9 @@ title: "Documentation Metadata Standard"
 doc_type: instruction
 description: "Defines the mandatory YAML frontmatter schema for every Markdown documentation file and roadmap-generated artifact in this repository, and the rule for applying it whenever such a file is created or materially updated."
 status: active
-version: "1.28"
+version: "1.29"
 created: 2026-07-07
-updated: 2026-08-06
+updated: 2026-08-07
 language: en
 id: documentation-metadata-standard
 tags: [frontmatter, metadata, documentation-standard, retrieval, rag, diataxis]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, adr-0001-documentation-and-governance-model
 
 Changelog of this document:
 
+- v1.29: Section 2.1 gains a sentence distinguishing a mechanical-only edit (citation fix, cross-reference renumbering) from a guidance change: the former still bumps `version` but doesn't require a matching changelog entry. A cross-repo documentation audit found 14 of the 16 documents in this repository that keep a body changelog with `version:` ahead of their own newest changelog entry, with no rule or written policy distinguishing the two cases.
 - v1.27: Section 1's `docs/manuals/` and `docs/references/` scope lists and Section 4's `manual` `doc_type` row gain the two documents added this batch (`docs/manuals/glossary.md`, `docs/references/missing-data-vocabulary.md`). A `fix-verifier` pass caught this: the batch had diagnosed the enumeration-drift class and then reproduced it, in the very table a prompt in the same batch flagged as previously fixed for it (`008-market-standard-vocabulary`, `007-missing-data-vocabulary`).
 - v1.26: Section 9's enforcement sentence now states that none of the automated checks run in a project created from this template outside the `licorsy` organization. The `ci-docs` job gained an `if: github.repository_owner == 'licorsy'` guard, making the template's dependency on Licorsy-controlled workflows explicit rather than silent; without that caveat this section promised adopters automation they do not receive.
-- v1.25: Section 1 realigned to the org-wide rule that every tracked Markdown file carries the schema. The blanket "repository entry points" exemption is replaced by a stated test — another system already owns the file's frontmatter as a functional contract, or renders/injects its raw content verbatim — under which only `README.md` (GitHub renders frontmatter as a visible table) and `CHANGELOG.md` (Keep a Changelog owns its structure) remain exempt, joined by the GitHub-owned PR and issue templates. `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `SECURITY.md`, and `CODE_OF_CONDUCT.md` move into scope via `doc-scope.js`'s `SCOPE_FILES`; the first two gained frontmatter in the same change, the latter three already carried it while going unvalidated.
 - Older entries: see `git log --follow` on this file.
 
 ---
@@ -69,7 +69,7 @@ Every file in scope carries all 8:
 
 ### 2.1 Body-changelog retention
 
-Instruction, manual, and tool-catalog documents (`agents/`, `docs/manuals/`, `docs/strategy/`, `docs/visuals/`) keep a "Changelog of this document" list in the body, below the frontmatter. ADRs record revision history in their own `## Status`/`## Consequences` prose instead; worked examples under `docs/manuals/examples/`, `docs/references/` templates, `QUICKSTART.md`, and the generated `docs/STATE.md` carry none — the frontmatter `version`/`updated` pair plus `git log --follow` is the record for those. That list is a freshness aid, not an archive: keep only the **newest 3 entries** inline. When adding a new entry pushes the count past 3, remove the oldest in the same edit and keep a fixed closing line as the last list item: "Older entries: see `git log --follow` on this file." Git history preserves every removed entry verbatim; the frontmatter `version` field stays monotonic and is never reset by trimming. Never reword entries that stay; retention is removal-only. The cap is CI-enforced: the `changelog-retention` rule of `.docgov.config.js` (`licorsy/docs-governance`) fails any living document whose changelog list exceeds 3 version entries (prompt-055; moved from the repo-local `check-changelog-retention.js` script to the shared engine, see Section 9).
+Instruction, manual, and tool-catalog documents (`agents/`, `docs/manuals/`, `docs/strategy/`, `docs/visuals/`) keep a "Changelog of this document" list in the body, below the frontmatter. ADRs record revision history in their own `## Status`/`## Consequences` prose instead; worked examples under `docs/manuals/examples/`, `docs/references/` templates, `QUICKSTART.md`, and the generated `docs/STATE.md` carry none — the frontmatter `version`/`updated` pair plus `git log --follow` is the record for those. That list is a freshness aid, not an archive: keep only the **newest 3 entries** inline. When adding a new entry pushes the count past 3, remove the oldest in the same edit and keep a fixed closing line as the last list item: "Older entries: see `git log --follow` on this file." Git history preserves every removed entry verbatim; the frontmatter `version` field stays monotonic and is never reset by trimming. Never reword entries that stay; retention is removal-only. A **mechanical-only edit** — a citation correction, a cross-reference renumbering, or another batch fix with no change to the document's own guidance — still bumps `version` (the `version-bump` rule requires it), but does not require a matching changelog entry: the changelog records decisions and guidance changes, not every edit that touched the file. `git log --follow` is the record for mechanical-only bumps; a reader who needs "why did the version number move with no changelog line" should read the commit, not expect an entry that would just restate "fixed a typo/citation." The cap is CI-enforced: the `changelog-retention` rule of `.docgov.config.js` (`licorsy/docs-governance`) fails any living document whose changelog list exceeds 3 version entries (prompt-055; moved from the repo-local `check-changelog-retention.js` script to the shared engine, see Section 9).
 
 ## 3. Optional fields
 

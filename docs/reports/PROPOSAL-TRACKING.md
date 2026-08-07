@@ -3,9 +3,9 @@ title: "Report Proposal Tracking"
 doc_type: status-artifact
 description: "Status index over every distinct proposal in docs/reports/*.md external improvement reports - done, done-scoped, deferred, rejected, or not-triaged - so a proposal's fate is discoverable in one place instead of scattered across docs/prompts/*.md CONTEXT sections and CHANGELOG.md prose. Populated 2026-07-24 from a full audit of docs/reports/008-relatorio-melhorias-v6.md (archived private-repo sequence, not a citable path in this repository) against docs/prompts/PROMPT-INDEX.md, CHANGELOG.md, and live repo state."
 status: active
-version: "1.14"
+version: "1.15"
 created: 2026-07-24
-updated: 2026-08-06
+updated: 2026-08-07
 language: en
 id: report-proposal-tracking
 tags: [status-artifact, docs-reports, tracking, discoverability]
@@ -28,7 +28,7 @@ Sections 6 ("Tabela de Riscos Consolidada"), 9 and 18 ("Backlog Priorizado") and
 | ID | Proposal | Status | Decision / Evidence |
 | --- | --- | --- | --- |
 | R008-0.1 | Composition strategy: this template = governance envelope, AI-DLC = construction-phase engine | deferred | `prompt-075` (archived private-repo sequence, not a citable path in this repository): "AI-DLC positioning relative to `awslabs/aidlc-workflows` ... deliberately out of scope here — needs its own scoping decision" |
-| R008-0.2 | New `docs/adr/0005-aidlc-integration.md` | deferred | Bundled with R008-0.1; no ADR-0005 exists |
+| R008-0.2 | New `docs/adr/0005-aidlc-integration.md` | deferred | Bundled with R008-0.1; `docs/adr/0005-public-release.md` now occupies that number (renumbered from `0010` by `docs/prompts/002-renumber-adr-0010-to-0005.md`) — this proposal would need `0006` or later |
 | R008-0.3 | New `agents/aidlc-adapter.md` | deferred (Bolt piece rejected) | Bundled with R008-0.1; Bolt vocabulary specifically rejected — `prompt-067` |
 | R008-0.4 | Kiro decision + `adapters/KIRO.md` | deferred | Bundled with R008-0.1 |
 | R008-0.5 | Spec Kit vs `aidlc-docs/` mapping table | deferred | Bundled with R008-0.1 |
@@ -63,7 +63,7 @@ Sections 6 ("Tabela de Riscos Consolidada"), 9 and 18 ("Backlog Priorizado") and
 | R008-T.1 | Fragment `docs/manuals/operation-manual.md` by phase | rejected | Same ADR-0003 citation as R008-E.2 |
 | R008-T.2 | Split orchestrator into system/tasks files | rejected | Batch-5 decision (2026-07-24): doesn't map onto how `agents/orchestrator.md` is actually organized (by cross-cutting Step/Rule, not by phase) — genuinely per-phase content already lives in `docs/strategy/roadmap.md` and is referenced, not inlined. The real size concern stays tracked under R008-2.7 instead. |
 | R008-T.3 | Compress frontmatter to short keys (`t:`/`v:`/`s:`) | rejected | Batch-5 decision (2026-07-24): the token-savings goal is already substantially met by `docs/STATE.md`'s single consolidated read; repo-wide migration cost (109+ files, every governance script, human-readability loss for the human-operator audience per `ADR-0002`) far exceeds the marginal benefit. |
-| R008-T.4 | `@path` lazy-loading references | rejected | Batch-5 decision (2026-07-24): the underlying pointer-not-inline principle is already this repo's practiced convention (ADR-0003 principle 3). Adopting the literal Claude-Code-specific `@path` syntax would reduce this repo's deliberate tool-neutrality, which `AGENTS.md` exists specifically to preserve. |
+| R008-T.4 | `@path` lazy-loading references | rejected | Batch-5 decision (2026-07-24): the underlying pointer-not-inline principle is already this repo's practiced convention (ADR-0003 principle 4). Adopting the literal Claude-Code-specific `@path` syntax would reduce this repo's deliberate tool-neutrality, which `AGENTS.md` exists specifically to preserve. |
 | R008-T.5 | `docs/STATE.md` reformatted as narrative "SESSION CONTEXT" (phase/mode/bolt/blockers/next action) | done-scoped | `docs/STATE.md` exists and is the mandated first read, but is a generated table of every living document's title/type/status/version (`prompt-034` (archived private-repo sequence, not a citable path in this repository), predates the report), not the proposed narrative session-context block |
 
 ### Section 1 — Redução de Overhead de Governança
