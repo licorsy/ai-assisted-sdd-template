@@ -3,9 +3,9 @@ title: "Repository State"
 doc_type: status-artifact
 description: "Generated single-read snapshot of every living document's title, type, status, version, and freshness. Answers 'where are we?' without a directory sweep; excludes docs/prompts/ regardless of status (kept lean), plus README.md, CLAUDE.md, and AGENTS.md (root entry points, but not part of doc-scope.js's narrower ROOT_FILES this generator sources from)."
 status: active
-version: "31"
+version: "32"
 created: 2026-07-13
-updated: 2026-08-07
+updated: 2026-11-11
 language: en
 id: repository-state
 tags: [status-artifact, generated, state, retrieval]
@@ -19,7 +19,7 @@ related: [operation-manual]
 
 One consolidated read of the living documents. For "where are we?" questions, start here, then follow the link that answers it.
 
-Documents without frontmatter show "—". Freshest source update: 2026-08-07.
+Documents without frontmatter show "—". Freshest source update: 2026-11-11.
 
 | Document | Title | Type | Status | Version | Updated |
 | --- | --- | --- | --- | --- | --- |
@@ -30,7 +30,7 @@ Documents without frontmatter show "—". Freshest source update: 2026-08-07.
 | [SECURITY.md](../SECURITY.md) | SECURITY.md | instruction | active | 1.0 | 2026-08-06 |
 | [agents/adversarial.md](../agents/adversarial.md) | Adversarial Review Prompt | instruction | active | 1.1 | 2026-08-03 |
 | [agents/doc-consistency.md](../agents/doc-consistency.md) | Doc Consistency Reviewer Prompt | instruction | active | 1.11 | 2026-08-07 |
-| [agents/init.md](../agents/init.md) | Template Init Prompt | instruction | active | 1.11 | 2026-08-06 |
+| [agents/init.md](../agents/init.md) | Template Init Prompt | instruction | active | 1.12 | 2026-11-11 |
 | [agents/orchestrator.md](../agents/orchestrator.md) | Orchestrator Prompt | instruction | active | 3.25 | 2026-08-06 |
 | [agents/phase-reviewer.md](../agents/phase-reviewer.md) | Orchestrator Reviewer Prompt | instruction | active | 1.2 | 2026-08-06 |
 | [agents/tool-discovery.md](../agents/tool-discovery.md) | Tool Hunter Prompt | instruction | active | 1.9 | 2026-08-06 |
@@ -45,7 +45,7 @@ Documents without frontmatter show "—". Freshest source update: 2026-08-07.
 | [docs/manuals/examples/risks.md](manuals/examples/risks.md) | Risk Register — Project | governance | active | 1.2 | 2026-07-28 |
 | [docs/manuals/examples/spec-prfaq-template.md](manuals/examples/spec-prfaq-template.md) | PRFAQ Template | template | active | 1.1 | 2026-07-31 |
 | [docs/manuals/glossary.md](manuals/glossary.md) | Glossary | manual | active | 1.2 | 2026-08-06 |
-| [docs/manuals/operation-manual.md](manuals/operation-manual.md) | Operation Manual - Integrating Instructions Documents | instruction | active | 3.61 | 2026-08-07 |
+| [docs/manuals/operation-manual.md](manuals/operation-manual.md) | Operation Manual - Integrating Instructions Documents | instruction | active | 3.62 | 2026-11-11 |
 | [docs/manuals/prompt-engineering-guide.md](manuals/prompt-engineering-guide.md) | Prompt Engineering Guide | manual | active | 1.11 | 2026-08-06 |
 | [docs/manuals/role-operating-guide.md](manuals/role-operating-guide.md) | Role Operating Guide — Product, Delivery, and All Lifecycle Roles | manual | active | 2.11 | 2026-08-06 |
 | [docs/manuals/tool-library-catalog.md](manuals/tool-library-catalog.md) | Claude Tool Library Catalog | tool-catalog | active | 2.7 | 2026-08-06 |
@@ -58,5 +58,5 @@ Documents without frontmatter show "—". Freshest source update: 2026-08-07.
 | [docs/reports/ARTIFACT-NECESSITY-AUDIT.md](reports/ARTIFACT-NECESSITY-AUDIT.md) | Artifact Necessity Audit: docs/manuals/, docs/references/, docs/reports/ | product-doc | active | 1.4 | 2026-08-06 |
 | [docs/reports/PROPOSAL-TRACKING.md](reports/PROPOSAL-TRACKING.md) | Report Proposal Tracking | status-artifact | active | 1.15 | 2026-08-07 |
 | [docs/strategy/go-to-market.md](strategy/go-to-market.md) | Go-to-Market Roadmap | instruction | active | 1.1 | 2026-08-06 |
-| [docs/strategy/roadmap.md](strategy/roadmap.md) | Business Software Development Roadmap | instruction | active | 3.31 | 2026-08-06 |
+| [docs/strategy/roadmap.md](strategy/roadmap.md) | Business Software Development Roadmap | instruction | active | 3.32 | 2026-11-11 |
 | [docs/visuals/template-visual-overview.md](visuals/template-visual-overview.md) | Template Visual Overview | manual | active | 1.15 | 2026-08-06 |

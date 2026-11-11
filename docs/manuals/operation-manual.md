@@ -3,9 +3,9 @@ title: "Operation Manual - Integrating Instructions Documents"
 doc_type: instruction
 description: "Operational guide for an AI-assisted software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.61"
+version: "3.62"
 created: 2024-07-04
-updated: 2026-08-07
+updated: 2026-11-11
 language: en
 id: operation-manual
 tags: [operating-model, phase-gates, governance, human-in-the-loop, living-documentation]
@@ -17,9 +17,9 @@ related: [orchestrator, roadmap, phase-reviewer, adversarial, doc-consistency, i
 
 Changelog of this document:
 
+- v3.62: Step 2's Spec Kit commands switch from the removed `--ai` flag to `--integration <agent> --script sh`, with one sentence recording the rename and where the Claude integration installs its skills (`docs/prompts/023-fix-bootstrap-specify-flag-and-business-scope.md`, issue #57).
 - v3.61: Step 9's frontmatter obligation gains the changelog/version-header clause and a `.specify/` best-effort qualifier (both adapters had drifted from this file, restating the rule without them — a cross-repo documentation audit found the gap); reconciled against `documentation-metadata-standard.md` Section 2.1's new mechanical-only exemption so the two documents no longer state opposite rules. Step 15's `generate-state.js` and `check-scope-consistency.js` rows corrected to match what those scripts actually do today; a row added for the (retired) `check-public-sanitization.js`.
 - v3.60: Step 12 rule 3's archived-repo citation reworded to the established qualifier phrase ("archived private-repo sequence, not a citable path in this repository"), matching the ~72 sites already using it, as part of closing out the `dead_citations` backlog.
-- v3.57: Document map's "Reference material" row gains `docs/references/missing-data-vocabulary.md`, which the same edit that added the `Glossary` row had left out; the honest-degraded-states pointer stops carrying its own count, which contradicted three other statements of it, and defers to the reference that owns the list; the runtime-trigger prose now says "a non-matching change", matching the flowchart node it mirrors (`fix-verifier` pass).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -87,10 +87,12 @@ uvx --from git+https://github.com/github/spec-kit.git specify init --here
 You can bootstrap the agent integration that best matches the current session.
 
 ```bash
-uvx --from git+https://github.com/github/spec-kit.git specify init --here --ai claude
-uvx --from git+https://github.com/github/spec-kit.git specify init --here --ai copilot
-uvx --from git+https://github.com/github/spec-kit.git specify init --here --ai gemini
+uvx --from git+https://github.com/github/spec-kit.git specify init --here --integration claude --script sh
+uvx --from git+https://github.com/github/spec-kit.git specify init --here --integration copilot --script sh
+uvx --from git+https://github.com/github/spec-kit.git specify init --here --integration gemini --script sh
 ```
+
+Current Spec Kit rejects the older `--ai` flag (`No such option: --ai`); `--integration` replaced it. The Claude integration installs the Spec Kit commands as skills under `.claude/skills/speckit-*`.
 
 This creates adapter files for each agent while keeping the same project memory and artifacts. If more than one agent is used, the repository should still maintain one shared canonical set of docs and specs.
 
