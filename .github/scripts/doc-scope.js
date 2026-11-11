@@ -11,8 +11,11 @@
 // of maintaining an independent copy (ADR-0003 principle 4). A script that
 // legitimately needs a different scope excludes or adds explicitly, with a
 // comment, rather than retyping the list from scratch.
+// docs/business is absent from this template itself; it is listed because a
+// generated project writes docs/business/market.md in Phase 1 and the
+// metadata standard (Sections 1 and 4) already covers it (issue #67).
 
-const CATEGORY_DIRS = ['agents', 'docs/manuals', 'docs/adr', 'docs/strategy', 'docs/visuals', 'docs/prompts', 'docs/references', 'docs/reports'];
+const CATEGORY_DIRS = ['agents', 'docs/manuals', 'docs/adr', 'docs/strategy', 'docs/visuals', 'docs/prompts', 'docs/references', 'docs/reports', 'docs/business'];
 const ROOT_FILES = ['CHANGELOG.md', 'QUICKSTART.md', 'CONTRIBUTING.md', 'SECURITY.md', 'CODE_OF_CONDUCT.md'];
 
 // The subset of CATEGORY_DIRS that .github/CODEOWNERS requires review for -

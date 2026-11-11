@@ -3,9 +3,9 @@ title: "Template Init Prompt"
 doc_type: instruction
 description: "Idempotent project bootstrap for a repository created from this template: detect greenfield vs. brownfield and confirm with the human, scaffold only the missing Phase 0 artifacts (status, ADR template, handbook stub, risk register, governance stub, telemetry ledger, changelog entry) with valid frontmatter, verify Spec Kit presence without installing anything, and end with a created/skipped/human-actions report. Running it twice must make the second run a pure no-op report."
 status: active
-version: "1.11"
+version: "1.12"
 created: 2026-07-13
-updated: 2026-08-06
+updated: 2026-11-11
 language: en
 id: init
 tags: [bootstrap, scaffold, idempotency, phase-0, template-init]
@@ -17,9 +17,9 @@ related: [operation-manual, orchestrator, documentation-metadata-standard, role-
 
 Changelog of this document:
 
+- v1.12: step 4's Spec Kit human task now hands out `specify init --here --integration claude --script sh`; the `--ai` flag it used to give no longer exists in Spec Kit, so every `/template-init` run briefed a failing command (`docs/prompts/023-fix-bootstrap-specify-flag-and-business-scope.md`, issue #57).
 - v1.9: the "never overwrite/renumber `docs/adr/`'s real ADRs" guard's occupied-range note updated from `0002`-`0004` to `0002`-`0005` - `docs/adr/0010-public-release.md` was renumbered to `0005` (`docs/prompts/002-renumber-adr-0010-to-0005.md`), so an adopter's first project ADR now needs `0006` or later to avoid a collision.
 - v1.8: doc-consistency-reviewer batch fix: the ADR-template scaffold row's location note corrected - the worked-example ADR actually lives in `docs/manuals/examples/`, not `docs/manuals/` directly - and gains an explicit "never overwrite/renumber `docs/adr/`'s real ADRs" guard, since this row scaffolds a blank template into that same directory (prompt-090).
-- v1.7: doc-consistency-reviewer batch fix: new `/docs/governance.md` scaffold row (roadmap Phase 0 Activity 8 and Generated-artifacts list both name it; propagated to README/QUICKSTART/`.claude/commands/template-init.md`'s scaffold-list mentions too); `/docs/status.md` scaffold row gains the "what is being brought" field (choice 1 now has a recorder, see `agents/orchestrator.md` v3.19); the telemetry-ledger/tracking-issue cell's ambiguous bare "Step 18"/"Step 4a" references - reintroduced by `prompt-087` (archived private-repo sequence, not a citable path in this repository) into a cell `prompt-086` v1.5 had already disambiguated once - corrected again (prompt-089).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -60,7 +60,7 @@ Each artifact carries valid frontmatter per `docs/manuals/documentation-metadata
 
 ### 4. Verify Spec Kit - report, don't install
 
-If `.specify/` is absent, report the exact commands from `docs/manuals/operation-manual.md` Steps 1-2 as a briefed human task (why + numbered steps + what to report back), for example: 1. Open the terminal; 2. Run `uvx --from git+https://github.com/github/spec-kit.git specify init --here --ai claude`; 3. Report back "done". If present, report the detected agent adapters.
+If `.specify/` is absent, report the exact commands from `docs/manuals/operation-manual.md` Steps 1-2 as a briefed human task (why + numbered steps + what to report back), for example: 1. Open the terminal; 2. Run `uvx --from git+https://github.com/github/spec-kit.git specify init --here --integration claude --script sh`; 3. Report back "done". If present, report the detected agent adapters.
 
 ### 4a. Offer the GitHub tracking-issue + Project board setup
 
