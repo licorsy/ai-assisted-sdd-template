@@ -107,7 +107,7 @@ module.exports = {
         inside_changelog_block: true,
         changelog_marker: 'Changelog of this document:',
         // Linhas de tabela do PROPOSAL-TRACKING.md com Status `deferred`/
-        // `rejected` (ver cabeçalho do arquivo, linha 20, pros seis valores
+        // `rejected` (ver cabeçalho do arquivo, linha 20, pros cinco valores
         // válidos) registram uma decisão já tomada sobre uma proposta - não
         // uma reafirmação atual do que existe. A segunda alternativa cobre a
         // mesma ideia em prosa fora de tabela (docs/adr/0002-audience-tier.md).

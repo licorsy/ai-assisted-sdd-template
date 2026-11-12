@@ -18,7 +18,7 @@ lastreviewed: "2026-07-31"
 
 Changelog of this document:
 
-- v2.8: removes one third-party repository-infrastructure entry at the owner's request. Its idea (one idempotent command that applies this template's own repository-infrastructure templates) is recorded as this repository's own proposal R009-A14 in `docs/reports/PROPOSAL-TRACKING.md` (`docs/prompts/025-tooling-artifact-done-audit.md`).
+- v2.8: removes one third-party repository-infrastructure entry at the owner's request. Its idea (one idempotent command that applies this template's own repository-infrastructure templates) is tracked as [licorsy/git-governance#56](https://github.com/licorsy/git-governance/issues/56).
 - v2.6: `grilling` entry's dangling citation of prompt `085` (archived private-repo sequence) qualified as non-citable in this repository, per `docs/manuals/operation-manual.md` Step 12 rule 3 (`docs/prompts/003-close-restart-followon-drift.md`).
 - v2.5: doc-consistency-reviewer batch fix: adds a one-sentence clarification below the Purpose section that the frontmatter `lastreviewed` field is file-level (most recent date any entry was added/reconfirmed), not a per-entry claim - each entry's own `checked on` field carries that (prompt-095).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).

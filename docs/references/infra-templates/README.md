@@ -60,4 +60,4 @@ Describe environments as versioned code from the first deploy - Terraform/OpenTo
 
 ## Design notes
 
-These templates are this repository's own work, built on public platform conventions: GitHub rulesets, Conventional Commits, release-please and SHA-pinned actions. Applying them imperatively, in one idempotent command, is tracked as proposal R009-A14 in [PROPOSAL-TRACKING.md](../../reports/PROPOSAL-TRACKING.md).
+These templates are this repository's own work, built on public platform conventions: GitHub rulesets, Conventional Commits, release-please and SHA-pinned actions. Applying them imperatively, in one idempotent command, is tracked as [licorsy/git-governance#56](https://github.com/licorsy/git-governance/issues/56).
