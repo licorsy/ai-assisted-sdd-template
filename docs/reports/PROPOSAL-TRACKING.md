@@ -3,9 +3,9 @@ title: "Report Proposal Tracking"
 doc_type: status-artifact
 description: "Status index over every distinct proposal in docs/reports/*.md external improvement reports - done, done-scoped, deferred, rejected, or not-triaged - so a proposal's fate is discoverable in one place instead of scattered across docs/prompts/*.md CONTEXT sections and CHANGELOG.md prose. Populated 2026-07-24 from a full audit of docs/reports/008-relatorio-melhorias-v6.md (archived private-repo sequence, not a citable path in this repository) against docs/prompts/PROMPT-INDEX.md, CHANGELOG.md, and live repo state."
 status: active
-version: "1.15"
+version: "1.16"
 created: 2026-07-24
-updated: 2026-08-07
+updated: 2026-11-12
 language: en
 id: report-proposal-tracking
 tags: [status-artifact, docs-reports, tracking, discoverability]
@@ -17,9 +17,74 @@ related: [documentation-metadata-standard]
 
 Every distinct, actionable proposal from every report in `docs/reports/` gets one row here, with a status and the evidence behind it. Future reports dropped into `docs/reports/` get their proposals logged here at intake (see `CONTRIBUTING.md`); batch-evaluation sessions update the `Status`/`Decision` columns directly rather than writing a new summary document each time.
 
-**Status values**: `done` (implemented as proposed) · `done-scoped` (something shipped for the same need, deliberately smaller/different — evidence says what was cut and why) · `deferred` (explicitly parked, with a recorded reason and revisit condition) · `rejected` (explicitly considered and declined, with a recorded reason) · `not-triaged` (no record of a decision anywhere — candidate for a future batch).
+**Status values**: `done` (implemented as proposed) · `done-scoped` (something shipped for the same need, deliberately smaller/different — evidence says what was cut and why) · `deferred` (explicitly parked, with a recorded reason and revisit condition) · `rejected` (explicitly considered and declined, with a recorded reason) · `in-progress` (accepted and being implemented — evidence names the open pull request) · `not-triaged` (no record of a decision anywhere — candidate for a future batch).
 
 Sections 6 ("Tabela de Riscos Consolidada"), 9 and 18 ("Backlog Priorizado") and 11/19 ("Estrutura-Alvo Completa") of the source report are consolidations/restatements of items already itemized in the sections below — they are not given separate rows, per this file's deduplication rule.
+
+## Source report: `docs/reports/009-tooling-artifact-and-done-audit.md`
+
+Audit of 2026-11-12 (`docs/prompts/025-tooling-artifact-done-audit.md`). This section is the checklist for that report: move a row to `in-progress` with its pull request when work starts, and to `done` when it merges. Priority: `P1` blocks or degrades the next generated project, `P2` next maintenance window, `P3` opportunistic.
+
+
+### A.1 Spec Kit
+
+| ID | Proposal | Status | Decision / Evidence |
+| --- | --- | --- | --- |
+| R009-A1 | Pin the Spec Kit install to a release tag (`v1.4.0`, verified 2026-11-12) instead of `main` | not-triaged | P1. Evidence in the report, row R009-A1 |
+| R009-A2 | Use `/speckit-<command>` (Claude skill invocation) instead of `/speckit.<command>` (85 occurrences, 9 files) | not-triaged | P1. Evidence in the report, row R009-A2 |
+| R009-A3 | Add `/speckit-converge` after implement in Phase 5 | not-triaged | P1. Evidence in the report, row R009-A3 |
+| R009-A4 | Document the Spec Kit upgrade path and the existing-project init command | not-triaged | P2. Evidence in the report, row R009-A4 |
+| R009-A5 | Offer `--no-model-invocation` for the core Spec Kit skills (token economy) | not-triaged | P3. Evidence in the report, row R009-A5 |
+
+### A.2 GitHub Actions and pre-commit hooks
+
+| ID | Proposal | Status | Decision / Evidence |
+| --- | --- | --- | --- |
+| R009-A7 | Bump this template's own CI actions (`checkout`, `setup-python`, `upload-artifact`, `codeql-action`) and pin them by SHA | not-triaged | P2. Evidence in the report, row R009-A7 |
+| R009-A8 | Bump the SHA-pinned actions in `infra-templates/` (`release-please-action` v5 is a major release) | not-triaged | P2. Evidence in the report, row R009-A8 |
+| R009-A9 | Bump `pre-commit-hooks` to v6.0.0 and `conventional-pre-commit` to v4.5.0 | not-triaged | P2. Evidence in the report, row R009-A9 |
+| R009-A10 | Automate action version updates with GitHub's native version updates | not-triaged | P3. Evidence in the report, row R009-A10 |
+
+### A.3 Plugins and the tool catalog
+
+| ID | Proposal | Status | Decision / Evidence |
+| --- | --- | --- | --- |
+| R009-A11 | Declare where the enabled plugins install from, or document the install; decide on `interaction-governance` and `model-governance` | not-triaged | P2. Evidence in the report, row R009-A11 |
+| R009-A12 | Publish a GitHub Release per tag in the `licorsy` plugin repositories (outside this repository) | not-triaged | P3. Evidence in the report, row R009-A12 |
+| R009-A13 | Re-vet the `graphify` catalog entry (new source organization, license now Apache-2.0) and bump `lastreviewed` | not-triaged | P2. Evidence in the report, row R009-A13 |
+| R009-A14 | One idempotent command that applies `infra-templates/` and SHA-pins every action (this repository's own design; fold into issue #59) | not-triaged | P2. Evidence in the report, row R009-A14 |
+| R009-A15 | Remove references to a third-party repository-infrastructure framework from the living documents | done | 2026-11-12, owner's request: catalog entry removed, `docs/references/token-economy.md`, `docs/references/infra-templates/README.md` and two historical `CHANGELOG.md` entries reworded; the idea survives as R009-A14 (`docs/prompts/025-tooling-artifact-done-audit.md`) |
+
+### B. Generated artifacts
+
+| ID | Proposal | Status | Decision / Evidence |
+| --- | --- | --- | --- |
+| R009-B0 | `/template-init` removes or archives the template-only files a generated project inherits (prompts, reports, ADRs 0002-0005, CHANGELOG history, adapters) | not-triaged | P1. Evidence in the report, row R009-B0 |
+| R009-B1 | Tier every Generated-artifacts bullet as required, conditional or optional | not-triaged | P2. Evidence in the report, row R009-B1 |
+| R009-B2 | Phase 0 generates the project's own `AGENTS.md`/`CLAUDE.md` and `README.md` | not-triaged | P1. Evidence in the report, row R009-B2 |
+| R009-B3 | Phase 1: fold problem statement, requirements, user stories and MVP scope into `prd.md`; one alternatives document | not-triaged | P2. Evidence in the report, row R009-B3 |
+| R009-B4 | Rename the project-level `docs/plan.md`; name one backlog source of truth | not-triaged | P2. Evidence in the report, row R009-B4 |
+| R009-B5 | Phase 3: cross-feature data model only when needed; one architecture document with C4; threat-model home and method | not-triaged | P2. Evidence in the report, row R009-B5 |
+| R009-B6 | Phase 4 tells `/speckit-tasks` to include tests (Spec Kit marks them optional) | not-triaged | P1. Evidence in the report, row R009-B6 |
+| R009-B7 | Give the Phase 6 defect log a home | not-triaged | P2. Evidence in the report, row R009-B7 |
+| R009-B8 | Phase 7 lists tag, release notes, deployment record and rollback runbook | not-triaged | P2. Evidence in the report, row R009-B8 |
+| R009-B9 | Phase 8: conditional incident postmortem; optional DORA view | not-triaged | P3. Evidence in the report, row R009-B9 |
+
+### C. Acceptance criteria / Done
+
+| ID | Proposal | Status | Decision / Evidence |
+| --- | --- | --- | --- |
+| R009-C0 | One project-level Definition of Done plus per-story acceptance criteria; a Definition of Ready for Phase 4 to 5 | not-triaged | P1. Evidence in the report, row R009-C0 |
+| R009-C1 | Phase 0: checkable onboarding and versioning criteria | not-triaged | P2. Evidence in the report, row R009-C1 |
+| R009-C2 | Phase 1: checkable problem, market and PRD-approval criteria | not-triaged | P2. Evidence in the report, row R009-C2 |
+| R009-C3 | Phase 2: checkable agreement on the first milestone | not-triaged | P2. Evidence in the report, row R009-C3 |
+| R009-C4 | Phase 3: C4 diagrams exist; zero `[NEEDS CLARIFICATION]`; Constitution Check passes | not-triaged | P1. Evidence in the report, row R009-C4 |
+| R009-C5 | Phases 4-5: Spec Kit task format, zero CRITICAL analyze findings, FR coverage, CI green, converge, PR approval | not-triaged | P1. Evidence in the report, row R009-C5 |
+| R009-C6 | Phase 6: per-scenario test evidence and recorded approval | not-triaged | P2. Evidence in the report, row R009-C6 |
+| R009-C7 | Phase 7: named documentation updates and next steps | not-triaged | P2. Evidence in the report, row R009-C7 |
+| R009-C8 | Phase 8: same cold-read check as Phase 0 | not-triaged | P3. Evidence in the report, row R009-C8 |
+| R009-C9 | Phase 5: security criterion (dependency review and secret scan green) | not-triaged | P2. Evidence in the report, row R009-C9 |
+| R009-C10 | Measurable non-functional requirements, verified in Phase 6 | not-triaged | P2. Evidence in the report, row R009-C10 |
 
 ## Source report: `docs/reports/008-relatorio-melhorias-v6.md` (archived private-repo sequence, not a citable path in this repository)
 

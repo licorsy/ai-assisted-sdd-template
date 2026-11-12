@@ -3,9 +3,9 @@ title: "Infra Templates - how to apply"
 doc_type: product-doc
 description: "Ready-to-apply GitHub hardening and deployment templates for projects generated from this template: main-branch ruleset, Conventional Commits check, release-please automation, and a staging-to-production CD skeleton with Docker starters and IaC guidance. This template repository does not apply these to itself."
 status: active
-version: "1.0"
+version: "1.1"
 created: 2026-07-13
-updated: 2026-07-13
+updated: 2026-11-12
 language: en
 id: infra-templates
 tags: [infrastructure, branch-protection, release-automation, deployment, iac, how-to]
@@ -58,6 +58,6 @@ Describe environments as versioned code from the first deploy - Terraform/OpenTo
 - **Secrets**: injected from GitHub Environments or a secrets manager; never in IaC files, images, or compose files.
 - **One command**: a fresh environment must be reproducible from the repo with one documented command; if it takes hand-steps, they belong in the IaC or this file's project-local copy.
 
-## Prior art
+## Design notes
 
-Iuri Pereira's `projeto-infra` skill applies this same pattern imperatively (vetted 2026-07-13 in [tool-library-catalog.md](../../manuals/tool-library-catalog.md): candidate, security level unvetted - notably no LICENSE, so its code cannot be lawfully copied; these templates are original work informed by the same conventions).
+These templates are this repository's own work, built on public platform conventions: GitHub rulesets, Conventional Commits, release-please and SHA-pinned actions. Applying them imperatively, in one idempotent command, is tracked as proposal R009-A14 in [PROPOSAL-TRACKING.md](../../reports/PROPOSAL-TRACKING.md).

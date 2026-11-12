@@ -3,9 +3,9 @@ title: "Prompt Index"
 doc_type: status-artifact
 description: "The id/status/one-line-purpose index over every prompt in docs/prompts/, updated whenever a prompt is created or moves lifecycle stage (operation-manual.md Step 11). The prompt file itself is the source of truth for content; this index exists so a reader can scan the whole archive without opening every file."
 status: active
-version: "1.31"
+version: "1.32"
 created: 2026-07-31
-updated: 2026-11-11
+updated: 2026-11-12
 language: en
 id: prompt-index
 tags: [status-artifact, docs-prompts, index]
@@ -41,5 +41,6 @@ One row per file in `docs/prompts/` (excluding `docs/prompts/basic-prompt-templa
 | `020-restore-root-governance-files` | archived | Closes the root-file scope gap `019` named and left out of its own batch: `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md` were declared in scope by `doc-scope.js` but absent at this repository's root. Confirmed via the archived private source repo (frozen 2026-07-31) that all three existed with real content and were never deliberately excluded from the mirror sync — a migration gap, not a policy-authorship task. Restores all three with frontmatter added and every stale reference fixed (an obsolete public-mirror-sync section removed, `hom` renamed to `staging`, a governance-script count already known to drift three times replaced with a pointer to `docs/manuals/operation-manual.md` Step 15's canonical table). Completed 2026-08-06: pull request `#48` merged, all seven `develop`-branch governance workflows green. |
 | `021-fix-cross-repo-doc-audit-findings` | archived | Closes 18 findings from a licorsy org-wide documentation-consistency audit run alongside identical audits of `.github`, `git-governance`, `docs-governance`, and `platform-workflows`: stale README/CHANGELOG claims about restored root files, a missing mechanical-vs-guidance-change distinction in the changelog-retention rule, a stale ADR-0003 checker enumeration, adapter blocks drifted from their own canonical Step 9, several dangling citations, and a `facts` pin whose gloss had drifted stricter than the org's actual promotion-PR-open-autonomy policy. Completed 2026-08-07: all local governance checkers and 49/49 tests green, `docgov check` clean via the live engine (not the stale cached plugin), a `--base-sha` dry run confirmed every edited document's version bump. |
 | `023-fix-bootstrap-specify-flag-and-business-scope` | archived | Closes issues #57 and #67: the Spec Kit `--ai` flag the template handed out is replaced by `--integration`, and `docs/business` joins `doc-scope.js` `CATEGORY_DIRS` so docs-governance validates it. |
+| `025-tooling-artifact-done-audit` | archived | Audit of tooling currency, generated artifacts and Done criteria as report 009, with its checklist in `docs/reports/PROPOSAL-TRACKING.md`; removes the living references to a third-party repository-infrastructure framework, keeping its idea as R009-A14. |
 
 Historical note: the pre-2026-07-31 prompt archive (numbered up to `109` at the time the private source repository was archived) is not migrated here and is not indexed by this table — see `docs/adr/0005-public-release.md` and `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` for why.
