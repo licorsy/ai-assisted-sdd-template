@@ -3,9 +3,9 @@ title: "Claude Tool Library Catalog"
 doc_type: tool-catalog
 description: "Single-file catalog of vetted, third-party Claude Code tools (Agents, Skills, Hooks, MCP servers, Commands) available for reuse across projects, so any roadmap activity needing a Claude-ecosystem capability can favor a proven, already-vetted tool over rebuilding it. Mode B's product frameworks/libraries (Phase 1, Activity 11a) go to the project's own build-vs-buy record instead, not here."
 status: active
-version: "2.7"
+version: "2.8"
 created: 2026-07-07
-updated: 2026-08-06
+updated: 2026-11-12
 language: en
 id: tool-library-catalog
 tags: [tool-library, catalog, agents, skills, hooks, mcp, discovery, build-vs-buy]
@@ -18,9 +18,9 @@ lastreviewed: "2026-07-31"
 
 Changelog of this document:
 
+- v2.8: removes one third-party repository-infrastructure entry at the owner's request. Its idea (one idempotent command that applies this template's own repository-infrastructure templates) is tracked as [licorsy/git-governance#56](https://github.com/licorsy/git-governance/issues/56).
 - v2.6: `grilling` entry's dangling citation of prompt `085` (archived private-repo sequence) qualified as non-citable in this repository, per `docs/manuals/operation-manual.md` Step 12 rule 3 (`docs/prompts/003-close-restart-followon-drift.md`).
 - v2.5: doc-consistency-reviewer batch fix: adds a one-sentence clarification below the Purpose section that the frontmatter `lastreviewed` field is file-level (most recent date any entry was added/reconfirmed), not a per-entry claim - each entry's own `checked on` field carries that (prompt-095).
-- v2.4: doc-consistency-reviewer batch fix: gains the new `lastreviewed` frontmatter field (prompt-020, reopened by prompt-094 after finding its 2026-07-28 decline was based on a false "no real entries" premise); `knowledge-rag`'s `Notes` field's "141 tracked Markdown files" figure - already one file stale after only one merge - replaced with a live `git ls-files` reference instead of a hardcoded count, matching `docs/references/token-economy.md` (prompt-094).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -133,15 +133,3 @@ Each cataloged tool is a level-3 heading with this fixed set of fields:
 - Roadmap coverage: Cross-phase operating efficiency — targeted semantic retrieval over `docs/` to avoid full-document reads.
 - Status: candidate
 - Notes: Likely overkill for this corpus (run `git ls-files '*.md' | wc -l` for the live count — 142 files as of this writing, growing by roughly one per merged prompt; the frozen `docs/prompts/` archive is most of it). The repo's generated `docs/STATE.md` snapshot and the `graphify` graph already cut multi-file scans; standing up a ChromaDB/ONNX RAG server with a reindex path is heavyweight infrastructure for a corpus this small. Recorded as a vetted option to revisit if the docs corpus grows substantially.
-
-### projeto-infra (iuripereira/claude-skills)
-
-- Kind: Skill
-- Source: https://github.com/iuripereira/claude-skills/tree/main/projeto-infra
-- What it does: One-shot GitHub repository-infrastructure setup skill (part of the sdd-iuri framework). It creates branch-protection rulesets via `gh api` (`POST repos/{owner}/{repo}/rulesets` from `main.json`/`develop.json`), deploys CI workflows (`ci-node.yml`/`ci-python.yml`), enforces Conventional Commits (commitlint + Husky `commit-msg` hook), wires release-please (`.release-please-config.json`, PT-BR changelog), adds `CODEOWNERS` and optional CodeRabbit/claude-code-action review config, and resolves every action to a commit SHA (`gh api .../commits/<tag> --jq .sha`, keeping a `# vX` comment) so CI is SHA-pinned. Idempotent — a second run reports a no-op.
-- How to use: Run after creating the GitHub remote, or standalone in an existing repo, with `gh` authenticated. Not installable as a marketplace plugin — clone/copy the skill from the repo. As prior art, read its `references/infra/rulesets/*.json` and workflow templates directly as a reference implementation of the pattern this template plans to ship for adopters.
-- Vetting evidence: tested: unverified (no independent test observed) · validated: unverified (no third-party usage evidence; single-author framework) · rating: 0 stars (GitHub, checked 2026-07-13) · last updated: all 6 commits dated 2026-07-12 — repo is one day old at check time (GitHub commits/main) · checked on 2026-07-13
-- Security level: unvetted — it is a genuinely close implementation of exactly the planned pattern (rulesets + Conventional Commits + release-please + SHA-pinned CI, which is good supply-chain practice), but multiple signals are weak or blocking: no LICENSE file (no legal grant to reuse/copy the code as-is), 0 stars, a one-day-old single-author repo, no independent validation, and it executes state-changing `gh api --method POST` and `git push`/`git branch` against the user's repo plus `npm i`/`npx husky init`, so its blast radius touches live GitHub settings and local config.
-- Roadmap coverage: Phase 3 Activity 7 (code/test/review + CI conventions) and Phase 7 (deployment / CI-CD infrastructure), and governance (branch-protection = decision-rights enforcement); also direct prior art for this template's own planned adopter GitHub-infra templates.
-- Status: candidate
-- Notes: Best value as a reference/pattern study to inform this template's own GitHub-infra templates, not as a drop-in dependency — the missing LICENSE blocks lawful direct reuse, and adopters must review the `gh api` ruleset mutations before running them against a real repo. Its release-please changelog and CodeRabbit config are PT-BR-flavored and would need localizing. Revisit if the author adds a license and the skill earns adoption evidence.

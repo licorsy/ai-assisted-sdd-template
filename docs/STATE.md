@@ -3,9 +3,9 @@ title: "Repository State"
 doc_type: status-artifact
 description: "Generated single-read snapshot of every living document's title, type, status, version, and freshness. Answers 'where are we?' without a directory sweep; excludes docs/prompts/ regardless of status (kept lean), plus README.md, CLAUDE.md, and AGENTS.md (root entry points, but not part of doc-scope.js's narrower ROOT_FILES this generator sources from)."
 status: active
-version: "32"
+version: "34"
 created: 2026-07-13
-updated: 2026-11-11
+updated: 2026-11-12
 language: en
 id: repository-state
 tags: [status-artifact, generated, state, retrieval]
@@ -19,7 +19,7 @@ related: [operation-manual]
 
 One consolidated read of the living documents. For "where are we?" questions, start here, then follow the link that answers it.
 
-Documents without frontmatter show "—". Freshest source update: 2026-11-11.
+Documents without frontmatter show "—". Freshest source update: 2026-11-12.
 
 | Document | Title | Type | Status | Version | Updated |
 | --- | --- | --- | --- | --- | --- |
@@ -48,12 +48,12 @@ Documents without frontmatter show "—". Freshest source update: 2026-11-11.
 | [docs/manuals/operation-manual.md](manuals/operation-manual.md) | Operation Manual - Integrating Instructions Documents | instruction | active | 3.62 | 2026-11-11 |
 | [docs/manuals/prompt-engineering-guide.md](manuals/prompt-engineering-guide.md) | Prompt Engineering Guide | manual | active | 1.11 | 2026-08-06 |
 | [docs/manuals/role-operating-guide.md](manuals/role-operating-guide.md) | Role Operating Guide — Product, Delivery, and All Lifecycle Roles | manual | active | 2.11 | 2026-08-06 |
-| [docs/manuals/tool-library-catalog.md](manuals/tool-library-catalog.md) | Claude Tool Library Catalog | tool-catalog | active | 2.7 | 2026-08-06 |
+| [docs/manuals/tool-library-catalog.md](manuals/tool-library-catalog.md) | Claude Tool Library Catalog | tool-catalog | active | 2.8 | 2026-11-12 |
 | [docs/references/gate-verification-template/README.md](references/gate-verification-template/README.md) | Gate Verification Template - how to apply | product-doc | active | 1.5 | 2026-08-06 |
-| [docs/references/infra-templates/README.md](references/infra-templates/README.md) | Infra Templates - how to apply | product-doc | active | 1.0 | 2026-07-13 |
+| [docs/references/infra-templates/README.md](references/infra-templates/README.md) | Infra Templates - how to apply | product-doc | active | 1.1 | 2026-11-12 |
 | [docs/references/missing-data-vocabulary.md](references/missing-data-vocabulary.md) | Missing Data Vocabulary | product-doc | active | 1.1 | 2026-08-03 |
 | [docs/references/telemetry-template/README.md](references/telemetry-template/README.md) | Telemetry Template - how to apply | product-doc | active | 1.2 | 2026-08-06 |
-| [docs/references/token-economy.md](references/token-economy.md) | Token Economy - adopt/defer/reject decisions | product-doc | active | 1.3 | 2026-07-31 |
+| [docs/references/token-economy.md](references/token-economy.md) | Token Economy - adopt/defer/reject decisions | product-doc | active | 1.4 | 2026-11-12 |
 | [docs/references/tools-ecosystem.md](references/tools-ecosystem.md) | Tools Ecosystem - unvetted starting shortlist | product-doc | active | 1.5 | 2026-08-06 |
 | [docs/reports/ARTIFACT-NECESSITY-AUDIT.md](reports/ARTIFACT-NECESSITY-AUDIT.md) | Artifact Necessity Audit: docs/manuals/, docs/references/, docs/reports/ | product-doc | active | 1.4 | 2026-08-06 |
 | [docs/reports/PROPOSAL-TRACKING.md](reports/PROPOSAL-TRACKING.md) | Report Proposal Tracking | status-artifact | active | 1.15 | 2026-08-07 |
