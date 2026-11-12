@@ -3,9 +3,9 @@ title: "Documentation Metadata Standard"
 doc_type: instruction
 description: "Defines the mandatory YAML frontmatter schema for every Markdown documentation file and roadmap-generated artifact in this repository, and the rule for applying it whenever such a file is created or materially updated."
 status: active
-version: "1.29"
+version: "1.30"
 created: 2026-07-07
-updated: 2026-08-07
+updated: 2026-11-12
 language: en
 id: documentation-metadata-standard
 tags: [frontmatter, metadata, documentation-standard, retrieval, rag, diataxis]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, adr-0001-documentation-and-governance-model
 
 Changelog of this document:
 
+- v1.30: Section 7's Phase 3 and Phase 4 Spec Kit rows name `specs/[NNN-feature-name]/` (`spec.md`, `plan.md`, `tasks.md`), where Spec Kit 1.3.x writes them, instead of `.specify/specs/` and `.specify/plans/`; `clarifications.md` leaves the table, since `/speckit.clarify` writes into the spec itself (`docs/prompts/024-fix-spec-kit-feature-paths.md`, issue #66).
 - v1.29: Section 2.1 gains a sentence distinguishing a mechanical-only edit (citation fix, cross-reference renumbering) from a guidance change: the former still bumps `version` but doesn't require a matching changelog entry. A cross-repo documentation audit found 14 of the 16 documents in this repository that keep a body changelog with `version:` ahead of their own newest changelog entry, with no rule or written policy distinguishing the two cases.
 - v1.27: Section 1's `docs/manuals/` and `docs/references/` scope lists and Section 4's `manual` `doc_type` row gain the two documents added this batch (`docs/manuals/glossary.md`, `docs/references/missing-data-vocabulary.md`). A `fix-verifier` pass caught this: the batch had diagnosed the enumeration-drift class and then reproduced it, in the very table a prompt in the same batch flagged as previously fixed for it (`008-market-standard-vocabulary`, `007-missing-data-vocabulary`).
-- v1.26: Section 9's enforcement sentence now states that none of the automated checks run in a project created from this template outside the `licorsy` organization. The `ci-docs` job gained an `if: github.repository_owner == 'licorsy'` guard, making the template's dependency on Licorsy-controlled workflows explicit rather than silent; without that caveat this section promised adopters automation they do not receive.
 - Older entries: see `git log --follow` on this file.
 
 ---
@@ -141,9 +141,9 @@ The roadmap (`docs/strategy/roadmap.md`) generates most of its artifacts under `
 | `docs/references/problem-statement.md`, `brainstorm.md`, `tree-of-thought-brainstorm.md`, `build-vs-buy.md` | `product-doc` | `explanation` | Phase 1 |
 | `docs/references/requirements.md`, `user-stories.md`, `mvp-scope.md`, `docs/business/market.md`, `docs/prd.md` | `product-doc` | `reference` | Phase 1 |
 | `docs/plan.md`, `docs/references/backlog.md` | `product-doc` | `reference` | Phase 2 |
-| `.specify/specs/[feature-name].md`, `.specify/plans/technical-strategy.md` | `spec-kit-artifact` | — | Phase 3 |
+| `specs/[NNN-feature-name]/spec.md`, `specs/[NNN-feature-name]/plan.md` (first pass) | `spec-kit-artifact` | — | Phase 3 |
 | `docs/references/data-model.md`, `integration-points.md` | `product-doc` | `reference` | Phase 3 |
-| `.specify/memory/clarifications.md`, `.specify/plans/[feature-name]-tech-plan.md` | `spec-kit-artifact` | — | Phase 4 |
+| `specs/[NNN-feature-name]/plan.md` (refined), `specs/[NNN-feature-name]/tasks.md` | `spec-kit-artifact` | — | Phase 4 |
 | `docs/task.md` | `product-doc` | `how-to` | Phase 4 |
 | `docs/references/test-report.md` | `product-doc` | `reference` | Phase 5 / 6 |
 | `docs/references/retrospective.md` | `product-doc` | `explanation` | Phase 8 |
