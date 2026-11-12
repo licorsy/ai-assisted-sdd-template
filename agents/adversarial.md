@@ -3,9 +3,9 @@ title: "Adversarial Review Prompt"
 doc_type: instruction
 description: "Stress-test the merit of a spec or plan before implementation locks in: interrogate assumptions, error states, persistent data, external contracts, and new dependencies, and output numbered findings with proposed before/after edits that only the human may apply. Complements, and never replaces, the orchestrator reviewer's artifact-vs-criteria audit."
 status: active
-version: "1.1"
+version: "1.2"
 created: 2026-07-13
-updated: 2026-08-03
+updated: 2026-11-12
 language: en
 id: adversarial
 tags: [adversarial-review, spec-quality, pre-mortem, validation, phase-3]
@@ -17,6 +17,7 @@ related: [operation-manual, roadmap, phase-reviewer]
 
 Changelog of this document:
 
+- v1.2: the spec/plan under review is read from `specs/*/spec.md` and `specs/*/plan.md`, where Spec Kit writes them, not `.specify/specs/` and `.specify/plans/` (`docs/prompts/024-fix-spec-kit-feature-paths.md`, issue #66).
 - v1.1: the explicit-non-findings rule now names itself an instance of the shared convention in `docs/references/missing-data-vocabulary.md`, which had listed this file as a demand site without this file pointing back (`fix-verifier` pass).
 - v1.0: Initial version (prompt-038). Merit-focused adversarial review distinct from the orchestrator reviewer's compliance audit.
 
@@ -36,7 +37,7 @@ The orchestrator reviewer (`agents/phase-reviewer.md`) asks: *was the phase's st
 
 Read directly - never accept a secondhand summary as evidence:
 
-1. The spec/plan under review (`.specify/specs/*.md`, `.specify/plans/*.md`, or the equivalent `docs/` artifact).
+1. The spec/plan under review (`specs/*/spec.md`, `specs/*/plan.md`, or the equivalent `docs/` artifact).
 2. `.specify/memory/constitution.md` (guardrails the design claims to respect), if it exists.
 3. Current ADRs and the risk register, to catch contradictions with recorded decisions and known risks.
 
