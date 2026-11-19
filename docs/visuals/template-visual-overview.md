@@ -3,9 +3,9 @@ title: "Template Visual Overview"
 doc_type: manual
 description: "Six Mermaid diagrams orienting a new reader in the template's architecture - document map, roadmap state machine, phase-execution sequence, prompt-lifecycle workflow, Spec Kit artifact flow, and the runtime-trigger decision flow. Diagrams orient, prose governs: every diagram links to the canonical document that owns its content."
 status: active
-version: "1.16"
+version: "1.17"
 created: 2026-07-14
-updated: 2026-11-12
+updated: 2026-11-19
 language: en
 id: template-visual-overview
 tags: [visual-documentation, mermaid, diagrams, onboarding, overview]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, orchestrator, prompt-engineering-guide]
 
 Changelog of this document:
 
+- v1.17: Section 5's Spec Kit flow uses `/speckit-<command>` and gains the `/speckit-converge` loop back to implement (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v1.16: Section 5's Spec Kit flow points at `specs/NNN-feature/` (`spec.md`, `plan.md`, `tasks.md`) and at the spec's own Clarifications section, matching roadmap v3.33 (`docs/prompts/024-fix-spec-kit-feature-paths.md`, issue #66).
 - v1.14: Section 3's `REFS` node gains `missing-data-vocabulary`, per this file's own rule that a diagram is reviewed in the same change as the documents it visualizes - two version bumps in this batch had passed without that review (`fix-verifier` pass).
-- v1.13: Section 6's flowchart entry node reworded from "Task / increment at hand" to "Task / change at hand" - it was the one use of the word that meant neither the release cycle nor the Scrum Increment. `Q4`'s "Security-relevant increment?" is the delivered-capability sense and stays (`008-market-standard-vocabulary`).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -94,7 +94,7 @@ One phase from entry to transition, with the layered validation model ([operatio
 sequenceDiagram
     actor H as Human
     participant O as Orchestrator session
-    participant SK as Spec Kit (/speckit.*)
+    participant SK as Spec Kit (/speckit-*)
     participant AR as adversarial-reviewer
     participant OR as orchestrator-reviewer
     H->>O: confirm phase, goal, acceptance criteria
@@ -136,14 +136,15 @@ The technical execution engine and where each command's artifact lands ([operati
 
 ```mermaid
 flowchart TD
-    C["/speckit.constitution"] --> CA[".specify/memory/constitution.md<br/>(Phase 3 - guardrails)"]
-    S["/speckit.specify"] --> SA["specs/NNN-feature/spec.md<br/>(Phase 3 - intent)"]
-    P1["/speckit.plan (first pass)"] --> PA["specs/NNN-feature/plan.md<br/>(Phase 3 - initial plan)"]
-    CL["/speckit.clarify"] --> CLA["Clarifications section of spec.md<br/>(Phase 4)"]
-    P2["/speckit.plan (refined)"] --> PB["specs/NNN-feature/plan.md, refined<br/>(Phase 4 - refined plan)"]
-    T["/speckit.tasks"] --> TA["specs/NNN-feature/tasks.md / docs/task.md<br/>(Phase 4 - atomic tasks)"]
-    AN["/speckit.analyze"] --> ANA["spec/plan/tasks cross-check<br/>(Phase 4 - mandatory, pre-code)"]
-    I["/speckit.implement"] --> IA["source code + tests, task by task<br/>(Phase 5 - test-first default)"]
+    C["/speckit-constitution"] --> CA[".specify/memory/constitution.md<br/>(Phase 3 - guardrails)"]
+    S["/speckit-specify"] --> SA["specs/NNN-feature/spec.md<br/>(Phase 3 - intent)"]
+    P1["/speckit-plan (first pass)"] --> PA["specs/NNN-feature/plan.md<br/>(Phase 3 - initial plan)"]
+    CL["/speckit-clarify"] --> CLA["Clarifications section of spec.md<br/>(Phase 4)"]
+    P2["/speckit-plan (refined)"] --> PB["specs/NNN-feature/plan.md, refined<br/>(Phase 4 - refined plan)"]
+    T["/speckit-tasks"] --> TA["specs/NNN-feature/tasks.md / docs/task.md<br/>(Phase 4 - atomic tasks)"]
+    AN["/speckit-analyze"] --> ANA["spec/plan/tasks cross-check<br/>(Phase 4 - mandatory, pre-code)"]
+    I["/speckit-implement"] --> IA["source code + tests, task by task<br/>(Phase 5 - test-first default)"]
+    CV["/speckit-converge"] --> CVA["unbuilt work appended to tasks.md<br/>(Phase 5 - repeat until Converged)"]
     CA --> S
     SA --> P1
     PA --> CL
@@ -151,6 +152,8 @@ flowchart TD
     PB --> T
     TA --> AN
     ANA --> I
+    IA --> CV
+    CVA -->|new tasks| I
 ```
 
 ## 6. Runtime-trigger decision flow

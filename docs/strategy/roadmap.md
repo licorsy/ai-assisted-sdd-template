@@ -3,9 +3,9 @@ title: "Business Software Development Roadmap"
 doc_type: instruction
 description: "Guide the creation and evolution of any software product or platform as a generic and reusable AI multi-agent software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.33"
+version: "3.34"
 created: 2024-07-04
-updated: 2026-11-12
+updated: 2026-11-19
 language: en
 id: roadmap
 tags: [roadmap, lifecycle, greenfield, brownfield, phase-gates]
@@ -17,9 +17,9 @@ related: [operation-manual, orchestrator, phase-reviewer, go-to-market]
 
 Changelog of this document:
 
+- v3.34: Spec Kit commands written as `/speckit-<command>`; Phase 3 Activity 9's recovery step installs a pinned Specify CLI; Phase 5 gains Activity 6a, `/speckit-converge` until `Converged` (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v3.33: Spec Kit feature artifacts move from `.specify/specs/`, `.specify/plans/` and `.specify/tasks/` to `specs/[NNN-feature-name]/` (`spec.md`, `plan.md`, `tasks.md`), where Spec Kit 1.3.x actually writes them; clarifications live in the spec's own `## Clarifications` section; Phase 3 names the real core configuration files; Phase 3 instructions separate the product-level `docs/` from the per-feature `specs/`; Section 10's tree follows (`docs/prompts/024-fix-spec-kit-feature-paths.md`, issue #66).
 - v3.32: Phase 3 Activity 9's recovery command uses `--integration <agent>` instead of the removed `--ai` flag (`docs/prompts/023-fix-bootstrap-specify-flag-and-business-scope.md`, issue #57).
-- v3.30: Phase 1 now states that Activities 9, 10 and 12 are product discovery and belong to this roadmap, and that a commercial-lifecycle roadmap builds on their output rather than re-deriving it. That ownership statement previously existed only inside `docs/strategy/go-to-market.md` - the file slated to leave - so removing it would have destroyed the only record of the boundary (`009-prepare-go-to-market-separation`).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -368,10 +368,10 @@ Define how the system will be built before implementation starts.
 7. Define code, test, and review conventions.
 7a. Conditional: if the design is security-relevant - it touches authentication/authorization, input handling, secrets, payments, file or OS access, externally sourced data, or cryptography (same runtime trigger as P4, `docs/manuals/prompt-engineering-guide.md` Section 12) - sketch the threat model in the SPEC/plan: the attack vectors those surfaces expose and the mitigation each design decision provides, so the adversarial merit review can attack it. Otherwise record the skip in one line.
 8. Record decisions in ADRs.
-9. Verify Spec Kit was already initialized during bootstrap (`docs/manuals/operation-manual.md` Steps 1-2). If it was skipped, or this is a brownfield adoption where it never ran, run `specify init --here --integration <agent> --script sh` here as a recovery step — this is not the primary/expected first appearance of that command.
-10. Run `/speckit.constitution` to generate `.specify/memory/constitution.md`.
-11. Run `/speckit.specify` to generate `specs/[NNN-feature-name]/spec.md` (Spec Kit numbers each feature directory, e.g. `specs/001-checkout/`).
-12. Run `/speckit.plan` to generate the first technical plan (`specs/[NNN-feature-name]/plan.md`), without breaking it into tasks yet.
+9. Verify Spec Kit was already initialized during bootstrap (`docs/manuals/operation-manual.md` Steps 1-2). If it was skipped, or this is a brownfield adoption where it never ran, install the Specify CLI pinned to a release tag and run `specify init --here --integration <agent> --script sh` here as a recovery step (Steps 1-2 hold the pinned command) — this is not the primary/expected first appearance of that command.
+10. Run `/speckit-constitution` to generate `.specify/memory/constitution.md`.
+11. Run `/speckit-specify` to generate `specs/[NNN-feature-name]/spec.md` (Spec Kit numbers each feature directory, e.g. `specs/001-checkout/`).
+12. Run `/speckit-plan` to generate the first technical plan (`specs/[NNN-feature-name]/plan.md`), without breaking it into tasks yet.
 
 #### Phase 3 - Generated artifacts
 
@@ -399,7 +399,7 @@ Define how the system will be built before implementation starts.
 - High-level architecture defined.
 - Development and review rules documented.
 - Significant decisions recorded in ADRs.
-- The SPEC is ready to become tasks - specific enough that Phase 4 can decompose it without inventing scope. Phase 3 does not generate the tasks themselves; Activity 12 above stops at the first technical plan on purpose, and `/speckit.tasks` runs in Phase 4.
+- The SPEC is ready to become tasks - specific enough that Phase 4 can decompose it without inventing scope. Phase 3 does not generate the tasks themselves; Activity 12 above stops at the first technical plan on purpose, and `/speckit-tasks` runs in Phase 4.
 - No critical ambiguity remains open.
 
 #### Phase 3 - Expected result
@@ -427,10 +427,10 @@ Turn the SPEC into small, clear, traceable tasks.
 
 #### Phase 4 - Activities
 
-1. Run `/speckit.clarify` to record ambiguities and the human answers that resolve them.
-2. Run `/speckit.plan` to produce a rigorous technical plan for implementation.
-3. Run `/speckit.tasks` to generate atomic tasks, typically represented as a granular backlog.
-4. Run `/speckit.analyze` to check the spec, plan, and tasks against each other for gaps, conflicts, and constitution violations before any code is written (mandatory; see `docs/manuals/operation-manual.md`, Step 5a rule 2).
+1. Run `/speckit-clarify` to record ambiguities and the human answers that resolve them.
+2. Run `/speckit-plan` to produce a rigorous technical plan for implementation.
+3. Run `/speckit-tasks` to generate atomic tasks, typically represented as a granular backlog.
+4. Run `/speckit-analyze` to check the spec, plan, and tasks against each other for gaps, conflicts, and constitution violations before any code is written (mandatory; see `docs/manuals/operation-manual.md`, Step 5a rule 2).
 5. Classify priority.
 6. Identify task dependencies.
 7. Define execution order.
@@ -440,7 +440,7 @@ Turn the SPEC into small, clear, traceable tasks.
 
 #### Phase 4 - Generated artifacts
 
-- `## Clarifications` section of `specs/[NNN-feature-name]/spec.md` (`/speckit.clarify` writes the answers into the spec itself)
+- `## Clarifications` section of `specs/[NNN-feature-name]/spec.md` (`/speckit-clarify` writes the answers into the spec itself)
 - `specs/[NNN-feature-name]/plan.md` (refined)
 - `docs/task.md` or `specs/[NNN-feature-name]/tasks.md`
 - `CHANGELOG.md` updated
@@ -491,10 +491,11 @@ During sprint execution, actual system assets are generated.
 
 1. Select one task at a time.
 2. Prepare context.
-3. Run `/speckit.implement` to generate source code and tests step by step. For a task that produces executable code, the default is a test-first cycle within this step: write a failing test, confirm it fails for the expected reason, then implement until it passes (red-green-refactor). This default does not apply verbatim to a task whose output is not executable code (documentation, configuration-only, research spikes) — those still need meaningful validation, just not a literal failing-test-first step. When the task integrates an unfamiliar or complex external API/dependency, use the external-dependency research-spike pattern (P10, `docs/manuals/prompt-engineering-guide.md`, Section 12) to cache exploration findings in a short-lived scratch doc.
+3. Run `/speckit-implement` to generate source code and tests step by step. For a task that produces executable code, the default is a test-first cycle within this step: write a failing test, confirm it fails for the expected reason, then implement until it passes (red-green-refactor). This default does not apply verbatim to a task whose output is not executable code (documentation, configuration-only, research spikes) — those still need meaningful validation, just not a literal failing-test-first step. When the task integrates an unfamiliar or complex external API/dependency, use the external-dependency research-spike pattern (P10, `docs/manuals/prompt-engineering-guide.md`, Section 12) to cache exploration findings in a short-lived scratch doc.
 4. Validate against the SPEC.
 5. Create or update tests.
 6. Run local validations.
+6a. Run `/speckit-converge` once the feature's tasks are implemented: it compares the code against the spec, plan, and tasks and appends any unbuilt work as new tasks. Implement those and repeat until it reports `Converged`.
 7. Submit to human checkpoint.
 8. Approve, correct, or reject.
 9. Record learnings.

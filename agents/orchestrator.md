@@ -3,9 +3,9 @@ title: "Orchestrator Prompt"
 doc_type: instruction
 description: "Orchestrate the creation and evolution of a software product or platform as a generic AI-assisted development system, with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.25"
+version: "3.26"
 created: 2024-07-04
-updated: 2026-08-06
+updated: 2026-11-19
 language: en
 id: orchestrator
 tags: [orchestrator, phase-sequencing, roadmap-path-selection, spec-kit]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, role-operating-guide]
 
 Changelog of this document:
 
+- v3.26: the Spec Kit command list uses the Claude Code skill syntax `/speckit-<command>` and gains `/speckit-converge` (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v3.24: the v3.23 pointer's "five places" count removed - it disagreed with three other statements of the same number and had no owner; `docs/references/missing-data-vocabulary.md` now owns the enumeration (`fix-verifier` pass).
 - v3.23: the phase-exit brief's "not tracked (…)"/"none" strings now point at `docs/references/missing-data-vocabulary.md` as instances of a shared convention, rather than reading as this file's private invention - the same honest-absence rule was independently reinvented across the corpus before the vocabulary existed, each site with its own token (`007-missing-data-vocabulary`).
-- v3.22: Step 3's readiness checklist gains acceptance criteria, which it never listed - the nearest item was "The phase goal was achieved", so the one thing a phase gate exists to check had no line of its own. Recorded per criterion in three states (met directly / met via a local analog / not applicable with the reason), reusing the "'not applicable' must be stated, not skipped" formulation `agents/adversarial.md` and `agents/doc-consistency.md` already carry (`006-absorb-local-notes-011-accepted-items`).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -74,9 +74,9 @@ Before producing any artifact:
 4. propose only the next immediate step.
 
 When a technical execution step is needed (specify, plan, tasks, implement),
-use the Spec Kit slash commands (`/speckit.constitution`, `/speckit.specify`,
-`/speckit.clarify`, `/speckit.plan`, `/speckit.tasks`, `/speckit.analyze`,
-`/speckit.implement`) instead of freeform code generation.
+use the Spec Kit slash commands (`/speckit-constitution`, `/speckit-specify`,
+`/speckit-clarify`, `/speckit-plan`, `/speckit-tasks`, `/speckit-analyze`,
+`/speckit-implement`, `/speckit-converge`) instead of freeform code generation.
 
 ## Operating rules
 
