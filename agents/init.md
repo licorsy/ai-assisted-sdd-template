@@ -60,7 +60,7 @@ Each artifact carries valid frontmatter per `docs/manuals/documentation-metadata
 
 ### 4. Verify Spec Kit - report, don't install
 
-If `.specify/` is absent, report the exact commands from `docs/manuals/operation-manual.md` Steps 1-2 as a briefed human task (why + numbered steps + what to report back), for example: 1. Open the terminal; 2. Run `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.4.3` (the tag the manual's Step 1 records; check for a newer release first); 3. Run `specify init --here --integration claude --script sh`; 4. Report back the output of `specify version`. If present, report the detected agent adapters and the output of `specify version` (or "`specify` not on PATH" when the CLI is absent), and write that version into `/docs/status.md`, so the installed Spec Kit version is on record.
+If `.specify/` is absent, report the exact commands from `docs/manuals/operation-manual.md` Steps 1-2 as a briefed human task (why + numbered steps + what to report back), for example: 1. Open the terminal; 2. Run `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.4.3` (the tag the manual's Step 1 records; check for a newer release first); 3. Run `specify init --here --integration claude --script sh`; 4. Report back the output of `specify version`, which init writes into `/docs/status.md`. If present, report the detected agent adapters and the output of `specify version` (or "`specify` not on PATH" when the CLI is absent), and write that version into `/docs/status.md`, so the installed Spec Kit version is on record.
 
 ### 4a. Offer the GitHub tracking-issue + Project board setup
 

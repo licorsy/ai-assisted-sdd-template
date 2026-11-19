@@ -17,7 +17,7 @@ related: [orchestrator, roadmap, phase-reviewer, adversarial, doc-consistency, i
 
 Changelog of this document:
 
-- v3.64: `specs/[NNN-feature-name]/` joins `.specify/` as Spec Kit's memory in the Living memory and Spec Kit rows, Step 8, Step 9's frontmatter scope, the search rule and Step 15; `--no-model-invocation` becomes an option, with its cost for an orchestrator-driven session; the ci-security row says dependency review runs at `staging`/`main` PRs (docs-consistency audit of 2026-11-19).
+- v3.64: `specs/[NNN-feature-name]/` (feature artifacts) joins `.specify/` (Spec Kit's memory) in the Living memory and Spec Kit rows, Step 8, Step 9's frontmatter scope, the search rule and Step 15; `--no-model-invocation` becomes an option, with its cost for an orchestrator-driven session; the ci-security row says dependency review runs at `staging`/`main` PRs (docs-consistency audit of 2026-11-19).
 - v3.63: Step 1 installs the Specify CLI pinned to a release tag (v1.4.3, verified 2026-11-19) and adds the existing-project and upgrade commands; Step 2 drops the bare-URL `uvx`, offers `--no-model-invocation` as the Claude Code token-economy default and points other integrations to Spec Kit's own pages; Spec Kit commands are written `/speckit-<command>`; Steps 4-5 add `/speckit-converge` (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v3.62: Step 2's Spec Kit commands switch from the removed `--ai` flag to `--integration <agent> --script sh`, with one sentence recording the rename and where the Claude integration installs its skills (`docs/prompts/023-fix-bootstrap-specify-flag-and-business-scope.md`, issue #57).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
@@ -58,7 +58,7 @@ The Execution Roadmap defines what happens. The Orchestrator Prompt defines when
 
 ## The key takeaway: Spec Kit is agent-agnostic by design
 
-Spec Kit is not tied to a single model or CLI. When you run `specify init`, it generates agent-specific integration files while keeping `specs/` and `.specify/` as the source of truth. That means the same project can be operated from Claude Code, GitHub Copilot, Gemini CLI, or other compatible tooling without rewriting the project memory. This same pattern — a thin, regeneration-safe adapter file per tool, with `.specify/` and this repository's own docs staying canonical — is the answer for any other LLM-based code assistant (for example Cursor or Codex) too; it does not need a separate abstraction layer of its own.
+Spec Kit is not tied to a single model or CLI. When you run `specify init`, it generates agent-specific integration files while keeping `specs/` and `.specify/` as the source of truth. That means the same project can be operated from Claude Code, GitHub Copilot, Gemini CLI, or other compatible tooling without rewriting the project memory. This same pattern — a thin, regeneration-safe adapter file per tool, with `specs/`, `.specify/` and this repository's own docs staying canonical — is the answer for any other LLM-based code assistant (for example Cursor or Codex) too; it does not need a separate abstraction layer of its own.
 
 Recommended rule:
 

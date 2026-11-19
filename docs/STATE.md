@@ -3,7 +3,7 @@ title: "Repository State"
 doc_type: status-artifact
 description: "Generated single-read snapshot of every living document's title, type, status, version, and freshness. Answers 'where are we?' without a directory sweep; excludes docs/prompts/ regardless of status (kept lean), plus README.md, CLAUDE.md, and AGENTS.md (root entry points, but not part of doc-scope.js's narrower ROOT_FILES this generator sources from)."
 status: active
-version: "36"
+version: "37"
 created: 2026-07-13
 updated: 2026-11-19
 language: en
@@ -54,7 +54,7 @@ Documents without frontmatter show "—". Freshest source update: 2026-11-19.
 | [docs/references/missing-data-vocabulary.md](references/missing-data-vocabulary.md) | Missing Data Vocabulary | product-doc | active | 1.1 | 2026-08-03 |
 | [docs/references/telemetry-template/README.md](references/telemetry-template/README.md) | Telemetry Template - how to apply | product-doc | active | 1.2 | 2026-08-06 |
 | [docs/references/token-economy.md](references/token-economy.md) | Token Economy - adopt/defer/reject decisions | product-doc | active | 1.4 | 2026-11-12 |
-| [docs/references/tools-ecosystem.md](references/tools-ecosystem.md) | Tools Ecosystem - unvetted starting shortlist | product-doc | active | 1.5 | 2026-08-06 |
+| [docs/references/tools-ecosystem.md](references/tools-ecosystem.md) | Tools Ecosystem - unvetted starting shortlist | product-doc | active | 1.6 | 2026-11-19 |
 | [docs/reports/ARTIFACT-NECESSITY-AUDIT.md](reports/ARTIFACT-NECESSITY-AUDIT.md) | Artifact Necessity Audit: docs/manuals/, docs/references/, docs/reports/ | product-doc | active | 1.4 | 2026-08-06 |
 | [docs/reports/PROPOSAL-TRACKING.md](reports/PROPOSAL-TRACKING.md) | Report Proposal Tracking | status-artifact | active | 1.15 | 2026-08-07 |
 | [docs/strategy/go-to-market.md](strategy/go-to-market.md) | Go-to-Market Roadmap | instruction | active | 1.1 | 2026-08-06 |
