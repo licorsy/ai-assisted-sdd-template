@@ -3,9 +3,9 @@ title: "Prompt Index"
 doc_type: status-artifact
 description: "The id/status/one-line-purpose index over every prompt in docs/prompts/, updated whenever a prompt is created or moves lifecycle stage (operation-manual.md Step 11). The prompt file itself is the source of truth for content; this index exists so a reader can scan the whole archive without opening every file."
 status: active
-version: "1.32"
+version: "1.33"
 created: 2026-07-31
-updated: 2026-11-12
+updated: 2026-11-19
 language: en
 id: prompt-index
 tags: [status-artifact, docs-prompts, index]
