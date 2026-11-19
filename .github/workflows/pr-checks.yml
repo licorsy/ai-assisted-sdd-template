@@ -111,11 +111,18 @@ jobs:
       base-sha: ${{ github.event.pull_request.base.sha }}
 
   # dependency-review (self-gated to staging/main inside the reusable workflow)
-  # plus secret-scanning on every trigger. Needs an org-level GITLEAKS_LICENSE
-  # secret to fully function — see licorsy/platform-workflows's README.
+  # plus secret-scanning on every trigger. Needs a GITLEAKS_LICENSE secret:
+  # org-level, passed by secrets: inherit; a private repo on GitHub Free also
+  # needs it at repository level, because org secrets don't reach it there.
+  # pull-requests: read is granted here because gitleaks-action lists the PR's
+  # commits, a private repo refuses that without it, and a called workflow can't
+  # raise the caller's token (licorsy/platform-workflows#35 and its README).
   #
   # Same owner guard, same reason as ci-docs above.
   ci-security:
     if: github.repository_owner == 'licorsy'
     uses: licorsy/platform-workflows/.github/workflows/ci-security.yml@v1
+    permissions:
+      contents: read
+      pull-requests: read
     secrets: inherit
