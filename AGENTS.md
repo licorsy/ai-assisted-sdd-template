@@ -3,9 +3,9 @@ title: "AGENTS.md"
 doc_type: instruction
 description: "Tool-neutral agent entry point for this repository, equivalent to CLAUDE.md, for coding tools that read AGENTS.md by convention: the always-on confirmation rule, the documentation metadata rule, and pointers to the documents that own the full text of each."
 status: active
-version: "1.0.3"
+version: "1.0.4"
 created: 2026-07-30
-updated: 2026-08-07
+updated: 2026-11-19
 language: en
 id: agents-adapter
 owner: Alexandre Clemente
@@ -26,7 +26,7 @@ Before executing any non-trivial instruction (creating or materially changing an
 ## Documentation metadata rule
 
 <!-- sync:documentation-metadata-rule source=docs/manuals/operation-manual.md anchor="## Step 9" -->
-Every Markdown documentation file or roadmap-generated artifact — `agents/` and every category directory under `docs/` enumerated in `docs/manuals/documentation-metadata-standard.md` Section 1, plus any artifact the roadmap generates under `.specify/` (best-effort there: Spec Kit tooling may regenerate those files and strip custom frontmatter, so apply it but don't treat its survival as guaranteed) — must carry the YAML frontmatter schema defined in `docs/manuals/documentation-metadata-standard.md`; apply it, alongside the version header and — for a guidance change, not a mechanical-only edit (see Section 2.1's distinction) — the changelog, whenever such a file is created or materially updated. This is the full rule defined in `docs/manuals/operation-manual.md`, Step 9; it applies regardless of task size.
+Every Markdown documentation file or roadmap-generated artifact — `agents/` and every category directory under `docs/` enumerated in `docs/manuals/documentation-metadata-standard.md` Section 1, plus any artifact the roadmap generates under `specs/` or `.specify/` (best-effort there: Spec Kit tooling may regenerate those files and strip custom frontmatter, so apply it but don't treat its survival as guaranteed) — must carry the YAML frontmatter schema defined in `docs/manuals/documentation-metadata-standard.md`; apply it, alongside the version header and — for a guidance change, not a mechanical-only edit (see Section 2.1's distinction) — the changelog, whenever such a file is created or materially updated. This is the full rule defined in `docs/manuals/operation-manual.md`, Step 9; it applies regardless of task size.
 <!-- /sync:documentation-metadata-rule -->
 
 ## Change-as-prompt rule

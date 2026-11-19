@@ -3,9 +3,9 @@ title: "CONTRIBUTING.md"
 doc_type: instruction
 description: "Contribution process for this template repository itself: the Change-as-prompt rule, the prompt lifecycle, file-naming and commit-message conventions, and the local validation gate. Governs changes to this repository's own docs, governance, prompts, and tooling — not a project generated from it."
 status: active
-version: "1.0"
+version: "1.1"
 created: 2026-08-06
-updated: 2026-08-06
+updated: 2026-11-19
 language: en
 id: contributing
 owner: Alexandre Clemente
@@ -41,4 +41,4 @@ Each prompt file's frontmatter `status` field tracks its own lifecycle:
 - **File naming**: root-level entry-point files use UPPER-CASE (`README.md`, `QUICKSTART.md`, `CLAUDE.md`, `AGENTS.md`, `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, `CHANGELOG.md`, `LICENSE`); root-level tool configuration keeps whatever filename its tool requires (`.pre-commit-config.yaml`, `.docgov.config.js`, `.gitignore`). Everything under `docs/` and `agents/`, plus `.github/workflows/` and `.github/scripts/`, uses lowercase-hyphenated names (`docs/manuals/operation-manual.md`, `docs/prompts/020-restore-root-governance-files.md`). GitHub-mandated files in `.github/` keep the exact names GitHub requires (`CODEOWNERS` and its issue/PR-template counterparts, when adopted).
 - **Documentation metadata**: every Markdown file in the living-document directories, plus the root files GitHub or another system doesn't already own the frontmatter contract for, carries the YAML frontmatter schema defined in `docs/manuals/documentation-metadata-standard.md`. `.github/scripts/doc-scope.js`'s `CATEGORY_DIRS`/`SCOPE_FILES` are the canonical, single-sourced enumeration of what's in scope — this file intentionally does not restate that list, to avoid it going stale independently.
 - **Local validation gate**: this repository uses `pre-commit` as its primary gate. After cloning, run `pre-commit install` and `pre-commit install --hook-type commit-msg` once. The configured hooks are file hygiene (trailing whitespace, EOF, YAML/JSON syntax, merge markers) and Conventional Commits on the commit subject (`.pre-commit-config.yaml`).
-- **Commit messages**: Conventional Commits (`feat`, `fix`, `docs`, `refactor`, `chore`, `test`, `perf`, `build`, `ci`), enforced by the `commit-msg` hook and re-checked on `staging`/`main` PRs by `.github/workflows/pr-checks.yml`.
+- **Commit messages**: Conventional Commits (`feat`, `fix`, `docs`, `refactor`, `chore`, `test`, `perf`, `build`, `ci`), enforced by the local `commit-msg` hook, which is the only gate: `.github/workflows/pr-checks.yml` no longer re-checks them (see its comment).

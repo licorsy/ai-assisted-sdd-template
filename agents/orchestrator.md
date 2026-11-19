@@ -3,7 +3,7 @@ title: "Orchestrator Prompt"
 doc_type: instruction
 description: "Orchestrate the creation and evolution of a software product or platform as a generic AI-assisted development system, with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.26"
+version: "3.27"
 created: 2024-07-04
 updated: 2026-11-19
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, role-operating-guide]
 
 Changelog of this document:
 
+- v3.27: the source-of-truth list gains `specs/[NNN-feature-name]/` (docs-consistency audit of 2026-11-19).
 - v3.26: the Spec Kit command list uses the Claude Code skill syntax `/speckit-<command>` and gains `/speckit-converge` (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v3.24: the v3.23 pointer's "five places" count removed - it disagreed with three other statements of the same number and had no owner; `docs/references/missing-data-vocabulary.md` now owns the enumeration (`fix-verifier` pass).
-- v3.23: the phase-exit brief's "not tracked (…)"/"none" strings now point at `docs/references/missing-data-vocabulary.md` as instances of a shared convention, rather than reading as this file's private invention - the same honest-absence rule was independently reinvented across the corpus before the vocabulary existed, each site with its own token (`007-missing-data-vocabulary`).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -33,6 +33,7 @@ We are working on a project. Follow the official roadmap phase by phase, documen
 Use these files as source of truth and living memory:
 
 - `.specify/memory/constitution.md`
+- `specs/[NNN-feature-name]/` (each feature's spec, plan and tasks)
 - `/docs/risks.md`
 - `/docs/adr/*.md`
 - `/docs/handbook.md`

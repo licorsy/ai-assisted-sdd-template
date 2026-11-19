@@ -3,7 +3,7 @@ title: "Template Visual Overview"
 doc_type: manual
 description: "Six Mermaid diagrams orienting a new reader in the template's architecture - document map, roadmap state machine, phase-execution sequence, prompt-lifecycle workflow, Spec Kit artifact flow, and the runtime-trigger decision flow. Diagrams orient, prose governs: every diagram links to the canonical document that owns its content."
 status: active
-version: "1.17"
+version: "1.18"
 created: 2026-07-14
 updated: 2026-11-19
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, orchestrator, prompt-engineering-guide]
 
 Changelog of this document:
 
+- v1.18: Section 3's map splits `.specify/` (constitution, templates) from `specs/NNN-feature/` (spec, plan, tasks), and Section 4's sequence returns artifacts in `specs/` too (docs-consistency audit of 2026-11-19).
 - v1.17: Section 5's Spec Kit flow uses `/speckit-<command>` and gains the `/speckit-converge` loop back to implement (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v1.16: Section 5's Spec Kit flow points at `specs/NNN-feature/` (`spec.md`, `plan.md`, `tasks.md`) and at the spec's own Clarifications section, matching roadmap v3.33 (`docs/prompts/024-fix-spec-kit-feature-paths.md`, issue #66).
-- v1.14: Section 3's `REFS` node gains `missing-data-vocabulary`, per this file's own rule that a diagram is reviewed in the same change as the documents it visualizes - two version bumps in this batch had passed without that review (`fix-verifier` pass).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -44,7 +44,8 @@ flowchart TD
     OM --> PEG["prompt-engineering-guide.md<br/>(how to write each prompt + pattern library)"]
     OM --> DMS["documentation-metadata-standard.md<br/>(frontmatter schema)"]
     OM --> ROG["role-operating-guide.md<br/>(one-person role coverage)"]
-    RM --> SPEC[".specify/<br/>(Spec Kit artifacts: constitution, specs, plans, tasks)"]
+    RM --> SPEC[".specify/<br/>(Spec Kit memory: constitution, templates)"]
+    RM --> FEAT["specs/NNN-feature/<br/>(Spec Kit artifacts: spec, plan, tasks)"]
     OM --> PROMPTS["docs/prompts/<br/>(change-as-prompt archive + PROMPT-INDEX)"]
     OM --> REFS["docs/references/<br/>(token-economy, tools-ecosystem, missing-data-vocabulary,<br/>infra-templates, telemetry-template, gate-verification-template)"]
     OM --> STATE["docs/STATE.md<br/>(generated single-read snapshot)"]
@@ -101,7 +102,7 @@ sequenceDiagram
     O->>H: state what will be done + artifacts (gate)
     H-->>O: approve
     O->>SK: technical execution (specify / plan / tasks / implement)
-    SK-->>O: artifacts in .specify/ + code/tests
+    SK-->>O: artifacts in specs/ + .specify/ + code/tests
     Note over O: Layer 5 - automated checks (lint, tests, CI)
     O->>O: Layer 1 - self-check vs phase criteria
     O->>AR: Layer 2 - merit review (design phases, security-relevant specs)
