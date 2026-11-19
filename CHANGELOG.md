@@ -20,9 +20,9 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
-- `pr-checks.yml`'s `ci-security` job grants `contents: read` and `pull-requests: read`, so a **private** project generated from this template gets a working `secret-scanning` check: `gitleaks-action` lists the PR's commits, a private repo refuses that call without `pull-requests: read`, and a called workflow cannot raise the caller's token (licorsy/platform-workflows#35). The comment also says a private repo on GitHub Free needs `GITLEAKS_LICENSE` at repository level.
-
 - Spec Kit's per-feature artifacts documented where Spec Kit actually writes them (`docs/prompts/024-fix-spec-kit-feature-paths.md`, issue #66): the roadmap, metadata standard, glossary, adversarial reviewer and visual overview placed spec, plan and tasks under `.specify/specs/`, `.specify/plans/` and `.specify/tasks/`, but Spec Kit 1.3.x writes `specs/NNN-<feature>/spec.md`, `plan.md` and `tasks.md`. The roadmap's two-pass plan is now one `plan.md`, first written in Phase 3 and refined in Phase 4; clarifications live in the spec's own `## Clarifications` section, so `.specify/memory/clarifications.md` is gone; and a new Phase 3 instruction separates the product-level `docs/` from the per-feature `specs/`.
+
+- `pr-checks.yml`'s `ci-security` job grants `contents: read` and `pull-requests: read`, so a **private** project generated from this template gets a working `secret-scanning` check: `gitleaks-action` lists the PR's commits, a private repo refuses that call without `pull-requests: read`, and a called workflow cannot raise the caller's token (licorsy/platform-workflows#35). The comment also says a private repo on GitHub Free needs `GITLEAKS_LICENSE` at repository level.
 
 - Two bootstrap defects a generated project hit on its first run (`docs/prompts/023-fix-bootstrap-specify-flag-and-business-scope.md`): the `specify init` commands in the operation manual, `agents/init.md` and the roadmap used the `--ai` flag current Spec Kit rejects, now `--integration <agent> --script sh` (#57); and `docs/business/` was missing from `doc-scope.js` `CATEGORY_DIRS`, so docs-governance never validated the `market.md` Phase 1 generates (#67).
 
