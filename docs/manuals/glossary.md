@@ -3,9 +3,9 @@ title: "Glossary"
 doc_type: manual
 description: "This operating model's vocabulary, stated in market-standard terms wherever one exists: the release cycle versus the Scrum Increment, the phase model named as Stage-Gate with each stage's agile equivalent, and the four delivery surfaces (Roadmap, Board, Backlog, Reports) mapped onto this repository's real artifacts. Exists so a reader who already knows Scrum, Kanban, or Stage-Gate does not have to learn a bespoke dialect first."
 status: active
-version: "1.2"
+version: "1.3"
 created: 2026-08-03
-updated: 2026-08-06
+updated: 2026-11-12
 language: en
 id: glossary
 tags: [glossary, vocabulary, stage-gate, scrum, delivery-surfaces, onboarding]
@@ -17,6 +17,7 @@ related: [roadmap, operation-manual, role-operating-guide]
 
 Changelog of this document:
 
+- v1.3: the Board row's Phase 4 task artifact is `specs/[NNN-feature-name]/tasks.md`, where Spec Kit writes it, not `.specify/tasks/sprint-backlog.json` (`docs/prompts/024-fix-spec-kit-feature-paths.md`, issue #66).
 - v1.1: gains the body changelog this document was missing - it was the only file in `docs/manuals/` without one - and records that `docs/strategy/go-to-market.md` deliberately keeps the pre-split `increment` spelling until it leaves the repository, so the disagreement reads as intentional rather than as drift (`fix-verifier` pass).
 - v1.0: created (`008-market-standard-vocabulary`). Carries the `release cycle` / `Increment` split, the Stage-Gate declaration with each stage's agile equivalent, and the four delivery surfaces mapped onto this repository's real artifacts.
 
@@ -66,7 +67,7 @@ Jira, Monday, and Asana all converged on the same four views. This model produce
 | Surface | Question it answers | This model's artifact |
 | --- | --- | --- |
 | **Roadmap / Timeline** | What comes when, by epic | `/docs/plan.md` (Phase 2) |
-| **Board** | What is in flight now | `docs/task.md` or `.specify/tasks/sprint-backlog.json` (Phase 4) |
+| **Board** | What is in flight now | `docs/task.md` or `specs/[NNN-feature-name]/tasks.md` (Phase 4) |
 | **Backlog** | What has not started, ordered | `/docs/references/backlog.md`, with its release-cycle status index |
 | **Reports / Insights** | How the process is going | `/docs/status.md`, `docs/references/retrospective.md`, `docs/references/test-report.md`, and `docs/telemetry/sessions.jsonl` where a project adopted it |
 

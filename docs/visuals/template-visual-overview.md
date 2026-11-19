@@ -3,9 +3,9 @@ title: "Template Visual Overview"
 doc_type: manual
 description: "Six Mermaid diagrams orienting a new reader in the template's architecture - document map, roadmap state machine, phase-execution sequence, prompt-lifecycle workflow, Spec Kit artifact flow, and the runtime-trigger decision flow. Diagrams orient, prose governs: every diagram links to the canonical document that owns its content."
 status: active
-version: "1.15"
+version: "1.16"
 created: 2026-07-14
-updated: 2026-08-06
+updated: 2026-11-12
 language: en
 id: template-visual-overview
 tags: [visual-documentation, mermaid, diagrams, onboarding, overview]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, orchestrator, prompt-engineering-guide]
 
 Changelog of this document:
 
+- v1.16: Section 5's Spec Kit flow points at `specs/NNN-feature/` (`spec.md`, `plan.md`, `tasks.md`) and at the spec's own Clarifications section, matching roadmap v3.33 (`docs/prompts/024-fix-spec-kit-feature-paths.md`, issue #66).
 - v1.14: Section 3's `REFS` node gains `missing-data-vocabulary`, per this file's own rule that a diagram is reviewed in the same change as the documents it visualizes - two version bumps in this batch had passed without that review (`fix-verifier` pass).
 - v1.13: Section 6's flowchart entry node reworded from "Task / increment at hand" to "Task / change at hand" - it was the one use of the word that meant neither the release cycle nor the Scrum Increment. `Q4`'s "Security-relevant increment?" is the delivered-capability sense and stays (`008-market-standard-vocabulary`).
-- v1.12: Section 6's runtime-trigger flowchart `Q9`/`P9` nodes re-worded to match P9's widened scope in `docs/manuals/prompt-engineering-guide.md` (v1.1: surface prototype, taste **or** information design), keeping the three copies of that trigger in sync (`006-absorb-local-notes-011-accepted-items`).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -137,11 +137,11 @@ The technical execution engine and where each command's artifact lands ([operati
 ```mermaid
 flowchart TD
     C["/speckit.constitution"] --> CA[".specify/memory/constitution.md<br/>(Phase 3 - guardrails)"]
-    S["/speckit.specify"] --> SA[".specify/specs/feature.md<br/>(Phase 3 - intent)"]
-    P1["/speckit.plan (first pass)"] --> PA[".specify/plans/technical-strategy.md<br/>(Phase 3 - initial plan)"]
-    CL["/speckit.clarify"] --> CLA["recorded ambiguities + answers<br/>(Phase 4)"]
-    P2["/speckit.plan (refined)"] --> PB[".specify/plans/[feature-name]-tech-plan.md<br/>(Phase 4 - refined plan)"]
-    T["/speckit.tasks"] --> TA["sprint backlog / docs/task.md<br/>(Phase 4 - atomic tasks)"]
+    S["/speckit.specify"] --> SA["specs/NNN-feature/spec.md<br/>(Phase 3 - intent)"]
+    P1["/speckit.plan (first pass)"] --> PA["specs/NNN-feature/plan.md<br/>(Phase 3 - initial plan)"]
+    CL["/speckit.clarify"] --> CLA["Clarifications section of spec.md<br/>(Phase 4)"]
+    P2["/speckit.plan (refined)"] --> PB["specs/NNN-feature/plan.md, refined<br/>(Phase 4 - refined plan)"]
+    T["/speckit.tasks"] --> TA["specs/NNN-feature/tasks.md / docs/task.md<br/>(Phase 4 - atomic tasks)"]
     AN["/speckit.analyze"] --> ANA["spec/plan/tasks cross-check<br/>(Phase 4 - mandatory, pre-code)"]
     I["/speckit.implement"] --> IA["source code + tests, task by task<br/>(Phase 5 - test-first default)"]
     CA --> S

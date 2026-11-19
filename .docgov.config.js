@@ -159,7 +159,10 @@ module.exports = {
           '/docs/references/brainstorm.md', 'brainstorm.md',
           '/docs/references/tree-of-thought-brainstorm.md', 'tree-of-thought-brainstorm.md',
           '/docs/references/integration-points.md', 'integration-points.md',
-          '.specify/memory/constitution.md', '.specify/memory/clarifications.md', '.specify/plans/technical-strategy.md',
+          '.specify/memory/constitution.md', '.specify/init-options.json', '.specify/integration.json',
+          // Caminho que nunca existe (o /speckit.clarify grava na própria spec),
+          // mantido como citação histórica pelo prompt 024 (issue #66).
+          '.specify/memory/clarifications.md',
           '/docs/adr/0000-adr-template.md',
           // Referência futura a um ADR-0001 de um PROJETO GERADO por este
           // template - distinto de docs/manuals/examples/adr-0001-
