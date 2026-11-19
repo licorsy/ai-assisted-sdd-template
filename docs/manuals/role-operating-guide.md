@@ -3,9 +3,9 @@ title: "Role Operating Guide — Product, Delivery, and All Lifecycle Roles"
 doc_type: manual
 description: "Single operating guide covering the project/product/product-owner surface and its extension to every other lifecycle role (architect, engineer, QA, DevOps, scrum master, stakeholder) for one person operating solo across the full roadmap."
 status: active
-version: "2.11"
+version: "2.12"
 created: 2024-07-04
-updated: 2026-08-06
+updated: 2026-11-19
 language: en
 id: role-operating-guide
 tags: [project-management, product-management, product-ownership, all-roles, solo-operator, role-switching, github-issues, scrum]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap, go-to-market, init]
 
 Changelog of this document:
 
+- v2.12: Spec Kit commands written as `/speckit-<command>`, the Claude Code skill syntax (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v2.10: Section 13's outer-loop line now says **release cycle** rather than "increment/cycle"; operating principle 2's "small, testable increments" is the delivered-capability sense and is unchanged (`008-market-standard-vocabulary`).
 - v2.9: the reporting criterion "a figure with no attached decision is decoration" added alongside Section 13's existing five-things rule for prose status updates - the same bar, applied to numbers, which nothing in the corpus stated for figures (`006-absorb-local-notes-011-accepted-items`).
-- v2.8: doc-consistency-reviewer batch fix: Section 9's Scrum master row and Section 10's Retrospective row both sent retrospective notes to `CHANGELOG.md`/`/docs/status.md`, contradicting `docs/strategy/roadmap.md` Phase 8 Activities 4/4c, which mandate `docs/references/retrospective.md` as the actual artifact and prune the narrative out of `status.md` (prompt-092).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -168,8 +168,8 @@ This table gives the whole-team lens across all nine roles — which one leads o
 | Project manager | GitHub Projects (roadmap and table views), `/docs/plan.md`, `/docs/risks.md` |
 | Product manager | Market/web research tools, `/docs/prd.md`, `/docs/business/market.md` |
 | Product owner | GitHub Issues, `/docs/references/backlog.md`, acceptance criteria templates |
-| Architect | ADRs, diagramming (text-based, versioned), `.specify/memory/constitution.md`, Spec Kit (`/speckit.constitution`, `/speckit.specify`, `/speckit.plan`) |
-| Software engineer / developer | The coding agent, Spec Kit (`/speckit.implement`), version control, local test runner |
+| Architect | ADRs, diagramming (text-based, versioned), `.specify/memory/constitution.md`, Spec Kit (`/speckit-constitution`, `/speckit-specify`, `/speckit-plan`) |
+| Software engineer / developer | The coding agent, Spec Kit (`/speckit-implement`), version control, local test runner |
 | Scrum master | GitHub Projects board, `/docs/status.md`, `docs/references/retrospective.md` |
 | Stakeholder (proxy) | PRD, plan, and phase-gate summaries produced by the orchestrator prompt |
 | QA / quality assurance engineer | Automated test suite, `/docs/references/test-report.md`, defect log in GitHub Issues |

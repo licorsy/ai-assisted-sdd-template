@@ -160,7 +160,7 @@ module.exports = {
           '/docs/references/tree-of-thought-brainstorm.md', 'tree-of-thought-brainstorm.md',
           '/docs/references/integration-points.md', 'integration-points.md',
           '.specify/memory/constitution.md', '.specify/init-options.json', '.specify/integration.json',
-          // Caminho que nunca existe (o /speckit.clarify grava na própria spec),
+          // Caminho que nunca existe (o /speckit-clarify grava na própria spec),
           // mantido como citação histórica pelo prompt 024 (issue #66).
           '.specify/memory/clarifications.md',
           '/docs/adr/0000-adr-template.md',

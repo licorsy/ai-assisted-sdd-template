@@ -3,9 +3,9 @@ title: "Prompt Engineering Guide"
 doc_type: manual
 description: "Authoring-quality guide for the individual prompts written during roadmap work - specification anatomy, example-driven specs, labeled context blocks, priority tags, staged multi-step prompting, chain-of-thought scaffolds, targeted refinement, comment-driven development - plus a versioned starter library of reusable prompt patterns including a security-audit checklist, each with a runtime trigger mapping it to its roadmap phase."
 status: active
-version: "1.11"
+version: "1.12"
 created: 2026-07-14
-updated: 2026-08-06
+updated: 2026-11-19
 language: en
 id: prompt-engineering-guide
 tags: [prompt-engineering, prompt-patterns, authoring-quality, code-generation, security-audit, runtime-triggers]
@@ -17,9 +17,9 @@ related: [operation-manual, roadmap]
 
 Changelog of this document:
 
+- v1.12: Spec Kit commands written as `/speckit-<command>`, the Claude Code skill syntax (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v1.10: P10's scratch-doc scope now says **release cycle**; P4's security trigger keeps `increment`, which means the delivered capability, matching `docs/strategy/roadmap.md` and the visual overview's identical wording (`008-market-standard-vocabulary`).
 - v1.9: P9 (v1.0 -> v1.1) is now a throwaway **surface** prototype, not only a taste prototype: its trigger covers information design (which facts belong on a surface, in what decomposition) alongside taste, since a surface whose taste is settled can still be wrong about what it shows. Gains a pitfall forbidding plausible invented numbers in a prototype. Section 12's trigger row updated in the same edit, as were `docs/strategy/roadmap.md` Activity 4 and the visual overview's flowchart node - the same P9 pair desynced once before, per v1.6 below (`006-absorb-local-notes-011-accepted-items`).
-- v1.8: Re-linked Section 1's and Section 4's `docs/prompts/basic-prompt-template.md` references, un-linked in v1.7 on the premise that `docs/prompts/` was absent from this repository; the file exists again as of `docs/prompts/001-restart-prompt-archive-and-source-of-truth.md` (`docs/prompts/003-close-restart-followon-drift.md`).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -101,7 +101,7 @@ Large asks fail as single prompts - they exceed what one generation can hold coh
 
 Two rules make the chain work: **ask for a simple working version first - explicitly say "do not optimize yet"** - and never combine stages 1 and 2 in one prompt for anything non-trivial. This is the prompt-level fractal of the roadmap's own Phase 3 → 5 → 6 flow and its walking-skeleton rule ([roadmap.md](../strategy/roadmap.md), Phases 4-5): end-to-end and minimal first, layered afterward.
 
-Two boundaries apply when the work runs inside a Spec Kit-managed phase. Feature-level staging belongs to the `/speckit.specify → plan → tasks` pipeline ([operation-manual.md](operation-manual.md) Step 15) - this chain operates *inside* one implementation task, not instead of the pipeline. And under the roadmap's Phase 5 test-first default, stages 2-3 swap: derive failing tests from the Stage 1 spec first, then implement until they pass.
+Two boundaries apply when the work runs inside a Spec Kit-managed phase. Feature-level staging belongs to the `/speckit-specify → plan → tasks` pipeline ([operation-manual.md](operation-manual.md) Step 15) - this chain operates *inside* one implementation task, not instead of the pipeline. And under the roadmap's Phase 5 test-first default, stages 2-3 swap: derive failing tests from the Stage 1 spec first, then implement until they pass.
 
 ## 7. Chain-of-thought scaffolds
 
@@ -161,7 +161,7 @@ Include [DOCSTRING STYLE] documentation and [N] test cases: [VALID / INVALID / E
 
 ### P2 - Staged feature build (v1.1)
 
-- **Use when:** a build is too large for one prompt but fits inside a single implementation task (one `/speckit.implement` task, or work outside the Spec Kit-managed phases). **Not when:** one function would do - use P1 - or the ask is genuinely feature-level: feature decomposition belongs to `/speckit.specify → plan → tasks` ([operation-manual.md](operation-manual.md) Step 15), not to a hand-rolled chain.
+- **Use when:** a build is too large for one prompt but fits inside a single implementation task (one `/speckit-implement` task, or work outside the Spec Kit-managed phases). **Not when:** one function would do - use P1 - or the ask is genuinely feature-level: feature decomposition belongs to `/speckit-specify → plan → tasks` ([operation-manual.md](operation-manual.md) Step 15), not to a hand-rolled chain.
 - **Pitfalls:** letting a stage silently drop earlier constraints - repeat "preserve all [error handling|behavior]" at every stage after the first. In Phase 5, run Stage 3 before Stage 2 (test-first default; see Section 6).
 
 ```text
@@ -312,11 +312,11 @@ A stale context file produces **coherent but misaligned** output - the most expe
 
 ## 12. Runtime triggers - which pattern, which phase
 
-The library stays fast because **skip is the default**: a pattern runs only when its trigger holds at the moment of use, and a skipped trigger costs at most one line of evidence. Nothing here re-routes work the `/speckit.*` pipeline owns ([operation-manual.md](operation-manual.md) Step 15) - patterns operate inside one of its tasks, in phases outside the pipeline, or in non-Spec-Kit work.
+The library stays fast because **skip is the default**: a pattern runs only when its trigger holds at the moment of use, and a skipped trigger costs at most one line of evidence. Nothing here re-routes work the `/speckit-*` pipeline owns ([operation-manual.md](operation-manual.md) Step 15) - patterns operate inside one of its tasks, in phases outside the pipeline, or in non-Spec-Kit work.
 
 | Pattern | Phase / step | Run when (decide at run time) | Skip when |
 | --- | --- | --- | --- |
-| P1 code-generation spec | Phase 5, inside one `/speckit.implement` task | The task creates a new function/class/module of non-trivial behavior | The ask is trivial (one-liner, rename) |
+| P1 code-generation spec | Phase 5, inside one `/speckit-implement` task | The task creates a new function/class/module of non-trivial behavior | The ask is trivial (one-liner, rename) |
 | P2 staged build | Phase 5 (sub-task granularity) or non-Spec-Kit work | The build exceeds one prompt but fits one implementation task | One function would do (P1), or the ask is feature-level (Spec Kit owns it) |
 | P3 debugging CoT | Any phase | Behavior diverges from intent and the cause is not obvious | The fix is already known - just state it |
 | P4 security audit | Phase 6 - Testing, or any pre-merge review | The increment touches authentication/authorization, input handling, secrets, payments, file or OS access, externally sourced data, or cryptography | None of those surfaces changed - record the skip in one line of the test evidence |

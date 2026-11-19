@@ -3,9 +3,9 @@ title: "Operation Manual - Integrating Instructions Documents"
 doc_type: instruction
 description: "Operational guide for an AI-assisted software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.62"
+version: "3.63"
 created: 2024-07-04
-updated: 2026-11-11
+updated: 2026-11-19
 language: en
 id: operation-manual
 tags: [operating-model, phase-gates, governance, human-in-the-loop, living-documentation]
@@ -17,9 +17,9 @@ related: [orchestrator, roadmap, phase-reviewer, adversarial, doc-consistency, i
 
 Changelog of this document:
 
+- v3.63: Step 1 installs the Specify CLI pinned to a release tag (v1.4.3, verified 2026-11-19) and adds the existing-project and upgrade commands; Step 2 drops the bare-URL `uvx`, offers `--no-model-invocation` as the Claude Code token-economy default and points other integrations to Spec Kit's own pages; Spec Kit commands are written `/speckit-<command>`; Steps 4-5 add `/speckit-converge` (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v3.62: Step 2's Spec Kit commands switch from the removed `--ai` flag to `--integration <agent> --script sh`, with one sentence recording the rename and where the Claude integration installs its skills (`docs/prompts/023-fix-bootstrap-specify-flag-and-business-scope.md`, issue #57).
 - v3.61: Step 9's frontmatter obligation gains the changelog/version-header clause and a `.specify/` best-effort qualifier (both adapters had drifted from this file, restating the rule without them — a cross-repo documentation audit found the gap); reconciled against `documentation-metadata-standard.md` Section 2.1's new mechanical-only exemption so the two documents no longer state opposite rules. Step 15's `generate-state.js` and `check-scope-consistency.js` rows corrected to match what those scripts actually do today; a row added for the (retired) `check-public-sanitization.js`.
-- v3.60: Step 12 rule 3's archived-repo citation reworded to the established qualifier phrase ("archived private-repo sequence, not a citable path in this repository"), matching the ~72 sites already using it, as part of closing out the `dead_citations` backlog.
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -76,23 +76,33 @@ Use the integrated terminal in the current repository environment.
 # Prerequisites: Python 3.11+, Git, and uv available in the environment
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
+# Install the Specify CLI pinned to a release tag (verified v1.4.3 on 2026-11-19)
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v1.4.3
+specify version
+
 # Initialize Spec Kit in the existing repository
-uvx --from git+https://github.com/github/spec-kit.git specify init --here
+specify init --here --integration claude --script sh
 ```
 
-`--here` keeps the repository structure intact and initializes the tooling inside the current project instead of creating a nested workspace.
+**Pin the tag; never install from the bare Git URL.** `uvx --from git+https://github.com/github/spec-kit.git` installs whatever Spec Kit's `main` holds that day: a project generated on 2026-11-04 got `1.3.1.dev0`, a development build. Spec Kit's own [installation guide](https://github.com/github/spec-kit/blob/v1.4.3/docs/installation.md) recommends installing from source pinned to a release tag. Spec Kit releases often (eight between 2026-11-03 and 2026-11-19), so check the [latest release](https://github.com/github/spec-kit/releases) on the day you install and write the tag you used into `/docs/status.md`.
+
+`--here` keeps the repository structure intact and initializes the tooling inside the current project instead of creating a nested workspace. On a repository that already has code, Spec Kit documents `specify init --here --force --integration <agent>`: `--force` skips the non-empty-directory confirmation.
+
+**Upgrading a pinned install.** Re-run the install with the new tag and `--force` (`uv tool install --force specify-cli --from git+https://github.com/github/spec-kit.git@vX.Y.Z`), then refresh the project's files with `specify integration upgrade <agent>` (and `specify extension update`, if extensions are installed), per Spec Kit's [upgrade guide](https://github.com/github/spec-kit/blob/v1.4.3/docs/upgrade.md). `specify self check` reports whether a newer release exists without changing anything.
 
 ## Step 2 - Choose the agent at startup and change later
 
 You can bootstrap the agent integration that best matches the current session.
 
 ```bash
-uvx --from git+https://github.com/github/spec-kit.git specify init --here --integration claude --script sh
-uvx --from git+https://github.com/github/spec-kit.git specify init --here --integration copilot --script sh
-uvx --from git+https://github.com/github/spec-kit.git specify init --here --integration gemini --script sh
+specify init --here --integration claude --script sh
+specify init --here --integration copilot --script sh
+specify init --here --integration gemini --script sh
 ```
 
-Current Spec Kit rejects the older `--ai` flag (`No such option: --ai`); `--integration` replaced it. The Claude integration installs the Spec Kit commands as skills under `.claude/skills/speckit-*`.
+Current Spec Kit rejects the older `--ai` flag (`No such option: --ai`); `--integration` replaced it. The Claude integration installs the Spec Kit commands as skills under `.claude/skills/speckit-<command>/`, invoked as `/speckit-<command>` (for example `/speckit-specify`); this manual writes every command that way. Other integrations invoke them differently: see Spec Kit's [per-integration pages](https://github.com/github/spec-kit/tree/v1.4.3/docs/integrations).
+
+**Token-economy default for Claude Code: user-invocable core skills.** Every Spec Kit skill is model-invocable by default, so each description sits in the session's skill listing whether or not it is used. `specify init --here --integration claude --script sh --integration-options="--no-model-invocation"` keeps the core skills invocable only by the human typing `/speckit-<command>`. Spec Kit's caveat: extension skills stay model-invocable, because mandatory extension hooks rely on the model invoking them; if an installed extension's mandatory hook runs a core command, leave this option off.
 
 This creates adapter files for each agent while keeping the same project memory and artifacts. If more than one agent is used, the repository should still maintain one shared canonical set of docs and specs.
 
@@ -129,9 +139,9 @@ The lifecycle below is the operational default for the full path. Shortened and 
 | Phase 0 - Foundation | Establish document foundation, governance, and starting-condition choice | Manual setup |
 | Phase 1 - Discovery | Clarify the problem and validate direction | Document work and research |
 | Phase 2 - Planning | Turn validated intent into an executable plan | Document work and planning |
-| Phase 3 - Designing | Formalize architecture and policy guardrails, producing an initial technical plan | `/speckit.constitution`, `/speckit.specify`, `/speckit.plan` (first pass) |
-| Phase 4 - Decomposition | Resolve ambiguity, refine the plan, then break it into atomic, cross-checked work items | `/speckit.clarify`, `/speckit.plan` (refined), `/speckit.tasks`, `/speckit.analyze` |
-| Phase 5 - Development | Implement one task at a time with validation | `/speckit.implement` |
+| Phase 3 - Designing | Formalize architecture and policy guardrails, producing an initial technical plan | `/speckit-constitution`, `/speckit-specify`, `/speckit-plan` (first pass) |
+| Phase 4 - Decomposition | Resolve ambiguity, refine the plan, then break it into atomic, cross-checked work items | `/speckit-clarify`, `/speckit-plan` (refined), `/speckit-tasks`, `/speckit-analyze` |
+| Phase 5 - Development | Implement one task at a time with validation, then converge | `/speckit-implement`, `/speckit-converge` |
 | Phase 6 - Testing | Validate behavior and close defects | Test execution and review |
 | Phase 7 - Deployment | Integrate safely and update records | Merge, release, and verification |
 | Phase 8 - Maintenance | Keep memory, documentation, and process current | Ongoing updates |
@@ -142,15 +152,16 @@ Phases 1 and 2 remain document-driven by design. Spec Kit enters the workflow wh
 
 The command order stays consistent across compatible agents:
 
-1. `/speckit.constitution` - define or update guardrails.
-2. `/speckit.specify` - capture the feature or system intent.
-3. `/speckit.clarify` - resolve ambiguity with human input.
-4. `/speckit.plan` - produce the technical plan.
-5. `/speckit.tasks` - derive actionable tasks.
-6. `/speckit.analyze` - check spec, plan, and tasks against each other for gaps, conflicts, and constitution violations before any code is written.
-7. `/speckit.implement` - execute tasks with validation.
+1. `/speckit-constitution` - define or update guardrails.
+2. `/speckit-specify` - capture the feature or system intent.
+3. `/speckit-clarify` - resolve ambiguity with human input.
+4. `/speckit-plan` - produce the technical plan.
+5. `/speckit-tasks` - derive actionable tasks.
+6. `/speckit-analyze` - check spec, plan, and tasks against each other for gaps, conflicts, and constitution violations before any code is written.
+7. `/speckit-implement` - execute tasks with validation.
+8. `/speckit-converge` - compare the code against the spec, plan, and tasks and append any unbuilt work as new tasks; run `/speckit-implement` again and repeat until it reports `Converged`.
 
-`/speckit.plan` runs twice in the roadmap's own phase breakdown: an initial pass in Phase 3, before `/speckit.clarify`, and a refined pass in Phase 4, after it (`docs/strategy/roadmap.md`, Phase 3 Activity 12 and Phase 4 Activities 1-2; see Step 4's table for which phase runs which pass). This list shows the full command set once, in dependency order, not a literal one-command-per-phase mapping.
+`/speckit-plan` runs twice in the roadmap's own phase breakdown: an initial pass in Phase 3, before `/speckit-clarify`, and a refined pass in Phase 4, after it (`docs/strategy/roadmap.md`, Phase 3 Activity 12 and Phase 4 Activities 1-2; see Step 4's table for which phase runs which pass). This list shows the full command set once, in dependency order, not a literal one-command-per-phase mapping.
 
 Use only one primary command at a time. Do not jump ahead if the current artifact is incomplete.
 
@@ -158,16 +169,16 @@ Use only one primary command at a time. Do not jump ahead if the current artifac
 
 Practice rules for the pipeline above:
 
-1. **Human review between `/speckit.specify` and `/speckit.plan`.** The spec is the cheapest place to catch a wrong direction; `/speckit.clarify` resolves the ambiguities the human review surfaces. Approving the spec only at implementation review time means paying plan and task generation for a direction that was never confirmed.
-2. **Always run `/speckit.clarify` and `/speckit.analyze`.** They cost tokens (see `docs/references/token-economy.md` for this repository's cost posture), but skipping them trades a small known cost for rework discovered mid-implementation - the expensive kind. Treat a run where both report nothing as cheap confirmation, not waste.
-3. **One feature = one specification.** A spec bundling several features can no longer be clarified, analyzed, planned, or reviewed as a unit; decomposition quality collapses. Split before `/speckit.plan`, not after.
-4. **Specification and implementation in separate PRs.** Reviewing "is this the right thing to build?" and "is this built right?" in one diff means neither gets reviewed well; a spec PR that merges first also gives `/speckit.plan` a stable, agreed input.
+1. **Human review between `/speckit-specify` and `/speckit-plan`.** The spec is the cheapest place to catch a wrong direction; `/speckit-clarify` resolves the ambiguities the human review surfaces. Approving the spec only at implementation review time means paying plan and task generation for a direction that was never confirmed.
+2. **Always run `/speckit-clarify` and `/speckit-analyze`.** They cost tokens (see `docs/references/token-economy.md` for this repository's cost posture), but skipping them trades a small known cost for rework discovered mid-implementation - the expensive kind. Treat a run where both report nothing as cheap confirmation, not waste.
+3. **One feature = one specification.** A spec bundling several features can no longer be clarified, analyzed, planned, or reviewed as a unit; decomposition quality collapses. Split before `/speckit-plan`, not after.
+4. **Specification and implementation in separate PRs.** Reviewing "is this the right thing to build?" and "is this built right?" in one diff means neither gets reviewed well; a spec PR that merges first also gives `/speckit-plan` a stable, agreed input.
 
 **When not to use the SDD pipeline.** SDD is not a silver bullet; its discipline has a real learning and token cost, and below a certain size the ceremony outweighs the drift it prevents. Use the standard lightweight process instead for:
 
 - **Throwaway spikes and prototypes** - exploration whose output is knowledge, not code to keep. If a prototype may graduate, that is the roadmap's fast-track path (`docs/strategy/roadmap.md`, section 4): build first, then back-fill the spec - not skip it forever.
 - **Small one-off scripts** - short, single-use utilities (on the order of a hundred lines) with no maintenance future.
-- **Urgent production hotfixes** - restore service through the normal emergency process, then back-fill spec and docs once stable; blocking a fire on `/speckit.specify` helps no one.
+- **Urgent production hotfixes** - restore service through the normal emergency process, then back-fill spec and docs once stable; blocking a fire on `/speckit-specify` helps no one.
 
 The common thread: SDD earns its cost where code lives long enough for spec-vs-code drift to hurt. Where nothing persists, there is nothing to drift.
 
@@ -336,7 +347,7 @@ Use the tool that matches the activity; do not default to freeform generation wh
 | Activity | Preferred tool or resource | Why |
 | --- | --- | --- |
 | Market and competitor research | Web search, plus any subscription research tools already available to the team | Freeform generation without retrieval produces stale or invented facts |
-| Architecture, spec, plan, task generation | Spec Kit slash commands (`/speckit.*`) | Keeps `.specify/` as a single regenerable source of truth |
+| Architecture, spec, plan, task generation | Spec Kit slash commands (`/speckit-*`) | Keeps `.specify/` as a single regenerable source of truth |
 | Backlog and issue tracking | GitHub Issues and GitHub Projects | Native to the repository, auditable, linkable from PRs and commits |
 | Architectural decisions | ADRs in `docs/adr/` — both for this template's own real decisions and for a project generated from this template; the worked example stays at `docs/manuals/examples/adr-0001-documentation-and-governance-model.md` (illustrative, not a live decision, so it does not move into `docs/adr/`) | Preserves the reasoning behind a decision, not just the decision |
 | Code search and repository-wide exploration | The coding agent's built-in search/grep tools | Faster and more accurate than manual reading for large repositories |
@@ -346,7 +357,7 @@ Use the tool that matches the activity; do not default to freeform generation wh
 | Stress-testing a spec or plan's merit before a design locks in | `agents/adversarial.md`; in Claude Code, the `adversarial-reviewer` subagent (`.claude/agents/adversarial-reviewer.md`) | Asks "is the bar aimed at the right thing?" while the design is still cheap to change — the question independent phase validation never asks |
 | Independent phase validation | `agents/phase-reviewer.md`; in Claude Code, the `orchestrator-reviewer` subagent (`.claude/agents/orchestrator-reviewer.md`) | Separates "did we do the work" from "did we check the work" |
 | Auditing the whole living-document set for cross-document consistency, traceability, redundancy, and ambiguity at cycle close | `agents/doc-consistency.md`; in Claude Code, the `doc-consistency-reviewer` subagent (`.claude/agents/doc-consistency-reviewer.md`) | Catches drift a single-phase review (`orchestrator-reviewer`) or a single-document edit doesn't surface; directed search over cross-references keeps it cheap enough to run every cycle instead of a redundant full-corpus read |
-| Automated testing | The project's own test runner, invoked by `/speckit.implement` or directly | Human review alone does not scale and misses regressions |
+| Automated testing | The project's own test runner, invoked by `/speckit-implement` or directly | Human review alone does not scale and misses regressions |
 | Enforcing frontmatter, resolvable internal links, the newest-3 changelog retention cap, the version bump, and the declared-fact pins | `.docgov.config.js`, run by the shared `licorsy/docs-governance` engine through `pr-checks.yml`'s `ci-docs` job | One engine replaced three repo-local scripts and their three workflows (`docs-frontmatter-lint.yml`, `broken-link-check.yml`, `changelog-retention-check.yml`, all retired). The config declares data, never logic: a check that does not exist yet belongs in the engine, not here. `dead_citations` and `version_citations` run as **shadow** — they report and never fail, pending a precision measurement on this corpus. This job and `ci-security` below are owner-guarded and do not run for adopters outside `licorsy`; `docs/manuals/documentation-metadata-standard.md` Section 9 holds the canonical caveat |
 | Enforcing that a promotion pull request comes from the branch below it | `pr-checks.yml`'s `promotion-source` job, pinned by the `promotion-chain-develop-staging-main` fact in `.docgov.config.js` | Rulesets require a pull request but place no constraint on where it comes *from*; a single-parent commit reached `main` that way once. The `facts` pin keeps the YAML enforcement and the prose permission matrix in `CLAUDE.md`/`AGENTS.md` from drifting apart |
 | Dependency review and secret scanning | `pr-checks.yml`'s `ci-security` job (`dependency-review-action`, `gitleaks`) | Catches a vulnerable dependency or a committed secret at PR time rather than after merge |
@@ -412,7 +423,7 @@ Pick the reasoning structure that matches the shape of the problem.
 | Executing a known, ordered procedure correctly | Chain of Thought (CoT) | Reduces skipped steps and arithmetic or sequencing errors in linear tasks | Phases 2, 4, and 5 - planning breakdowns, task decomposition, step-by-step implementation |
 | Checking a finished artifact against a fixed rubric | Checklist / rubric-grounded prompting | Anchors the model to explicit pass/fail criteria instead of open-ended judgment | Phase 6 - Testing, and the Reviewer Prompt |
 | Answering a natural-language question from existing documents | Retrieval-grounded prompting (read before answering) | Prevents confident but invented answers when the fact already exists in the repository | Step 13 above, and any status or handbook query |
-| Resolving a single open ambiguity with the human | Direct clarifying question, no chain-of-thought needed | The bottleneck is missing information, not reasoning depth | `/speckit.clarify`, and any blocked step under Step 6 |
+| Resolving a single open ambiguity with the human | Direct clarifying question, no chain-of-thought needed | The bottleneck is missing information, not reasoning depth | `/speckit-clarify`, and any blocked step under Step 6 |
 
 Do not apply Tree of Thought to a task that is really a checklist, and do not apply a checklist to a task that genuinely requires exploring unknown alternatives; mismatched technique is a common source of wasted effort.
 

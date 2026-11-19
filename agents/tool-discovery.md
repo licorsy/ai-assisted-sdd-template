@@ -3,9 +3,9 @@ title: "Tool Hunter Prompt"
 doc_type: instruction
 description: "Two-mode prior-art search before building from scratch: Mode A finds Claude Code tools (Agents, Skills, Hooks, MCP servers, Commands) for the catalog, Mode B finds product frameworks/libraries/services for roadmap Phase 1 Activity 11a's build-vs-buy record. Records any tool meeting a concrete need with a signed security level, rather than filtering candidates on a freshness/rating gate."
 status: active
-version: "1.9"
+version: "1.10"
 created: 2024-07-06
-updated: 2026-08-06
+updated: 2026-11-19
 language: en
 id: tool-discovery
 tags: [tool-hunter, subagent, tools, discovery, agent, catalog, build-vs-buy]
@@ -17,9 +17,9 @@ related: [tool-library-catalog, operation-manual, documentation-metadata-standar
 
 Changelog of this document:
 
+- v1.10: Spec Kit commands written as `/speckit-<command>`, the Claude Code skill syntax (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v1.8: doc-consistency-reviewer batch fix: `## Tasks` step 1 now carries the "ask before proceeding if the mode is unclear" rule, previously only in the `.claude/agents/tool-hunter.md` adapter (a third recurrence of the same adapter-vs-canonical class `prompt-095`/`prompt-096` (archived private-repo sequence, not a citable path in this repository) already fixed twice); Mode B's first bullet no longer paraphrases the "7-day freshness bar" contrast the Mode B heading was already rewritten to retire at v1.7 (prompt-096 verified only the exact retired phrase, missing this paraphrase); Context section no longer instructs a reader to invoke the Claude-Code-only adapter (prompt-097).
 - v1.7: doc-consistency-reviewer batch fix: retires the "7-day freshness bar" contrast from the Mode B heading (Mode A's own recency check was already redefined as supporting evidence, not a gate); the Mode A re-research caching rule, previously only in the `.claude/agents/tool-hunter.md` adapter, now also lives in this canonical file's Rules, Constraints, and Considerations section; `## Tasks` step 2's "passes vetting" wording corrected to match this file's own "not pass/fail gates" Mode A model (prompt-096).
-- v1.6: doc-consistency-reviewer batch fix: `## Tasks` step 2 now instructs bumping `docs/manuals/tool-library-catalog.md`'s frontmatter `lastreviewed` field to today's date for Mode A - previously no instruction anywhere set this field after its initial creation (prompt-095).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -39,7 +39,7 @@ Remember to follow the project and metadata standard.
 
 Keep both destinations lean and needs-driven: only research and record a tool or library when there is a concrete, current need named by a roadmap activity, artifact, or an explicit request. Never build a broad, speculative, or exhaustive catalog "just in case" — a small number of tools actually needed for actual activities, not a huge and complex library.
 
-Do not invoke tool-hunter, in either mode, to search for a capability already covered by a mechanism already installed in this operating model — for example, Spec Kit's own `/speckit.constitution`, `/speckit.specify`, `/speckit.plan`, `/speckit.tasks`, and `/speckit.implement` already cover constitution, spec, plan, task, and implementation generation. Searching for a third-party alternative to a command that ships with the installed toolchain is out of scope for tool-hunter.
+Do not invoke tool-hunter, in either mode, to search for a capability already covered by a mechanism already installed in this operating model — for example, Spec Kit's own `/speckit-constitution`, `/speckit-specify`, `/speckit-plan`, `/speckit-tasks`, and `/speckit-implement` already cover constitution, spec, plan, task, and implementation generation. Searching for a third-party alternative to a command that ships with the installed toolchain is out of scope for tool-hunter.
 
 Do not re-research a Mode A catalog entry already checked within the last 7 days and already marked `adopted` or `rejected` for the same need, unless explicitly asked to re-verify it — a recency check on an already-decided entry, not a vetting gate on a new candidate (Mode A records recency as supporting evidence, never as a pass/fail gate; see the Mode A criteria below).
 
