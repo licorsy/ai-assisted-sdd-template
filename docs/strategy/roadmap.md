@@ -3,7 +3,7 @@ title: "Business Software Development Roadmap"
 doc_type: instruction
 description: "Guide the creation and evolution of any software product or platform as a generic and reusable AI multi-agent software development system with human-in-the-loop control, living documentation, persistent memory, path selection, and phase-by-phase execution."
 status: active
-version: "3.34"
+version: "3.35"
 created: 2024-07-04
 updated: 2026-11-19
 language: en
@@ -17,9 +17,9 @@ related: [operation-manual, orchestrator, phase-reviewer, go-to-market]
 
 Changelog of this document:
 
+- v3.35: Phase 5's done list gains `/speckit-converge` reporting `Converged` (docs-consistency audit of 2026-11-19).
 - v3.34: Spec Kit commands written as `/speckit-<command>`; Phase 3 Activity 9's recovery step installs a pinned Specify CLI; Phase 5 gains Activity 6a, `/speckit-converge` until `Converged` (`docs/prompts/025-fix-spec-kit-pin-syntax-converge.md`, issue #71).
 - v3.33: Spec Kit feature artifacts move from `.specify/specs/`, `.specify/plans/` and `.specify/tasks/` to `specs/[NNN-feature-name]/` (`spec.md`, `plan.md`, `tasks.md`), where Spec Kit 1.3.x actually writes them; clarifications live in the spec's own `## Clarifications` section; Phase 3 names the real core configuration files; Phase 3 instructions separate the product-level `docs/` from the per-feature `specs/`; Section 10's tree follows (`docs/prompts/024-fix-spec-kit-feature-paths.md`, issue #66).
-- v3.32: Phase 3 Activity 9's recovery command uses `--integration <agent>` instead of the removed `--ai` flag (`docs/prompts/023-fix-bootstrap-specify-flag-and-business-scope.md`, issue #57).
 - Older entries: see `git log --follow` on this file (retention per `docs/manuals/documentation-metadata-standard.md` Section 2.1, prompt-033).
 
 ---
@@ -521,6 +521,7 @@ During sprint execution, actual system assets are generated.
 - Implementation compiles or runs.
 - Minimum tests pass.
 - Code respects constitution and SPEC.
+- `/speckit-converge` reports `Converged` for the feature (no unbuilt work left in `tasks.md`).
 - Explicit human checkpoint happened.
 - Changes were recorded.
 - If this is the project's first release cycle: it is a working walking skeleton (minimal end-to-end vertical slice), not a big-bang implementation.

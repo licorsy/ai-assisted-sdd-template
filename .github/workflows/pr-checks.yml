@@ -1,7 +1,7 @@
 # Absorbs the retired docs-governance.yml and adds the licorsy/platform-
 # workflows reusable checks. Mirrors git-governance's dogfooded pr-checks.yml:
 # local pre-commit is the continuous gate everywhere including develop; the
-# pre-commit/Conventional-Commits job here is the remote backstop, run only
+# pre-commit job here (file-content hooks only) is the remote backstop, run only
 # at the two deliberate promotion points (staging, main) or on demand, to
 # save Actions minutes. ci-docs/ci-security are NOT branch-restricted: docs
 # correctness and secret scanning should be caught as early as develop.
